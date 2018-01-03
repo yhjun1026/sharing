@@ -1,0 +1,80 @@
+server:
+  application:
+      name: sharing-server
+  port: ${SERVER_PORT:10010}
+  workerId: ${SERVER_WORKERID:1}
+spring:
+  datasource:
+    name: open-api
+    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:sharing}?useUnicode=true&characterEncoding=utf-8
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:}
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: ${DATABASE_FILTERS:stat,log4j}
+    initialSize: ${DATABASE_INITIALSIZE:10}
+    minIdle: ${DATABASE_MINIDLE:10}
+    maxActive: ${DATABASE_MAXACTIVE:1000}
+    maxWait: ${DATABASE_MAXWAIT:60000}
+    timeBetweenEvictionRunsMillis: ${DATABASE_TIMEBETWEENEVICTIONRUNSMILLIS:60000}
+    minEvictableIdleTimeMillis: ${DATABASE_MINEVICTABLEIDLETIMEMILLIS:300000}
+    logSlowSql: ${DATABASE_LOGSLOWSQL:true}
+    poolPreparedStatements: ${DATABASE_POOLPREPAREDSTATEMENTS:true}
+    druid:
+      username: ${DATABASE_DRUID_USERNAME:admin}
+      password: ${DATABASE_DRUID_PASSWORD:hd123}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cache:
+    type: guava
+  filter:
+    enable: false
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: cn.sharing.platform.server.entity
+
+logging:                                # 配置日志级别，让hibernate打印出执行的SQL
+  config: classpath:logback.xml
+  level:
+    root: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${REGISTER_CENTER_DEFAULT_SERVICE_URL:http://localhost:8760/eureka/}
+  instance:
+      hostname: ${SERVER_HOSTNAME:172.17.5.122}
+      ipAddress: ${SERVER_ACCESSABLE_IP:172.17.5.122}
+      nonSecurePort: ${SERVER_ACCESSABLE_PORT:10000}
+      instanceId: open-api:${SERVER_ACCESSABLE_IP:172.17.5.122}:${SERVER_ACCESSABLE_PORT:10000}
+      prefer-ip-address: true
+      metadataMap:
+        language: java
+        apiDoc: /swagger-ui.html
+
+endpoints:
+  logfile:
+    enabled: true
+  shutdown:
+    #启用shutdown
+    enabled: ${SERVER_SHUTDOWN_ENABLED:true}
+    #密码验证
+    sensitive: false
+
+
+log:
+  task:
+    logType: INFO
+    cron:
+      clearInfo: 0 */1 * * * ?
+      #清理info日志周期,单位 天
+      infoPeriod: 3
+      clearError: 0 */1 * * * ?
+      #清理error日志周期,单位 天
+      errorPeriod: 30
+
+
+    
+
