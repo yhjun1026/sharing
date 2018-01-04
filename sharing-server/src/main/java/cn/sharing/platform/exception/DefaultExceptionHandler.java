@@ -1,9 +1,9 @@
 package cn.sharing.platform.exception;
 
-import com.qianfan123.sailing.open.api.ResponseResult;
-import com.qianfan123.sailing.open.api.ReturnCodeEnum;
-import com.qianfan123.sailing.open.server.utils.JsonHelper;
-import com.qianfan123.sailing.open.server.utils.RequestContextUtils;
+import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.common.ReturnCodeEnum;
+import cn.sharing.platform.utils.JsonHelper;
+import cn.sharing.platform.utils.RequestContextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -134,8 +134,8 @@ public class DefaultExceptionHandler {
 		PrintWriter writer = null;
 		try {
 			ResponseResult<String> resp = new ResponseResult<String>();
-			resp.setStatus(ReturnCodeEnum.SERVER_ERROR.value());
-			resp.setMessage(ReturnCodeEnum.SERVER_ERROR.getDesc());
+			resp.setStatus(ReturnCodeEnum.Fail.value());
+			resp.setMessage(ReturnCodeEnum.Fail.getDesc());
 			if(ex instanceof MethodArgumentNotValidException){
 				MethodArgumentNotValidException e=(MethodArgumentNotValidException)ex;
 				Iterator var2 = e.getBindingResult().getAllErrors().iterator();

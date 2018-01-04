@@ -8,7 +8,7 @@
  */
 package cn.sharing.platform.config;
 
-import com.qianfan123.sailing.open.server.filter.SignatureFilter;
+import cn.sharing.platform.filter.SignatureFilter;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -34,14 +34,14 @@ public class SignFilterConfig {
   public SignatureFilter getFilter(){
     return new SignatureFilter();
   }
-  @Bean
-  public FilterRegistrationBean registrationBean() {
-    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-    registrationBean.setFilter(getFilter());
-    List<String> urlPatterns = new ArrayList<String>();
-    urlPatterns.add("/api/*");
-    registrationBean.setUrlPatterns(urlPatterns);
-    registrationBean.setOrder(1);
-    return registrationBean;
-  }
+//  @Bean
+//  public FilterRegistrationBean registrationBean() {
+//    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//    registrationBean.setFilter(getFilter());
+//    List<String> urlPatterns = new ArrayList<String>();
+//    urlPatterns.add("/api/*");
+//    registrationBean.setUrlPatterns(urlPatterns);
+//    registrationBean.setOrder(1);
+//    return registrationBean;
+//  }
 }

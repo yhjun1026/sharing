@@ -8,6 +8,15 @@
  */
 package cn.sharing.platform.facade;
 
+import cn.sharing.platform.common.ResponseResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.util.Map;
+
 /**
  * @author yanghongjun
  * @version 1.0
@@ -17,9 +26,13 @@ package cn.sharing.platform.facade;
 public class DemoImpl implements Demo {
 
   @Override
-  public ResponseResult<Void> login(@RequestHeader("orgCode") String orgCode, @RequestBody @Valid LoginInfo loginInfo);
+  public ResponseResult<Void> login(@RequestHeader("orgCode") String orgCode, @RequestBody @Valid Map<String, String> param){
+    return new ResponseResult<>();
+  }
 
   @Override
-  public  ResponseResult<Void>  offline(@RequestHeader("orgCode") String orgCode, @RequestBody @Valid ConectInfo
-          conectInfo);
+  public  ResponseResult<Void>  offline(@RequestHeader("orgCode") String orgCode, @RequestBody @Valid String[]
+          conectInfo){
+    return new ResponseResult<>();
+  }
 }

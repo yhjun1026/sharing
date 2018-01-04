@@ -1,7 +1,6 @@
 package cn.sharing.platform.exception;
 
-
-import com.qianfan123.sailing.open.api.ReturnCodeEnum;
+import cn.sharing.platform.common.ReturnCodeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
