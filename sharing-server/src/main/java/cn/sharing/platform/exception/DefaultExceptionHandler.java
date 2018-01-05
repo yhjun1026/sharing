@@ -34,28 +34,6 @@ public class DefaultExceptionHandler {
 	private static final Logger log = LoggerFactory.getLogger(ExceptionHandler.class);
 
 
-	@ExceptionHandler(OpenApiException.class)
-	public void procesOpenApiException(HttpServletResponse response, OpenApiException se) {
-		response.setCharacterEncoding(UTF8);
-		response.setContentType(RESPONSE_CONTENT_TYPE);
-		response.setStatus(HttpStatus.OK.value());
-		PrintWriter writer = null;
-		try {
-			ResponseResult<String> resp = new ResponseResult<String>();
-			resp.setStatus(se.getCode());
-			resp.setMessage(se.getMessage());
-			writer = response.getWriter();
-			writer.write(JsonHelper.toJsonWithoutNull(resp));
-			log.error(" error msg:{}, exception:{}", se.getMessage(), se);
-		} catch (IOException e) {
-			log.error("exception:{}", e);
-		} finally {
-			if (null != writer) {
-				writer.close();
-			}
-		}
-	}
-
 
 	@ExceptionHandler(BindException.class)
 	public void processValidationError(HttpServletResponse response, BindException ex) {

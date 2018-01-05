@@ -12,11 +12,6 @@
   <artifactId>sharing-api</artifactId>
   <dependencies>
     <dependency>
-      <groupId>cn.sharing.platform</groupId>
-      <artifactId>sharing-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
@@ -123,11 +118,7 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-    <dependency>
-      <groupId>cn.sharing.platform</groupId>
-      <artifactId>sharing-server</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+
   </dependencies>
 
 

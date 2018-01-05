@@ -58,26 +58,26 @@ public class SharingApplication {
   private void init() {
   }
 
-//  @Bean
-//  public Docket createRestApi() {
-//    return new Docket(DocumentationType.SWAGGER_2)
-//            .apiInfo(apiInfo())
-//            .select()
-//            .apis(RequestHandlerSelectors.basePackage("com.qianfan123.sailing"))
-//            .paths((com.google.common.base.Predicate<String>) paths())
-//            .build();
-//  }
-//
-//  private Predicate<String> paths(){
-//    return Predicates.and(PathSelectors.regex("/api/v1/.*"), Predicates.not(PathSelectors.regex("/error")));
-//  }
-//
-//  private ApiInfo apiInfo() {
-//    return new ApiInfoBuilder()
-//            .title("印力集成系统")
-//            .description("")
-//            .termsOfServiceUrl("")
-//            .version("1.0")
-//            .build();
-//  }
+  @Bean
+  public Docket createRestApi() {
+    return new Docket(DocumentationType.SWAGGER_2)
+            .apiInfo(apiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("cn.sharing.platform"))
+            .paths(paths())
+            .build();
+  }
+
+  private com.google.common.base.Predicate<String> paths(){
+    return Predicates.and(PathSelectors.regex("/api/v1/.*"), Predicates.not(PathSelectors.regex("/error")));
+  }
+
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder()
+            .title("印力集成系统")
+            .description("")
+            .termsOfServiceUrl("")
+            .version("1.0")
+            .build();
+  }
 }

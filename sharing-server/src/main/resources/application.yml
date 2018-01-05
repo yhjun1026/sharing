@@ -1,12 +1,12 @@
 server:
   application:
       name: sharing-server
-  port: ${SERVER_PORT:10010}
+  port: ${SERVER_PORT:10086}
   workerId: ${SERVER_WORKERID:1}
 spring:
   datasource:
     name: open-api
-    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:sharing}?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:open-api}?useUnicode=true&characterEncoding=utf-8
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:}
     type: com.alibaba.druid.pool.DruidDataSource

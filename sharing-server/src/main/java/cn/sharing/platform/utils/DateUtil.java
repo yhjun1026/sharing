@@ -53,7 +53,7 @@ public class DateUtil {
 
 	public static Date getDateByPattern(String time, String pattern) {
 		Date date = null;
-		if (StringUtils.isNotBlank(time)) {
+		if (StringUtils.isEmpty(time)) {
 			try {
 				date = DateUtils.parseDate(time, pattern);
 			} catch (Exception ex) {
@@ -135,7 +135,7 @@ public class DateUtil {
 	 */
 	public static String dateToString(Date date, String formatType) {
 		if (null == date) {
-			return StringUtils.EMPTY;
+			return null;
 		}
 		return new SimpleDateFormat(formatType).format(date);
 	}
@@ -214,7 +214,6 @@ public class DateUtil {
 	 * 把日期转化成00时00分00秒
 	 * 
 	 * @param time
-	 * @param day
 	 * @return
 	 */
 	public static Date toZeroTimeDays(Date time) {
@@ -234,7 +233,6 @@ public class DateUtil {
 	 * 把日期转化成23时59分59秒
 	 * 
 	 * @param time
-	 * @param day
 	 * @return
 	 */
 	public static Date toEndTimeDays(Date time) {
