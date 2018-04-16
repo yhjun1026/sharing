@@ -5,8 +5,8 @@ server:
   workerId: ${SERVER_WORKERID:1}
 spring:
   datasource:
-    name: open-api
-    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:open-api}?useUnicode=true&characterEncoding=utf-8
+    name: sharing
+    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:sharing}?useUnicode=true&characterEncoding=utf-8
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:}
     type: com.alibaba.druid.pool.DruidDataSource
@@ -45,10 +45,10 @@ eureka:
     serviceUrl:
       defaultZone: ${REGISTER_CENTER_DEFAULT_SERVICE_URL:http://localhost:8760/eureka/}
   instance:
-      hostname: ${SERVER_HOSTNAME:172.17.5.122}
-      ipAddress: ${SERVER_ACCESSABLE_IP:172.17.5.122}
+      hostname: ${SERVER_HOSTNAME:127.0.0.1}
+      ipAddress: ${SERVER_ACCESSABLE_IP:127.0.0.1}
       nonSecurePort: ${SERVER_ACCESSABLE_PORT:10000}
-      instanceId: open-api:${SERVER_ACCESSABLE_IP:172.17.5.122}:${SERVER_ACCESSABLE_PORT:10000}
+      instanceId: sharing:${SERVER_ACCESSABLE_IP:127.0.0.1}:${SERVER_ACCESSABLE_PORT:10000}
       prefer-ip-address: true
       metadataMap:
         language: java

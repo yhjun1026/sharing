@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sharing.dao.mapper.GoodsBorrowDtlMapper">
+  <resultMap id="BaseResultMap" type="com.sharing.dao.entity.GoodsBorrowDtl">
+    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
+    <result column="GOODSUUID" jdbcType="VARCHAR" property="goodsuuid" />
+    <result column="GOODSCODE" jdbcType="VARCHAR" property="goodscode" />
+    <result column="GOODSNAME" jdbcType="VARCHAR" property="goodsname" />
+    <result column="BORROWQTY" jdbcType="DECIMAL" property="borrowqty" />
+    <result column="BORROWDESCRIP" jdbcType="VARCHAR" property="borrowdescrip" />
+    <result column="DEPOSITAMT" jdbcType="DECIMAL" property="depositamt" />
+    <result column="DAMAGED" jdbcType="INTEGER" property="damaged" />
+    <result column="RETURNDESCRIP" jdbcType="VARCHAR" property="returndescrip" />
+    <result column="BACKQTY" jdbcType="DECIMAL" property="backqty" />
+    <result column="PAYAMT" jdbcType="DECIMAL" property="payamt" />
+    <result column="BACKDEPOSITAMT" jdbcType="DECIMAL" property="backdepositamt" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="BORROWUUID" jdbcType="VARCHAR" property="borrowuuid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UUID, GOODSUUID, GOODSCODE, GOODSNAME, BORROWQTY, BORROWDESCRIP, DEPOSITAMT, DAMAGED, 
+    RETURNDESCRIP, BACKQTY, PAYAMT, BACKDEPOSITAMT, MEMO, BORROWUUID
+  </sql>
+  <select id="selectByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shgoodsborrowdtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="offset != null and limit != null">
+      limit ${offset}, ${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shgoodsborrowdtl
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shgoodsborrowdtl
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample">
+    delete from shgoodsborrowdtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+    insert into shgoodsborrowdtl (UUID, GOODSUUID, GOODSCODE, 
+      GOODSNAME, BORROWQTY, BORROWDESCRIP, 
+      DEPOSITAMT, DAMAGED, RETURNDESCRIP, 
+      BACKQTY, PAYAMT, BACKDEPOSITAMT, 
+      MEMO, BORROWUUID)
+    values (#{uuid,jdbcType=VARCHAR}, #{goodsuuid,jdbcType=VARCHAR}, #{goodscode,jdbcType=VARCHAR}, 
+      #{goodsname,jdbcType=VARCHAR}, #{borrowqty,jdbcType=DECIMAL}, #{borrowdescrip,jdbcType=VARCHAR}, 
+      #{depositamt,jdbcType=DECIMAL}, #{damaged,jdbcType=INTEGER}, #{returndescrip,jdbcType=VARCHAR}, 
+      #{backqty,jdbcType=DECIMAL}, #{payamt,jdbcType=DECIMAL}, #{backdepositamt,jdbcType=DECIMAL}, 
+      #{memo,jdbcType=VARCHAR}, #{borrowuuid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+    insert into shgoodsborrowdtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        UUID,
+      </if>
+      <if test="goodsuuid != null">
+        GOODSUUID,
+      </if>
+      <if test="goodscode != null">
+        GOODSCODE,
+      </if>
+      <if test="goodsname != null">
+        GOODSNAME,
+      </if>
+      <if test="borrowqty != null">
+        BORROWQTY,
+      </if>
+      <if test="borrowdescrip != null">
+        BORROWDESCRIP,
+      </if>
+      <if test="depositamt != null">
+        DEPOSITAMT,
+      </if>
+      <if test="damaged != null">
+        DAMAGED,
+      </if>
+      <if test="returndescrip != null">
+        RETURNDESCRIP,
+      </if>
+      <if test="backqty != null">
+        BACKQTY,
+      </if>
+      <if test="payamt != null">
+        PAYAMT,
+      </if>
+      <if test="backdepositamt != null">
+        BACKDEPOSITAMT,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="borrowuuid != null">
+        BORROWUUID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsuuid != null">
+        #{goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null">
+        #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowqty != null">
+        #{borrowqty,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowdescrip != null">
+        #{borrowdescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="depositamt != null">
+        #{depositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="damaged != null">
+        #{damaged,jdbcType=INTEGER},
+      </if>
+      <if test="returndescrip != null">
+        #{returndescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="backqty != null">
+        #{backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="payamt != null">
+        #{payamt,jdbcType=DECIMAL},
+      </if>
+      <if test="backdepositamt != null">
+        #{backdepositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowuuid != null">
+        #{borrowuuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultType="java.lang.Long">
+    select count(*) from shgoodsborrowdtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shgoodsborrowdtl
+    <set>
+      <if test="record.uuid != null">
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsuuid != null">
+        GOODSUUID = #{record.goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodscode != null">
+        GOODSCODE = #{record.goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsname != null">
+        GOODSNAME = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowqty != null">
+        BORROWQTY = #{record.borrowqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.borrowdescrip != null">
+        BORROWDESCRIP = #{record.borrowdescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depositamt != null">
+        DEPOSITAMT = #{record.depositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.damaged != null">
+        DAMAGED = #{record.damaged,jdbcType=INTEGER},
+      </if>
+      <if test="record.returndescrip != null">
+        RETURNDESCRIP = #{record.returndescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backqty != null">
+        BACKQTY = #{record.backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payamt != null">
+        PAYAMT = #{record.payamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.backdepositamt != null">
+        BACKDEPOSITAMT = #{record.backdepositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowuuid != null">
+        BORROWUUID = #{record.borrowuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateSql != null" >
+        ${record.updateSql},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shgoodsborrowdtl
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      GOODSUUID = #{record.goodsuuid,jdbcType=VARCHAR},
+      GOODSCODE = #{record.goodscode,jdbcType=VARCHAR},
+      GOODSNAME = #{record.goodsname,jdbcType=VARCHAR},
+      BORROWQTY = #{record.borrowqty,jdbcType=DECIMAL},
+      BORROWDESCRIP = #{record.borrowdescrip,jdbcType=VARCHAR},
+      DEPOSITAMT = #{record.depositamt,jdbcType=DECIMAL},
+      DAMAGED = #{record.damaged,jdbcType=INTEGER},
+      RETURNDESCRIP = #{record.returndescrip,jdbcType=VARCHAR},
+      BACKQTY = #{record.backqty,jdbcType=DECIMAL},
+      PAYAMT = #{record.payamt,jdbcType=DECIMAL},
+      BACKDEPOSITAMT = #{record.backdepositamt,jdbcType=DECIMAL},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      BORROWUUID = #{record.borrowuuid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+    update shgoodsborrowdtl
+    <set>
+      <if test="goodsuuid != null">
+        GOODSUUID = #{goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null">
+        GOODSCODE = #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        GOODSNAME = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowqty != null">
+        BORROWQTY = #{borrowqty,jdbcType=DECIMAL},
+      </if>
+      <if test="borrowdescrip != null">
+        BORROWDESCRIP = #{borrowdescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="depositamt != null">
+        DEPOSITAMT = #{depositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="damaged != null">
+        DAMAGED = #{damaged,jdbcType=INTEGER},
+      </if>
+      <if test="returndescrip != null">
+        RETURNDESCRIP = #{returndescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="backqty != null">
+        BACKQTY = #{backqty,jdbcType=DECIMAL},
+      </if>
+      <if test="payamt != null">
+        PAYAMT = #{payamt,jdbcType=DECIMAL},
+      </if>
+      <if test="backdepositamt != null">
+        BACKDEPOSITAMT = #{backdepositamt,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowuuid != null">
+        BORROWUUID = #{borrowuuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+    update shgoodsborrowdtl
+    set GOODSUUID = #{goodsuuid,jdbcType=VARCHAR},
+      GOODSCODE = #{goodscode,jdbcType=VARCHAR},
+      GOODSNAME = #{goodsname,jdbcType=VARCHAR},
+      BORROWQTY = #{borrowqty,jdbcType=DECIMAL},
+      BORROWDESCRIP = #{borrowdescrip,jdbcType=VARCHAR},
+      DEPOSITAMT = #{depositamt,jdbcType=DECIMAL},
+      DAMAGED = #{damaged,jdbcType=INTEGER},
+      RETURNDESCRIP = #{returndescrip,jdbcType=VARCHAR},
+      BACKQTY = #{backqty,jdbcType=DECIMAL},
+      PAYAMT = #{payamt,jdbcType=DECIMAL},
+      BACKDEPOSITAMT = #{backdepositamt,jdbcType=DECIMAL},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      BORROWUUID = #{borrowuuid,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shgoodsborrowdtl
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="sumByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultType="long" >
+    select sum(${sumCol}) from shgoodsborrowdtl
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <insert id="batchInsert">
+    <if test="items.get(0) != null">
+            insert into shgoodsborrowdtl  (UUID, GOODSUUID, GOODSCODE, 
+        GOODSNAME, BORROWQTY, BORROWDESCRIP, 
+        DEPOSITAMT, DAMAGED, RETURNDESCRIP, 
+        BACKQTY, PAYAMT, BACKDEPOSITAMT, 
+        MEMO, BORROWUUID)
+      values
+      <foreach collection="items" item="item" index="index" separator=",">
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsuuid,jdbcType=VARCHAR}, #{item.goodscode,jdbcType=VARCHAR}, 
+        #{item.goodsname,jdbcType=VARCHAR}, #{item.borrowqty,jdbcType=DECIMAL}, #{item.borrowdescrip,jdbcType=VARCHAR}, 
+        #{item.depositamt,jdbcType=DECIMAL}, #{item.damaged,jdbcType=INTEGER}, #{item.returndescrip,jdbcType=VARCHAR}, 
+        #{item.backqty,jdbcType=DECIMAL}, #{item.payamt,jdbcType=DECIMAL}, #{item.backdepositamt,jdbcType=DECIMAL}, 
+        #{item.memo,jdbcType=VARCHAR}, #{item.borrowuuid,jdbcType=VARCHAR})
+      </foreach>
+    </if>
+  </insert>
+</mapper>

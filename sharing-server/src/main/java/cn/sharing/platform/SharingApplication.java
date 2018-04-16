@@ -9,7 +9,6 @@
 package cn.sharing.platform;
 
 import com.google.common.base.Predicates;
-import org.apache.commons.collections4.Predicate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -39,7 +38,7 @@ import javax.annotation.PostConstruct;
 @EnableSwagger2
 @EnableScheduling
 @ComponentScan(basePackages = {"cn.sharing.platform"})
-@MapperScan(basePackages = {"cn.sharing.platform.mapper"})
+@MapperScan(basePackages = {"com.sharing.dao.mapper"})
 @EnableCaching
 @EnableFeignClients(basePackages = {"cn.sharing.platform.client"})
 public class SharingApplication {
@@ -69,12 +68,12 @@ public class SharingApplication {
   }
 
   private com.google.common.base.Predicate<String> paths(){
-    return Predicates.and(PathSelectors.regex("/api/v1/.*"), Predicates.not(PathSelectors.regex("/error")));
+    return Predicates.and(PathSelectors.regex("/api/.*"), Predicates.not(PathSelectors.regex("/error")));
   }
 
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
-            .title("印力集成系统")
+            .title("xx管理系统")
             .description("")
             .termsOfServiceUrl("")
             .version("1.0")
