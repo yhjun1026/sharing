@@ -20,6 +20,9 @@ export const m = {
     about: '关于作者',
     weather: '天气预报',
     cube: '魔幻立方',
-    authority: '权限测试'
+    authority: '权限测试',
+    article: '物品管理',
+    article_new: '物品新增',
+    article_list: '物品列表'
   }
 }

@@ -1,0 +1,39 @@
+
+@font-face {font-family: "home-font";
+  src: url('home-font.eot?t=1497343398111'); /* IE9*/
+  src: url('home-font.eot?t=1497343398111#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('home-font.woff?t=1497343398111') format('woff'), /* chrome, firefox */
+  url('home-font.ttf?t=1497343398111') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('home-font.svg?t=1497343398111#home-font') format('svg'); /* iOS 4.1- */
+}
+
+.home-font {
+  font-family:"home-font" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home-careremindedit:before { content: "\e618"; }
+
+.icon-home-expendmanage:before { content: "\e619"; }
+
+.icon-home-giftconversion:before { content: "\e61a"; }
+
+.icon-home-integraladjustment:before { content: "\e61b"; }
+
+.icon-home-memberlist:before { content: "\e61c"; }
+
+.icon-home-integralrules:before { content: "\e61d"; }
+
+.icon-home-integraladdition:before { content: "\e61e"; }
+
+.icon-home-right:before { content: "\e61f"; }
+
+.icon-home-newmember:before { content: "\e620"; }
+
+.icon-home-newreturnrecord:before { content: "\e621"; }
+
+.icon-home-levellist:before { content: "\e622"; }
+

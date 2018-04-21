@@ -40,11 +40,33 @@ if (debug) {
                 icon: 'el-icon-menu',
                 children: []
             }, {
+              name: '魔幻立方1',
+              name_en: 'Cube1',
+              router: '/cube1',
+              icon: 'el-icon-menu',
+              children: []
+            }, {
                 name: '权限测试',
                 name_en: 'Authority',
                 router: '/authority-test',
                 icon: 'el-icon-setting',
                 children: []
+            },{
+              name: '物品管理',
+              name_en: 'Articles',
+              router: '/article-new',
+              icon: 'el-icon-time',
+              children: [{
+                name: '物品新增',
+                name_en: 'NewArticle',
+                router: '/article-new',
+                icon: 'el-icon-date'
+              }, {
+                name: '物品列表',
+                name_en: 'ArticleList',
+                router: '/enroll-list',
+                icon: 'el-icon-document'
+              }]
             }]
         },
         "msg": "Success",

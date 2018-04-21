@@ -1,8 +1,10 @@
-package cn.sharing.platform.goods;
+package cn.sharing.platform.goods.v1;
 
 import cn.sharing.platform.common.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * Created by guotao on 2018.01.18.
  */
-@RequestMapping("/api/goods")
+@RequestMapping("/api/v1/goods")
 @Api(tags = "物品接口")
 public interface GoodsService {
   /**
@@ -29,10 +31,10 @@ public interface GoodsService {
    * @param goodsUuid 物品uuid
    * @return 物品信息
    */
-  @RequestMapping(value = "/query" +
-          "", method = RequestMethod.POST)
-  @ApiOperation(value = "查询")
-  public ResponseResult<SGoods> query (@RequestBody String goodsUuid);
+  @RequestMapping(value = "/get/{goodsid}", method = RequestMethod.GET)
+  @ApiOperation(value = "获取")
+  public ResponseResult<SGoods> get ( @PathVariable(value = "goodsid") @ApiParam(name = "goodsid",
+          value = "物品代码");
   /**
    * 物品库存调整
    * @param sGoodsStock 物品库存信息对象

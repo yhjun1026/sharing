@@ -1,4 +1,4 @@
-package cn.sharing.platform.goods;
+package cn.sharing.platform.goods.v1;
 
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.ResponseResult;

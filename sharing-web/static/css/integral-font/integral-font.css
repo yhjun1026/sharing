@@ -1,0 +1,19 @@
+
+@font-face {font-family: "integral-font";
+  src: url('integral-font.eot?t=1500881007472'); /* IE9*/
+  src: url('integral-font.eot?t=1500881007472#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('integral-font.woff?t=1500881007472') format('woff'), /* chrome, firefox */
+  url('integral-font.ttf?t=1500881007472') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('integral-font.svg?t=1500881007472#integral-font') format('svg'); /* iOS 4.1- */
+}
+
+.integral-font {
+  font-family:"integral-font" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-integral-detail-ready:before { content: "\e61c"; }
+

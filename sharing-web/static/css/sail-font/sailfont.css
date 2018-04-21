@@ -1,0 +1,61 @@
+/*
+  大千帆系统菜单图标库
+  目前统一由张华维护，其他人不要做随意改动
+  有新图标需要添加找张华统一添加
+*/
+
+@font-face {font-family: "sailfont";
+  src: url('sailfont.eot?t=1493281248132'); /* IE9*/
+  src: url('sailfont.eot?t=1493281248132#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('sailfont.woff?t=1493281248132') format('woff'), /* chrome, firefox */
+  url('sailfont.ttf?t=1493281248132') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('sailfont.svg?t=1493281248132#sailfont') format('svg'); /* iOS 4.1- */
+}
+
+.sailfont {
+  font-family:"sailfont" !important;
+  font-size:28px;
+  font-style:normal;
+  font-weight: normal;
+  margin-right: 5px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+/*大千帆 -- 各模块（主页）*/
+.icon-sail-menu-home:before { content: "\e617"; }
+
+
+/*营销*/
+/*营销 -- 营销策划*/
+.icon-sail-menu-market-scheme:before { content: "\e619"; }
+/*营销 -- 营销推广*/
+.icon-sail-menu-market-put:before { content: "\e618"; }
+/*营销 -- 营销执行*/
+.icon-sail-menu-market-exec:before { content: "\e622"; }
+/*营销 -- 营销分析*/
+.icon-sail-menu-market-analy:before { content: "\e61c"; }
+
+
+/*会员*/
+/*会员 -- 会员定义*/
+.icon-sail-menu-member-define:before { content: "\e61e"; }
+/*会员 -- 会员拓展*/
+.icon-sail-menu-member-extend:before { content: "\e61f"; }
+/*会员 -- 会员维护与应用*/
+.icon-sail-menu-member-app:before { content: "\e61a"; }
+/*会员 -- 会员分析*/
+.icon-sail-menu-member-analy:before { content: "\e61b"; }
+/*会员 -- 设置*/
+.icon-sail-menu-member-setting:before { content: "\e61d"; }
+
+
+/*权限*/
+/*组织与授权 --  基础资料*/
+.icon-sail-menu-org-basic:before { content: "\e60a"; }
+/*组织与授权 -- 组织与授权*/
+.icon-sail-menu-org-org:before { content: "\e621"; }
+/*组织与授权 -- 设置*/
+.icon-sail-menu-org-setting:before { content: "\e620"; }

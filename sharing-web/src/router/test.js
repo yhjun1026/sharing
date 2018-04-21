@@ -19,6 +19,8 @@ const EnrollList = () => import('@/views/EnrollList/EnrollList')
 const Weather = () => import('@/views/Weather/Weather')
 const Cube = () => import('@/views/Cube/Cube')
 const AuthorityTest = () => import('@/views/AuthorityTest/AuthorityTest')
+const NewArticle = () => import('@/views/article/article-new')
+const Cube1 = () => import('@/views/borrowandback/Cube')
 // 天气预报
 // const Weather = resolve => require(['@/views/Weather/Weather'], resolve)
 // 立方体
@@ -55,9 +57,19 @@ export default // 然后就是嵌套路由了，也就是登陆后的各个页�
       component: Cube
     },
     {
+      path: 'cube1',
+      meta: {requireAuth: true},
+      component: Cube1
+    },
+    {
       path: 'authority-test',
       meta: {requireAuth: true},
       component: AuthorityTest
+    },
+    {
+      path: 'article-new',
+      meta: {requireAuth: true},
+      component: NewArticle
     }
   ]
 }
