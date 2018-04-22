@@ -64,7 +64,7 @@ if (debug) {
               }, {
                 name: '物品列表',
                 name_en: 'ArticleList',
-                router: '/enroll-list',
+                router: '/article-list',
                 icon: 'el-icon-document'
               }]
             }]
