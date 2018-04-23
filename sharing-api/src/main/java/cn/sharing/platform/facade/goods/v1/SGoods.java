@@ -1,4 +1,4 @@
-package cn.sharing.platform.goods.v1;
+package cn.sharing.platform.facade.goods.v1;
 
 import lombok.Data;
 

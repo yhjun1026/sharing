@@ -1,4 +1,4 @@
-package cn.sharing.platform.goods.v1;
+package cn.sharing.platform.service.goods.v1;
 
 import com.sharing.dao.entity.Goods;
 import com.sharing.dao.entity.GoodsBorrowDtl;

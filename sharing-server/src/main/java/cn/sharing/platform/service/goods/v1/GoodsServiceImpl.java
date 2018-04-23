@@ -1,7 +1,8 @@
-package cn.sharing.platform.goods.v1;
+package cn.sharing.platform.service.goods.v1;
 
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.facade.goods.v1.*;
 import cn.sharing.platform.store.StoreDao;
 import com.sharing.dao.entity.Goods;
 import com.sharing.dao.entity.GoodsBorrowDtl;
