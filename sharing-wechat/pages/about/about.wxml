@@ -1,0 +1,10 @@
+<!--about.wxml-->
+<view class="container">
+  <view  bindtap="bindViewTap" class="about">
+    <text class="about-title">关于蓝鲸灵</text>
+    <text class="about-content">关于蓝鲸灵,关于蓝鲸灵,关于蓝鲸灵,关于蓝鲸灵</text>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

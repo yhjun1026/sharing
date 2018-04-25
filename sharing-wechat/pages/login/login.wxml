@@ -1,0 +1,60 @@
+<!-- login.wxml -->
+<!-- toast -->
+<import src="../../templates/toast/toast.wxml"/>
+<template is="fftoast" data="{{...__fftoast__}}"/>
+
+<view class="container">
+    <view class="logo-content">
+        <image class="logo" src="{{images.logo}}"></image>
+    </view>
+    <view class="form-content">
+      <form bindsubmit="formSubmit">
+
+        <view class="form-control">
+          <image src="{{images.phone}}" class="icon-phone"></image>
+          <input name="mobile" type="text" bindinput="bindKeyMobile" placeholder="请输入手机号"/>
+        </view>
+
+        <view class="form-control verify-control">
+          <image src="{{images.sms}}" class="icon-sms"></image>
+          <input name="verifyCode" type="number" bindinput="bindKeyVerify" placeholder="短信验证码"/>
+          <view class="btn-verify {{isSendVerify ? 'btn-verify-gray' : ''}}" bindtap="bindGetVerify">
+            {{verifyText}}
+          </view>
+        </view>
+
+        <view class="message-box">
+          {{errorMessage}}
+        </view>
+
+        <view class="checkbox-area">
+          <checkbox-group  bindchange="bindAgreeChange">
+            <label class="weui-agree" for="weuiAgree">
+              <view class="weui-agree__text">
+                <checkbox class="weui-agree__checkbox" id="weuiAgree" value="agree" checked="{{isAgree}}" />
+                <view class="weui-agree__checkbox-icon">
+                  <icon class="weui-agree__checkbox-icon-check" type="success_no_circle" size="9" wx:if="{{isAgree}}"></icon>
+                </view>
+                我已阅读并同意
+              </view>
+            </label>
+          </checkbox-group>
+          <navigator url="/pages/login/agreement/agreement" class="weui-agree__link">《飞凡会员服务协议》</navigator>
+        </view>
+
+        <view class="btn-area">
+          <button type="primary" size="default"
+            class="btn {{btnDisabled ? 'btn-disabled' : ''}}"
+            disabled="{{btnDisabled}}"
+            hover-class="btn-hover"
+            form-type="submit">
+            确认
+          </button>
+        </view>
+
+        <!--<view class="prompt">
+          验证手机号后，您可以用手机号直接登录飞凡，享有会员专属特权和优惠
+        </view>-->
+      </form>
+    </view>
+</view>

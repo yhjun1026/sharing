@@ -1,0 +1,19 @@
+/* pages/login/agreement.wxss */
+.weui-article__section{
+  padding:15px;
+  background:#efefef;
+  color: #333;
+}
+.title{
+	text-align: center;
+	color: #666666;
+	font-family: PingFangSC-Regular, sans-serif;
+	font-weight: bold;
+	font-size:19px;
+}
+.weui-article__h3{
+	color: #666666;
+	font-size: 16px;
+	font-family: PingFangSC-Regular, sans-serif;
+	font-weight: bold;
+}

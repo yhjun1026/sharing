@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index",
+    
+    "pages/login/login",
+    
+    "pages/login/agreement/agreement",
+    "pages/myticket/myticket",
+    "pages/selectcity/selectcity",
+    "pages/ticket/detail/detail",
+    "pages/ticket/manual/manual",
+    "pages/ticket/qrcode/qrcode",
+    "pages/ticket/shop/shop"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "飞凡新生活",
+    "navigationBarBackgroundColor": "#15b6ff",
+    "backgroundColor": "#f8f8f8"
+  },
+  "tabBar": {
+    "color":"#000000",
+    "selectedColor": "#2abfff",
+    "borderStyle":"#333333",
+    "list": [{
+      "pagePath": "pages/index",
+      "text": "优惠市场",
+      "iconPath": "images/icons/quan2.png",
+      "selectedIconPath": "images/icons/quan.png"
+    }, {
+      "pagePath": "pages/myticket/myticket",
+      "text": "我的券包",
+      "iconPath": "images/icons/mybao2.png",
+      "selectedIconPath": "images/icons/mybao.png"
+    }]
+  },
+
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

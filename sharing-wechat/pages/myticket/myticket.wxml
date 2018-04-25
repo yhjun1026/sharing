@@ -1,0 +1,68 @@
+<!--myticket.wxml-->
+<view class="page">
+    <view class="userinfo">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </view>
+    <view class="tab-box">
+        <block wx:for-items="{{ tabs }}" wx:key="{{ index }}">
+            <view class="tab-item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" id="{{index}}" data-status="{{ item.status }}" bindtap="tabClick">{{ item.text }}</view>
+        </block>
+        <view class="weui-navbar__slider" style=" transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+    </view>
+    <view class="quan-wrapper" wx:if="{{ length <= 0}}">
+        <image class="quan-null" src="../images/quan_null.png" mode="aspectFit"></image>
+        <view class="quan-text">您还没有可用的券</view>
+    </view>
+    <scroll-view wx:if="{{ length > 0}}" scroll-y="true" bindscrolltoupper="handleUpper" bindscrolltolower="handleLower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" class="myticket-content">
+
+    <block wx:for="{{ticketList}}" wx:key="{{id}}">
+        <view class="ticket-item">
+            <navigator url="/pages/ticket/detail/detail?productNo={{ item.productNo }}&couponNo={{ item.couponNo }}&couponStatus={{ item.couponStatus }}"  hover-class="">
+            <view class="ticket-item-main">
+                <view class="ticket-item-content">
+                    <text class="ticket-item-title">{{item.title}}</text>
+                    <text class="ticket-item-validdate">
+                        <text wx:if="{{item.couponStatus === 3 || item.couponStatus === 6}}">有效期至：{{ item.endtime }}</text>
+                        <text wx:elif="{{item.couponStatus === 4}}">使用时间：{{ item.usetime }}</text>
+                        <text wx:else>其它时间：</text>
+                        <text>{{item.validdate}}</text>
+                    </text>
+                </view>
+                <view class="ticket-item-number ticket-item-type" wx:if="{{item.productType == 1002}}">
+                    兑换券
+                </view>
+                <view class="ticket-item-number" wx:else>
+                    {{item.origPrice}}<text class="ticket-item-unit">元</text>
+                </view>
+            </view>
+            <view class="ticket-item-footer">
+                <view class="ticket-item-ftcontent">
+                    <image src="../images/quan.png" class="ticket-item-imgcode"></image>
+                    券码：
+                    <text class="ticket-item-code">{{item.couponNo}}</text>
+                </view>
+                <view wx:if="{{ activeIndex == 0}}" class="ticket-item-extra">
+                    <button type="default" size="mini" bindtap="defaultTap" hover-class="other-button-hover" class="weui-btn mini-btn ffan-btn-endtime"  wx:if="{{ item.isoverdue }}">即将过期</button>
+                </view>
+            </view>
+            </navigator>
+        </view>
+    </block>
+
+    <view class="weui-loadmore" wx:if="{{hasRefesh}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+    <view class="weui-loadmore weui-loadmore_line" wx:if="{{hasNoMore}}">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多数据</view>
+    </view>
+  </scroll-view>
+
+</view>
+
+
+<!-- 登录失败
+<view wx:else>
+  登录失败请重试
+</view> -->

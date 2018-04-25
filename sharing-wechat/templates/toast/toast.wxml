@@ -1,0 +1,16 @@
+<!-- fftoast.wxml -->
+<template name="fftoast">
+	<view class="fftoast {{reveal ? 'fftoast_show' : ''}}">
+		<view class="fftoast__mask"></view>
+		<view class="fftoast__bd" animation="{{animationData}}">
+			<block wx:if="{{img}}">
+				<view class="fftoast__bd__img {{imgClassName || ''}}">
+					<image class="fftoast__bd__img_desc" src="{{img}}" mode="{{imgMode || 'scaleToFill'}}"></image>
+				</view>
+			</block>
+			<block wx:if="{{title}}">
+				<view class="fftoast__bd__title {{titleClassName || ''}}">{{title}}</view>
+			</block>
+		</view>
+	</view>
+</template>

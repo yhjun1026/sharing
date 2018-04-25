@@ -1,0 +1,29 @@
+<import src="../../templates/links.wxml"/>
+<!-- toast -->
+<import src="../../templates/toast/toast.wxml"/>
+<template is="fftoast" data="{{...__fftoast__}}"/>
+
+<view class="container">
+    <navigator url="/pages/logs/logs">日志</navigator>
+    <navigator url="/pages/login/login">login</navigator>
+    <navigator url="/pages/login/agreement/agreement">飞凡会员用户协议</navigator>
+    <navigator url="/pages/about/about">关于我们</navigator>
+    <navigator url="/pages/selectcity/selectcity">城市选择</navigator>
+
+    <navigator url="/pages/ticket/detail/detail">券-详情</navigator>
+    <navigator url="/pages/ticket/manual/manual">券-使用须知</navigator>
+    <navigator url="/pages/ticket/shop/shop">券-适用门店</navigator>
+    <navigator url="/pages/ticket/qrcode/qrcode">券-二维码</navigator>
+
+    <image src="https://api.ffan.com/qrcode/v1/qrcode?type=png&size=100&info=10000"></image>
+    <image src="https://api.ffan.com/ffan/v1/barcode?text=049302180048&imgHeight=40&imgType=png&codeBusinessType=coupon"></image>
+
+    <button type="default" size="defaultSize"  bindtap="handleTapToast" hover-class="other-button-hover">Toast</button>
+
+    <view class="demoLinks">
+      <text>这里是Template案例</text>
+      <view wx:for="{{demoLinks}}" wx:key="{{index}}">
+        <template is="templateLinks" data="{{...item}}"/>
+      </view>
+    </view>
+</view>

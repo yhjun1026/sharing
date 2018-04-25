@@ -1,0 +1,26 @@
+@import "../../../utils/wxParse/wxParse.wxss";
+
+.bg {
+    background-color: #fff;
+}
+
+.title-main {
+    font-size: 32rpx;
+    color: #000;
+}
+
+.title-sub {
+    color: #666;
+    font-size: 28rpx;
+}
+
+.coupon-text {
+    color: #666;
+    font-size: 22rpx;
+}
+
+.coupon-panel__hd:after {
+  right: 15px;
+}
+
+/* pages/ticket/manual.wxss */

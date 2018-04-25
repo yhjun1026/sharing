@@ -1,0 +1,17 @@
+<view class="bg">
+    <view class="main-box">
+        <view class="text-line-1 text-center">{{ ticketTitle }}</view>
+    </view>
+    <view class="main-box">
+        <view class="weui-panel__hd coupon-panel__hd coupon-hd">
+            <view class="page__desc"><image class="weui-flex__item quan" src="../../images/quan.png" mode="aspectFit" />券码：<text class="text-color">{{ ticketCode }}</text></view>
+        </view>
+        <view class="box">
+            <image src="{{ ticketBarcodeSrc }}" style="width:80%;height:60px"></image>
+
+            <view class="qrcode-box"><image src="{{ ticketQrcodeSrc }}" style="width:150px;height:150px"></image></view>
+            
+        </view>        
+    </view>
+
+</view>

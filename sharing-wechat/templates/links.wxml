@@ -1,0 +1,5 @@
+<template name="templateLinks">
+<navigator wx:if="{{type=='tab'}}" open-type="switchTab" id="links-{{index}}" url="{{url}}" hover-class="navigator-hover">{{title}}</navigator>
+<navigator wx:elif="{{type=='redirect'}}" open-type="redirect" id="links-{{index}}" url="{{url}}" hover-class="navigator-hover">{{title}}</navigator>
+<navigator wx:else id="links-{{index}}" url="{{url}}" hover-class="navigator-hover">{{title}}</navigator>
+</template>

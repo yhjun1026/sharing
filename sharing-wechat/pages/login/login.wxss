@@ -1,0 +1,115 @@
+/**
+ * 登录页面样式
+ */
+.logo-content {
+  padding: 100rpx 0;
+}
+.logo-content .logo {
+  width: 265rpx;
+  height: 124rpx;
+}
+.form-content {
+  width:680rpx;
+  padding: 50rpx 0;
+}
+.form-control {
+  padding-left: 10rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 1rpx solid #d9d9d9;
+  display: flex;
+  flex-direction: row;
+}
+input {
+  height: 30px;
+  font-size: 14px;
+}
+.phone-control {
+  justify-content: flex-start;
+}
+/* ----- verify-control ------ */
+.verify-control {
+  justify-content: space-between;
+}
+.verify-control icon-sms {
+  flex: 1
+}
+.verify-control input {
+  flex: 4;
+}
+.verify-control .btn-verify {
+  color: #2abfff;
+  flex: 2;
+  padding-left: 8px;
+  margin-bottom: 2px;
+  font-size: 13px;
+  border-left: 1px solid #d9d9d9;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.verify-control .btn-verify-gray {
+  color: #333;
+}
+
+/* ----- btn ------ */
+.btn-area {
+  margin-top: 30rpx;
+}
+.btn-area .btn {
+  border: 0 none;
+  background-color: #2abfff;
+  color: #fff;
+  width: 690rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 0;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.btn-area button[disabled][type="primary"] {
+  background-color: #cccccc;
+}
+
+/* ----- checkbox ------ */
+.checkbox-area {
+  display: flex;
+}
+.weui-agree {
+  padding: 0;
+}
+.weui-agree .weui-agree__text {
+  color: #333;
+}
+.checkbox-area .weui-agree__link {
+  font-size: 13px;
+  color: #2abfff;
+}
+
+.prompt {
+  margin-top: 50rpx;
+  padding: 0 20rpx;
+  font-size: 13px;
+}
+
+/* ----- icon ------ */
+.form-control image.icon-phone {
+  width: 12px;
+  height: 19px;
+  margin: 3px 15px 0 0;
+  display: inline-block;
+}
+.form-control image.icon-sms {
+  width: 16px;
+  height: 17px;
+  margin: 5px 13px 0 0;
+  display: inline-block;
+}
+.my_fftoast_title {
+    font-size: 24rpx;
+}
+
+/* ----- error mssage ------ */
+.message-box {
+  height: 50rpx;
+  color: #ff4e5a;
+  font-size: 22rpx;
+}

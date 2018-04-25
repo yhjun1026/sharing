@@ -1,0 +1,44 @@
+<view class="bg">
+
+    <view class="main-box">
+        <view wx:if="{{title === '代金券' || title === '停车券'}}" class="text-line-1 text-center">{{couponInfo.title}}</view>
+        <view wx:if="{{title === '代金券'}}" class="text-line-2 text-center">{{couponInfo.marketPrice}}元{{title}}</view>
+        <view wx:if="{{title === '兑换券'}}" class="text-line-1 text-center">{{couponInfo.title}}兑换券</view>
+        <button wx:if="{{couponStatus == 1}}" class="coupon-btn invalid-btn">锁定</button>
+        <button wx:if="{{couponStatus == 2}}" class="coupon-btn invalid-btn">出票中</button>
+        <navigator url="/pages/ticket/qrcode/qrcode?couponNo={{ couponNo }}&couponTitle={{ couponInfo.title }}" wx:if="{{couponStatus == 3}}">
+            <button class="coupon-btn valid-btn">立即使用</button>
+        </navigator>
+        <button wx:if="{{couponStatus == 4}}" class="coupon-btn invalid-btn">已使用</button>
+        <button wx:if="{{couponStatus == 5}}" class="coupon-btn invalid-btn">已导出</button>
+        <button wx:if="{{couponStatus == 6}}" class="coupon-btn invalid-btn">已过期</button>
+        <button wx:if="{{couponStatus == 7}}" class="coupon-btn invalid-btn">已兑换</button>
+        <button wx:if="{{couponStatus == 8}}" class="coupon-btn invalid-btn">已出票</button>
+        <navigator url="/pages/ticket/qrcode/qrcode?couponNo={{ couponNo }}&couponTitle={{ couponInfo.title }}" wx:if="{{couponStatus == 9}}">
+            <button class="coupon-btn valid-btn">立即使用</button>
+        </navigator>
+        <button wx:if="{{couponStatus == 12}}" class="coupon-btn invalid-btn">已退货</button>
+        <view class="text-line-3 text-center">{{validHint}}</view>
+    </view>
+
+    <view class="main-box">
+        <view class="weui-panel__hd coupon-panel__hd coupon-hd">
+            <view class="page__desc">到店向服务员出示使用</view>
+            <view class="page__desc" wx:if="{{couponInfo.buyNotify !== ''}}">{{couponInfo.buyNotify}}</view>
+        </view>
+        <view class="weui-panel__hd coupon-panel__hd">
+            <block wx:for-items="{{couponInfo.topPics}}" wx:for-item="topPic">
+                <image class="coupon-pic" mode="widthFix" src="{{topPic}}" />
+            </block>
+        </view>
+        <navigator url="/pages/ticket/manual/manual" class="coupon-cell weui-cell_access weui-cell_link">
+            <view class="weui-cell__bd text-left coupon-bd">使用须知</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="/pages/ticket/shop/shop?productNo={{ productNo }}" class="coupon-cell weui-cell_access weui-cell_link">
+            <view class="weui-cell__bd text-left coupon-bd">适用门店</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+    </view>
+
+</view>

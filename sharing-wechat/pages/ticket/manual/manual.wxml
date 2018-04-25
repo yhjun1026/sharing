@@ -1,0 +1,19 @@
+<import src="../../../utils/wxParse/wxParse.wxml" />
+
+<view class="bg">
+    <view class="weui-panel__hd coupon-panel__hd">
+        <view class="title-main">券使用须知</view>
+    </view>
+    <view class="weui-panel__hd coupon-panel__hd">
+        <view class="title-sub">有效时间</view>
+        <view class="coupon-text">{{validPeriod}}</view>
+    </view>
+    <view class="weui-panel__hd coupon-panel__hd" wx:if="{{buyNotify !== ''}}">
+        <view class="title-sub">使用条件</view>
+        <view class="coupon-text">{{buyNotify}}</view>
+    </view>
+    <view class="weui-panel__hd coupon-panel__hd">
+        <view class="title-sub">优惠说明</view>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+    </view>
+</view>
