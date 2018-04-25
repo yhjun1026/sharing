@@ -39,13 +39,7 @@ if (debug) {
                 router: '/cube',
                 icon: 'el-icon-menu',
                 children: []
-            }, {
-              name: '魔幻立方1',
-              name_en: 'Cube1',
-              router: '/cube1',
-              icon: 'el-icon-menu',
-              children: []
-            }, {
+            },{
                 name: '权限测试',
                 name_en: 'Authority',
                 router: '/authority-test',
@@ -67,7 +61,29 @@ if (debug) {
                 router: '/article-list',
                 icon: 'el-icon-document'
               }]
-            }]
+            },
+              {
+                name: '租用记录',
+                name_en: 'RentList',
+                router: '/article-list',
+                icon: 'el-icon-setting',
+                children: []
+              },
+              {
+                name: '物品归还',
+                name_en: 'RentList',
+                router: '/article-list',
+                icon: 'el-icon-setting',
+                children: []
+              },
+              {
+                name: '物品赔偿',
+                name_en: 'RentList',
+                router: '/article-list',
+                icon: 'el-icon-setting',
+                children: []
+              },
+            ]
         },
         "msg": "Success",
         "status": "YQ-000"
