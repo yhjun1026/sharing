@@ -1,4 +1,4 @@
-package cn.sharing.platform.facade.goods.v1;
+package cn.sharing.platform.facade.borrow.v1;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  *
  * Created by guotao on 2018.01.20.
  */
-public class SGoodsBorrowDtl {
+public class SBorrowDtl {
   private String uuid;
 
   private String goodsuuid;

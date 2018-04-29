@@ -1,6 +1,7 @@
 package cn.sharing.platform.facade.goods.v1;
 
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.facade.borrow.v1.SBorrow;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -53,7 +54,7 @@ public interface GoodsService {
   @RequestMapping(value = "/borrow" +
           "", method = RequestMethod.POST)
   @ApiOperation(value = "物品借用")
-  public ResponseResult<Void> borrow (@RequestBody SGoodsBorrow sGoodsBorrow);
+  public ResponseResult<Void> borrow (@RequestBody SBorrow sGoodsBorrow);
   /**
    * 物品锁定
    * @param sGoodsBorrow 物品信息对象
@@ -62,7 +63,7 @@ public interface GoodsService {
   @RequestMapping(value = "/lock" +
           "", method = RequestMethod.POST)
   @ApiOperation(value = "物品借用")
-  public ResponseResult<Void> lock (@RequestBody SGoodsBorrow sGoodsBorrow);
+  public ResponseResult<Void> lock (@RequestBody SBorrow sGoodsBorrow);
 
   /**
    * 物品归还
@@ -72,9 +73,7 @@ public interface GoodsService {
   @RequestMapping(value = "/back" +
           "", method = RequestMethod.POST)
   @ApiOperation(value = "物品归还")
-  public ResponseResult<Void> back (@RequestBody SGoodsBorrow sGoodsBorrow);
-
-
+  public ResponseResult<Void> back (@RequestBody SBorrow sGoodsBorrow);
 
 
 }
