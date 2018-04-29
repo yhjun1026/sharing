@@ -2,6 +2,8 @@ package cn.sharing.platform.service.goods.v1;
 
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.facade.borrow.v1.SBorrow;
+import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
 import cn.sharing.platform.facade.goods.v1.*;
 import cn.sharing.platform.store.StoreDao;
 import com.sharing.dao.entity.Goods;
@@ -154,7 +156,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 物品信息
    */
   @Override
-  public ResponseResult<Void> borrow(@RequestBody SGoodsBorrow sGoodsBorrow) {
+  public ResponseResult<Void> borrow(@RequestBody SBorrow sGoodsBorrow) {
     if (sGoodsBorrow.getUuid() == null || sGoodsBorrow.getUuid().equals("")) {
       return ResponseResult.failed("物品借用UUID为空.");
     }
@@ -191,7 +193,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 物品信息
    */
   @Override
-  public ResponseResult<Void> back(@RequestBody SGoodsBorrow sGoodsBorrow) {
+  public ResponseResult<Void> back(@RequestBody SBorrow sGoodsBorrow) {
     if (sGoodsBorrow.getUuid() == null || sGoodsBorrow.getUuid().equals("")) {
       return ResponseResult.failed("物品借用UUID为空.");
     }
@@ -302,7 +304,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @param   sGoodsBorrow 物品借用单信息
    * @return  物品借用单对象
    */
-  private GoodsBorrowMst converSGoodsBorrow(SGoodsBorrow sGoodsBorrow){
+  private GoodsBorrowMst converSGoodsBorrow(SBorrow sGoodsBorrow){
     GoodsBorrowMst goodsBorrowMst = new GoodsBorrowMst();
     goodsBorrowMst.setUuid(sGoodsBorrow.getUuid());
     goodsBorrowMst.setBillnumber(sGoodsBorrow.getBillnumber());
@@ -327,10 +329,10 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @param   sGoodsBorrow 物品借用单信息
    * @return  物品借用单对象明细
    */
-  private List<GoodsBorrowDtl> converSGoodsBorrowDtl(SGoodsBorrow sGoodsBorrow){
+  private List<GoodsBorrowDtl> converSGoodsBorrowDtl(SBorrow sGoodsBorrow){
     List<GoodsBorrowDtl> goodsBorrowDtls = new ArrayList<>();
-    List<SGoodsBorrowDtl> sGoodsBorrowDtls = sGoodsBorrow.getsGoodsBorrowDtl();
-    for (SGoodsBorrowDtl sGoodsBorrowDtl: sGoodsBorrowDtls){
+    List<SBorrowDtl> sGoodsBorrowDtls = sGoodsBorrow.getsGoodsBorrowDtl();
+    for (SBorrowDtl sGoodsBorrowDtl: sGoodsBorrowDtls){
       GoodsBorrowDtl goodsBorrowDtl = new GoodsBorrowDtl();
       goodsBorrowDtl.setUuid(sGoodsBorrowDtl.getUuid());
       goodsBorrowDtl.setGoodsuuid(sGoodsBorrowDtl.getGoodsuuid());
