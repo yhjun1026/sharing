@@ -226,12 +226,6 @@
               message: '请输入0~999999之间的数值',
               trigger: 'change,blur'
             }
-          ],
-          exchangeModes: [
-            {type: "array", required: true, message: '请至少选择一种兑换方式', trigger: 'change'}
-          ],
-          point: [
-            {required: false, pattern: /^([1-9]{1}\d{0,5})$/, message: '请输入1~999999之间的整数', trigger: 'change,blur'}
           ]
         },
         square: [],
@@ -258,11 +252,11 @@
             this.save(() => {
               if (!this.$route.query.isShowTip) {
               this.$message({
-                message: '礼品信息已更新',
+                message: '物品信息已更新',
                 type: 'success'
               });
             } else {
-              this.$confirm('成功新增礼品', '', {
+              this.$confirm('成功新增物品', '', {
                 cancelButtonText: '取消',
                 confirmButtonText: '继续添加',
                 type: 'success',
@@ -290,10 +284,10 @@
         const isPic = (file.type === 'image/jpeg' || file.type === 'image/png');
         const isLt5M = file.size / 1024 / 1024 < 5;
         if (!isPic) {
-          this.$message.error('上传头像图片只能是 JPG/PNG 格式!');
+          this.$message.error('上传图片只能是 JPG/PNG 格式!');
         }
         if (!isLt5M) {
-          this.$message.error('上传头像图片大小不能超过 5MB!');
+          this.$message.error('上传图片大小不能超过 5MB!');
         }
         return isPic && isLt5M;
       },
