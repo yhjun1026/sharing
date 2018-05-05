@@ -4,10 +4,11 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 物品信息
- *
+ * <p>
  * Created by guotao on 2018.01.18.
  */
 @Data
@@ -21,14 +22,12 @@ public class SGoods {
   private String name;
   /** 物品类型 */
   private String type;
-  /** 物品状态 */
-  private Integer stat;
+  /** 物品状态, 0表示正常，1表示非正常 */
+  private Integer state;
   /** 总库存 */
   private int quantity;
-  /** 当前库存 */
+  /** 当前库存，可以租用的数量 */
   private int currentQuantity;
-  /** 单位 */
-  private String unit;
   /** 图片 */
   private String picture;
   /** 描述 */
@@ -47,5 +46,14 @@ public class SGoods {
   private String memo;
   /** 组织uuid */
   private String storeuuid;
+
+  /** 押金金额 */
+  private BigDecimal depositamt;
+
+  /** 赔偿金额 */
+  private BigDecimal repayamt;
+
+  /** 该商品的库存列表 */
+  private List<SGoodsStock> sGoodsStockList;
 
 }
