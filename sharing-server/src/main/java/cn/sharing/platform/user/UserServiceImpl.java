@@ -2,8 +2,8 @@ package cn.sharing.platform.user;
 
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.common.UCN;
 import cn.sharing.platform.store.StoreDao;
-import com.hd123.rumba.commons.biz.entity.UCN;
 import com.sharing.dao.entity.Store;
 import com.sharing.dao.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

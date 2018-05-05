@@ -118,11 +118,6 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.hd123.rumba.commons</groupId>
-      <artifactId>rumba-commons-biz</artifactId>
-      <version>1.10</version>
-    </dependency>
 
   </dependencies>
 
