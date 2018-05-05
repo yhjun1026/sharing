@@ -24,26 +24,26 @@ public interface GoodsService {
   /**
    * 物品查询，查询信息包含物品的库存信息
    *
-   * @param goodsid
+   * @param goodsId
    *         物品uuid
    * @return 物品信息
    */
   @RequestMapping(value = "/get/{goodsid}", method = RequestMethod.GET)
   @ApiOperation(value = "获取物品信息,包括物品的库存")
   ResponseResult<SGoods> get(@PathVariable(value = "goodsid") @ApiParam(name = "goodsid", value = "物品代码") String
-                                     goodsid);
+                                     goodsId);
 
   /**
    * 获取可以租用的物品
    *
-   * @param goodsid
+   * @param goodsId
    *         物品ID
    * @return 可以租用物品信息
    */
   @RequestMapping(value = "/get/rent/{goodsid}", method = RequestMethod.GET)
   @ApiOperation(value = "获取可以租用的物品")
   ResponseResult<SGoods> getRentGoods(@PathVariable(value = "goodsid") @ApiParam(name = "goodsid", value = "物品代码")
-                                              String goodsid);
+                                              String goodsId);
 
   /**
    * 物品新增，用于新增物品或者增加物品的库存数量
