@@ -23,12 +23,12 @@ public interface PaymentService {
     @RequestMapping(value = "/save" +
             "", method = RequestMethod.POST)
     @ApiOperation(value = "支付保存")
-    public ResponseResult<Void> save (@RequestBody PayInfo payInfo);
+    public ResponseResult<Void> save (@RequestBody PayInfoParam payInfo);
 
 
     @RequestMapping(value = "/{payid}", method = RequestMethod.GET)
     @ApiOperation(value = "获取支付详情")
-    public ResponseResult<PayInfo> get(@PathVariable(value = "payid") @ApiParam(name = "payid",
+    public ResponseResult<PayInfoParam> get(@PathVariable(value = "payid") @ApiParam(name = "payid",
             value = "支付id")String payid);
 
 }

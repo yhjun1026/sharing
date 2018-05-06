@@ -8,7 +8,6 @@ import java.math.BigDecimal;
  * Created by guotao on 2018.01.20.
  */
 public class SBorrowDtl {
-  private String uuid;
 
   private String goodsuuid;
 
@@ -33,14 +32,6 @@ public class SBorrowDtl {
   private BigDecimal backdepositamt;
 
   private String memo;
-
-  public String getUuid() {
-    return uuid;
-  }
-
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
-  }
 
   public String getGoodsuuid() {
     return goodsuuid;

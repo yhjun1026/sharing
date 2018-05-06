@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel(value="支付信息对象",description="支付信息对象")
-public class PayInfo {
+public class PayInfoParam {
     @ApiModelProperty(value="支付记录id",name="id",required=true)
     private String id;
     @ApiModelProperty(value="交易类型",name="tranType",required=true)
@@ -25,7 +25,6 @@ public class PayInfo {
     private String outTradeNo;
     @ApiModelProperty(value="支付金额",name="payAmt",required=true)
     private BigDecimal payAmt;
-
     @ApiModelProperty(value="支付人",name="payUser",required=true)
     private String payUser;
     @ApiModelProperty(value="支付时间/退款时间",name="payTime",required=true)

@@ -36,18 +36,6 @@ public interface BorrowService {
     @ApiOperation(value = "物品借用")
     public ResponseResult<Void> borrow(@RequestBody SBorrow sGoodsBorrow);
 
-    /**
-     * 租用单物品领取确认
-     *
-     * @param  borrowId  租用单单号
-     * @return
-     */
-    @RequestMapping(value = "/{borrowId}/pick" +
-            "", method = RequestMethod.POST)
-    @ApiOperation(value = "物品锁定")
-    public ResponseResult<Void> lock(@PathVariable String borrowId);
-
-
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     @ApiOperation(value = "租用单查询")
     public ResponseResult<QueryResult<SBorrow>> query(@RequestBody @Valid BorrowQuery param);

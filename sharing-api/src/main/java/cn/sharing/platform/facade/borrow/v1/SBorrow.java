@@ -1,10 +1,9 @@
 package cn.sharing.platform.facade.borrow.v1;
 
-import cn.sharing.platform.facade.payment.v1.PayInfo;
+import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 import java.util.List;
@@ -17,19 +16,20 @@ import java.util.List;
 @Data
 @ApiModel(description = " 租用单")
 public class SBorrow {
+
   private String uuid;
 
-  @ApiModelProperty(value = "租用单单号", required = true)
+  @ApiModelProperty(value = "租用单单号", required = false)
   private String billnumber;
 
-  @ApiModelProperty(value = "原租用单单号（类型为归还单时赋值对应租用单单号）", required = false)
-  private String oriBillNumner;
+//  @ApiModelProperty(value = "原租用单单号（类型为归还单时赋值对应租用单单号）", required = false)
+//  private String oriBillNumner;
 
   private String stat;
 
-  @ApiModelProperty(value = "租用单类型（1为租用，-1为归还）", required = true)
-  @NotBlank(message ="租用单类型[borrowertype]不能为空")
-  private String borrowertype;
+//  @ApiModelProperty(value = "租用单类型（1为租用，-1为归还）", required = true)
+//  @NotBlank(message ="租用单类型[borrowertype]不能为空")
+//  private String borrowertype;
 
   private String borrower;
   @ApiModelProperty(value = "租借用户信息", required = true)
@@ -51,7 +51,7 @@ public class SBorrow {
 
   private String storeuuid;
 
-  private PayInfo payInfo;
+  private PayInfoParam payInfo;
 
   private List<SBorrowDtl> sGoodsBorrowDtl;
 

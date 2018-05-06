@@ -8,7 +8,7 @@ LICENCE         VARCHAR(128)     NULL,        /*注册信息*/
 LASTUPDTIME     DATETIME         NULL,        /*最后修改时间*/
 MEMO            VARCHAR(256)     NULL,        /*备注(预留)*/
 UPPERUUID       VARCHAR(32)      NULL         /*上级组织UUID(SHSTORE.UUID)*/
-)
+);
 
 
 /*用户表*/
@@ -26,7 +26,7 @@ MEMO            VARCHAR(256)     NULL,        /*备注(预留)*/
 STOREUUID       VARCHAR(32)      NULL,        /*所属组织(SHSTORE.UUID)*/
 STORECODE       VARCHAR(64)      NULL,        /*所属组织(SHSTORE.CODE)*/
 STORENAME       VARCHAR(64)      NULL         /*所属组织(SHSTORE.NAME)*/
-)
+);
 
 /*物品表*/
 CREATE TABLE SHGOODS(
@@ -44,7 +44,7 @@ LASTER          VARCHAR(32)      NULL,           /*最后修改人*/
 LASTUPDTIME     DATETIME         NULL,           /*最后更新时间*/
 MEMO            VARCHAR(256)     NULL,           /*备注(预留)*/
 STOREUUID       VARCHAR(32)      NULL            /*所属组织(SHSTORE.UUID)*/
-)
+);
 
 /*物品库存*/
 CREATE TABLE SHGoodsStock(
@@ -90,7 +90,25 @@ BACKQTY            DECIMAL(10,2)    DEFAULT 0 NULL,        /*物品归还数量*
 PAYAMT             DECIMAL(10,2)    DEFAULT 0 NULL,        /*使用费用金额*/
 BACKDEPOSITAMT     DECIMAL(10,2)    DEFAULT 0 NULL,        /*归还押金情况*/
 MEMO               VARCHAR(256)     NULL,                  /*备注(预留)*/
-BORROWUUID         VARCHAR(32)      NULL                   /*借用单ID(SHGoodsBorrowMst.UUID)*/
+BORROWUUID         VARCHAR(32)      NULL,                  /*借用单ID(SHGoodsBorrowMst.UUID)*/
+BORROWPAYUUID      VARCHAR(32)      NULL,                  /*借用单付款id*/
+BACKPAYUUID        VARCHAR(32)      NULL,                  /*退款付款id*/
+COMPENSATEPAYUUID  VARCHAR(32)      NULL                   /*赔偿付款id*/
+);
+
+/*支付信息*/
+CREATE TABLE SHPAYINFO(
+UUID               VARCHAR(32)      PRIMARY KEY NOT NULL,
+PAYID              VARCHAR(64)      NOT NULL,              /*支付记录id*/
+TRANSTYPE          INT              NOT NULL,              /*交易类型,  1:支付， -1:退款*/
+PAYTYPE            INT              NULL,                  /*支付方式, 1:微信， 2:支付宝*/
+TRADENO            VARCHAR(64)      NOT NULL,              /*支付单号（支付平台）*/
+OUTTRADENO         VARCHAR(64)      NOT NULL,              /*支付单号（商户）*/
+PAYAMT             DECIMAL(10,2)    DEFAULT 0 NULL,        /*使用费用金额*/
+PAYUSER            VARCHAR(64)      NOT NULL,              /*支付人*/
+PAYTIME            DATETIME         NULL,                  /*支付（退款）时间*/
+ORITRADENO         VARCHAR(64)      NULL,                  /*原支付单号（支付平台，退款时使用）*/
+ORIOUTTRADENO      VARCHAR(64)      NULL                   /*原支付单号（商户，退款时使用）*/
 );
 
 /****************************END****************************/
