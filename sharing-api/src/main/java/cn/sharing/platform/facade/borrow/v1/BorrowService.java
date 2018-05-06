@@ -28,13 +28,12 @@ public interface BorrowService {
     /**
      * 物品使用
      *
-     * @param sGoodsBorrow 物品借用信息对象
+     * @param borrowParam 物品借用信息对象
      * @return 物品信息
      */
-    @RequestMapping(value = "/save" +
-            "", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ApiOperation(value = "物品借用")
-    public ResponseResult<Void> borrow(@RequestBody SBorrow sGoodsBorrow);
+    public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam);
 
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     @ApiOperation(value = "租用单查询")
@@ -59,4 +58,6 @@ public interface BorrowService {
     @RequestMapping(value = "/compensate", method = RequestMethod.POST)
     @ApiOperation(value = "物品赔偿")
     public ResponseResult<Void> compensate(@RequestBody @Valid SBorrow sGoodsBorrow);
+
+    //新增两个接口 1. 获取明细   2.领取，记录领用人和领用时间（BORROWER 表结构调整）
 }

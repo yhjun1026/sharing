@@ -151,6 +151,21 @@ public class GoodsBorrowDtlExample {
         return this;
     }
 
+    public GoodsBorrowDtlExample sumBorrowpayuuid() {
+        this.sumCol="BORROWPAYUUID";
+        return this;
+    }
+
+    public GoodsBorrowDtlExample sumBackpayuuid() {
+        this.sumCol="BACKPAYUUID";
+        return this;
+    }
+
+    public GoodsBorrowDtlExample sumCompensatepayuuid() {
+        this.sumCol="COMPENSATEPAYUUID";
+        return this;
+    }
+
     public Integer getOffset() {
         return this.offset;
     }
@@ -1131,6 +1146,216 @@ public class GoodsBorrowDtlExample {
 
         public Criteria andBorrowuuidNotBetween(String value1, String value2) {
             addCriterion("BORROWUUID not between", value1, value2, "borrowuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidIsNull() {
+            addCriterion("BORROWPAYUUID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidIsNotNull() {
+            addCriterion("BORROWPAYUUID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidEqualTo(String value) {
+            addCriterion("BORROWPAYUUID =", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidNotEqualTo(String value) {
+            addCriterion("BORROWPAYUUID <>", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidGreaterThan(String value) {
+            addCriterion("BORROWPAYUUID >", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidGreaterThanOrEqualTo(String value) {
+            addCriterion("BORROWPAYUUID >=", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidLessThan(String value) {
+            addCriterion("BORROWPAYUUID <", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidLessThanOrEqualTo(String value) {
+            addCriterion("BORROWPAYUUID <=", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidLike(String value) {
+            addCriterion("BORROWPAYUUID like", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidNotLike(String value) {
+            addCriterion("BORROWPAYUUID not like", value, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidIn(List<String> values) {
+            addCriterion("BORROWPAYUUID in", values, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidNotIn(List<String> values) {
+            addCriterion("BORROWPAYUUID not in", values, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidBetween(String value1, String value2) {
+            addCriterion("BORROWPAYUUID between", value1, value2, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBorrowpayuuidNotBetween(String value1, String value2) {
+            addCriterion("BORROWPAYUUID not between", value1, value2, "borrowpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidIsNull() {
+            addCriterion("BACKPAYUUID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidIsNotNull() {
+            addCriterion("BACKPAYUUID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidEqualTo(String value) {
+            addCriterion("BACKPAYUUID =", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidNotEqualTo(String value) {
+            addCriterion("BACKPAYUUID <>", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidGreaterThan(String value) {
+            addCriterion("BACKPAYUUID >", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidGreaterThanOrEqualTo(String value) {
+            addCriterion("BACKPAYUUID >=", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidLessThan(String value) {
+            addCriterion("BACKPAYUUID <", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidLessThanOrEqualTo(String value) {
+            addCriterion("BACKPAYUUID <=", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidLike(String value) {
+            addCriterion("BACKPAYUUID like", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidNotLike(String value) {
+            addCriterion("BACKPAYUUID not like", value, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidIn(List<String> values) {
+            addCriterion("BACKPAYUUID in", values, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidNotIn(List<String> values) {
+            addCriterion("BACKPAYUUID not in", values, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidBetween(String value1, String value2) {
+            addCriterion("BACKPAYUUID between", value1, value2, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andBackpayuuidNotBetween(String value1, String value2) {
+            addCriterion("BACKPAYUUID not between", value1, value2, "backpayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidIsNull() {
+            addCriterion("COMPENSATEPAYUUID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidIsNotNull() {
+            addCriterion("COMPENSATEPAYUUID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidEqualTo(String value) {
+            addCriterion("COMPENSATEPAYUUID =", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidNotEqualTo(String value) {
+            addCriterion("COMPENSATEPAYUUID <>", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidGreaterThan(String value) {
+            addCriterion("COMPENSATEPAYUUID >", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidGreaterThanOrEqualTo(String value) {
+            addCriterion("COMPENSATEPAYUUID >=", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidLessThan(String value) {
+            addCriterion("COMPENSATEPAYUUID <", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidLessThanOrEqualTo(String value) {
+            addCriterion("COMPENSATEPAYUUID <=", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidLike(String value) {
+            addCriterion("COMPENSATEPAYUUID like", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidNotLike(String value) {
+            addCriterion("COMPENSATEPAYUUID not like", value, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidIn(List<String> values) {
+            addCriterion("COMPENSATEPAYUUID in", values, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidNotIn(List<String> values) {
+            addCriterion("COMPENSATEPAYUUID not in", values, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidBetween(String value1, String value2) {
+            addCriterion("COMPENSATEPAYUUID between", value1, value2, "compensatepayuuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensatepayuuidNotBetween(String value1, String value2) {
+            addCriterion("COMPENSATEPAYUUID not between", value1, value2, "compensatepayuuid");
             return (Criteria) this;
         }
 

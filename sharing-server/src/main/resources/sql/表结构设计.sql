@@ -60,7 +60,7 @@ MEMO            VARCHAR(256)   NULL                   /*备注(预留)*/
 CREATE TABLE SHGoodsBorrowMst(
 UUID            VARCHAR(32)    PRIMARY KEY NOT NULL,
 BILLNUMBER      VARCHAR(32)    NOT NULL,              /*物品借用单号*/
-STAT            VARCHAR(16)    NOT NULL,              /*单据状态 新增 none; 借用中 using;完成 finished*/ 
+STAT            VARCHAR(16)    NOT NULL,              /*单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated*/
 BORROWERTYPE    VARCHAR(64)    NULL,                  /*借用人类型(内部员工，外部)*/ 
 BORROWER        VARCHAR(64)    NULL,                  /*借用人*/
 MOBILE          VARCHAR(32)    NULL,                  /*借用人手机号*/

@@ -32,6 +32,12 @@ public class GoodsBorrowDtl implements Serializable {
 
     private String borrowuuid;
 
+    private String borrowpayuuid;
+
+    private String backpayuuid;
+
+    private String compensatepayuuid;
+
     private static final long serialVersionUID = 1L;
 
     private String updateSql;
@@ -146,6 +152,30 @@ public class GoodsBorrowDtl implements Serializable {
 
     public void setBorrowuuid(String borrowuuid) {
         this.borrowuuid = borrowuuid == null ? null : borrowuuid.trim();
+    }
+
+    public String getBorrowpayuuid() {
+        return borrowpayuuid;
+    }
+
+    public void setBorrowpayuuid(String borrowpayuuid) {
+        this.borrowpayuuid = borrowpayuuid == null ? null : borrowpayuuid.trim();
+    }
+
+    public String getBackpayuuid() {
+        return backpayuuid;
+    }
+
+    public void setBackpayuuid(String backpayuuid) {
+        this.backpayuuid = backpayuuid == null ? null : backpayuuid.trim();
+    }
+
+    public String getCompensatepayuuid() {
+        return compensatepayuuid;
+    }
+
+    public void setCompensatepayuuid(String compensatepayuuid) {
+        this.compensatepayuuid = compensatepayuuid == null ? null : compensatepayuuid.trim();
     }
 
     public String getUpdateSql() {
