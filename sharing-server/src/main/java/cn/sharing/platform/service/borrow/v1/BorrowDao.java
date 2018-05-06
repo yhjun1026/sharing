@@ -5,6 +5,7 @@ import cn.sharing.platform.facade.borrow.v1.BorrowDtlParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.utils.DateUtil;
+import cn.sharing.platform.utils.SerialNumberUtil;
 import cn.sharing.platform.utils.UUIDGenerator;
 import com.sharing.dao.entity.Goods;
 import com.sharing.dao.entity.GoodsBorrowDtl;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by zenglin on 2018/5/6.
@@ -39,6 +41,9 @@ public class BorrowDao {
 
   @Autowired
   private GoodsBorrowMstMapper goodsBorrowMstMapper;
+
+  @Autowired
+  private SerialNumberUtil serialNumberUtil;
 
   @Transactional
   public String saveBorrow(BorrowParam param) {
@@ -67,8 +72,20 @@ public class BorrowDao {
       goodsBorrowDtlMapper.insert(borrowDtl);
     }
 
+    List<String> billNumbers = null;
+    try {
+      billNumbers = serialNumberUtil.generateNumber("JY", 6, 1);
+    } catch (Exception e) {
+      log.error("【新增租用单】生成单据号异常，" + e.getMessage());
+      throw new RuntimeException("生成单据号异常，" + e.getMessage());
+    }
+    if (billNumbers == null || billNumbers.size() == 0) {
+      throw new RuntimeException("生成单据号失败");
+    }
+
     GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
     borrowMst.setUuid(mstUuid);
+    borrowMst.setBillnumber(billNumbers.get(0));
     goodsBorrowMstMapper.insert(borrowMst);
 
     return mstUuid;
@@ -115,7 +132,6 @@ public class BorrowDao {
       return null;
     }
     GoodsBorrowMst borrowMst = new GoodsBorrowMst();
-    borrowMst.setBillnumber("");  //todo  单号生成
     borrowMst.setStat(BorrowStatEnum.NEW.getCode());
     borrowMst.setMobile(borrowParam.getCustom().getPhoneNumber());
     borrowMst.setAddress(borrowParam.getCustom().getAddress());

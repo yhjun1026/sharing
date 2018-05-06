@@ -53,7 +53,7 @@ public class DateUtil {
 
 	public static Date getDateByPattern(String time, String pattern) {
 		Date date = null;
-		if (StringUtils.isEmpty(time)) {
+		if (!StringUtils.isEmpty(time)) {
 			try {
 				date = DateUtils.parseDate(time, pattern);
 			} catch (Exception ex) {

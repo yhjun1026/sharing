@@ -111,4 +111,15 @@ ORITRADENO         VARCHAR(64)      NULL,                  /*原支付单号（�
 ORIOUTTRADENO      VARCHAR(64)      NULL                   /*原支付单号（商户，退款时使用）*/
 );
 
+CREATE TABLE IF NOT EXISTS `serial_number` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `day` date NOT NULL COMMENT '日期',
+  `business_code` varchar(64) NOT NULL DEFAULT '' COMMENT '业务类型code',
+  `num` int(11) NOT NULL DEFAULT '0' COMMENT '当前值',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `orgCodeDay` (`business_code`,`day`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
 /****************************END****************************/

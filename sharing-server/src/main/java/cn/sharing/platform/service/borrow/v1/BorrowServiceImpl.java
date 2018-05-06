@@ -26,6 +26,7 @@ public class BorrowServiceImpl implements BorrowService {
   @Autowired
   private GoodsDao goodsDao;
 
+  @Autowired
   private BorrowDao borrowDao;
 
   @Override
