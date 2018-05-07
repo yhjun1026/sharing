@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
   `borrow_operate_time` datetime DEFAULT NULL COMMENT '领用受理时间',
   `return_operator` varchar(64) DEFAULT NULL COMMENT '归还受理人',
   `return_operate_time` datetime DEFAULT NULL COMMENT '归还受理时间',
+  `lst_upd_time` datetime NOT NULL COMMENT '最后更新时间',
   `memo` varchar(256) DEFAULT NULL COMMENT '备注',
   `store_uuid` varchar(32) DEFAULT NULL COMMENT '所属组织，暂时无用',
   PRIMARY KEY (`uuid`)
