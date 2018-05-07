@@ -1,5 +1,6 @@
 package cn.sharing.platform.facade.goods.v1;
 
+import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 /**
  * 物品服务接口
@@ -34,16 +37,13 @@ public interface GoodsService {
                                      goodsId);
 
   /**
-   * 获取可以租用的物品
-   *
-   * @param goodsId
-   *         物品ID
-   * @return 可以租用物品信息
+   * 分页查询可租用的物品信息
+   * @param param 分页参数
+   * @return
    */
-  @RequestMapping(value = "/get/rent/{goodsid}", method = RequestMethod.GET)
+  @RequestMapping(value = "/get/rent/all", method = RequestMethod.POST)
   @ApiOperation(value = "获取可以租用的物品")
-  ResponseResult<SGoods> getRentGoods(@PathVariable(value = "goodsid") @ApiParam(name = "goodsid", value = "物品代码")
-                                              String goodsId);
+  ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody  @Valid GoodsQuery param);
 
   /**
    * 物品新增，用于新增物品或者增加物品的库存数量

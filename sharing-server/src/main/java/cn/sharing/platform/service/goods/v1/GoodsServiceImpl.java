@@ -1,7 +1,9 @@
 package cn.sharing.platform.service.goods.v1;
 
 import cn.sharing.platform.BaseImpl;
+import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.GoodsService;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,14 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   }
 
   /**
-   * 获取可以租用的物品
+   * 分页查询可租用的物品信息
    *
-   * @param goodsId
-   *         物品ID
-   * @return 可以租用物品信息
+   * @param param
+   *         分页参数
+   * @return
    */
   @Override
-  public ResponseResult<SGoods> getRentGoods(String goodsId) {
+  public ResponseResult<QueryResult<SGoods>> getRentGoods(GoodsQuery param) {
     return null;
   }
 
