@@ -2,21 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sharing.dao.mapper.GoodsBorrowMstMapper">
   <resultMap id="BaseResultMap" type="com.sharing.dao.entity.GoodsBorrowMst">
-    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
-    <result column="BILLNUMBER" jdbcType="VARCHAR" property="billnumber" />
-    <result column="STAT" jdbcType="VARCHAR" property="stat" />
-    <result column="BORROWERTYPE" jdbcType="VARCHAR" property="borrowertype" />
-    <result column="BORROWER" jdbcType="VARCHAR" property="borrower" />
-    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
-    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
-    <result column="RETURNTIME" jdbcType="TIMESTAMP" property="returntime" />
-    <result column="REALRETURNTIME" jdbcType="TIMESTAMP" property="realreturntime" />
-    <result column="FILLER" jdbcType="VARCHAR" property="filler" />
-    <result column="FILDATE" jdbcType="TIMESTAMP" property="fildate" />
-    <result column="LASTER" jdbcType="VARCHAR" property="laster" />
-    <result column="LASTUPDTIME" jdbcType="TIMESTAMP" property="lastupdtime" />
-    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
-    <result column="STOREUUID" jdbcType="VARCHAR" property="storeuuid" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="bill_number" jdbcType="VARCHAR" property="billNumber" />
+    <result column="stat" jdbcType="VARCHAR" property="stat" />
+    <result column="borrow_type" jdbcType="VARCHAR" property="borrowType" />
+    <result column="borrower" jdbcType="VARCHAR" property="borrower" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="plan_return_time" jdbcType="TIMESTAMP" property="planReturnTime" />
+    <result column="real_return_time" jdbcType="TIMESTAMP" property="realReturnTime" />
+    <result column="borrow_operator" jdbcType="VARCHAR" property="borrowOperator" />
+    <result column="borrow_operate_time" jdbcType="TIMESTAMP" property="borrowOperateTime" />
+    <result column="return_operator" jdbcType="VARCHAR" property="returnOperator" />
+    <result column="return_operate_time" jdbcType="TIMESTAMP" property="returnOperateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lst_upd_time" jdbcType="TIMESTAMP" property="lstUpdTime" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="store_uuid" jdbcType="VARCHAR" property="storeUuid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -77,8 +79,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, BILLNUMBER, STAT, BORROWERTYPE, BORROWER, MOBILE, ADDRESS, RETURNTIME, REALRETURNTIME, 
-    FILLER, FILDATE, LASTER, LASTUPDTIME, MEMO, STOREUUID
+    uuid, bill_number, stat, borrow_type, borrower, mobile, address, plan_return_time, 
+    real_return_time, borrow_operator, borrow_operate_time, return_operator, return_operate_time, 
+    create_time, lst_upd_time, memo, store_uuid
   </sql>
   <select id="selectByExample" parameterType="com.sharing.dao.entity.GoodsBorrowMstExample" resultMap="BaseResultMap">
     select
@@ -102,11 +105,11 @@
     select 
     <include refid="Base_Column_List" />
     from shgoodsborrowmst
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shgoodsborrowmst
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.sharing.dao.entity.GoodsBorrowMstExample">
     delete from shgoodsborrowmst
@@ -115,80 +118,86 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sharing.dao.entity.GoodsBorrowMst">
-    insert into shgoodsborrowmst (UUID, BILLNUMBER, STAT, 
-      BORROWERTYPE, BORROWER, MOBILE, 
-      ADDRESS, RETURNTIME, REALRETURNTIME, 
-      FILLER, FILDATE, LASTER, 
-      LASTUPDTIME, MEMO, STOREUUID
-      )
-    values (#{uuid,jdbcType=VARCHAR}, #{billnumber,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR}, 
-      #{borrowertype,jdbcType=VARCHAR}, #{borrower,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{returntime,jdbcType=TIMESTAMP}, #{realreturntime,jdbcType=TIMESTAMP}, 
-      #{filler,jdbcType=VARCHAR}, #{fildate,jdbcType=TIMESTAMP}, #{laster,jdbcType=VARCHAR}, 
-      #{lastupdtime,jdbcType=TIMESTAMP}, #{memo,jdbcType=VARCHAR}, #{storeuuid,jdbcType=VARCHAR}
-      )
+    insert into shgoodsborrowmst (uuid, bill_number, stat, 
+      borrow_type, borrower, mobile, 
+      address, plan_return_time, real_return_time, 
+      borrow_operator, borrow_operate_time, return_operator, 
+      return_operate_time, create_time, lst_upd_time, 
+      memo, store_uuid)
+    values (#{uuid,jdbcType=VARCHAR}, #{billNumber,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR}, 
+      #{borrowType,jdbcType=VARCHAR}, #{borrower,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{planReturnTime,jdbcType=TIMESTAMP}, #{realReturnTime,jdbcType=TIMESTAMP}, 
+      #{borrowOperator,jdbcType=VARCHAR}, #{borrowOperateTime,jdbcType=TIMESTAMP}, #{returnOperator,jdbcType=VARCHAR}, 
+      #{returnOperateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{lstUpdTime,jdbcType=TIMESTAMP}, 
+      #{memo,jdbcType=VARCHAR}, #{storeUuid,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sharing.dao.entity.GoodsBorrowMst">
     insert into shgoodsborrowmst
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
-        UUID,
+        uuid,
       </if>
-      <if test="billnumber != null">
-        BILLNUMBER,
+      <if test="billNumber != null">
+        bill_number,
       </if>
       <if test="stat != null">
-        STAT,
+        stat,
       </if>
-      <if test="borrowertype != null">
-        BORROWERTYPE,
+      <if test="borrowType != null">
+        borrow_type,
       </if>
       <if test="borrower != null">
-        BORROWER,
+        borrower,
       </if>
       <if test="mobile != null">
-        MOBILE,
+        mobile,
       </if>
       <if test="address != null">
-        ADDRESS,
+        address,
       </if>
-      <if test="returntime != null">
-        RETURNTIME,
+      <if test="planReturnTime != null">
+        plan_return_time,
       </if>
-      <if test="realreturntime != null">
-        REALRETURNTIME,
+      <if test="realReturnTime != null">
+        real_return_time,
       </if>
-      <if test="filler != null">
-        FILLER,
+      <if test="borrowOperator != null">
+        borrow_operator,
       </if>
-      <if test="fildate != null">
-        FILDATE,
+      <if test="borrowOperateTime != null">
+        borrow_operate_time,
       </if>
-      <if test="laster != null">
-        LASTER,
+      <if test="returnOperator != null">
+        return_operator,
       </if>
-      <if test="lastupdtime != null">
-        LASTUPDTIME,
+      <if test="returnOperateTime != null">
+        return_operate_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lstUpdTime != null">
+        lst_upd_time,
       </if>
       <if test="memo != null">
-        MEMO,
+        memo,
       </if>
-      <if test="storeuuid != null">
-        STOREUUID,
+      <if test="storeUuid != null">
+        store_uuid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="billnumber != null">
-        #{billnumber,jdbcType=VARCHAR},
+      <if test="billNumber != null">
+        #{billNumber,jdbcType=VARCHAR},
       </if>
       <if test="stat != null">
         #{stat,jdbcType=VARCHAR},
       </if>
-      <if test="borrowertype != null">
-        #{borrowertype,jdbcType=VARCHAR},
+      <if test="borrowType != null">
+        #{borrowType,jdbcType=VARCHAR},
       </if>
       <if test="borrower != null">
         #{borrower,jdbcType=VARCHAR},
@@ -199,29 +208,35 @@
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="returntime != null">
-        #{returntime,jdbcType=TIMESTAMP},
+      <if test="planReturnTime != null">
+        #{planReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="realreturntime != null">
-        #{realreturntime,jdbcType=TIMESTAMP},
+      <if test="realReturnTime != null">
+        #{realReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="filler != null">
-        #{filler,jdbcType=VARCHAR},
+      <if test="borrowOperator != null">
+        #{borrowOperator,jdbcType=VARCHAR},
       </if>
-      <if test="fildate != null">
-        #{fildate,jdbcType=TIMESTAMP},
+      <if test="borrowOperateTime != null">
+        #{borrowOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="laster != null">
-        #{laster,jdbcType=VARCHAR},
+      <if test="returnOperator != null">
+        #{returnOperator,jdbcType=VARCHAR},
       </if>
-      <if test="lastupdtime != null">
-        #{lastupdtime,jdbcType=TIMESTAMP},
+      <if test="returnOperateTime != null">
+        #{returnOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstUpdTime != null">
+        #{lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="storeuuid != null">
-        #{storeuuid,jdbcType=VARCHAR},
+      <if test="storeUuid != null">
+        #{storeUuid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -235,49 +250,55 @@
     update shgoodsborrowmst
     <set>
       <if test="record.uuid != null">
-        UUID = #{record.uuid,jdbcType=VARCHAR},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.billnumber != null">
-        BILLNUMBER = #{record.billnumber,jdbcType=VARCHAR},
+      <if test="record.billNumber != null">
+        bill_number = #{record.billNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.stat != null">
-        STAT = #{record.stat,jdbcType=VARCHAR},
+        stat = #{record.stat,jdbcType=VARCHAR},
       </if>
-      <if test="record.borrowertype != null">
-        BORROWERTYPE = #{record.borrowertype,jdbcType=VARCHAR},
+      <if test="record.borrowType != null">
+        borrow_type = #{record.borrowType,jdbcType=VARCHAR},
       </if>
       <if test="record.borrower != null">
-        BORROWER = #{record.borrower,jdbcType=VARCHAR},
+        borrower = #{record.borrower,jdbcType=VARCHAR},
       </if>
       <if test="record.mobile != null">
-        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
       <if test="record.address != null">
-        ADDRESS = #{record.address,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.returntime != null">
-        RETURNTIME = #{record.returntime,jdbcType=TIMESTAMP},
+      <if test="record.planReturnTime != null">
+        plan_return_time = #{record.planReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.realreturntime != null">
-        REALRETURNTIME = #{record.realreturntime,jdbcType=TIMESTAMP},
+      <if test="record.realReturnTime != null">
+        real_return_time = #{record.realReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.filler != null">
-        FILLER = #{record.filler,jdbcType=VARCHAR},
+      <if test="record.borrowOperator != null">
+        borrow_operator = #{record.borrowOperator,jdbcType=VARCHAR},
       </if>
-      <if test="record.fildate != null">
-        FILDATE = #{record.fildate,jdbcType=TIMESTAMP},
+      <if test="record.borrowOperateTime != null">
+        borrow_operate_time = #{record.borrowOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.laster != null">
-        LASTER = #{record.laster,jdbcType=VARCHAR},
+      <if test="record.returnOperator != null">
+        return_operator = #{record.returnOperator,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastupdtime != null">
-        LASTUPDTIME = #{record.lastupdtime,jdbcType=TIMESTAMP},
+      <if test="record.returnOperateTime != null">
+        return_operate_time = #{record.returnOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lstUpdTime != null">
+        lst_upd_time = #{record.lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.memo != null">
-        MEMO = #{record.memo,jdbcType=VARCHAR},
+        memo = #{record.memo,jdbcType=VARCHAR},
       </if>
-      <if test="record.storeuuid != null">
-        STOREUUID = #{record.storeuuid,jdbcType=VARCHAR},
+      <if test="record.storeUuid != null">
+        store_uuid = #{record.storeUuid,jdbcType=VARCHAR},
       </if>
       <if test="record.updateSql != null" >
         ${record.updateSql},
@@ -289,21 +310,23 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update shgoodsborrowmst
-    set UUID = #{record.uuid,jdbcType=VARCHAR},
-      BILLNUMBER = #{record.billnumber,jdbcType=VARCHAR},
-      STAT = #{record.stat,jdbcType=VARCHAR},
-      BORROWERTYPE = #{record.borrowertype,jdbcType=VARCHAR},
-      BORROWER = #{record.borrower,jdbcType=VARCHAR},
-      MOBILE = #{record.mobile,jdbcType=VARCHAR},
-      ADDRESS = #{record.address,jdbcType=VARCHAR},
-      RETURNTIME = #{record.returntime,jdbcType=TIMESTAMP},
-      REALRETURNTIME = #{record.realreturntime,jdbcType=TIMESTAMP},
-      FILLER = #{record.filler,jdbcType=VARCHAR},
-      FILDATE = #{record.fildate,jdbcType=TIMESTAMP},
-      LASTER = #{record.laster,jdbcType=VARCHAR},
-      LASTUPDTIME = #{record.lastupdtime,jdbcType=TIMESTAMP},
-      MEMO = #{record.memo,jdbcType=VARCHAR},
-      STOREUUID = #{record.storeuuid,jdbcType=VARCHAR}
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      bill_number = #{record.billNumber,jdbcType=VARCHAR},
+      stat = #{record.stat,jdbcType=VARCHAR},
+      borrow_type = #{record.borrowType,jdbcType=VARCHAR},
+      borrower = #{record.borrower,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      plan_return_time = #{record.planReturnTime,jdbcType=TIMESTAMP},
+      real_return_time = #{record.realReturnTime,jdbcType=TIMESTAMP},
+      borrow_operator = #{record.borrowOperator,jdbcType=VARCHAR},
+      borrow_operate_time = #{record.borrowOperateTime,jdbcType=TIMESTAMP},
+      return_operator = #{record.returnOperator,jdbcType=VARCHAR},
+      return_operate_time = #{record.returnOperateTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      lst_upd_time = #{record.lstUpdTime,jdbcType=TIMESTAMP},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      store_uuid = #{record.storeUuid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -311,68 +334,76 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sharing.dao.entity.GoodsBorrowMst">
     update shgoodsborrowmst
     <set>
-      <if test="billnumber != null">
-        BILLNUMBER = #{billnumber,jdbcType=VARCHAR},
+      <if test="billNumber != null">
+        bill_number = #{billNumber,jdbcType=VARCHAR},
       </if>
       <if test="stat != null">
-        STAT = #{stat,jdbcType=VARCHAR},
+        stat = #{stat,jdbcType=VARCHAR},
       </if>
-      <if test="borrowertype != null">
-        BORROWERTYPE = #{borrowertype,jdbcType=VARCHAR},
+      <if test="borrowType != null">
+        borrow_type = #{borrowType,jdbcType=VARCHAR},
       </if>
       <if test="borrower != null">
-        BORROWER = #{borrower,jdbcType=VARCHAR},
+        borrower = #{borrower,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null">
-        MOBILE = #{mobile,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
-        ADDRESS = #{address,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="returntime != null">
-        RETURNTIME = #{returntime,jdbcType=TIMESTAMP},
+      <if test="planReturnTime != null">
+        plan_return_time = #{planReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="realreturntime != null">
-        REALRETURNTIME = #{realreturntime,jdbcType=TIMESTAMP},
+      <if test="realReturnTime != null">
+        real_return_time = #{realReturnTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="filler != null">
-        FILLER = #{filler,jdbcType=VARCHAR},
+      <if test="borrowOperator != null">
+        borrow_operator = #{borrowOperator,jdbcType=VARCHAR},
       </if>
-      <if test="fildate != null">
-        FILDATE = #{fildate,jdbcType=TIMESTAMP},
+      <if test="borrowOperateTime != null">
+        borrow_operate_time = #{borrowOperateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="laster != null">
-        LASTER = #{laster,jdbcType=VARCHAR},
+      <if test="returnOperator != null">
+        return_operator = #{returnOperator,jdbcType=VARCHAR},
       </if>
-      <if test="lastupdtime != null">
-        LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
+      <if test="returnOperateTime != null">
+        return_operate_time = #{returnOperateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lstUpdTime != null">
+        lst_upd_time = #{lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="memo != null">
-        MEMO = #{memo,jdbcType=VARCHAR},
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="storeuuid != null">
-        STOREUUID = #{storeuuid,jdbcType=VARCHAR},
+      <if test="storeUuid != null">
+        store_uuid = #{storeUuid,jdbcType=VARCHAR},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sharing.dao.entity.GoodsBorrowMst">
     update shgoodsborrowmst
-    set BILLNUMBER = #{billnumber,jdbcType=VARCHAR},
-      STAT = #{stat,jdbcType=VARCHAR},
-      BORROWERTYPE = #{borrowertype,jdbcType=VARCHAR},
-      BORROWER = #{borrower,jdbcType=VARCHAR},
-      MOBILE = #{mobile,jdbcType=VARCHAR},
-      ADDRESS = #{address,jdbcType=VARCHAR},
-      RETURNTIME = #{returntime,jdbcType=TIMESTAMP},
-      REALRETURNTIME = #{realreturntime,jdbcType=TIMESTAMP},
-      FILLER = #{filler,jdbcType=VARCHAR},
-      FILDATE = #{fildate,jdbcType=TIMESTAMP},
-      LASTER = #{laster,jdbcType=VARCHAR},
-      LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
-      MEMO = #{memo,jdbcType=VARCHAR},
-      STOREUUID = #{storeuuid,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    set bill_number = #{billNumber,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=VARCHAR},
+      borrow_type = #{borrowType,jdbcType=VARCHAR},
+      borrower = #{borrower,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      plan_return_time = #{planReturnTime,jdbcType=TIMESTAMP},
+      real_return_time = #{realReturnTime,jdbcType=TIMESTAMP},
+      borrow_operator = #{borrowOperator,jdbcType=VARCHAR},
+      borrow_operate_time = #{borrowOperateTime,jdbcType=TIMESTAMP},
+      return_operator = #{returnOperator,jdbcType=VARCHAR},
+      return_operate_time = #{returnOperateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      lst_upd_time = #{lstUpdTime,jdbcType=TIMESTAMP},
+      memo = #{memo,jdbcType=VARCHAR},
+      store_uuid = #{storeUuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.sharing.dao.entity.GoodsBorrowMstExample" resultMap="BaseResultMap">
     select
@@ -397,20 +428,20 @@
   </select>
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-            insert into shgoodsborrowmst  (UUID, BILLNUMBER, STAT, 
-        BORROWERTYPE, BORROWER, MOBILE, 
-        ADDRESS, RETURNTIME, REALRETURNTIME, 
-        FILLER, FILDATE, LASTER, 
-        LASTUPDTIME, MEMO, STOREUUID
-        )
+            insert into shgoodsborrowmst  (uuid, bill_number, stat, 
+        borrow_type, borrower, mobile, 
+        address, plan_return_time, real_return_time, 
+        borrow_operator, borrow_operate_time, return_operator, 
+        return_operate_time, create_time, lst_upd_time, 
+        memo, store_uuid)
       values
       <foreach collection="items" item="item" index="index" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.billnumber,jdbcType=VARCHAR}, #{item.stat,jdbcType=VARCHAR}, 
-        #{item.borrowertype,jdbcType=VARCHAR}, #{item.borrower,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, 
-        #{item.address,jdbcType=VARCHAR}, #{item.returntime,jdbcType=TIMESTAMP}, #{item.realreturntime,jdbcType=TIMESTAMP}, 
-        #{item.filler,jdbcType=VARCHAR}, #{item.fildate,jdbcType=TIMESTAMP}, #{item.laster,jdbcType=VARCHAR}, 
-        #{item.lastupdtime,jdbcType=TIMESTAMP}, #{item.memo,jdbcType=VARCHAR}, #{item.storeuuid,jdbcType=VARCHAR}
-        )
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.billNumber,jdbcType=VARCHAR}, #{item.stat,jdbcType=VARCHAR}, 
+        #{item.borrowType,jdbcType=VARCHAR}, #{item.borrower,jdbcType=VARCHAR}, #{item.mobile,jdbcType=VARCHAR}, 
+        #{item.address,jdbcType=VARCHAR}, #{item.planReturnTime,jdbcType=TIMESTAMP}, #{item.realReturnTime,jdbcType=TIMESTAMP}, 
+        #{item.borrowOperator,jdbcType=VARCHAR}, #{item.borrowOperateTime,jdbcType=TIMESTAMP}, #{item.returnOperator,jdbcType=VARCHAR}, 
+        #{item.returnOperateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.lstUpdTime,jdbcType=TIMESTAMP}, 
+        #{item.memo,jdbcType=VARCHAR}, #{item.storeUuid,jdbcType=VARCHAR})
       </foreach>
     </if>
   </insert>

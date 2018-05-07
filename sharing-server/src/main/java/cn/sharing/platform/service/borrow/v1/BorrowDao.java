@@ -16,6 +16,7 @@ import com.sharing.dao.mapper.GoodsBorrowMstMapper;
 import com.sharing.dao.mapper.GoodsMapper;
 import com.sharing.dao.mapper.PayInfoMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,7 @@ public class BorrowDao {
     //3.记录借用单表
     String mstUuid = UUIDGenerator.getUUID();
     for (BorrowDtlParam dtl : param.getBorrowDtls()) {
-      Goods goods = goodsMapper.selectByPrimaryKey(dtl.getGoodsuuid());
+      Goods goods = goodsMapper.selectByPrimaryKey(dtl.getGoodsUuid());
       goods.setStat(1);
       goodsMapper.updateByPrimaryKeySelective(goods);
       //记录支付信息
@@ -64,10 +65,10 @@ public class BorrowDao {
         payInfoMapper.insert(payInfo);
       }
       GoodsBorrowDtl borrowDtl = convertFromBorrowDtlParam(dtl);
-      borrowDtl.setGoodscode(goods.getCode());
-      borrowDtl.setGoodsname(goods.getName());
-      borrowDtl.setBorrowuuid(mstUuid);
-      borrowDtl.setBorrowpayuuid(payUuid);
+      borrowDtl.setGoodsCode(goods.getCode());
+      borrowDtl.setGoodsName(goods.getName());
+      borrowDtl.setBorrowUuid(mstUuid);
+      borrowDtl.setBorrowPayUuid(payUuid);
 
       goodsBorrowDtlMapper.insert(borrowDtl);
     }
@@ -85,7 +86,8 @@ public class BorrowDao {
 
     GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
     borrowMst.setUuid(mstUuid);
-    borrowMst.setBillnumber(billNumbers.get(0));
+    borrowMst.setBillNumber(billNumbers.get(0));
+    borrowMst.setLstUpdTime(new Date());
     goodsBorrowMstMapper.insert(borrowMst);
 
     return mstUuid;
@@ -97,16 +99,8 @@ public class BorrowDao {
     }
 
     PayInfo payInfo = new PayInfo();
-    payInfo.setPayid(payInfoParam.getPayid());
-    payInfo.setTranstype(payInfoParam.getTranType());
-    payInfo.setPaytype(payInfoParam.getPayType());
-    payInfo.setTradeno(payInfoParam.getTradeNo());
-    payInfo.setOuttradeno(payInfoParam.getOutTradeNo());
-    payInfo.setPayamt(payInfoParam.getPayAmt());
-    payInfo.setPayuser(payInfoParam.getPayUser());
-    payInfo.setPaytime(DateUtil.getDateByPattern(payInfoParam.getPayTime(), DateUtil.DEFAULT_FORMAT));
-    payInfo.setOritradeno(payInfoParam.getOriTradeNo());
-    payInfo.setOriouttradeno(payInfoParam.getOriOutTradeNo());
+    BeanUtils.copyProperties(payInfoParam, payInfo);
+    payInfo.setPayTime(DateUtil.getDateByPattern(payInfoParam.getPayTime(), DateUtil.DEFAULT_FORMAT));
 
     return payInfo;
   }
@@ -118,11 +112,7 @@ public class BorrowDao {
 
     GoodsBorrowDtl borrowDtl = new GoodsBorrowDtl();
     borrowDtl.setUuid(UUIDGenerator.getUUID());
-    borrowDtl.setGoodsuuid(dtlParam.getGoodsuuid());
-    borrowDtl.setBorrowqty(dtlParam.getBorrowqty());
-    borrowDtl.setBorrowdescrip(dtlParam.getBorrowdescrip());
-    borrowDtl.setDepositamt(dtlParam.getDepositamt());
-    borrowDtl.setMemo(dtlParam.getMemo());
+    BeanUtils.copyProperties(dtlParam, borrowDtl);
 
     return borrowDtl;
   }
@@ -133,13 +123,12 @@ public class BorrowDao {
     }
     GoodsBorrowMst borrowMst = new GoodsBorrowMst();
     borrowMst.setStat(BorrowStatEnum.NEW.getCode());
+    borrowMst.setBorrower(borrowParam.getCustom().getNick());
     borrowMst.setMobile(borrowParam.getCustom().getPhoneNumber());
     borrowMst.setAddress(borrowParam.getCustom().getAddress());
-    borrowMst.setReturntime(DateUtil.getDateByPattern(borrowParam.getReturntime(), DateUtil.DEFAULT_FORMAT));
-    borrowMst.setFiller(borrowParam.getFiller());
-    borrowMst.setFildate(new Date());
-    borrowMst.setLaster(borrowParam.getFiller());
-    borrowMst.setLastupdtime(new Date());
+    borrowMst.setPlanReturnTime(DateUtil.getDateByPattern(borrowParam.getReturnTime(), DateUtil.DEFAULT_FORMAT));
+    borrowMst.setCreateTime(new Date());
+    borrowMst.setLstUpdTime(new Date());
     borrowMst.setMemo(borrowParam.getMemo());
 
     return borrowMst;

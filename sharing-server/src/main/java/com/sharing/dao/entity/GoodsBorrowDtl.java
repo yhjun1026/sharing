@@ -6,37 +6,37 @@ import java.math.BigDecimal;
 public class GoodsBorrowDtl implements Serializable {
     private String uuid;
 
-    private String goodsuuid;
+    private String goodsUuid;
 
-    private String goodscode;
+    private String goodsCode;
 
-    private String goodsname;
+    private String goodsName;
 
-    private BigDecimal borrowqty;
+    private BigDecimal borrowQty;
 
-    private String borrowdescrip;
+    private String borrowDescrip;
 
-    private BigDecimal depositamt;
+    private BigDecimal depositAmt;
 
     private Integer damaged;
 
-    private String returndescrip;
+    private String returnDescrip;
 
-    private BigDecimal backqty;
+    private BigDecimal returnQty;
 
-    private BigDecimal payamt;
+    private BigDecimal payAmt;
 
-    private BigDecimal backdepositamt;
+    private BigDecimal returnDepositAmt;
+
+    private String borrowUuid;
+
+    private String borrowPayUuid;
+
+    private String returnPayUuid;
+
+    private String compensatePayUuid;
 
     private String memo;
-
-    private String borrowuuid;
-
-    private String borrowpayuuid;
-
-    private String backpayuuid;
-
-    private String compensatepayuuid;
 
     private static final long serialVersionUID = 1L;
 
@@ -50,52 +50,52 @@ public class GoodsBorrowDtl implements Serializable {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public String getGoodsuuid() {
-        return goodsuuid;
+    public String getGoodsUuid() {
+        return goodsUuid;
     }
 
-    public void setGoodsuuid(String goodsuuid) {
-        this.goodsuuid = goodsuuid == null ? null : goodsuuid.trim();
+    public void setGoodsUuid(String goodsUuid) {
+        this.goodsUuid = goodsUuid == null ? null : goodsUuid.trim();
     }
 
-    public String getGoodscode() {
-        return goodscode;
+    public String getGoodsCode() {
+        return goodsCode;
     }
 
-    public void setGoodscode(String goodscode) {
-        this.goodscode = goodscode == null ? null : goodscode.trim();
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode == null ? null : goodsCode.trim();
     }
 
-    public String getGoodsname() {
-        return goodsname;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname == null ? null : goodsname.trim();
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public BigDecimal getBorrowqty() {
-        return borrowqty;
+    public BigDecimal getBorrowQty() {
+        return borrowQty;
     }
 
-    public void setBorrowqty(BigDecimal borrowqty) {
-        this.borrowqty = borrowqty;
+    public void setBorrowQty(BigDecimal borrowQty) {
+        this.borrowQty = borrowQty;
     }
 
-    public String getBorrowdescrip() {
-        return borrowdescrip;
+    public String getBorrowDescrip() {
+        return borrowDescrip;
     }
 
-    public void setBorrowdescrip(String borrowdescrip) {
-        this.borrowdescrip = borrowdescrip == null ? null : borrowdescrip.trim();
+    public void setBorrowDescrip(String borrowDescrip) {
+        this.borrowDescrip = borrowDescrip == null ? null : borrowDescrip.trim();
     }
 
-    public BigDecimal getDepositamt() {
-        return depositamt;
+    public BigDecimal getDepositAmt() {
+        return depositAmt;
     }
 
-    public void setDepositamt(BigDecimal depositamt) {
-        this.depositamt = depositamt;
+    public void setDepositAmt(BigDecimal depositAmt) {
+        this.depositAmt = depositAmt;
     }
 
     public Integer getDamaged() {
@@ -106,36 +106,68 @@ public class GoodsBorrowDtl implements Serializable {
         this.damaged = damaged;
     }
 
-    public String getReturndescrip() {
-        return returndescrip;
+    public String getReturnDescrip() {
+        return returnDescrip;
     }
 
-    public void setReturndescrip(String returndescrip) {
-        this.returndescrip = returndescrip == null ? null : returndescrip.trim();
+    public void setReturnDescrip(String returnDescrip) {
+        this.returnDescrip = returnDescrip == null ? null : returnDescrip.trim();
     }
 
-    public BigDecimal getBackqty() {
-        return backqty;
+    public BigDecimal getReturnQty() {
+        return returnQty;
     }
 
-    public void setBackqty(BigDecimal backqty) {
-        this.backqty = backqty;
+    public void setReturnQty(BigDecimal returnQty) {
+        this.returnQty = returnQty;
     }
 
-    public BigDecimal getPayamt() {
-        return payamt;
+    public BigDecimal getPayAmt() {
+        return payAmt;
     }
 
-    public void setPayamt(BigDecimal payamt) {
-        this.payamt = payamt;
+    public void setPayAmt(BigDecimal payAmt) {
+        this.payAmt = payAmt;
     }
 
-    public BigDecimal getBackdepositamt() {
-        return backdepositamt;
+    public BigDecimal getReturnDepositAmt() {
+        return returnDepositAmt;
     }
 
-    public void setBackdepositamt(BigDecimal backdepositamt) {
-        this.backdepositamt = backdepositamt;
+    public void setReturnDepositAmt(BigDecimal returnDepositAmt) {
+        this.returnDepositAmt = returnDepositAmt;
+    }
+
+    public String getBorrowUuid() {
+        return borrowUuid;
+    }
+
+    public void setBorrowUuid(String borrowUuid) {
+        this.borrowUuid = borrowUuid == null ? null : borrowUuid.trim();
+    }
+
+    public String getBorrowPayUuid() {
+        return borrowPayUuid;
+    }
+
+    public void setBorrowPayUuid(String borrowPayUuid) {
+        this.borrowPayUuid = borrowPayUuid == null ? null : borrowPayUuid.trim();
+    }
+
+    public String getReturnPayUuid() {
+        return returnPayUuid;
+    }
+
+    public void setReturnPayUuid(String returnPayUuid) {
+        this.returnPayUuid = returnPayUuid == null ? null : returnPayUuid.trim();
+    }
+
+    public String getCompensatePayUuid() {
+        return compensatePayUuid;
+    }
+
+    public void setCompensatePayUuid(String compensatePayUuid) {
+        this.compensatePayUuid = compensatePayUuid == null ? null : compensatePayUuid.trim();
     }
 
     public String getMemo() {
@@ -144,38 +176,6 @@ public class GoodsBorrowDtl implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
-    }
-
-    public String getBorrowuuid() {
-        return borrowuuid;
-    }
-
-    public void setBorrowuuid(String borrowuuid) {
-        this.borrowuuid = borrowuuid == null ? null : borrowuuid.trim();
-    }
-
-    public String getBorrowpayuuid() {
-        return borrowpayuuid;
-    }
-
-    public void setBorrowpayuuid(String borrowpayuuid) {
-        this.borrowpayuuid = borrowpayuuid == null ? null : borrowpayuuid.trim();
-    }
-
-    public String getBackpayuuid() {
-        return backpayuuid;
-    }
-
-    public void setBackpayuuid(String backpayuuid) {
-        this.backpayuuid = backpayuuid == null ? null : backpayuuid.trim();
-    }
-
-    public String getCompensatepayuuid() {
-        return compensatepayuuid;
-    }
-
-    public void setCompensatepayuuid(String compensatepayuuid) {
-        this.compensatepayuuid = compensatepayuuid == null ? null : compensatepayuuid.trim();
     }
 
     public String getUpdateSql() {

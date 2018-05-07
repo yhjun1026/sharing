@@ -57,7 +57,8 @@ MEMO            VARCHAR(256)   NULL                   /*备注(预留)*/
 );
 
 /*物品借用单主表*/
-CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
+CREATE TABLE IF NOT EXISTS `shgoodsborrowmst`;
+CREATE TABLE `shgoodsborrowmst` (
   `uuid` varchar(32) NOT NULL,
   `bill_number` varchar(32) NOT NULL COMMENT '借用单据号',
   `stat` varchar(16) NOT NULL COMMENT '单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated',
@@ -71,11 +72,13 @@ CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
   `borrow_operate_time` datetime DEFAULT NULL COMMENT '领用受理时间',
   `return_operator` varchar(64) DEFAULT NULL COMMENT '归还受理人',
   `return_operate_time` datetime DEFAULT NULL COMMENT '归还受理时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
   `lst_upd_time` datetime NOT NULL COMMENT '最后更新时间',
   `memo` varchar(256) DEFAULT NULL COMMENT '备注',
   `store_uuid` varchar(32) DEFAULT NULL COMMENT '所属组织，暂时无用',
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品借用单主表';
+
 
 /*物品借用单明细*/
 CREATE TABLE IF NOT EXISTS `shgoodsborrowdtl` (

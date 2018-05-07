@@ -6,11 +6,11 @@ import java.util.Date;
 public class GoodsBorrowMst implements Serializable {
     private String uuid;
 
-    private String billnumber;
+    private String billNumber;
 
     private String stat;
 
-    private String borrowertype;
+    private String borrowType;
 
     private String borrower;
 
@@ -18,21 +18,25 @@ public class GoodsBorrowMst implements Serializable {
 
     private String address;
 
-    private Date returntime;
+    private Date planReturnTime;
 
-    private Date realreturntime;
+    private Date realReturnTime;
 
-    private String filler;
+    private String borrowOperator;
 
-    private Date fildate;
+    private Date borrowOperateTime;
 
-    private String laster;
+    private String returnOperator;
 
-    private Date lastupdtime;
+    private Date returnOperateTime;
+
+    private Date createTime;
+
+    private Date lstUpdTime;
 
     private String memo;
 
-    private String storeuuid;
+    private String storeUuid;
 
     private static final long serialVersionUID = 1L;
 
@@ -46,12 +50,12 @@ public class GoodsBorrowMst implements Serializable {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public String getBillnumber() {
-        return billnumber;
+    public String getBillNumber() {
+        return billNumber;
     }
 
-    public void setBillnumber(String billnumber) {
-        this.billnumber = billnumber == null ? null : billnumber.trim();
+    public void setBillNumber(String billNumber) {
+        this.billNumber = billNumber == null ? null : billNumber.trim();
     }
 
     public String getStat() {
@@ -62,12 +66,12 @@ public class GoodsBorrowMst implements Serializable {
         this.stat = stat == null ? null : stat.trim();
     }
 
-    public String getBorrowertype() {
-        return borrowertype;
+    public String getBorrowType() {
+        return borrowType;
     }
 
-    public void setBorrowertype(String borrowertype) {
-        this.borrowertype = borrowertype == null ? null : borrowertype.trim();
+    public void setBorrowType(String borrowType) {
+        this.borrowType = borrowType == null ? null : borrowType.trim();
     }
 
     public String getBorrower() {
@@ -94,52 +98,68 @@ public class GoodsBorrowMst implements Serializable {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getReturntime() {
-        return returntime;
+    public Date getPlanReturnTime() {
+        return planReturnTime;
     }
 
-    public void setReturntime(Date returntime) {
-        this.returntime = returntime;
+    public void setPlanReturnTime(Date planReturnTime) {
+        this.planReturnTime = planReturnTime;
     }
 
-    public Date getRealreturntime() {
-        return realreturntime;
+    public Date getRealReturnTime() {
+        return realReturnTime;
     }
 
-    public void setRealreturntime(Date realreturntime) {
-        this.realreturntime = realreturntime;
+    public void setRealReturnTime(Date realReturnTime) {
+        this.realReturnTime = realReturnTime;
     }
 
-    public String getFiller() {
-        return filler;
+    public String getBorrowOperator() {
+        return borrowOperator;
     }
 
-    public void setFiller(String filler) {
-        this.filler = filler == null ? null : filler.trim();
+    public void setBorrowOperator(String borrowOperator) {
+        this.borrowOperator = borrowOperator == null ? null : borrowOperator.trim();
     }
 
-    public Date getFildate() {
-        return fildate;
+    public Date getBorrowOperateTime() {
+        return borrowOperateTime;
     }
 
-    public void setFildate(Date fildate) {
-        this.fildate = fildate;
+    public void setBorrowOperateTime(Date borrowOperateTime) {
+        this.borrowOperateTime = borrowOperateTime;
     }
 
-    public String getLaster() {
-        return laster;
+    public String getReturnOperator() {
+        return returnOperator;
     }
 
-    public void setLaster(String laster) {
-        this.laster = laster == null ? null : laster.trim();
+    public void setReturnOperator(String returnOperator) {
+        this.returnOperator = returnOperator == null ? null : returnOperator.trim();
     }
 
-    public Date getLastupdtime() {
-        return lastupdtime;
+    public Date getReturnOperateTime() {
+        return returnOperateTime;
     }
 
-    public void setLastupdtime(Date lastupdtime) {
-        this.lastupdtime = lastupdtime;
+    public void setReturnOperateTime(Date returnOperateTime) {
+        this.returnOperateTime = returnOperateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLstUpdTime() {
+        return lstUpdTime;
+    }
+
+    public void setLstUpdTime(Date lstUpdTime) {
+        this.lstUpdTime = lstUpdTime;
     }
 
     public String getMemo() {
@@ -150,12 +170,12 @@ public class GoodsBorrowMst implements Serializable {
         this.memo = memo == null ? null : memo.trim();
     }
 
-    public String getStoreuuid() {
-        return storeuuid;
+    public String getStoreUuid() {
+        return storeUuid;
     }
 
-    public void setStoreuuid(String storeuuid) {
-        this.storeuuid = storeuuid == null ? null : storeuuid.trim();
+    public void setStoreUuid(String storeUuid) {
+        this.storeUuid = storeUuid == null ? null : storeUuid.trim();
     }
 
     public String getUpdateSql() {

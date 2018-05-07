@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sharing.dao.mapper.PayInfoMapper">
   <resultMap id="BaseResultMap" type="com.sharing.dao.entity.PayInfo">
-    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
-    <result column="PAYID" jdbcType="VARCHAR" property="payid" />
-    <result column="TRANSTYPE" jdbcType="INTEGER" property="transtype" />
-    <result column="PAYTYPE" jdbcType="INTEGER" property="paytype" />
-    <result column="TRADENO" jdbcType="VARCHAR" property="tradeno" />
-    <result column="OUTTRADENO" jdbcType="VARCHAR" property="outtradeno" />
-    <result column="PAYAMT" jdbcType="DECIMAL" property="payamt" />
-    <result column="PAYUSER" jdbcType="VARCHAR" property="payuser" />
-    <result column="PAYTIME" jdbcType="TIMESTAMP" property="paytime" />
-    <result column="ORITRADENO" jdbcType="VARCHAR" property="oritradeno" />
-    <result column="ORIOUTTRADENO" jdbcType="VARCHAR" property="oriouttradeno" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="pay_id" jdbcType="VARCHAR" property="payId" />
+    <result column="trans_type" jdbcType="INTEGER" property="transType" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="pay_amt" jdbcType="DECIMAL" property="payAmt" />
+    <result column="pay_user" jdbcType="VARCHAR" property="payUser" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="ori_trade_no" jdbcType="VARCHAR" property="oriTradeNo" />
+    <result column="ori_out_trade_no" jdbcType="VARCHAR" property="oriOutTradeNo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, PAYID, TRANSTYPE, PAYTYPE, TRADENO, OUTTRADENO, PAYAMT, PAYUSER, PAYTIME, ORITRADENO, 
-    ORIOUTTRADENO
+    uuid, pay_id, trans_type, pay_type, trade_no, out_trade_no, pay_amt, pay_user, pay_time, 
+    ori_trade_no, ori_out_trade_no
   </sql>
   <select id="selectByExample" parameterType="com.sharing.dao.entity.PayInfoExample" resultMap="BaseResultMap">
     select
@@ -98,11 +98,11 @@
     select 
     <include refid="Base_Column_List" />
     from shpayinfo
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shpayinfo
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.sharing.dao.entity.PayInfoExample">
     delete from shpayinfo
@@ -111,85 +111,85 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sharing.dao.entity.PayInfo">
-    insert into shpayinfo (UUID, PAYID, TRANSTYPE, 
-      PAYTYPE, TRADENO, OUTTRADENO, 
-      PAYAMT, PAYUSER, PAYTIME, 
-      ORITRADENO, ORIOUTTRADENO)
-    values (#{uuid,jdbcType=VARCHAR}, #{payid,jdbcType=VARCHAR}, #{transtype,jdbcType=INTEGER}, 
-      #{paytype,jdbcType=INTEGER}, #{tradeno,jdbcType=VARCHAR}, #{outtradeno,jdbcType=VARCHAR}, 
-      #{payamt,jdbcType=DECIMAL}, #{payuser,jdbcType=VARCHAR}, #{paytime,jdbcType=TIMESTAMP}, 
-      #{oritradeno,jdbcType=VARCHAR}, #{oriouttradeno,jdbcType=VARCHAR})
+    insert into shpayinfo (uuid, pay_id, trans_type, 
+      pay_type, trade_no, out_trade_no, 
+      pay_amt, pay_user, pay_time, 
+      ori_trade_no, ori_out_trade_no)
+    values (#{uuid,jdbcType=VARCHAR}, #{payId,jdbcType=VARCHAR}, #{transType,jdbcType=INTEGER}, 
+      #{payType,jdbcType=INTEGER}, #{tradeNo,jdbcType=VARCHAR}, #{outTradeNo,jdbcType=VARCHAR}, 
+      #{payAmt,jdbcType=DECIMAL}, #{payUser,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{oriTradeNo,jdbcType=VARCHAR}, #{oriOutTradeNo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sharing.dao.entity.PayInfo">
     insert into shpayinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
-        UUID,
+        uuid,
       </if>
-      <if test="payid != null">
-        PAYID,
+      <if test="payId != null">
+        pay_id,
       </if>
-      <if test="transtype != null">
-        TRANSTYPE,
+      <if test="transType != null">
+        trans_type,
       </if>
-      <if test="paytype != null">
-        PAYTYPE,
+      <if test="payType != null">
+        pay_type,
       </if>
-      <if test="tradeno != null">
-        TRADENO,
+      <if test="tradeNo != null">
+        trade_no,
       </if>
-      <if test="outtradeno != null">
-        OUTTRADENO,
+      <if test="outTradeNo != null">
+        out_trade_no,
       </if>
-      <if test="payamt != null">
-        PAYAMT,
+      <if test="payAmt != null">
+        pay_amt,
       </if>
-      <if test="payuser != null">
-        PAYUSER,
+      <if test="payUser != null">
+        pay_user,
       </if>
-      <if test="paytime != null">
-        PAYTIME,
+      <if test="payTime != null">
+        pay_time,
       </if>
-      <if test="oritradeno != null">
-        ORITRADENO,
+      <if test="oriTradeNo != null">
+        ori_trade_no,
       </if>
-      <if test="oriouttradeno != null">
-        ORIOUTTRADENO,
+      <if test="oriOutTradeNo != null">
+        ori_out_trade_no,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="payid != null">
-        #{payid,jdbcType=VARCHAR},
+      <if test="payId != null">
+        #{payId,jdbcType=VARCHAR},
       </if>
-      <if test="transtype != null">
-        #{transtype,jdbcType=INTEGER},
+      <if test="transType != null">
+        #{transType,jdbcType=INTEGER},
       </if>
-      <if test="paytype != null">
-        #{paytype,jdbcType=INTEGER},
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
       </if>
-      <if test="tradeno != null">
-        #{tradeno,jdbcType=VARCHAR},
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="outtradeno != null">
-        #{outtradeno,jdbcType=VARCHAR},
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="payamt != null">
-        #{payamt,jdbcType=DECIMAL},
+      <if test="payAmt != null">
+        #{payAmt,jdbcType=DECIMAL},
       </if>
-      <if test="payuser != null">
-        #{payuser,jdbcType=VARCHAR},
+      <if test="payUser != null">
+        #{payUser,jdbcType=VARCHAR},
       </if>
-      <if test="paytime != null">
-        #{paytime,jdbcType=TIMESTAMP},
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="oritradeno != null">
-        #{oritradeno,jdbcType=VARCHAR},
+      <if test="oriTradeNo != null">
+        #{oriTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="oriouttradeno != null">
-        #{oriouttradeno,jdbcType=VARCHAR},
+      <if test="oriOutTradeNo != null">
+        #{oriOutTradeNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -203,37 +203,37 @@
     update shpayinfo
     <set>
       <if test="record.uuid != null">
-        UUID = #{record.uuid,jdbcType=VARCHAR},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.payid != null">
-        PAYID = #{record.payid,jdbcType=VARCHAR},
+      <if test="record.payId != null">
+        pay_id = #{record.payId,jdbcType=VARCHAR},
       </if>
-      <if test="record.transtype != null">
-        TRANSTYPE = #{record.transtype,jdbcType=INTEGER},
+      <if test="record.transType != null">
+        trans_type = #{record.transType,jdbcType=INTEGER},
       </if>
-      <if test="record.paytype != null">
-        PAYTYPE = #{record.paytype,jdbcType=INTEGER},
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=INTEGER},
       </if>
-      <if test="record.tradeno != null">
-        TRADENO = #{record.tradeno,jdbcType=VARCHAR},
+      <if test="record.tradeNo != null">
+        trade_no = #{record.tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.outtradeno != null">
-        OUTTRADENO = #{record.outtradeno,jdbcType=VARCHAR},
+      <if test="record.outTradeNo != null">
+        out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.payamt != null">
-        PAYAMT = #{record.payamt,jdbcType=DECIMAL},
+      <if test="record.payAmt != null">
+        pay_amt = #{record.payAmt,jdbcType=DECIMAL},
       </if>
-      <if test="record.payuser != null">
-        PAYUSER = #{record.payuser,jdbcType=VARCHAR},
+      <if test="record.payUser != null">
+        pay_user = #{record.payUser,jdbcType=VARCHAR},
       </if>
-      <if test="record.paytime != null">
-        PAYTIME = #{record.paytime,jdbcType=TIMESTAMP},
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.oritradeno != null">
-        ORITRADENO = #{record.oritradeno,jdbcType=VARCHAR},
+      <if test="record.oriTradeNo != null">
+        ori_trade_no = #{record.oriTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.oriouttradeno != null">
-        ORIOUTTRADENO = #{record.oriouttradeno,jdbcType=VARCHAR},
+      <if test="record.oriOutTradeNo != null">
+        ori_out_trade_no = #{record.oriOutTradeNo,jdbcType=VARCHAR},
       </if>
       <if test="record.updateSql != null" >
         ${record.updateSql},
@@ -245,17 +245,17 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update shpayinfo
-    set UUID = #{record.uuid,jdbcType=VARCHAR},
-      PAYID = #{record.payid,jdbcType=VARCHAR},
-      TRANSTYPE = #{record.transtype,jdbcType=INTEGER},
-      PAYTYPE = #{record.paytype,jdbcType=INTEGER},
-      TRADENO = #{record.tradeno,jdbcType=VARCHAR},
-      OUTTRADENO = #{record.outtradeno,jdbcType=VARCHAR},
-      PAYAMT = #{record.payamt,jdbcType=DECIMAL},
-      PAYUSER = #{record.payuser,jdbcType=VARCHAR},
-      PAYTIME = #{record.paytime,jdbcType=TIMESTAMP},
-      ORITRADENO = #{record.oritradeno,jdbcType=VARCHAR},
-      ORIOUTTRADENO = #{record.oriouttradeno,jdbcType=VARCHAR}
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      pay_id = #{record.payId,jdbcType=VARCHAR},
+      trans_type = #{record.transType,jdbcType=INTEGER},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      trade_no = #{record.tradeNo,jdbcType=VARCHAR},
+      out_trade_no = #{record.outTradeNo,jdbcType=VARCHAR},
+      pay_amt = #{record.payAmt,jdbcType=DECIMAL},
+      pay_user = #{record.payUser,jdbcType=VARCHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      ori_trade_no = #{record.oriTradeNo,jdbcType=VARCHAR},
+      ori_out_trade_no = #{record.oriOutTradeNo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -263,52 +263,52 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sharing.dao.entity.PayInfo">
     update shpayinfo
     <set>
-      <if test="payid != null">
-        PAYID = #{payid,jdbcType=VARCHAR},
+      <if test="payId != null">
+        pay_id = #{payId,jdbcType=VARCHAR},
       </if>
-      <if test="transtype != null">
-        TRANSTYPE = #{transtype,jdbcType=INTEGER},
+      <if test="transType != null">
+        trans_type = #{transType,jdbcType=INTEGER},
       </if>
-      <if test="paytype != null">
-        PAYTYPE = #{paytype,jdbcType=INTEGER},
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
       </if>
-      <if test="tradeno != null">
-        TRADENO = #{tradeno,jdbcType=VARCHAR},
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="outtradeno != null">
-        OUTTRADENO = #{outtradeno,jdbcType=VARCHAR},
+      <if test="outTradeNo != null">
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="payamt != null">
-        PAYAMT = #{payamt,jdbcType=DECIMAL},
+      <if test="payAmt != null">
+        pay_amt = #{payAmt,jdbcType=DECIMAL},
       </if>
-      <if test="payuser != null">
-        PAYUSER = #{payuser,jdbcType=VARCHAR},
+      <if test="payUser != null">
+        pay_user = #{payUser,jdbcType=VARCHAR},
       </if>
-      <if test="paytime != null">
-        PAYTIME = #{paytime,jdbcType=TIMESTAMP},
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="oritradeno != null">
-        ORITRADENO = #{oritradeno,jdbcType=VARCHAR},
+      <if test="oriTradeNo != null">
+        ori_trade_no = #{oriTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="oriouttradeno != null">
-        ORIOUTTRADENO = #{oriouttradeno,jdbcType=VARCHAR},
+      <if test="oriOutTradeNo != null">
+        ori_out_trade_no = #{oriOutTradeNo,jdbcType=VARCHAR},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sharing.dao.entity.PayInfo">
     update shpayinfo
-    set PAYID = #{payid,jdbcType=VARCHAR},
-      TRANSTYPE = #{transtype,jdbcType=INTEGER},
-      PAYTYPE = #{paytype,jdbcType=INTEGER},
-      TRADENO = #{tradeno,jdbcType=VARCHAR},
-      OUTTRADENO = #{outtradeno,jdbcType=VARCHAR},
-      PAYAMT = #{payamt,jdbcType=DECIMAL},
-      PAYUSER = #{payuser,jdbcType=VARCHAR},
-      PAYTIME = #{paytime,jdbcType=TIMESTAMP},
-      ORITRADENO = #{oritradeno,jdbcType=VARCHAR},
-      ORIOUTTRADENO = #{oriouttradeno,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    set pay_id = #{payId,jdbcType=VARCHAR},
+      trans_type = #{transType,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=INTEGER},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      pay_amt = #{payAmt,jdbcType=DECIMAL},
+      pay_user = #{payUser,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      ori_trade_no = #{oriTradeNo,jdbcType=VARCHAR},
+      ori_out_trade_no = #{oriOutTradeNo,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="com.sharing.dao.entity.PayInfoExample" resultMap="BaseResultMap">
     select
@@ -333,16 +333,16 @@
   </select>
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-            insert into shpayinfo  (UUID, PAYID, TRANSTYPE, 
-        PAYTYPE, TRADENO, OUTTRADENO, 
-        PAYAMT, PAYUSER, PAYTIME, 
-        ORITRADENO, ORIOUTTRADENO)
+            insert into shpayinfo  (uuid, pay_id, trans_type, 
+        pay_type, trade_no, out_trade_no, 
+        pay_amt, pay_user, pay_time, 
+        ori_trade_no, ori_out_trade_no)
       values
       <foreach collection="items" item="item" index="index" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.payid,jdbcType=VARCHAR}, #{item.transtype,jdbcType=INTEGER}, 
-        #{item.paytype,jdbcType=INTEGER}, #{item.tradeno,jdbcType=VARCHAR}, #{item.outtradeno,jdbcType=VARCHAR}, 
-        #{item.payamt,jdbcType=DECIMAL}, #{item.payuser,jdbcType=VARCHAR}, #{item.paytime,jdbcType=TIMESTAMP}, 
-        #{item.oritradeno,jdbcType=VARCHAR}, #{item.oriouttradeno,jdbcType=VARCHAR})
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.payId,jdbcType=VARCHAR}, #{item.transType,jdbcType=INTEGER}, 
+        #{item.payType,jdbcType=INTEGER}, #{item.tradeNo,jdbcType=VARCHAR}, #{item.outTradeNo,jdbcType=VARCHAR}, 
+        #{item.payAmt,jdbcType=DECIMAL}, #{item.payUser,jdbcType=VARCHAR}, #{item.payTime,jdbcType=TIMESTAMP}, 
+        #{item.oriTradeNo,jdbcType=VARCHAR}, #{item.oriOutTradeNo,jdbcType=VARCHAR})
       </foreach>
     </if>
   </insert>

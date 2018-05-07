@@ -43,12 +43,8 @@ public class BorrowServiceImpl implements BorrowService {
       response = ResponseResult.failed("租借用户信息未填写.");
       return response;
     }
-    if (StringUtils.isEmpty(borrowParam.getReturntime())) {
+    if (StringUtils.isEmpty(borrowParam.getReturnTime())) {
       response = ResponseResult.failed("计划归还时间未填写.");
-      return response;
-    }
-    if (StringUtils.isEmpty(borrowParam.getFiller())) {
-      response = ResponseResult.failed("填单人未填写.");
       return response;
     }
     if (borrowParam.getBorrowDtls() == null || borrowParam.getBorrowDtls().size() == 0) {
@@ -56,7 +52,7 @@ public class BorrowServiceImpl implements BorrowService {
       return response;
     }
     for (BorrowDtlParam dtl : borrowParam.getBorrowDtls()) {
-      if (!goodsDao.isExistGoodsByUuid(dtl.getGoodsuuid())) {
+      if (!goodsDao.isExistGoodsByUuid(dtl.getGoodsUuid())) {
         response = ResponseResult.failed("租用的物品不存在.");
         return response;
       }

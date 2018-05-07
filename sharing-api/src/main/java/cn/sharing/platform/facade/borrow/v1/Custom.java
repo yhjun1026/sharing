@@ -8,6 +8,7 @@
  */
 package cn.sharing.platform.facade.borrow.v1;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -17,6 +18,7 @@ import lombok.Data;
 @Data
 public class Custom {
     private String nick;
+    @ApiModelProperty(value = "手机号", required = true)
     private String phoneNumber;
     private String wechat;
     private String address;

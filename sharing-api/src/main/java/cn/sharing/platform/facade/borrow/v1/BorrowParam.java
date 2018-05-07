@@ -15,13 +15,11 @@ public class BorrowParam {
   @ApiModelProperty(value = "租借用户信息", required = true)
   private Custom custom;
   @ApiModelProperty(value = "计划归还时间(yyyy-MM-dd hh:mm:ss)", required = true)
-  private String returntime;
-  @ApiModelProperty(value = "填单人", required = true)
-  private String filler;
+  private String returnTime;
   @ApiModelProperty(value = "备注")
   private String memo;
   @ApiModelProperty(value = "组织id（暂时无用）")
-  private String storeuuid;
+  private String storeUuid;
   @ApiModelProperty(value = "租用商品明细")
   private List<BorrowDtlParam> borrowDtls;
 }

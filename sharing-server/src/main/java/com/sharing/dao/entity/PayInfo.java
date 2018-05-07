@@ -7,25 +7,25 @@ import java.util.Date;
 public class PayInfo implements Serializable {
     private String uuid;
 
-    private String payid;
+    private String payId;
 
-    private Integer transtype;
+    private Integer transType;
 
-    private Integer paytype;
+    private Integer payType;
 
-    private String tradeno;
+    private String tradeNo;
 
-    private String outtradeno;
+    private String outTradeNo;
 
-    private BigDecimal payamt;
+    private BigDecimal payAmt;
 
-    private String payuser;
+    private String payUser;
 
-    private Date paytime;
+    private Date payTime;
 
-    private String oritradeno;
+    private String oriTradeNo;
 
-    private String oriouttradeno;
+    private String oriOutTradeNo;
 
     private static final long serialVersionUID = 1L;
 
@@ -39,84 +39,84 @@ public class PayInfo implements Serializable {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public String getPayid() {
-        return payid;
+    public String getPayId() {
+        return payId;
     }
 
-    public void setPayid(String payid) {
-        this.payid = payid == null ? null : payid.trim();
+    public void setPayId(String payId) {
+        this.payId = payId == null ? null : payId.trim();
     }
 
-    public Integer getTranstype() {
-        return transtype;
+    public Integer getTransType() {
+        return transType;
     }
 
-    public void setTranstype(Integer transtype) {
-        this.transtype = transtype;
+    public void setTransType(Integer transType) {
+        this.transType = transType;
     }
 
-    public Integer getPaytype() {
-        return paytype;
+    public Integer getPayType() {
+        return payType;
     }
 
-    public void setPaytype(Integer paytype) {
-        this.paytype = paytype;
+    public void setPayType(Integer payType) {
+        this.payType = payType;
     }
 
-    public String getTradeno() {
-        return tradeno;
+    public String getTradeNo() {
+        return tradeNo;
     }
 
-    public void setTradeno(String tradeno) {
-        this.tradeno = tradeno == null ? null : tradeno.trim();
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
     }
 
-    public String getOuttradeno() {
-        return outtradeno;
+    public String getOutTradeNo() {
+        return outTradeNo;
     }
 
-    public void setOuttradeno(String outtradeno) {
-        this.outtradeno = outtradeno == null ? null : outtradeno.trim();
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
     }
 
-    public BigDecimal getPayamt() {
-        return payamt;
+    public BigDecimal getPayAmt() {
+        return payAmt;
     }
 
-    public void setPayamt(BigDecimal payamt) {
-        this.payamt = payamt;
+    public void setPayAmt(BigDecimal payAmt) {
+        this.payAmt = payAmt;
     }
 
-    public String getPayuser() {
-        return payuser;
+    public String getPayUser() {
+        return payUser;
     }
 
-    public void setPayuser(String payuser) {
-        this.payuser = payuser == null ? null : payuser.trim();
+    public void setPayUser(String payUser) {
+        this.payUser = payUser == null ? null : payUser.trim();
     }
 
-    public Date getPaytime() {
-        return paytime;
+    public Date getPayTime() {
+        return payTime;
     }
 
-    public void setPaytime(Date paytime) {
-        this.paytime = paytime;
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
     }
 
-    public String getOritradeno() {
-        return oritradeno;
+    public String getOriTradeNo() {
+        return oriTradeNo;
     }
 
-    public void setOritradeno(String oritradeno) {
-        this.oritradeno = oritradeno == null ? null : oritradeno.trim();
+    public void setOriTradeNo(String oriTradeNo) {
+        this.oriTradeNo = oriTradeNo == null ? null : oriTradeNo.trim();
     }
 
-    public String getOriouttradeno() {
-        return oriouttradeno;
+    public String getOriOutTradeNo() {
+        return oriOutTradeNo;
     }
 
-    public void setOriouttradeno(String oriouttradeno) {
-        this.oriouttradeno = oriouttradeno == null ? null : oriouttradeno.trim();
+    public void setOriOutTradeNo(String oriOutTradeNo) {
+        this.oriOutTradeNo = oriOutTradeNo == null ? null : oriOutTradeNo.trim();
     }
 
     public String getUpdateSql() {

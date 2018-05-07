@@ -14,9 +14,9 @@ import java.util.Date;
 @ApiModel(value="支付信息对象",description="支付信息对象")
 public class PayInfoParam {
     @ApiModelProperty(value="支付记录id",name="id",required=true)
-    private String payid;
-    @ApiModelProperty(value="交易类型（1 支付， -1 退款）",name="tranType",required=true)
-    private Integer tranType;   //1 支付， -1 退款
+    private String payId;
+    @ApiModelProperty(value="交易类型（1 支付， -1 退款）",name="transType",required=true)
+    private Integer transType;   //1 支付， -1 退款
     @ApiModelProperty(value="支付方式（1 微信， 2 支付宝）",name="payType",required=false)
     private Integer payType;   //1 微信， 2 支付宝
     @ApiModelProperty(value="支付单号（支付平台）",name="tradeNo",required=true)

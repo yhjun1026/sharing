@@ -156,21 +156,21 @@ public class GoodsDao {
   public Boolean borrowStock(GoodsBorrowDtl goodsBorrowDtl){
     /** 判断物品库存记录是否存在 */
     try {
-      Stock oldStock= getGoodsStockByUuid(goodsBorrowDtl.getGoodsuuid());
+      Stock oldStock= getGoodsStockByUuid(goodsBorrowDtl.getGoodsUuid());
       if (oldStock == null){
         /** 不存在 */
         return false;
       } else{
         /** 存在 按主键更新*/
-        if (oldStock.getUseqty().compareTo(goodsBorrowDtl.getBorrowqty()) < 0){
+        if (oldStock.getUseqty().compareTo(goodsBorrowDtl.getBorrowQty()) < 0){
           sMessage = "库存不足.";
           return false;
         }
         Stock stock = new Stock();
         stock.setUuid(oldStock.getUuid());
         stock.setInv(oldStock.getInv());
-        stock.setUseqty(oldStock.getUseqty().subtract(goodsBorrowDtl.getBorrowqty()));
-        stock.setQty(oldStock.getQty().add(goodsBorrowDtl.getBorrowqty()));
+        stock.setUseqty(oldStock.getUseqty().subtract(goodsBorrowDtl.getBorrowQty()));
+        stock.setQty(oldStock.getQty().add(goodsBorrowDtl.getBorrowQty()));
         stock.setMemo(oldStock.getMemo());
         stock.setLastupdtime(new Date());
         int count = stockMapper.updateByPrimaryKey(stock);
@@ -190,7 +190,7 @@ public class GoodsDao {
   public Boolean backStock(GoodsBorrowDtl goodsBorrowDtl){
     /** 判断物品库存记录是否存在 */
     try {
-      Stock oldStock= getGoodsStockByUuid(goodsBorrowDtl.getGoodsuuid());
+      Stock oldStock= getGoodsStockByUuid(goodsBorrowDtl.getGoodsUuid());
       if (oldStock == null){
         /** 不存在 */
         return false;
@@ -199,8 +199,8 @@ public class GoodsDao {
         Stock stock = new Stock();
         stock.setUuid(oldStock.getUuid());
         stock.setInv(oldStock.getInv());
-        stock.setUseqty(oldStock.getUseqty().add(goodsBorrowDtl.getBackqty()));
-        stock.setQty(oldStock.getQty().subtract(goodsBorrowDtl.getBackqty()));
+        stock.setUseqty(oldStock.getUseqty().add(goodsBorrowDtl.getReturnQty()));
+        stock.setQty(oldStock.getQty().subtract(goodsBorrowDtl.getReturnQty()));
         stock.setMemo(oldStock.getMemo());
         stock.setLastupdtime(new Date());
         int count = stockMapper.updateByPrimaryKey(stock);
@@ -255,7 +255,7 @@ public class GoodsDao {
           /** 删除后更新 */
           GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
           GoodsBorrowDtlExample.Criteria criteria= example.createCriteria();
-          criteria.andBorrowuuidEqualTo(goodsBorrowMst.getUuid());
+          criteria.andBorrowUuidEqualTo(goodsBorrowMst.getUuid());
           if (goodsBorrowDtlMapper.deleteByExample(example) > 0) {
             for (GoodsBorrowDtl goodsBorrowDtl : goodsBorrowDtls) {
               /** 保存明细 */
@@ -296,7 +296,7 @@ public class GoodsDao {
           /** 删除后更新 */
           GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
           GoodsBorrowDtlExample.Criteria criteria= example.createCriteria();
-          criteria.andBorrowuuidEqualTo(goodsBorrowMst.getUuid());
+          criteria.andBorrowUuidEqualTo(goodsBorrowMst.getUuid());
           if (goodsBorrowDtlMapper.deleteByExample(example) > 0) {
             for (GoodsBorrowDtl goodsBorrowDtl : goodsBorrowDtls) {
               /** 保存明细 */
