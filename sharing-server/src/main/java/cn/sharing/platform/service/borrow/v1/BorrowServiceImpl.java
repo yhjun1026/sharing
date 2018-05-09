@@ -2,15 +2,21 @@ package cn.sharing.platform.service.borrow.v1;
 
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.facade.borrow.v1.BorrowBackParam;
+import cn.sharing.platform.facade.borrow.v1.BorrowCollarParam;
+import cn.sharing.platform.facade.borrow.v1.BorrowCompensateParam;
+import cn.sharing.platform.facade.borrow.v1.BorrowDetailInfoDto;
 import cn.sharing.platform.facade.borrow.v1.BorrowDtlParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
 import cn.sharing.platform.facade.borrow.v1.BorrowService;
+import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
 import cn.sharing.platform.facade.borrow.v1.SBorrow;
 import cn.sharing.platform.service.goods.v1.GoodsDao;
 import cn.sharing.platform.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -72,17 +78,27 @@ public class BorrowServiceImpl implements BorrowService {
   }
 
   @Override
-  public ResponseResult<QueryResult<SBorrow>> query(@RequestBody @Valid BorrowQuery param) {
+  public ResponseResult<Void> collar(@RequestBody BorrowCollarParam collarParam) {
     return null;
   }
 
   @Override
-  public ResponseResult<Void> back(@RequestBody @Valid SBorrow sGoodsBorrow) {
+  public ResponseResult<Void> back(@RequestBody BorrowBackParam backParam) {
     return null;
   }
 
   @Override
-  public ResponseResult<Void> compensate(@RequestBody @Valid SBorrow sGoodsBorrow) {
+  public ResponseResult<Void> compensate(@RequestBody BorrowCompensateParam compensateParam) {
+    return null;
+  }
+
+  @Override
+  public ResponseResult<QueryResult<BorrowSummaryDto>> query(@RequestBody BorrowQuery param) {
+    return null;
+  }
+
+  @Override
+  public ResponseResult<BorrowDetailInfoDto> get(@PathVariable String uuid) {
     return null;
   }
 }
