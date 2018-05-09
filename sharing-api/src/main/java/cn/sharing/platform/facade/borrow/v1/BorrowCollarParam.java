@@ -13,5 +13,5 @@ public class BorrowCollarParam {
   @ApiModelProperty(value = "租用单id", required = true)
   private String borrowId;
   @ApiModelProperty(value = "领用受理人", required = true)
-  private String operator;
+  private String borrowDealer;
 }

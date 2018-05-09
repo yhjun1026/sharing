@@ -6,12 +6,11 @@ import cn.sharing.platform.facade.borrow.v1.BorrowBackParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowCollarParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowCompensateParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowDetailInfoDto;
-import cn.sharing.platform.facade.borrow.v1.BorrowDtlParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
 import cn.sharing.platform.facade.borrow.v1.BorrowService;
 import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
-import cn.sharing.platform.facade.borrow.v1.SBorrow;
+import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
 import cn.sharing.platform.service.goods.v1.GoodsDao;
 import cn.sharing.platform.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +35,11 @@ public class BorrowServiceImpl implements BorrowService {
   private BorrowDao borrowDao;
 
   @Override
+  public ResponseResult<Void> preCompensate(@RequestBody BorrowCompensateParam compensateParam) {
+    return null;
+  }
+
+  @Override
   public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam) {
     //1. 验证参数
     //2. 调用dao层进行操作（更新物品状态，插入数据）
@@ -49,15 +53,15 @@ public class BorrowServiceImpl implements BorrowService {
       response = ResponseResult.failed("租借用户信息未填写.");
       return response;
     }
-    if (StringUtils.isEmpty(borrowParam.getReturnTime())) {
+    if (StringUtils.isEmpty(borrowParam.getPlanBackTime())) {
       response = ResponseResult.failed("计划归还时间未填写.");
       return response;
     }
-    if (borrowParam.getBorrowDtls() == null || borrowParam.getBorrowDtls().size() == 0) {
+    if (borrowParam.getSGoodsBorrowDtl() == null || borrowParam.getSGoodsBorrowDtl().size() == 0) {
       response = ResponseResult.failed("租用物品未指定.");
       return response;
     }
-    for (BorrowDtlParam dtl : borrowParam.getBorrowDtls()) {
+    for (SBorrowDtl dtl : borrowParam.getSGoodsBorrowDtl()) {
       if (!goodsDao.isExistGoodsByUuid(dtl.getGoodsUuid())) {
         response = ResponseResult.failed("租用的物品不存在.");
         return response;

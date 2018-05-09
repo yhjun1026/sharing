@@ -1,5 +1,6 @@
 package cn.sharing.platform.facade.borrow.v1;
 
+import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,15 +12,7 @@ import java.util.List;
  */
 @Data
 @ApiModel(description = "租用单保存")
-public class BorrowParam {
-  @ApiModelProperty(value = "租借用户信息", required = true)
-  private Custom custom;
-  @ApiModelProperty(value = "计划归还时间(yyyy-MM-dd hh:mm:ss)", required = true)
-  private String returnTime;
-  @ApiModelProperty(value = "备注")
-  private String memo;
-  @ApiModelProperty(value = "组织id（暂时无用）")
-  private String storeUuid;
-  @ApiModelProperty(value = "租用商品明细")
-  private List<BorrowDtlParam> borrowDtls;
+public class BorrowParam extends SBorrow {
+  @ApiModelProperty(value = "租用付款信息", required = true)
+  private PayInfoParam payInfo;
 }

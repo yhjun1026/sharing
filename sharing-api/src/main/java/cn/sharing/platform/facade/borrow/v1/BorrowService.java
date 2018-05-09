@@ -50,7 +50,6 @@ public interface BorrowService {
      * @param backParam 物品借用归还信息对象
      * @return
      */
-    //疑问 1. 是否需要记录物品是否损坏信息？建议在物品模块中开接口做
     @RequestMapping(value = "/back", method = RequestMethod.POST)
     @ApiOperation(value = "物品归还")
     public ResponseResult<Void> back(@RequestBody BorrowBackParam backParam);

@@ -20,9 +20,14 @@ import org.hibernate.validator.constraints.NotBlank;
 @Data
 @ApiModel(description = "物品租用记录查询参数")
 public class BorrowQuery {
-//    @ApiModelProperty(value = "项目Id(必须)", required = true)
-//    @NotBlank(message ="项目Id[storeId]不能为空")
-//    private String storeId;
+    @ApiModelProperty(value = "项目Id")
+    private String storeId;
+    @ApiModelProperty(value = "查询开始时间(yyyy-MM-dd hh:mm:ss)")
+    private String beginTime;
+    @ApiModelProperty(value = "查询结束时间(yyyy-MM-dd hh:mm:ss)")
+    private String endTime;
+    @ApiModelProperty(value = "物品名称")
+    private String goodsName;
     @ApiModelProperty(value = "当前页号，默认1", required = false)
     private int page = 1;
     @ApiModelProperty(value = "每页大小，默认50，不超过200", required = false)

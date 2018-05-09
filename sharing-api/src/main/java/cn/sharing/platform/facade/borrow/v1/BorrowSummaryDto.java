@@ -13,17 +13,13 @@ import java.util.List;
  */
 @Data
 @ApiModel(description = "查询租用单列表返回对象")
-public class BorrowSummaryDto {
+public class BorrowSummaryDto extends SBorrow{
   @ApiModelProperty(value = "租用单id")
   private String uuid;
   @ApiModelProperty(value = "租用单单号")
   private String billNumber;
   @ApiModelProperty(value = "单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated")
   private String stat;
-  @ApiModelProperty(value = "租用人信息")
-  private Custom custom;
-  @ApiModelProperty(value = "计划归还时间")
-  private String planReturnTime;
   @ApiModelProperty(value = "实际归还时间")
   private String realReturnTime;
   @ApiModelProperty(value = "领用受理人")
@@ -38,8 +34,4 @@ public class BorrowSummaryDto {
   private String createTime;
   @ApiModelProperty(value = "最后更新时间")
   private String lstUpdTime;
-  @ApiModelProperty(value = "备注")
-  private String memo;
-  @ApiModelProperty(value = "租用物品信息")
-  private List<UCN> goods;
 }

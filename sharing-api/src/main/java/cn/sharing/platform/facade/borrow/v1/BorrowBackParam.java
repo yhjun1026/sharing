@@ -14,7 +14,7 @@ public class BorrowBackParam {
   @ApiModelProperty(value = "租用单id", required = true)
   private String borrowId;
   @ApiModelProperty(value = "归还受理人", required = true)
-  private String operator;
+  private String backDealer;
   @ApiModelProperty(value = "押金退还付款信息")
   private PayInfoParam payInfoParam;
 }
