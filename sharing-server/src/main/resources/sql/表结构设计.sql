@@ -57,24 +57,25 @@ MEMO            VARCHAR(256)   NULL                   /*备注(预留)*/
 );
 
 /*物品借用单主表*/
-CREATE TABLE IF NOT EXISTS `shgoodsborrowmst`;
-CREATE TABLE `shgoodsborrowmst` (
+CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
   `uuid` varchar(32) NOT NULL,
   `bill_number` varchar(32) NOT NULL COMMENT '借用单据号',
   `stat` varchar(16) NOT NULL COMMENT '单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated',
-  `borrow_type` varchar(64) DEFAULT NULL COMMENT '借用人类型(内部员工，外部)，暂时无用',
   `borrower` varchar(64) DEFAULT NULL COMMENT '借用人',
   `mobile` varchar(32) NOT NULL COMMENT '借用人手机号',
   `address` varchar(256) DEFAULT NULL COMMENT '借用人联系地址',
-  `plan_return_time` datetime NOT NULL COMMENT '计划归还时间',
-  `real_return_time` datetime DEFAULT NULL COMMENT '实际归还时间',
-  `borrow_operator` varchar(64) DEFAULT NULL COMMENT '领用受理人',
-  `borrow_operate_time` datetime DEFAULT NULL COMMENT '领用受理时间',
-  `return_operator` varchar(64) DEFAULT NULL COMMENT '归还受理人',
-  `return_operate_time` datetime DEFAULT NULL COMMENT '归还受理时间',
+  `plan_back_time` datetime NOT NULL COMMENT '计划归还时间',
+  `real_back_time` datetime DEFAULT NULL COMMENT '实际归还时间',
+  `borrow_dealer` varchar(64) DEFAULT NULL COMMENT '领用受理人',
+  `borrow_deal_time` datetime DEFAULT NULL COMMENT '领用受理时间',
+  `back_dealer` varchar(64) DEFAULT NULL COMMENT '归还受理人',
+  `back_deal_time` datetime DEFAULT NULL COMMENT '归还受理时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `lst_upd_time` datetime NOT NULL COMMENT '最后更新时间',
   `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `borrow_pay_uuid` varchar(32) DEFAULT NULL COMMENT '租用付款uuid',
+  `back_pay_uuid` varchar(32) DEFAULT NULL COMMENT '退还时退款uuid',
+  `compensate_pay_uuid` varchar(32) DEFAULT NULL COMMENT '赔偿付款uuid',
   `store_uuid` varchar(32) DEFAULT NULL COMMENT '所属组织，暂时无用',
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物品借用单主表';
@@ -83,21 +84,15 @@ CREATE TABLE `shgoodsborrowmst` (
 /*物品借用单明细*/
 CREATE TABLE IF NOT EXISTS `shgoodsborrowdtl` (
   `uuid` varchar(32) NOT NULL,
-  `goods_uuid` varchar(32) NOT NULL COMMENT '物品id',
-  `goods_code` varchar(64) DEFAULT NULL COMMENT '物品代码',
+  `goods_uuid` varchar(32) NOT NULL COMMENT '具体物品uuid',
+  `goods_code` varchar(64) DEFAULT NULL COMMENT '具体物品代码',
   `goods_name` varchar(64) DEFAULT NULL COMMENT '物品名称',
-  `borrow_qty` decimal(10,2) DEFAULT '0.00' COMMENT '物品借用数量，暂时无用',
+  `goods_price` decimal(10,2) DEFAULT NULL COMMENT '物品单价',
+  `compensate_amt` decimal(10,2) DEFAULT NULL COMMENT '需赔偿金额',
   `borrow_descrip` varchar(512) DEFAULT NULL COMMENT '借出物品情况描述',
   `deposit_amt` decimal(10,2) DEFAULT '0.00' COMMENT '借用物品时缴纳押金',
-  `damaged` int(11) DEFAULT '0' COMMENT '损坏标识;0 没有损坏;1 已损坏;',
   `return_descrip` varchar(512) DEFAULT NULL COMMENT '物品归还时描述',
-  `return_qty` decimal(10,2) DEFAULT '0.00' COMMENT '物品归还数量，暂时无用',
-  `pay_amt` decimal(10,2) DEFAULT '0.00' COMMENT '使用费用金额',
-  `return_deposit_amt` decimal(10,2) DEFAULT '0.00' COMMENT '归还押金金额',
   `borrow_uuid` varchar(32) NOT NULL COMMENT '借用单主表id',
-  `borrow_pay_uuid` varchar(32) DEFAULT NULL COMMENT '借用付款id',
-  `return_pay_uuid` varchar(32) DEFAULT NULL COMMENT '归还时退款id',
-  `compensate_pay_uuid` varchar(32) DEFAULT NULL COMMENT '赔偿付款id',
   `memo` varchar(256) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`uuid`),
   KEY `borrow_uuid` (`borrow_uuid`)
