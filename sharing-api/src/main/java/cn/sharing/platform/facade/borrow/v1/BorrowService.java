@@ -56,12 +56,12 @@ public interface BorrowService {
 
     /**
      * 物品赔偿发起
-     * @param compensateParam 物品借用信息对象
+     * @param preCompensateParam 物品借用信息对象
      * @return
      */
     @RequestMapping(value = "/precompensate", method = RequestMethod.POST)
     @ApiOperation(value = "物品赔偿发起")
-    public ResponseResult<Void> preCompensate(@RequestBody BorrowCompensateParam compensateParam);
+    public ResponseResult<Void> preCompensate(@RequestBody PreCompensateParam preCompensateParam);
 
     /**
      * 物品赔偿

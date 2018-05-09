@@ -10,6 +10,7 @@ import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
 import cn.sharing.platform.facade.borrow.v1.BorrowService;
 import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
+import cn.sharing.platform.facade.borrow.v1.PreCompensateParam;
 import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
 import cn.sharing.platform.service.goods.v1.GoodsDao;
 import cn.sharing.platform.utils.StringUtils;
@@ -33,11 +34,6 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Autowired
   private BorrowDao borrowDao;
-
-  @Override
-  public ResponseResult<Void> preCompensate(@RequestBody BorrowCompensateParam compensateParam) {
-    return null;
-  }
 
   @Override
   public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam) {
@@ -103,6 +99,11 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Override
   public ResponseResult<BorrowDetailInfoDto> get(@PathVariable String uuid) {
+    return null;
+  }
+
+  @Override
+  public ResponseResult<Void> preCompensate(@RequestBody PreCompensateParam compensateParam) {
     return null;
   }
 }
