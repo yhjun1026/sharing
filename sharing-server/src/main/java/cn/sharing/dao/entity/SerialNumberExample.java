@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.util.ArrayList;
 import java.util.Date;

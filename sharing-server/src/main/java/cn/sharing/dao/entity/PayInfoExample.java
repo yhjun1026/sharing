@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

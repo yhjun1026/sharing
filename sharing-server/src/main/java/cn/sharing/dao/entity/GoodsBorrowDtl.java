@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,29 +12,17 @@ public class GoodsBorrowDtl implements Serializable {
 
     private String goodsName;
 
-    private BigDecimal borrowQty;
+    private BigDecimal goodsPrice;
+
+    private BigDecimal compensateAmt;
 
     private String borrowDescrip;
 
     private BigDecimal depositAmt;
 
-    private Integer damaged;
-
     private String returnDescrip;
 
-    private BigDecimal returnQty;
-
-    private BigDecimal payAmt;
-
-    private BigDecimal returnDepositAmt;
-
     private String borrowUuid;
-
-    private String borrowPayUuid;
-
-    private String returnPayUuid;
-
-    private String compensatePayUuid;
 
     private String memo;
 
@@ -74,12 +62,20 @@ public class GoodsBorrowDtl implements Serializable {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public BigDecimal getBorrowQty() {
-        return borrowQty;
+    public BigDecimal getGoodsPrice() {
+        return goodsPrice;
     }
 
-    public void setBorrowQty(BigDecimal borrowQty) {
-        this.borrowQty = borrowQty;
+    public void setGoodsPrice(BigDecimal goodsPrice) {
+        this.goodsPrice = goodsPrice;
+    }
+
+    public BigDecimal getCompensateAmt() {
+        return compensateAmt;
+    }
+
+    public void setCompensateAmt(BigDecimal compensateAmt) {
+        this.compensateAmt = compensateAmt;
     }
 
     public String getBorrowDescrip() {
@@ -98,14 +94,6 @@ public class GoodsBorrowDtl implements Serializable {
         this.depositAmt = depositAmt;
     }
 
-    public Integer getDamaged() {
-        return damaged;
-    }
-
-    public void setDamaged(Integer damaged) {
-        this.damaged = damaged;
-    }
-
     public String getReturnDescrip() {
         return returnDescrip;
     }
@@ -114,60 +102,12 @@ public class GoodsBorrowDtl implements Serializable {
         this.returnDescrip = returnDescrip == null ? null : returnDescrip.trim();
     }
 
-    public BigDecimal getReturnQty() {
-        return returnQty;
-    }
-
-    public void setReturnQty(BigDecimal returnQty) {
-        this.returnQty = returnQty;
-    }
-
-    public BigDecimal getPayAmt() {
-        return payAmt;
-    }
-
-    public void setPayAmt(BigDecimal payAmt) {
-        this.payAmt = payAmt;
-    }
-
-    public BigDecimal getReturnDepositAmt() {
-        return returnDepositAmt;
-    }
-
-    public void setReturnDepositAmt(BigDecimal returnDepositAmt) {
-        this.returnDepositAmt = returnDepositAmt;
-    }
-
     public String getBorrowUuid() {
         return borrowUuid;
     }
 
     public void setBorrowUuid(String borrowUuid) {
         this.borrowUuid = borrowUuid == null ? null : borrowUuid.trim();
-    }
-
-    public String getBorrowPayUuid() {
-        return borrowPayUuid;
-    }
-
-    public void setBorrowPayUuid(String borrowPayUuid) {
-        this.borrowPayUuid = borrowPayUuid == null ? null : borrowPayUuid.trim();
-    }
-
-    public String getReturnPayUuid() {
-        return returnPayUuid;
-    }
-
-    public void setReturnPayUuid(String returnPayUuid) {
-        this.returnPayUuid = returnPayUuid == null ? null : returnPayUuid.trim();
-    }
-
-    public String getCompensatePayUuid() {
-        return compensatePayUuid;
-    }
-
-    public void setCompensatePayUuid(String compensatePayUuid) {
-        this.compensatePayUuid = compensatePayUuid == null ? null : compensatePayUuid.trim();
     }
 
     public String getMemo() {

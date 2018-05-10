@@ -1,21 +1,22 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class Stock implements Serializable {
+public class Store implements Serializable {
     private String uuid;
 
-    private BigDecimal inv;
+    private String code;
 
-    private BigDecimal qty;
+    private String name;
 
-    private BigDecimal useqty;
+    private String licence;
 
     private Date lastupdtime;
 
     private String memo;
+
+    private String upperuuid;
 
     private static final long serialVersionUID = 1L;
 
@@ -29,28 +30,28 @@ public class Stock implements Serializable {
         this.uuid = uuid == null ? null : uuid.trim();
     }
 
-    public BigDecimal getInv() {
-        return inv;
+    public String getCode() {
+        return code;
     }
 
-    public void setInv(BigDecimal inv) {
-        this.inv = inv;
+    public void setCode(String code) {
+        this.code = code == null ? null : code.trim();
     }
 
-    public BigDecimal getQty() {
-        return qty;
+    public String getName() {
+        return name;
     }
 
-    public void setQty(BigDecimal qty) {
-        this.qty = qty;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public BigDecimal getUseqty() {
-        return useqty;
+    public String getLicence() {
+        return licence;
     }
 
-    public void setUseqty(BigDecimal useqty) {
-        this.useqty = useqty;
+    public void setLicence(String licence) {
+        this.licence = licence == null ? null : licence.trim();
     }
 
     public Date getLastupdtime() {
@@ -67,6 +68,14 @@ public class Stock implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
+    }
+
+    public String getUpperuuid() {
+        return upperuuid;
+    }
+
+    public void setUpperuuid(String upperuuid) {
+        this.upperuuid = upperuuid == null ? null : upperuuid.trim();
     }
 
     public String getUpdateSql() {

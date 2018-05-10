@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sharing.dao.mapper.StoreMapper">
-  <resultMap id="BaseResultMap" type="com.sharing.dao.entity.Store">
+<mapper namespace="cn.sharing.dao.mapper.StoreMapper">
+  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.Store">
     <id column="UUID" jdbcType="VARCHAR" property="uuid" />
     <result column="CODE" jdbcType="VARCHAR" property="code" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     UUID, CODE, NAME, LICENCE, LASTUPDTIME, MEMO, UPPERUUID
   </sql>
-  <select id="selectByExample" parameterType="com.sharing.dao.entity.StoreExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.sharing.dao.entity.StoreExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -99,13 +99,13 @@
     delete from shstore
     where UUID = #{uuid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sharing.dao.entity.StoreExample">
+  <delete id="deleteByExample" parameterType="cn.sharing.dao.entity.StoreExample">
     delete from shstore
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sharing.dao.entity.Store">
+  <insert id="insert" parameterType="cn.sharing.dao.entity.Store">
     insert into shstore (UUID, CODE, NAME, 
       LICENCE, LASTUPDTIME, MEMO, 
       UPPERUUID)
@@ -113,7 +113,7 @@
       #{licence,jdbcType=VARCHAR}, #{lastupdtime,jdbcType=TIMESTAMP}, #{memo,jdbcType=VARCHAR}, 
       #{upperuuid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sharing.dao.entity.Store">
+  <insert id="insertSelective" parameterType="cn.sharing.dao.entity.Store">
     insert into shstore
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
@@ -162,7 +162,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sharing.dao.entity.StoreExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.sharing.dao.entity.StoreExample" resultType="java.lang.Long">
     select count(*) from shstore
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -213,7 +213,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sharing.dao.entity.Store">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.dao.entity.Store">
     update shstore
     <set>
       <if test="code != null">
@@ -237,7 +237,7 @@
     </set>
     where UUID = #{uuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sharing.dao.entity.Store">
+  <update id="updateByPrimaryKey" parameterType="cn.sharing.dao.entity.Store">
     update shstore
     set CODE = #{code,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
@@ -247,7 +247,7 @@
       UPPERUUID = #{upperuuid,jdbcType=VARCHAR}
     where UUID = #{uuid,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.sharing.dao.entity.StoreExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.dao.entity.StoreExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -262,7 +262,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="sumByExample" parameterType="com.sharing.dao.entity.StoreExample" resultType="long" >
+  <select id="sumByExample" parameterType="cn.sharing.dao.entity.StoreExample" resultType="long" >
     select sum(${sumCol}) from shstore
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

@@ -1,7 +1,7 @@
-package com.sharing.dao.mapper;
+package cn.sharing.dao.mapper;
 
-import com.sharing.dao.entity.GoodsBorrowDtl;
-import com.sharing.dao.entity.GoodsBorrowDtlExample;
+import cn.sharing.dao.entity.GoodsBorrowDtl;
+import cn.sharing.dao.entity.GoodsBorrowDtlExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

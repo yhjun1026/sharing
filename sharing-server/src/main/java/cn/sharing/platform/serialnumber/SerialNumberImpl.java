@@ -1,9 +1,9 @@
 package cn.sharing.platform.serialnumber;
 
 import cn.sharing.platform.utils.DateUtil;
-import com.sharing.dao.entity.SerialNumber;
-import com.sharing.dao.mapper.SerialNumberMapper;
-import com.sharing.dao.mapper.SerialNumberMapperExt;
+import cn.sharing.dao.entity.SerialNumber;
+import cn.sharing.dao.mapper.SerialNumberMapper;
+import cn.sharing.dao.mapper.SerialNumberMapperExt;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.sharing.dao.mapper;
+package cn.sharing.dao.mapper;
 
 import org.apache.ibatis.annotations.Param;
 

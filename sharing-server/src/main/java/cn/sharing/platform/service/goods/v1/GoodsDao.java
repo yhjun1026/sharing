@@ -1,17 +1,17 @@
 package cn.sharing.platform.service.goods.v1;
 
-import com.sharing.dao.entity.Goods;
-import com.sharing.dao.entity.GoodsBorrowDtl;
-import com.sharing.dao.entity.GoodsBorrowDtlExample;
-import com.sharing.dao.entity.GoodsBorrowMst;
-import com.sharing.dao.entity.GoodsBorrowMstExample;
-import com.sharing.dao.entity.GoodsExample;
-import com.sharing.dao.entity.Stock;
-import com.sharing.dao.entity.StockExample;
-import com.sharing.dao.mapper.GoodsBorrowDtlMapper;
-import com.sharing.dao.mapper.GoodsBorrowMstMapper;
-import com.sharing.dao.mapper.GoodsMapper;
-import com.sharing.dao.mapper.StockMapper;
+import cn.sharing.dao.entity.Goods;
+import cn.sharing.dao.entity.GoodsBorrowDtl;
+import cn.sharing.dao.entity.GoodsBorrowDtlExample;
+import cn.sharing.dao.entity.GoodsBorrowMst;
+import cn.sharing.dao.entity.GoodsBorrowMstExample;
+import cn.sharing.dao.entity.GoodsExample;
+import cn.sharing.dao.entity.Stock;
+import cn.sharing.dao.entity.StockExample;
+import cn.sharing.dao.mapper.GoodsBorrowDtlMapper;
+import cn.sharing.dao.mapper.GoodsBorrowMstMapper;
+import cn.sharing.dao.mapper.GoodsMapper;
+import cn.sharing.dao.mapper.StockMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,15 +162,15 @@ public class GoodsDao {
         return false;
       } else{
         /** 存在 按主键更新*/
-        if (oldStock.getUseqty().compareTo(goodsBorrowDtl.getBorrowQty()) < 0){
+        if (oldStock.getUseqty().compareTo(new BigDecimal(1)) < 0){
           sMessage = "库存不足.";
           return false;
         }
         Stock stock = new Stock();
         stock.setUuid(oldStock.getUuid());
         stock.setInv(oldStock.getInv());
-        stock.setUseqty(oldStock.getUseqty().subtract(goodsBorrowDtl.getBorrowQty()));
-        stock.setQty(oldStock.getQty().add(goodsBorrowDtl.getBorrowQty()));
+        stock.setUseqty(oldStock.getUseqty().subtract(new BigDecimal(1)));
+        stock.setQty(oldStock.getQty().add(new BigDecimal(1)));
         stock.setMemo(oldStock.getMemo());
         stock.setLastupdtime(new Date());
         int count = stockMapper.updateByPrimaryKey(stock);
@@ -199,8 +199,8 @@ public class GoodsDao {
         Stock stock = new Stock();
         stock.setUuid(oldStock.getUuid());
         stock.setInv(oldStock.getInv());
-        stock.setUseqty(oldStock.getUseqty().add(goodsBorrowDtl.getReturnQty()));
-        stock.setQty(oldStock.getQty().subtract(goodsBorrowDtl.getReturnQty()));
+        stock.setUseqty(oldStock.getUseqty().add(new BigDecimal(1)));
+        stock.setQty(oldStock.getQty().subtract(new BigDecimal(1)));
         stock.setMemo(oldStock.getMemo());
         stock.setLastupdtime(new Date());
         int count = stockMapper.updateByPrimaryKey(stock);

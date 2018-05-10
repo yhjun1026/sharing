@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -101,8 +101,13 @@ public class GoodsBorrowDtlExample {
         return this;
     }
 
-    public GoodsBorrowDtlExample sumBorrowQty() {
-        this.sumCol="borrow_qty";
+    public GoodsBorrowDtlExample sumGoodsPrice() {
+        this.sumCol="goods_price";
+        return this;
+    }
+
+    public GoodsBorrowDtlExample sumCompensateAmt() {
+        this.sumCol="compensate_amt";
         return this;
     }
 
@@ -116,48 +121,13 @@ public class GoodsBorrowDtlExample {
         return this;
     }
 
-    public GoodsBorrowDtlExample sumDamaged() {
-        this.sumCol="damaged";
-        return this;
-    }
-
     public GoodsBorrowDtlExample sumReturnDescrip() {
         this.sumCol="return_descrip";
         return this;
     }
 
-    public GoodsBorrowDtlExample sumReturnQty() {
-        this.sumCol="return_qty";
-        return this;
-    }
-
-    public GoodsBorrowDtlExample sumPayAmt() {
-        this.sumCol="pay_amt";
-        return this;
-    }
-
-    public GoodsBorrowDtlExample sumReturnDepositAmt() {
-        this.sumCol="return_deposit_amt";
-        return this;
-    }
-
     public GoodsBorrowDtlExample sumBorrowUuid() {
         this.sumCol="borrow_uuid";
-        return this;
-    }
-
-    public GoodsBorrowDtlExample sumBorrowPayUuid() {
-        this.sumCol="borrow_pay_uuid";
-        return this;
-    }
-
-    public GoodsBorrowDtlExample sumReturnPayUuid() {
-        this.sumCol="return_pay_uuid";
-        return this;
-    }
-
-    public GoodsBorrowDtlExample sumCompensatePayUuid() {
-        this.sumCol="compensate_pay_uuid";
         return this;
     }
 
@@ -509,63 +479,123 @@ public class GoodsBorrowDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyIsNull() {
-            addCriterion("borrow_qty is null");
+        public Criteria andGoodsPriceIsNull() {
+            addCriterion("goods_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyIsNotNull() {
-            addCriterion("borrow_qty is not null");
+        public Criteria andGoodsPriceIsNotNull() {
+            addCriterion("goods_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyEqualTo(BigDecimal value) {
-            addCriterion("borrow_qty =", value, "borrowQty");
+        public Criteria andGoodsPriceEqualTo(BigDecimal value) {
+            addCriterion("goods_price =", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyNotEqualTo(BigDecimal value) {
-            addCriterion("borrow_qty <>", value, "borrowQty");
+        public Criteria andGoodsPriceNotEqualTo(BigDecimal value) {
+            addCriterion("goods_price <>", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyGreaterThan(BigDecimal value) {
-            addCriterion("borrow_qty >", value, "borrowQty");
+        public Criteria andGoodsPriceGreaterThan(BigDecimal value) {
+            addCriterion("goods_price >", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("borrow_qty >=", value, "borrowQty");
+        public Criteria andGoodsPriceGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("goods_price >=", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyLessThan(BigDecimal value) {
-            addCriterion("borrow_qty <", value, "borrowQty");
+        public Criteria andGoodsPriceLessThan(BigDecimal value) {
+            addCriterion("goods_price <", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("borrow_qty <=", value, "borrowQty");
+        public Criteria andGoodsPriceLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("goods_price <=", value, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyIn(List<BigDecimal> values) {
-            addCriterion("borrow_qty in", values, "borrowQty");
+        public Criteria andGoodsPriceIn(List<BigDecimal> values) {
+            addCriterion("goods_price in", values, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyNotIn(List<BigDecimal> values) {
-            addCriterion("borrow_qty not in", values, "borrowQty");
+        public Criteria andGoodsPriceNotIn(List<BigDecimal> values) {
+            addCriterion("goods_price not in", values, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("borrow_qty between", value1, value2, "borrowQty");
+        public Criteria andGoodsPriceBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("goods_price between", value1, value2, "goodsPrice");
             return (Criteria) this;
         }
 
-        public Criteria andBorrowQtyNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("borrow_qty not between", value1, value2, "borrowQty");
+        public Criteria andGoodsPriceNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("goods_price not between", value1, value2, "goodsPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtIsNull() {
+            addCriterion("compensate_amt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtIsNotNull() {
+            addCriterion("compensate_amt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtEqualTo(BigDecimal value) {
+            addCriterion("compensate_amt =", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtNotEqualTo(BigDecimal value) {
+            addCriterion("compensate_amt <>", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtGreaterThan(BigDecimal value) {
+            addCriterion("compensate_amt >", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("compensate_amt >=", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtLessThan(BigDecimal value) {
+            addCriterion("compensate_amt <", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("compensate_amt <=", value, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtIn(List<BigDecimal> values) {
+            addCriterion("compensate_amt in", values, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtNotIn(List<BigDecimal> values) {
+            addCriterion("compensate_amt not in", values, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("compensate_amt between", value1, value2, "compensateAmt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompensateAmtNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("compensate_amt not between", value1, value2, "compensateAmt");
             return (Criteria) this;
         }
 
@@ -699,66 +729,6 @@ public class GoodsBorrowDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andDamagedIsNull() {
-            addCriterion("damaged is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedIsNotNull() {
-            addCriterion("damaged is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedEqualTo(Integer value) {
-            addCriterion("damaged =", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedNotEqualTo(Integer value) {
-            addCriterion("damaged <>", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedGreaterThan(Integer value) {
-            addCriterion("damaged >", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("damaged >=", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedLessThan(Integer value) {
-            addCriterion("damaged <", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedLessThanOrEqualTo(Integer value) {
-            addCriterion("damaged <=", value, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedIn(List<Integer> values) {
-            addCriterion("damaged in", values, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedNotIn(List<Integer> values) {
-            addCriterion("damaged not in", values, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedBetween(Integer value1, Integer value2) {
-            addCriterion("damaged between", value1, value2, "damaged");
-            return (Criteria) this;
-        }
-
-        public Criteria andDamagedNotBetween(Integer value1, Integer value2) {
-            addCriterion("damaged not between", value1, value2, "damaged");
-            return (Criteria) this;
-        }
-
         public Criteria andReturnDescripIsNull() {
             addCriterion("return_descrip is null");
             return (Criteria) this;
@@ -829,186 +799,6 @@ public class GoodsBorrowDtlExample {
             return (Criteria) this;
         }
 
-        public Criteria andReturnQtyIsNull() {
-            addCriterion("return_qty is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyIsNotNull() {
-            addCriterion("return_qty is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyEqualTo(BigDecimal value) {
-            addCriterion("return_qty =", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyNotEqualTo(BigDecimal value) {
-            addCriterion("return_qty <>", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyGreaterThan(BigDecimal value) {
-            addCriterion("return_qty >", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("return_qty >=", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyLessThan(BigDecimal value) {
-            addCriterion("return_qty <", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("return_qty <=", value, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyIn(List<BigDecimal> values) {
-            addCriterion("return_qty in", values, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyNotIn(List<BigDecimal> values) {
-            addCriterion("return_qty not in", values, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("return_qty between", value1, value2, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnQtyNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("return_qty not between", value1, value2, "returnQty");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtIsNull() {
-            addCriterion("pay_amt is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtIsNotNull() {
-            addCriterion("pay_amt is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtEqualTo(BigDecimal value) {
-            addCriterion("pay_amt =", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtNotEqualTo(BigDecimal value) {
-            addCriterion("pay_amt <>", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtGreaterThan(BigDecimal value) {
-            addCriterion("pay_amt >", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("pay_amt >=", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtLessThan(BigDecimal value) {
-            addCriterion("pay_amt <", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("pay_amt <=", value, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtIn(List<BigDecimal> values) {
-            addCriterion("pay_amt in", values, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtNotIn(List<BigDecimal> values) {
-            addCriterion("pay_amt not in", values, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("pay_amt between", value1, value2, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andPayAmtNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("pay_amt not between", value1, value2, "payAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtIsNull() {
-            addCriterion("return_deposit_amt is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtIsNotNull() {
-            addCriterion("return_deposit_amt is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtEqualTo(BigDecimal value) {
-            addCriterion("return_deposit_amt =", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtNotEqualTo(BigDecimal value) {
-            addCriterion("return_deposit_amt <>", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtGreaterThan(BigDecimal value) {
-            addCriterion("return_deposit_amt >", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("return_deposit_amt >=", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtLessThan(BigDecimal value) {
-            addCriterion("return_deposit_amt <", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("return_deposit_amt <=", value, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtIn(List<BigDecimal> values) {
-            addCriterion("return_deposit_amt in", values, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtNotIn(List<BigDecimal> values) {
-            addCriterion("return_deposit_amt not in", values, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("return_deposit_amt between", value1, value2, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnDepositAmtNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("return_deposit_amt not between", value1, value2, "returnDepositAmt");
-            return (Criteria) this;
-        }
-
         public Criteria andBorrowUuidIsNull() {
             addCriterion("borrow_uuid is null");
             return (Criteria) this;
@@ -1076,216 +866,6 @@ public class GoodsBorrowDtlExample {
 
         public Criteria andBorrowUuidNotBetween(String value1, String value2) {
             addCriterion("borrow_uuid not between", value1, value2, "borrowUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidIsNull() {
-            addCriterion("borrow_pay_uuid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidIsNotNull() {
-            addCriterion("borrow_pay_uuid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidEqualTo(String value) {
-            addCriterion("borrow_pay_uuid =", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidNotEqualTo(String value) {
-            addCriterion("borrow_pay_uuid <>", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidGreaterThan(String value) {
-            addCriterion("borrow_pay_uuid >", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("borrow_pay_uuid >=", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidLessThan(String value) {
-            addCriterion("borrow_pay_uuid <", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidLessThanOrEqualTo(String value) {
-            addCriterion("borrow_pay_uuid <=", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidLike(String value) {
-            addCriterion("borrow_pay_uuid like", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidNotLike(String value) {
-            addCriterion("borrow_pay_uuid not like", value, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidIn(List<String> values) {
-            addCriterion("borrow_pay_uuid in", values, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidNotIn(List<String> values) {
-            addCriterion("borrow_pay_uuid not in", values, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidBetween(String value1, String value2) {
-            addCriterion("borrow_pay_uuid between", value1, value2, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andBorrowPayUuidNotBetween(String value1, String value2) {
-            addCriterion("borrow_pay_uuid not between", value1, value2, "borrowPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidIsNull() {
-            addCriterion("return_pay_uuid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidIsNotNull() {
-            addCriterion("return_pay_uuid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidEqualTo(String value) {
-            addCriterion("return_pay_uuid =", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidNotEqualTo(String value) {
-            addCriterion("return_pay_uuid <>", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidGreaterThan(String value) {
-            addCriterion("return_pay_uuid >", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("return_pay_uuid >=", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidLessThan(String value) {
-            addCriterion("return_pay_uuid <", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidLessThanOrEqualTo(String value) {
-            addCriterion("return_pay_uuid <=", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidLike(String value) {
-            addCriterion("return_pay_uuid like", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidNotLike(String value) {
-            addCriterion("return_pay_uuid not like", value, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidIn(List<String> values) {
-            addCriterion("return_pay_uuid in", values, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidNotIn(List<String> values) {
-            addCriterion("return_pay_uuid not in", values, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidBetween(String value1, String value2) {
-            addCriterion("return_pay_uuid between", value1, value2, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andReturnPayUuidNotBetween(String value1, String value2) {
-            addCriterion("return_pay_uuid not between", value1, value2, "returnPayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidIsNull() {
-            addCriterion("compensate_pay_uuid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidIsNotNull() {
-            addCriterion("compensate_pay_uuid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidEqualTo(String value) {
-            addCriterion("compensate_pay_uuid =", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidNotEqualTo(String value) {
-            addCriterion("compensate_pay_uuid <>", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidGreaterThan(String value) {
-            addCriterion("compensate_pay_uuid >", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("compensate_pay_uuid >=", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidLessThan(String value) {
-            addCriterion("compensate_pay_uuid <", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidLessThanOrEqualTo(String value) {
-            addCriterion("compensate_pay_uuid <=", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidLike(String value) {
-            addCriterion("compensate_pay_uuid like", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidNotLike(String value) {
-            addCriterion("compensate_pay_uuid not like", value, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidIn(List<String> values) {
-            addCriterion("compensate_pay_uuid in", values, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidNotIn(List<String> values) {
-            addCriterion("compensate_pay_uuid not in", values, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidBetween(String value1, String value2) {
-            addCriterion("compensate_pay_uuid between", value1, value2, "compensatePayUuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompensatePayUuidNotBetween(String value1, String value2) {
-            addCriterion("compensate_pay_uuid not between", value1, value2, "compensatePayUuid");
             return (Criteria) this;
         }
 

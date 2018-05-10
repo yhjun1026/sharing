@@ -1,8 +1,8 @@
 package cn.sharing.platform.store;
 
-import com.sharing.dao.entity.Store;
-import com.sharing.dao.entity.StoreExample;
-import com.sharing.dao.mapper.StoreMapper;
+import cn.sharing.dao.entity.Store;
+import cn.sharing.dao.entity.StoreExample;
+import cn.sharing.dao.mapper.StoreMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,10 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class User implements Serializable {
+public class Goods implements Serializable {
     private String uuid;
 
     private String code;
@@ -12,23 +13,25 @@ public class User implements Serializable {
 
     private String type;
 
-    private String groupuuid;
+    private Integer stat;
 
-    private String password;
+    private String picture;
 
-    private Date logintime;
+    private String description;
 
-    private String mobile;
+    private BigDecimal price;
+
+    private BigDecimal depositamt;
+
+    private BigDecimal repayamt;
+
+    private String laster;
 
     private Date lastupdtime;
 
     private String memo;
 
     private String storeuuid;
-
-    private String storecode;
-
-    private String storename;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,36 +69,60 @@ public class User implements Serializable {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getGroupuuid() {
-        return groupuuid;
+    public Integer getStat() {
+        return stat;
     }
 
-    public void setGroupuuid(String groupuuid) {
-        this.groupuuid = groupuuid == null ? null : groupuuid.trim();
+    public void setStat(Integer stat) {
+        this.stat = stat;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 
-    public Date getLogintime() {
-        return logintime;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLogintime(Date logintime) {
-        this.logintime = logintime;
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
-    public String getMobile() {
-        return mobile;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getDepositamt() {
+        return depositamt;
+    }
+
+    public void setDepositamt(BigDecimal depositamt) {
+        this.depositamt = depositamt;
+    }
+
+    public BigDecimal getRepayamt() {
+        return repayamt;
+    }
+
+    public void setRepayamt(BigDecimal repayamt) {
+        this.repayamt = repayamt;
+    }
+
+    public String getLaster() {
+        return laster;
+    }
+
+    public void setLaster(String laster) {
+        this.laster = laster == null ? null : laster.trim();
     }
 
     public Date getLastupdtime() {
@@ -120,22 +147,6 @@ public class User implements Serializable {
 
     public void setStoreuuid(String storeuuid) {
         this.storeuuid = storeuuid == null ? null : storeuuid.trim();
-    }
-
-    public String getStorecode() {
-        return storecode;
-    }
-
-    public void setStorecode(String storecode) {
-        this.storecode = storecode == null ? null : storecode.trim();
-    }
-
-    public String getStorename() {
-        return storename;
-    }
-
-    public void setStorename(String storename) {
-        this.storename = storename == null ? null : storename.trim();
     }
 
     public String getUpdateSql() {

@@ -1,27 +1,21 @@
 package cn.sharing.platform.service.borrow.v1;
 
-import cn.sharing.platform.common.BorrowStatEnum;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.utils.DateUtil;
 import cn.sharing.platform.utils.SerialNumberUtil;
-import cn.sharing.platform.utils.UUIDGenerator;
-import com.sharing.dao.entity.Goods;
-import com.sharing.dao.entity.GoodsBorrowDtl;
-import com.sharing.dao.entity.GoodsBorrowMst;
-import com.sharing.dao.entity.PayInfo;
-import com.sharing.dao.mapper.GoodsBorrowDtlMapper;
-import com.sharing.dao.mapper.GoodsBorrowMstMapper;
-import com.sharing.dao.mapper.GoodsMapper;
-import com.sharing.dao.mapper.PayInfoMapper;
+import cn.sharing.dao.entity.GoodsBorrowDtl;
+import cn.sharing.dao.entity.GoodsBorrowMst;
+import cn.sharing.dao.entity.PayInfo;
+import cn.sharing.dao.mapper.GoodsBorrowDtlMapper;
+import cn.sharing.dao.mapper.GoodsBorrowMstMapper;
+import cn.sharing.dao.mapper.GoodsMapper;
+import cn.sharing.dao.mapper.PayInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by zenglin on 2018/5/6.

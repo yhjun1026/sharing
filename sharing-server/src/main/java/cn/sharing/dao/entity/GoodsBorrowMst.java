@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.dao.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,31 +10,35 @@ public class GoodsBorrowMst implements Serializable {
 
     private String stat;
 
-    private String borrowType;
-
     private String borrower;
 
     private String mobile;
 
     private String address;
 
-    private Date planReturnTime;
+    private Date planBackTime;
 
-    private Date realReturnTime;
+    private Date realBackTime;
 
-    private String borrowOperator;
+    private String borrowDealer;
 
-    private Date borrowOperateTime;
+    private Date borrowDealTime;
 
-    private String returnOperator;
+    private String backDealer;
 
-    private Date returnOperateTime;
+    private Date backDealTime;
 
     private Date createTime;
 
     private Date lstUpdTime;
 
     private String memo;
+
+    private String borrowPayUuid;
+
+    private String backPayUuid;
+
+    private String compensatePayUuid;
 
     private String storeUuid;
 
@@ -66,14 +70,6 @@ public class GoodsBorrowMst implements Serializable {
         this.stat = stat == null ? null : stat.trim();
     }
 
-    public String getBorrowType() {
-        return borrowType;
-    }
-
-    public void setBorrowType(String borrowType) {
-        this.borrowType = borrowType == null ? null : borrowType.trim();
-    }
-
     public String getBorrower() {
         return borrower;
     }
@@ -98,52 +94,52 @@ public class GoodsBorrowMst implements Serializable {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getPlanReturnTime() {
-        return planReturnTime;
+    public Date getPlanBackTime() {
+        return planBackTime;
     }
 
-    public void setPlanReturnTime(Date planReturnTime) {
-        this.planReturnTime = planReturnTime;
+    public void setPlanBackTime(Date planBackTime) {
+        this.planBackTime = planBackTime;
     }
 
-    public Date getRealReturnTime() {
-        return realReturnTime;
+    public Date getRealBackTime() {
+        return realBackTime;
     }
 
-    public void setRealReturnTime(Date realReturnTime) {
-        this.realReturnTime = realReturnTime;
+    public void setRealBackTime(Date realBackTime) {
+        this.realBackTime = realBackTime;
     }
 
-    public String getBorrowOperator() {
-        return borrowOperator;
+    public String getBorrowDealer() {
+        return borrowDealer;
     }
 
-    public void setBorrowOperator(String borrowOperator) {
-        this.borrowOperator = borrowOperator == null ? null : borrowOperator.trim();
+    public void setBorrowDealer(String borrowDealer) {
+        this.borrowDealer = borrowDealer == null ? null : borrowDealer.trim();
     }
 
-    public Date getBorrowOperateTime() {
-        return borrowOperateTime;
+    public Date getBorrowDealTime() {
+        return borrowDealTime;
     }
 
-    public void setBorrowOperateTime(Date borrowOperateTime) {
-        this.borrowOperateTime = borrowOperateTime;
+    public void setBorrowDealTime(Date borrowDealTime) {
+        this.borrowDealTime = borrowDealTime;
     }
 
-    public String getReturnOperator() {
-        return returnOperator;
+    public String getBackDealer() {
+        return backDealer;
     }
 
-    public void setReturnOperator(String returnOperator) {
-        this.returnOperator = returnOperator == null ? null : returnOperator.trim();
+    public void setBackDealer(String backDealer) {
+        this.backDealer = backDealer == null ? null : backDealer.trim();
     }
 
-    public Date getReturnOperateTime() {
-        return returnOperateTime;
+    public Date getBackDealTime() {
+        return backDealTime;
     }
 
-    public void setReturnOperateTime(Date returnOperateTime) {
-        this.returnOperateTime = returnOperateTime;
+    public void setBackDealTime(Date backDealTime) {
+        this.backDealTime = backDealTime;
     }
 
     public Date getCreateTime() {
@@ -168,6 +164,30 @@ public class GoodsBorrowMst implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo == null ? null : memo.trim();
+    }
+
+    public String getBorrowPayUuid() {
+        return borrowPayUuid;
+    }
+
+    public void setBorrowPayUuid(String borrowPayUuid) {
+        this.borrowPayUuid = borrowPayUuid == null ? null : borrowPayUuid.trim();
+    }
+
+    public String getBackPayUuid() {
+        return backPayUuid;
+    }
+
+    public void setBackPayUuid(String backPayUuid) {
+        this.backPayUuid = backPayUuid == null ? null : backPayUuid.trim();
+    }
+
+    public String getCompensatePayUuid() {
+        return compensatePayUuid;
+    }
+
+    public void setCompensatePayUuid(String compensatePayUuid) {
+        this.compensatePayUuid = compensatePayUuid == null ? null : compensatePayUuid.trim();
     }
 
     public String getStoreUuid() {

@@ -1,7 +1,7 @@
-package com.sharing.dao.mapper;
+package cn.sharing.dao.mapper;
 
-import com.sharing.dao.entity.Goods;
-import com.sharing.dao.entity.GoodsExample;
+import cn.sharing.dao.entity.Goods;
+import cn.sharing.dao.entity.GoodsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

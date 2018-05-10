@@ -1,7 +1,7 @@
-package com.sharing.dao.mapper;
+package cn.sharing.dao.mapper;
 
-import com.sharing.dao.entity.SerialNumber;
-import com.sharing.dao.entity.SerialNumberExample;
+import cn.sharing.dao.entity.SerialNumber;
+import cn.sharing.dao.entity.SerialNumberExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sharing.dao.mapper.GoodsBorrowDtlMapper">
-  <resultMap id="BaseResultMap" type="com.sharing.dao.entity.GoodsBorrowDtl">
+<mapper namespace="cn.sharing.dao.mapper.GoodsBorrowDtlMapper">
+  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.GoodsBorrowDtl">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="goods_uuid" jdbcType="VARCHAR" property="goodsUuid" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
-    <result column="borrow_qty" jdbcType="DECIMAL" property="borrowQty" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="compensate_amt" jdbcType="DECIMAL" property="compensateAmt" />
     <result column="borrow_descrip" jdbcType="VARCHAR" property="borrowDescrip" />
     <result column="deposit_amt" jdbcType="DECIMAL" property="depositAmt" />
-    <result column="damaged" jdbcType="INTEGER" property="damaged" />
     <result column="return_descrip" jdbcType="VARCHAR" property="returnDescrip" />
-    <result column="return_qty" jdbcType="DECIMAL" property="returnQty" />
-    <result column="pay_amt" jdbcType="DECIMAL" property="payAmt" />
-    <result column="return_deposit_amt" jdbcType="DECIMAL" property="returnDepositAmt" />
     <result column="borrow_uuid" jdbcType="VARCHAR" property="borrowUuid" />
-    <result column="borrow_pay_uuid" jdbcType="VARCHAR" property="borrowPayUuid" />
-    <result column="return_pay_uuid" jdbcType="VARCHAR" property="returnPayUuid" />
-    <result column="compensate_pay_uuid" jdbcType="VARCHAR" property="compensatePayUuid" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -79,11 +73,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, goods_uuid, goods_code, goods_name, borrow_qty, borrow_descrip, deposit_amt, 
-    damaged, return_descrip, return_qty, pay_amt, return_deposit_amt, borrow_uuid, borrow_pay_uuid, 
-    return_pay_uuid, compensate_pay_uuid, memo
+    uuid, goods_uuid, goods_code, goods_name, goods_price, compensate_amt, borrow_descrip, 
+    deposit_amt, return_descrip, borrow_uuid, memo
   </sql>
-  <select id="selectByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -111,27 +104,23 @@
     delete from shgoodsborrowdtl
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample">
+  <delete id="deleteByExample" parameterType="cn.sharing.dao.entity.GoodsBorrowDtlExample">
     delete from shgoodsborrowdtl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+  <insert id="insert" parameterType="cn.sharing.dao.entity.GoodsBorrowDtl">
     insert into shgoodsborrowdtl (uuid, goods_uuid, goods_code, 
-      goods_name, borrow_qty, borrow_descrip, 
-      deposit_amt, damaged, return_descrip, 
-      return_qty, pay_amt, return_deposit_amt, 
-      borrow_uuid, borrow_pay_uuid, return_pay_uuid, 
-      compensate_pay_uuid, memo)
+      goods_name, goods_price, compensate_amt, 
+      borrow_descrip, deposit_amt, return_descrip, 
+      borrow_uuid, memo)
     values (#{uuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR}, 
-      #{goodsName,jdbcType=VARCHAR}, #{borrowQty,jdbcType=DECIMAL}, #{borrowDescrip,jdbcType=VARCHAR}, 
-      #{depositAmt,jdbcType=DECIMAL}, #{damaged,jdbcType=INTEGER}, #{returnDescrip,jdbcType=VARCHAR}, 
-      #{returnQty,jdbcType=DECIMAL}, #{payAmt,jdbcType=DECIMAL}, #{returnDepositAmt,jdbcType=DECIMAL}, 
-      #{borrowUuid,jdbcType=VARCHAR}, #{borrowPayUuid,jdbcType=VARCHAR}, #{returnPayUuid,jdbcType=VARCHAR}, 
-      #{compensatePayUuid,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+      #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{compensateAmt,jdbcType=DECIMAL}, 
+      #{borrowDescrip,jdbcType=VARCHAR}, #{depositAmt,jdbcType=DECIMAL}, #{returnDescrip,jdbcType=VARCHAR}, 
+      #{borrowUuid,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+  <insert id="insertSelective" parameterType="cn.sharing.dao.entity.GoodsBorrowDtl">
     insert into shgoodsborrowdtl
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
@@ -146,8 +135,11 @@
       <if test="goodsName != null">
         goods_name,
       </if>
-      <if test="borrowQty != null">
-        borrow_qty,
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="compensateAmt != null">
+        compensate_amt,
       </if>
       <if test="borrowDescrip != null">
         borrow_descrip,
@@ -155,32 +147,11 @@
       <if test="depositAmt != null">
         deposit_amt,
       </if>
-      <if test="damaged != null">
-        damaged,
-      </if>
       <if test="returnDescrip != null">
         return_descrip,
       </if>
-      <if test="returnQty != null">
-        return_qty,
-      </if>
-      <if test="payAmt != null">
-        pay_amt,
-      </if>
-      <if test="returnDepositAmt != null">
-        return_deposit_amt,
-      </if>
       <if test="borrowUuid != null">
         borrow_uuid,
-      </if>
-      <if test="borrowPayUuid != null">
-        borrow_pay_uuid,
-      </if>
-      <if test="returnPayUuid != null">
-        return_pay_uuid,
-      </if>
-      <if test="compensatePayUuid != null">
-        compensate_pay_uuid,
       </if>
       <if test="memo != null">
         memo,
@@ -199,8 +170,11 @@
       <if test="goodsName != null">
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="borrowQty != null">
-        #{borrowQty,jdbcType=DECIMAL},
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="compensateAmt != null">
+        #{compensateAmt,jdbcType=DECIMAL},
       </if>
       <if test="borrowDescrip != null">
         #{borrowDescrip,jdbcType=VARCHAR},
@@ -208,39 +182,18 @@
       <if test="depositAmt != null">
         #{depositAmt,jdbcType=DECIMAL},
       </if>
-      <if test="damaged != null">
-        #{damaged,jdbcType=INTEGER},
-      </if>
       <if test="returnDescrip != null">
         #{returnDescrip,jdbcType=VARCHAR},
       </if>
-      <if test="returnQty != null">
-        #{returnQty,jdbcType=DECIMAL},
-      </if>
-      <if test="payAmt != null">
-        #{payAmt,jdbcType=DECIMAL},
-      </if>
-      <if test="returnDepositAmt != null">
-        #{returnDepositAmt,jdbcType=DECIMAL},
-      </if>
       <if test="borrowUuid != null">
         #{borrowUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="borrowPayUuid != null">
-        #{borrowPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="returnPayUuid != null">
-        #{returnPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="compensatePayUuid != null">
-        #{compensatePayUuid,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.sharing.dao.entity.GoodsBorrowDtlExample" resultType="java.lang.Long">
     select count(*) from shgoodsborrowdtl
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -261,8 +214,11 @@
       <if test="record.goodsName != null">
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="record.borrowQty != null">
-        borrow_qty = #{record.borrowQty,jdbcType=DECIMAL},
+      <if test="record.goodsPrice != null">
+        goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.compensateAmt != null">
+        compensate_amt = #{record.compensateAmt,jdbcType=DECIMAL},
       </if>
       <if test="record.borrowDescrip != null">
         borrow_descrip = #{record.borrowDescrip,jdbcType=VARCHAR},
@@ -270,32 +226,11 @@
       <if test="record.depositAmt != null">
         deposit_amt = #{record.depositAmt,jdbcType=DECIMAL},
       </if>
-      <if test="record.damaged != null">
-        damaged = #{record.damaged,jdbcType=INTEGER},
-      </if>
       <if test="record.returnDescrip != null">
         return_descrip = #{record.returnDescrip,jdbcType=VARCHAR},
       </if>
-      <if test="record.returnQty != null">
-        return_qty = #{record.returnQty,jdbcType=DECIMAL},
-      </if>
-      <if test="record.payAmt != null">
-        pay_amt = #{record.payAmt,jdbcType=DECIMAL},
-      </if>
-      <if test="record.returnDepositAmt != null">
-        return_deposit_amt = #{record.returnDepositAmt,jdbcType=DECIMAL},
-      </if>
       <if test="record.borrowUuid != null">
         borrow_uuid = #{record.borrowUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.borrowPayUuid != null">
-        borrow_pay_uuid = #{record.borrowPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.returnPayUuid != null">
-        return_pay_uuid = #{record.returnPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.compensatePayUuid != null">
-        compensate_pay_uuid = #{record.compensatePayUuid,jdbcType=VARCHAR},
       </if>
       <if test="record.memo != null">
         memo = #{record.memo,jdbcType=VARCHAR},
@@ -314,24 +249,18 @@
       goods_uuid = #{record.goodsUuid,jdbcType=VARCHAR},
       goods_code = #{record.goodsCode,jdbcType=VARCHAR},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      borrow_qty = #{record.borrowQty,jdbcType=DECIMAL},
+      goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+      compensate_amt = #{record.compensateAmt,jdbcType=DECIMAL},
       borrow_descrip = #{record.borrowDescrip,jdbcType=VARCHAR},
       deposit_amt = #{record.depositAmt,jdbcType=DECIMAL},
-      damaged = #{record.damaged,jdbcType=INTEGER},
       return_descrip = #{record.returnDescrip,jdbcType=VARCHAR},
-      return_qty = #{record.returnQty,jdbcType=DECIMAL},
-      pay_amt = #{record.payAmt,jdbcType=DECIMAL},
-      return_deposit_amt = #{record.returnDepositAmt,jdbcType=DECIMAL},
       borrow_uuid = #{record.borrowUuid,jdbcType=VARCHAR},
-      borrow_pay_uuid = #{record.borrowPayUuid,jdbcType=VARCHAR},
-      return_pay_uuid = #{record.returnPayUuid,jdbcType=VARCHAR},
-      compensate_pay_uuid = #{record.compensatePayUuid,jdbcType=VARCHAR},
       memo = #{record.memo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
     <set>
       <if test="goodsUuid != null">
@@ -343,8 +272,11 @@
       <if test="goodsName != null">
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="borrowQty != null">
-        borrow_qty = #{borrowQty,jdbcType=DECIMAL},
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="compensateAmt != null">
+        compensate_amt = #{compensateAmt,jdbcType=DECIMAL},
       </if>
       <if test="borrowDescrip != null">
         borrow_descrip = #{borrowDescrip,jdbcType=VARCHAR},
@@ -352,32 +284,11 @@
       <if test="depositAmt != null">
         deposit_amt = #{depositAmt,jdbcType=DECIMAL},
       </if>
-      <if test="damaged != null">
-        damaged = #{damaged,jdbcType=INTEGER},
-      </if>
       <if test="returnDescrip != null">
         return_descrip = #{returnDescrip,jdbcType=VARCHAR},
       </if>
-      <if test="returnQty != null">
-        return_qty = #{returnQty,jdbcType=DECIMAL},
-      </if>
-      <if test="payAmt != null">
-        pay_amt = #{payAmt,jdbcType=DECIMAL},
-      </if>
-      <if test="returnDepositAmt != null">
-        return_deposit_amt = #{returnDepositAmt,jdbcType=DECIMAL},
-      </if>
       <if test="borrowUuid != null">
         borrow_uuid = #{borrowUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="borrowPayUuid != null">
-        borrow_pay_uuid = #{borrowPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="returnPayUuid != null">
-        return_pay_uuid = #{returnPayUuid,jdbcType=VARCHAR},
-      </if>
-      <if test="compensatePayUuid != null">
-        compensate_pay_uuid = #{compensatePayUuid,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
@@ -385,27 +296,21 @@
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sharing.dao.entity.GoodsBorrowDtl">
+  <update id="updateByPrimaryKey" parameterType="cn.sharing.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
     set goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
       goods_code = #{goodsCode,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
-      borrow_qty = #{borrowQty,jdbcType=DECIMAL},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      compensate_amt = #{compensateAmt,jdbcType=DECIMAL},
       borrow_descrip = #{borrowDescrip,jdbcType=VARCHAR},
       deposit_amt = #{depositAmt,jdbcType=DECIMAL},
-      damaged = #{damaged,jdbcType=INTEGER},
       return_descrip = #{returnDescrip,jdbcType=VARCHAR},
-      return_qty = #{returnQty,jdbcType=DECIMAL},
-      pay_amt = #{payAmt,jdbcType=DECIMAL},
-      return_deposit_amt = #{returnDepositAmt,jdbcType=DECIMAL},
       borrow_uuid = #{borrowUuid,jdbcType=VARCHAR},
-      borrow_pay_uuid = #{borrowPayUuid,jdbcType=VARCHAR},
-      return_pay_uuid = #{returnPayUuid,jdbcType=VARCHAR},
-      compensate_pay_uuid = #{compensatePayUuid,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -420,7 +325,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="sumByExample" parameterType="com.sharing.dao.entity.GoodsBorrowDtlExample" resultType="long" >
+  <select id="sumByExample" parameterType="cn.sharing.dao.entity.GoodsBorrowDtlExample" resultType="long" >
     select sum(${sumCol}) from shgoodsborrowdtl
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -429,19 +334,15 @@
   <insert id="batchInsert">
     <if test="items.get(0) != null">
             insert into shgoodsborrowdtl  (uuid, goods_uuid, goods_code, 
-        goods_name, borrow_qty, borrow_descrip, 
-        deposit_amt, damaged, return_descrip, 
-        return_qty, pay_amt, return_deposit_amt, 
-        borrow_uuid, borrow_pay_uuid, return_pay_uuid, 
-        compensate_pay_uuid, memo)
+        goods_name, goods_price, compensate_amt, 
+        borrow_descrip, deposit_amt, return_descrip, 
+        borrow_uuid, memo)
       values
       <foreach collection="items" item="item" index="index" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.goodsCode,jdbcType=VARCHAR}, 
-        #{item.goodsName,jdbcType=VARCHAR}, #{item.borrowQty,jdbcType=DECIMAL}, #{item.borrowDescrip,jdbcType=VARCHAR}, 
-        #{item.depositAmt,jdbcType=DECIMAL}, #{item.damaged,jdbcType=INTEGER}, #{item.returnDescrip,jdbcType=VARCHAR}, 
-        #{item.returnQty,jdbcType=DECIMAL}, #{item.payAmt,jdbcType=DECIMAL}, #{item.returnDepositAmt,jdbcType=DECIMAL}, 
-        #{item.borrowUuid,jdbcType=VARCHAR}, #{item.borrowPayUuid,jdbcType=VARCHAR}, #{item.returnPayUuid,jdbcType=VARCHAR}, 
-        #{item.compensatePayUuid,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR})
+        #{item.goodsName,jdbcType=VARCHAR}, #{item.goodsPrice,jdbcType=DECIMAL}, #{item.compensateAmt,jdbcType=DECIMAL}, 
+        #{item.borrowDescrip,jdbcType=VARCHAR}, #{item.depositAmt,jdbcType=DECIMAL}, #{item.returnDescrip,jdbcType=VARCHAR}, 
+        #{item.borrowUuid,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR})
       </foreach>
     </if>
   </insert>

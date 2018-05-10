@@ -1,8 +1,8 @@
 package cn.sharing.platform.user;
 
-import com.sharing.dao.entity.User;
-import com.sharing.dao.entity.UserExample;
-import com.sharing.dao.mapper.UserMapper;
+import cn.sharing.dao.entity.User;
+import cn.sharing.dao.entity.UserExample;
+import cn.sharing.dao.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
