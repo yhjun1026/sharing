@@ -38,12 +38,14 @@ public interface GoodsService {
 
   /**
    * 分页查询可租用的物品信息
-   * @param param 分页参数
+   *
+   * @param param
+   *         分页参数
    * @return
    */
   @RequestMapping(value = "/get/rent/all", method = RequestMethod.POST)
   @ApiOperation(value = "获取可以租用的物品")
-  ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody  @Valid GoodsQuery param);
+  ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody @Valid GoodsQuery param);
 
   /**
    * 物品新增，用于新增物品或者增加物品的库存数量
@@ -72,13 +74,14 @@ public interface GoodsService {
   /**
    * 更新物品的状态
    *
-   * @param sGoods
-   *         物品信息
+   * @param uuid
+   *         租用物品ID
    * @return 修改成功或者失败
    */
-  @RequestMapping(value = "/update/stock" + "", method = RequestMethod.POST)
+  @RequestMapping(value = "/update/stock/{uuid}" + "", method = RequestMethod.POST)
   @ApiOperation(value = "更新物品的状态")
-  ResponseResult<Void> updateStock(@RequestBody SGoods sGoods);
+  ResponseResult<Void> updateState(@PathVariable(value = "uuid") @ApiParam(name = "uuid", value = "租用物品ID") String
+                                           uuid);
 
   /**
    * 删除物品
@@ -90,4 +93,15 @@ public interface GoodsService {
   @RequestMapping(value = "/delete" + "", method = RequestMethod.POST)
   @ApiOperation(value = "删除物品")
   ResponseResult<Void> delete(@RequestBody SGoods sGoods);
+
+  /**
+   * 修改物品信息
+   *
+   * @param sGoods
+   *         物品信息
+   * @return
+   */
+  @RequestMapping(value = "/update" + "", method = RequestMethod.POST)
+  @ApiOperation(value = "修改物品信息")
+  ResponseResult<Void> update(@RequestBody SGoods sGoods);
 }

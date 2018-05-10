@@ -72,14 +72,15 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   /**
    * 更新物品的状态
    *
-   * @param sGoods
-   *         物品信息
+   * @param uuid
+   *         租用物品ID
    * @return 修改成功或者失败
    */
   @Override
-  public ResponseResult<Void> updateStock(SGoods sGoods) {
+  public ResponseResult<Void> updateState(String uuid) {
     return null;
   }
+
 
   /**
    * 删除物品
@@ -90,6 +91,18 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<Void> delete(SGoods sGoods) {
+    return null;
+  }
+
+  /**
+   * 修改物品信息
+   *
+   * @param sGoods
+   *         物品信息
+   * @return
+   */
+  @Override
+  public ResponseResult<Void> update(SGoods sGoods) {
     return null;
   }
 }

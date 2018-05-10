@@ -24,6 +24,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <config-center.version>1.1</config-center.version>
+    <commons-fileupload.version>1.3.1</commons-fileupload.version>
     <sail-frame.version>1.0</sail-frame.version>
     <druid.version>1.0.29</druid.version>
     <interface-authen.version>1.1</interface-authen.version>
@@ -42,6 +43,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>${commons-fileupload.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
