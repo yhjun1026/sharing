@@ -38,7 +38,7 @@ import javax.annotation.PostConstruct;
 @EnableSwagger2
 @EnableScheduling
 @ComponentScan(basePackages = {"cn.sharing.platform"})
-@MapperScan(basePackages = {"com.sharing.dao.mapper"})
+@MapperScan(basePackages = {"cn.sharing.dao.mapper"})
 @EnableCaching
 @EnableFeignClients(basePackages = {"cn.sharing.platform.client"})
 public class SharingApplication {
