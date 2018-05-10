@@ -95,9 +95,7 @@ public class BorrowDao {
 
     GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
     borrowMst.setUuid(mstUuid);
-    borrowMst.setStat(BorrowStatEnum.NEW.getCode());
     borrowMst.setBillNumber(billNumbers.get(0));
-    borrowMst.setLstUpdTime(new Date());
     goodsBorrowMstMapper.insert(borrowMst);
 
     return mstUuid;
@@ -266,17 +264,18 @@ public class BorrowDao {
     if (borrowParam == null) {
       return null;
     }
-//    GoodsBorrowMst borrowMst = new GoodsBorrowMst();
-//    borrowMst.setStat(BorrowStatEnum.NEW.getCode());
-//    borrowMst.setBorrower(borrowParam.getCustom().getNick());
-//    borrowMst.setMobile(borrowParam.getCustom().getPhoneNumber());
-//    borrowMst.setAddress(borrowParam.getCustom().getAddress());
-//    borrowMst.setPlanReturnTime(DateUtil.getDateByPattern(borrowParam.getReturnTime(), DateUtil.DEFAULT_FORMAT));
-//    borrowMst.setCreateTime(new Date());
-//    borrowMst.setLstUpdTime(new Date());
-//    borrowMst.setMemo(borrowParam.getMemo());
+    GoodsBorrowMst borrowMst = new GoodsBorrowMst();
+    borrowMst.setStat(BorrowStatEnum.NEW.getCode());
+    borrowMst.setBorrower(borrowParam.getCustom().getNick());
+    borrowMst.setMobile(borrowParam.getCustom().getMobile());
+    borrowMst.setAddress(borrowParam.getCustom().getAddress());
+    borrowMst.setPlanBackTime(DateUtil.getDateByPattern(borrowParam.getPlanBackTime(), DateUtil.DEFAULT_FORMAT));
+    borrowMst.setCreateTime(new Date());
+    borrowMst.setLstUpdTime(new Date());
+    borrowMst.setMemo(borrowParam.getMemo());
+    borrowMst.setStoreUuid(borrowParam.getStoreUuid());
 
-    return null;
+    return borrowMst;
   }
 
   //将数据库的租用单转换成输出对象
