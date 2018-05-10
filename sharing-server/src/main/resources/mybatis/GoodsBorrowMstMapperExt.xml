@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sharing.dao.mapper.GoodsBorrowMstMapperExt">
+  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.GoodsBorrowMst">
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="bill_number" jdbcType="VARCHAR" property="billNumber" />
+    <result column="stat" jdbcType="VARCHAR" property="stat" />
+    <result column="borrower" jdbcType="VARCHAR" property="borrower" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="plan_back_time" jdbcType="TIMESTAMP" property="planBackTime" />
+    <result column="real_back_time" jdbcType="TIMESTAMP" property="realBackTime" />
+    <result column="borrow_dealer" jdbcType="VARCHAR" property="borrowDealer" />
+    <result column="borrow_deal_time" jdbcType="TIMESTAMP" property="borrowDealTime" />
+    <result column="back_dealer" jdbcType="VARCHAR" property="backDealer" />
+    <result column="back_deal_time" jdbcType="TIMESTAMP" property="backDealTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="lst_upd_time" jdbcType="TIMESTAMP" property="lstUpdTime" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="borrow_pay_uuid" jdbcType="VARCHAR" property="borrowPayUuid" />
+    <result column="back_pay_uuid" jdbcType="VARCHAR" property="backPayUuid" />
+    <result column="compensate_pay_uuid" jdbcType="VARCHAR" property="compensatePayUuid" />
+    <result column="store_uuid" jdbcType="VARCHAR" property="storeUuid" />
+  </resultMap>
+
+  <select id="queryGoodsBorrowMst" resultMap="BaseResultMap">
+    SELECT DISTINCT mst.* from shgoodsborrowmst mst, shgoodsborrowdtl dtl
+    where mst.uuid = dtl.borrow_uuid
+    <if test="storeId != null">
+      and mst.store_uuid = #{storeId,jdbcType=VARCHAR}
+      and(st.`code` LIKE CONCAT('%', #{code}, '%') or st.`name` LIKE CONCAT('%', #{code}, '%'))
+    </if>
+    <if test="stat != null">
+      and mst.stat = #{stat,jdbcType=VARCHAR}
+    </if>
+    <if test="beginTime !=null">
+      <![CDATA[
+                and mst.create_time >= #{beginTime}
+                ]]>
+    </if>
+    <if test="endTime !=null">
+      <![CDATA[
+                and mst.create_time <= #{endTime}
+                ]]>
+    </if>
+    <if test="goodsName != null">
+      and mst.goodsName liek "%"#{goodsName}"%"
+    </if>
+
+  </select>
+</mapper>

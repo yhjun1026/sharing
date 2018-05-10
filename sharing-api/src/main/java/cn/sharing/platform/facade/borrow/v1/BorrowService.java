@@ -28,47 +28,62 @@ public interface BorrowService {
     /**
      * 物品使用
      *
-     * @param sGoodsBorrow 物品借用信息对象
+     * @param borrowParam 物品借用信息对象
      * @return 物品信息
      */
-    @RequestMapping(value = "/save" +
-            "", method = RequestMethod.POST)
-    @ApiOperation(value = "物品借用")
-    public ResponseResult<Void> borrow(@RequestBody SBorrow sGoodsBorrow);
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @ApiOperation(value = "新增物品借用")
+    public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam);
 
-    /**
-     * 租用单物品领取确认
-     *
-     * @param  borrowId  租用单单号
-     * @return
-     */
-    @RequestMapping(value = "/{borrowId}/pick" +
-            "", method = RequestMethod.POST)
-    @ApiOperation(value = "物品锁定")
-    public ResponseResult<Void> lock(@PathVariable String borrowId);
-
-
-    @RequestMapping(value = "/query", method = RequestMethod.POST)
-    @ApiOperation(value = "租用单查询")
-    public ResponseResult<QueryResult<SBorrow>> query(@RequestBody @Valid BorrowQuery param);
-
+   /**
+   * 物品领用
+   * @param collarParam
+   * @return
+   */
+   //疑问：物品是否新增一个待领取状态
+    @RequestMapping(value = "/collar", method = RequestMethod.POST)
+    @ApiOperation(value = "物品领用")
+    public ResponseResult<Void> collar(@RequestBody BorrowCollarParam collarParam);
 
     /**
      * 物品归还
-     * @param sGoodsBorrow 物品借用信息对象
+     * @param backParam 物品借用归还信息对象
      * @return
      */
     @RequestMapping(value = "/back", method = RequestMethod.POST)
     @ApiOperation(value = "物品归还")
-    public ResponseResult<Void> back(@RequestBody @Valid SBorrow sGoodsBorrow);
+    public ResponseResult<Void> back(@RequestBody BorrowBackParam backParam);
 
+    /**
+     * 物品赔偿发起
+     * @param preCompensateParam 物品借用信息对象
+     * @return
+     */
+    @RequestMapping(value = "/precompensate", method = RequestMethod.POST)
+    @ApiOperation(value = "物品赔偿发起")
+    public ResponseResult<Void> preCompensate(@RequestBody PreCompensateParam preCompensateParam);
 
     /**
      * 物品赔偿
-     * @param sGoodsBorrow 物品借用信息对象
+     * @param compensateParam 物品借用信息对象
      * @return
      */
     @RequestMapping(value = "/compensate", method = RequestMethod.POST)
     @ApiOperation(value = "物品赔偿")
-    public ResponseResult<Void> compensate(@RequestBody @Valid SBorrow sGoodsBorrow);
+    public ResponseResult<Void> compensate(@RequestBody BorrowCompensateParam compensateParam);
+
+
+    /**
+    * 租用单查询
+     * @param param
+     * @return
+   */
+    @RequestMapping(value = "/query", method = RequestMethod.POST)
+    @ApiOperation(value = "租用单查询")
+    public ResponseResult<QueryResult<BorrowSummaryDto>> query(@RequestBody BorrowQuery param);
+
+
+    @RequestMapping(value = "/get/{uuid}", method = RequestMethod.GET)
+    @ApiOperation(value = "获取单个租用单信息")
+    public ResponseResult<BorrowDetailInfoDto> get(@PathVariable String uuid);
 }

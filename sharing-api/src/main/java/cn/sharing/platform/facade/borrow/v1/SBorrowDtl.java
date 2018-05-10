@@ -1,5 +1,9 @@
 package cn.sharing.platform.facade.borrow.v1;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
 import java.math.BigDecimal;
 
 /**
@@ -7,134 +11,25 @@ import java.math.BigDecimal;
  *
  * Created by guotao on 2018.01.20.
  */
+@Data
+@ApiModel(description = "租用单明细信息")
 public class SBorrowDtl {
-  private String uuid;
-
-  private String goodsuuid;
-
-  private String goodscode;
-
-  private String goodsname;
-
-  private BigDecimal borrowqty;
-
-  private String borrowdescrip;
-
-  private BigDecimal depositamt;
-
-  private Integer damaged;
-
-  private String returndescrip;
-
-  private BigDecimal backqty;
-
-  private BigDecimal payamt;
-
-  private BigDecimal backdepositamt;
-
+  @ApiModelProperty(value = "具体物品uuid", required = true)
+  private String goodsUuid;
+  @ApiModelProperty(value = "具体物品code", required = true)
+  private String goodsCode;
+  @ApiModelProperty(value = "物品名称", required = true)
+  private String goodsName;
+  @ApiModelProperty(value = "物品单价", required = true)
+  private BigDecimal goodsPrice;
+  @ApiModelProperty(value = "需赔偿金额")
+  private BigDecimal compensateAmt;
+  @ApiModelProperty(value = "物品借出描述")
+  private String borrowDescrip;
+  @ApiModelProperty(value = "借用时缴纳押金")
+  private BigDecimal depositAmt;
+  @ApiModelProperty(value = "物品归还描述")
+  private String backDescrip;
+  @ApiModelProperty(value = "备注")
   private String memo;
-
-  public String getUuid() {
-    return uuid;
-  }
-
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
-  }
-
-  public String getGoodsuuid() {
-    return goodsuuid;
-  }
-
-  public void setGoodsuuid(String goodsuuid) {
-    this.goodsuuid = goodsuuid;
-  }
-
-  public String getGoodscode() {
-    return goodscode;
-  }
-
-  public void setGoodscode(String goodscode) {
-    this.goodscode = goodscode;
-  }
-
-  public String getGoodsname() {
-    return goodsname;
-  }
-
-  public void setGoodsname(String goodsname) {
-    this.goodsname = goodsname;
-  }
-
-  public String getBorrowdescrip() {
-    return borrowdescrip;
-  }
-
-  public void setBorrowdescrip(String borrowdescrip) {
-    this.borrowdescrip = borrowdescrip;
-  }
-
-  public BigDecimal getDepositamt() {
-    return depositamt;
-  }
-
-  public void setDepositamt(BigDecimal depositamt) {
-    this.depositamt = depositamt;
-  }
-
-  public Integer getDamaged() {
-    return damaged;
-  }
-
-  public void setDamaged(Integer damaged) {
-    this.damaged = damaged;
-  }
-
-  public String getReturndescrip() {
-    return returndescrip;
-  }
-
-  public void setReturndescrip(String returndescrip) {
-    this.returndescrip = returndescrip;
-  }
-
-  public BigDecimal getPayamt() {
-    return payamt;
-  }
-
-  public void setPayamt(BigDecimal payamt) {
-    this.payamt = payamt;
-  }
-
-  public BigDecimal getBackdepositamt() {
-    return backdepositamt;
-  }
-
-  public void setBackdepositamt(BigDecimal backdepositamt) {
-    this.backdepositamt = backdepositamt;
-  }
-
-  public String getMemo() {
-    return memo;
-  }
-
-  public void setMemo(String memo) {
-    this.memo = memo;
-  }
-
-  public BigDecimal getBorrowqty() {
-    return borrowqty;
-  }
-
-  public void setBorrowqty(BigDecimal borrowqty) {
-    this.borrowqty = borrowqty;
-  }
-
-  public BigDecimal getBackqty() {
-    return backqty;
-  }
-
-  public void setBackqty(BigDecimal backqty) {
-    this.backqty = backqty;
-  }
 }

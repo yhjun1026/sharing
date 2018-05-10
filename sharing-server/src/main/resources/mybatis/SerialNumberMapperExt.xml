@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.sharing.dao.mapper.SerialNumberMapperExt">
+	<resultMap id="BaseResultMap" type="cn.sharing.dao.entity.SerialNumber">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="day" jdbcType="DATE" property="day" />
+		<result column="business_code" jdbcType="VARCHAR" property="businessCode" />
+		<result column="num" jdbcType="INTEGER" property="num" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, day,business_code, num, create_time,update_time
+	</sql>
+
+	<select id="queryByCode" resultType="java.lang.Integer">
+		select
+		num
+		from serial_number
+		where business_code =#{businessCode,jdbcType=VARCHAR} and day=#{day,jdbcType=DATE}
+	</select>
+
+	<select id="queryIdByCode" resultType="java.lang.Long">
+		select
+		id
+		from serial_number
+		where business_code =#{businessCode,jdbcType=VARCHAR} and day=#{day,jdbcType=DATE}
+	</select>
+
+	<select id="queryById" resultType="java.lang.Integer">
+		select
+		num
+		from serial_number
+		where id = #{id,jdbcType=BIGINT}
+		for update
+	</select>
+
+
+	<update id="updateByCodeAndSourceNum">
+		update serial_number
+		set num =
+		#{num,jdbcType=INTEGER}
+		where business_code=#{businessCode,jdbcType=VARCHAR} and num =
+		#{sourceNum,jdbcType=INTEGER} and
+		day=#{day,jdbcType=DATE}
+	</update>
+
+
+</mapper>

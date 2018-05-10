@@ -1,10 +1,9 @@
 package cn.sharing.platform.facade.borrow.v1;
 
-import cn.sharing.platform.facade.payment.v1.PayInfo;
+import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 import java.util.List;
@@ -15,44 +14,17 @@ import java.util.List;
  * Created by guotao on 2018.01.20.
  */
 @Data
-@ApiModel(description = " 租用单")
+@ApiModel(description = "租用单基础信息")
 public class SBorrow {
-  private String uuid;
-
-  @ApiModelProperty(value = "租用单单号", required = true)
-  private String billnumber;
-
-  @ApiModelProperty(value = "原租用单单号（类型为归还单时赋值对应租用单单号）", required = false)
-  private String oriBillNumner;
-
-  private String stat;
-
-  @ApiModelProperty(value = "租用单类型（1为租用，-1为归还）", required = true)
-  @NotBlank(message ="租用单类型[borrowertype]不能为空")
-  private String borrowertype;
-
-  private String borrower;
   @ApiModelProperty(value = "租借用户信息", required = true)
   private Custom custom;
-
-  private Date returntime;
-
-  private Date realreturntime;
-
-  private String filler;
-
-  private Date fildate;
-
-  private String laster;
-
-  private Date lastupdtime;
-
+  @ApiModelProperty(value = "计划归还时间(yyyy-MM-dd hh:mm:ss)", required = true)
+  private String planBackTime;
+  @ApiModelProperty(value = "备注")
   private String memo;
-
-  private String storeuuid;
-
-  private PayInfo payInfo;
-
-  private List<SBorrowDtl> sGoodsBorrowDtl;
+  @ApiModelProperty(value = "组织id")
+  private String storeUuid;
+  @ApiModelProperty(value = "租用商品明细", required = true)
+  private List<SBorrowDtl> goodsDtl;
 
 }

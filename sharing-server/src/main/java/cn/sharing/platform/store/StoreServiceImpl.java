@@ -2,7 +2,7 @@ package cn.sharing.platform.store;
 
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.ResponseResult;
-import com.sharing.dao.entity.Store;
+import cn.sharing.dao.entity.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
