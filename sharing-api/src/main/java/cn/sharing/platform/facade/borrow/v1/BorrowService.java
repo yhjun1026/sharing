@@ -86,11 +86,4 @@ public interface BorrowService {
     @RequestMapping(value = "/get/{uuid}", method = RequestMethod.GET)
     @ApiOperation(value = "获取单个租用单信息")
     public ResponseResult<BorrowDetailInfoDto> get(@PathVariable String uuid);
-
-
-
-
-
-  //新增两个接口 1. 获取明细   2.领取，记录领用人和领用时间（BORROWER 表结构调整）
-    //疑问：物品是否新增一个待领取状态
 }

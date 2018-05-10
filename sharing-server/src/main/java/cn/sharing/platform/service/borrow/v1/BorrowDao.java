@@ -1,8 +1,13 @@
 package cn.sharing.platform.service.borrow.v1;
 
 import cn.sharing.dao.entity.GoodsBorrowDtlExample;
+import cn.sharing.dao.mapper.GoodsBorrowMstMapperExt;
+import cn.sharing.platform.common.BorrowStatEnum;
+import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.facade.borrow.v1.BorrowDetailInfoDto;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
+import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
+import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
 import cn.sharing.platform.facade.borrow.v1.Custom;
 import cn.sharing.platform.facade.borrow.v1.PreCompensateGoodsParam;
 import cn.sharing.platform.facade.borrow.v1.PreCompensateParam;
@@ -18,6 +23,9 @@ import cn.sharing.dao.mapper.GoodsBorrowMstMapper;
 import cn.sharing.dao.mapper.PayInfoMapper;
 import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.utils.UUIDGenerator;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.sun.xml.internal.rngom.digested.DAttributePattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +54,9 @@ public class BorrowDao {
 
   @Autowired
   private SerialNumberUtil serialNumberUtil;
+
+  @Autowired
+  private GoodsBorrowMstMapperExt goodsBorrowMstMapperExt;
 
   @Transactional
   public String saveBorrow(BorrowParam param) {
@@ -84,6 +95,7 @@ public class BorrowDao {
 
     GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
     borrowMst.setUuid(mstUuid);
+    borrowMst.setStat(BorrowStatEnum.NEW.getCode());
     borrowMst.setBillNumber(billNumbers.get(0));
     borrowMst.setLstUpdTime(new Date());
     goodsBorrowMstMapper.insert(borrowMst);
@@ -97,6 +109,7 @@ public class BorrowDao {
     // TODO: 2018/5/10  
     //2.更新领用单领用受理人，领用受理时间，最后修改时间
     GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
+    goodsBorrowMst.setStat(BorrowStatEnum.USING.getCode());
     goodsBorrowMst.setLstUpdTime(new Date());
     goodsBorrowMst.setBorrowDealer(dealer);
     goodsBorrowMst.setBorrowDealTime(new Date());
@@ -132,6 +145,7 @@ public class BorrowDao {
       payInfoMapper.insert(payInfo);
     }
     GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
+    goodsBorrowMst.setStat(BorrowStatEnum.BACKED.getCode());
     goodsBorrowMst.setBackDealer(backDealer);
     goodsBorrowMst.setBackDealTime(new Date());
     goodsBorrowMst.setLstUpdTime(new Date());
@@ -149,6 +163,7 @@ public class BorrowDao {
     payInfoMapper.insert(payInfo);
 
     GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
+    goodsBorrowMst.setStat(BorrowStatEnum.COMPENSATED.getCode());
     goodsBorrowMst.setLstUpdTime(new Date());
     goodsBorrowMst.setCompensatePayUuid(uuid);
     goodsBorrowMstMapper.updateByPrimaryKeySelective(goodsBorrowMst);
@@ -189,6 +204,35 @@ public class BorrowDao {
     }
 
     return detailInfoDto;
+  }
+
+  public QueryResult<BorrowSummaryDto> query(BorrowQuery param) {
+    Page<GoodsBorrowMst> page = pageBorrowGoodsMst(param);
+    List<GoodsBorrowMst> goodsBorrowMsts = page.getResult();
+    List<BorrowSummaryDto> lstDto = new ArrayList<>();
+    for (GoodsBorrowMst item : goodsBorrowMsts) {
+      BorrowSummaryDto summaryDto = convertDetailDtoFromMst(item);
+      //明细信息
+      GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
+      GoodsBorrowDtlExample.Criteria criteria = example.createCriteria();
+      criteria.andBorrowUuidEqualTo(item.getUuid());
+      List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
+      List<SBorrowDtl> goodsDtl = new ArrayList<>();
+      for (GoodsBorrowDtl dtl : dtls) {
+        goodsDtl.add(convertSBorrowDtlFromDtl(dtl));
+      }
+      summaryDto.setGoodsDtl(goodsDtl);
+
+      lstDto.add(summaryDto);
+    }
+
+    QueryResult<BorrowSummaryDto> result = new QueryResult<>();
+    result.setItem(lstDto);
+    result.setPage(page.getPageNum());
+    result.setPageSize(page.getPageSize());
+    result.setTotalCount(page.getTotal());
+
+    return result;
   }
 
   //将参数的物品明细转换成数据库对象
@@ -294,5 +338,29 @@ public class BorrowDao {
     }
 
     return payInfoParam;
+  }
+
+  private Page<GoodsBorrowMst> pageBorrowGoodsMst(BorrowQuery param) {
+    Date beginTime = null;
+    Date endTime = null;
+    if (!StringUtils.isEmpty(param.getBeginTime())) {
+      beginTime = DateUtil.getDateByPattern(param.getBeginTime(), DateUtil.DEFAULT_FORMAT);
+    }
+    if (!StringUtils.isEmpty(param.getEndTime())) {
+      endTime = DateUtil.getDateByPattern(param.getEndTime(), DateUtil.DEFAULT_FORMAT);
+    }
+    String stat = null;
+    if (param.getBorrowType() == 1) {
+      stat = BorrowStatEnum.NEW.getCode();
+    } else if (param.getBorrowType() == 2) {
+      stat = BorrowStatEnum.USING.getCode();
+    } else if (param.getBorrowType() == 3) {
+      stat = BorrowStatEnum.BACKED.getCode();
+    } else if (param.getBorrowType() == 4) {
+      stat = BorrowStatEnum.COMPENSATED.getCode();
+    }
+    Page<GoodsBorrowMst> page = PageHelper.startPage((param.getPage() - 1) * param.getPageSize(), param.getPageSize(), true);
+    goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
+    return page;
   }
 }

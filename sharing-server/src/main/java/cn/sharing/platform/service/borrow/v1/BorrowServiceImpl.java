@@ -148,7 +148,26 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Override
   public ResponseResult<QueryResult<BorrowSummaryDto>> query(@RequestBody BorrowQuery param) {
-    return null;
+    ResponseResult<QueryResult<BorrowSummaryDto>> response;
+    if (!StringUtils.isEmpty(param.getBeginTime()) && param.getBeginTime().length() != 19) {
+      response = ResponseResult.failed("查询开始时间格式不正确.");
+      return response;
+    }
+    if (!StringUtils.isEmpty(param.getEndTime()) && param.getEndTime().length() != 19) {
+      response = ResponseResult.failed("查询结束时间格式不正确.");
+      return response;
+    }
+    try {
+      QueryResult<BorrowSummaryDto> result = borrowDao.query(param);
+      response = ResponseResult.success();
+      response.setData(result);
+
+      return response;
+    } catch (Exception e) {
+      log.error("【查询租用单】异常，" + e.getMessage());
+      response = ResponseResult.failed("查询租用单发生异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
