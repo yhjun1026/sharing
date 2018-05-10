@@ -18,8 +18,8 @@ import lombok.Data;
 @Data
 public class Custom {
     private String nick;
-    @ApiModelProperty(value = "手机号", required = true)
-    private String phoneNumber;
+    @ApiModelProperty(value = "联系方式", required = true)
+    private String mobile;
     private String wechat;
     private String address;
 }

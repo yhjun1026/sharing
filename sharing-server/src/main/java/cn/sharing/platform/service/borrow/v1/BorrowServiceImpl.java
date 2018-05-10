@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 /**
  * Created by zenglin on 2018/5/6.
  */
@@ -49,15 +47,19 @@ public class BorrowServiceImpl implements BorrowService {
       response = ResponseResult.failed("租借用户信息未填写.");
       return response;
     }
-    if (StringUtils.isEmpty(borrowParam.getPlanBackTime())) {
-      response = ResponseResult.failed("计划归还时间未填写.");
+    if (StringUtils.isEmpty(borrowParam.getPlanBackTime()) || borrowParam.getPlanBackTime().length() != 19) {
+      response = ResponseResult.failed("计划归还时间未填写或格式不正确.");
       return response;
     }
-    if (borrowParam.getSGoodsBorrowDtl() == null || borrowParam.getSGoodsBorrowDtl().size() == 0) {
+    if (StringUtils.isEmpty(borrowParam.getCustom().getMobile())) {
+      response = ResponseResult.failed("租用人联系方式未填写.");
+      return response;
+    }
+    if (borrowParam.getGoodsDtl() == null || borrowParam.getGoodsDtl().size() == 0) {
       response = ResponseResult.failed("租用物品未指定.");
       return response;
     }
-    for (SBorrowDtl dtl : borrowParam.getSGoodsBorrowDtl()) {
+    for (SBorrowDtl dtl : borrowParam.getGoodsDtl()) {
       if (!goodsDao.isExistGoodsByUuid(dtl.getGoodsUuid())) {
         response = ResponseResult.failed("租用的物品不存在.");
         return response;
@@ -79,17 +81,69 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Override
   public ResponseResult<Void> collar(@RequestBody BorrowCollarParam collarParam) {
-    return null;
+    ResponseResult<Void> response;
+    if (StringUtils.isEmpty(collarParam.getBorrowId())) {
+      response = ResponseResult.failed("租用单id未填写.");
+      return response;
+    }
+    if (StringUtils.isEmpty(collarParam.getBorrowDealer())) {
+      response = ResponseResult.failed("领用受理人未填写.");
+      return response;
+    }
+    try {
+      borrowDao.collar(collarParam.getBorrowId(), collarParam.getBorrowDealer());
+      response = ResponseResult.success();
+      return response;
+    } catch (Exception e) {
+      log.error("【物品领用】异常，" + e.getMessage());
+      response = ResponseResult.failed("物品领用发生异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
   public ResponseResult<Void> back(@RequestBody BorrowBackParam backParam) {
-    return null;
+    ResponseResult<Void> response;
+    if (StringUtils.isEmpty(backParam.getBorrowId())) {
+      response = ResponseResult.failed("租用单id未填写.");
+      return response;
+    }
+    if (StringUtils.isEmpty(backParam.getBackDealer())) {
+      response = ResponseResult.failed("归还受理人未填写.");
+      return response;
+    }
+    try {
+      borrowDao.back(backParam.getBorrowId(), backParam.getBackDealer(), backParam.getPayInfoParam());
+      response = ResponseResult.success();
+      return response;
+    } catch (Exception e) {
+      log.error("【物品归还】异常，" + e.getMessage());
+      response = ResponseResult.failed("物品归还发生异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
   public ResponseResult<Void> compensate(@RequestBody BorrowCompensateParam compensateParam) {
-    return null;
+    ResponseResult<Void> response;
+    if (StringUtils.isEmpty(compensateParam.getBorrowId())) {
+      response = ResponseResult.failed("租用单id未填写.");
+      return response;
+    }
+    if (compensateParam.getPayInfoParam() == null) {
+      response = ResponseResult.failed("赔偿付款信息为填写.");
+      return response;
+    }
+
+    try {
+      borrowDao.compensate(compensateParam.getBorrowId(), compensateParam.getPayInfoParam());
+      response = ResponseResult.success();
+      return response;
+    } catch (Exception e) {
+      log.error("【物品赔偿】异常，" + e.getMessage());
+      response = ResponseResult.failed("物品赔偿发生异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
@@ -99,11 +153,39 @@ public class BorrowServiceImpl implements BorrowService {
 
   @Override
   public ResponseResult<BorrowDetailInfoDto> get(@PathVariable String uuid) {
-    return null;
+    try {
+      ResponseResult<BorrowDetailInfoDto> response = new ResponseResult<>();
+      BorrowDetailInfoDto detailInfoDto = borrowDao.get(uuid);
+      response.setData(detailInfoDto);
+
+      return response;
+    } catch (Exception e) {
+      log.error("【查询租用单详情】异常，" + e.getMessage());
+      ResponseResult<BorrowDetailInfoDto> response = ResponseResult.failed("查询租用单详情发生异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
   public ResponseResult<Void> preCompensate(@RequestBody PreCompensateParam compensateParam) {
-    return null;
+    ResponseResult<Void> response;
+    if (StringUtils.isEmpty(compensateParam.getBorrowId())) {
+      response = ResponseResult.failed("租用单id未填写.");
+      return response;
+    }
+    if (compensateParam.getCompensateGoods() == null || compensateParam.getCompensateGoods().size() == 0) {
+      response = ResponseResult.failed("物品赔偿信息未填写.");
+      return response;
+    }
+
+    try {
+      borrowDao.preCompensate(compensateParam);
+      response = ResponseResult.success();
+      return response;
+    } catch (Exception e) {
+      log.error("【发起预赔偿】异常，" + e.getMessage());
+      response = ResponseResult.failed("发起预赔偿异常，" + e.getMessage());
+      return response;
+    }
   }
 }

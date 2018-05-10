@@ -25,6 +25,6 @@ public class SBorrow {
   @ApiModelProperty(value = "组织id")
   private String storeUuid;
   @ApiModelProperty(value = "租用商品明细", required = true)
-  private List<SBorrowDtl> sGoodsBorrowDtl;
+  private List<SBorrowDtl> goodsDtl;
 
 }

@@ -21,15 +21,15 @@ public class BorrowSummaryDto extends SBorrow{
   @ApiModelProperty(value = "单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated")
   private String stat;
   @ApiModelProperty(value = "实际归还时间")
-  private String realReturnTime;
+  private String realBackTime;
   @ApiModelProperty(value = "领用受理人")
-  private String borrowOperator;
+  private String borrowDealer;
   @ApiModelProperty(value = "领用受理时间")
-  private String getBorrowOperateTime;
+  private String borrowDealTime;
   @ApiModelProperty(value = "归还受理人")
-  private String returnOperator;
+  private String backDealer;
   @ApiModelProperty(value = "归还受理时间")
-  private String returnOperateTime;
+  private String backDealTime;
   @ApiModelProperty(value = "创建时间")
   private String createTime;
   @ApiModelProperty(value = "最后更新时间")
