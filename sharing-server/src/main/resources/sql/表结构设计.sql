@@ -35,11 +35,15 @@ CODE            VARCHAR(64)      NOT NULL,       /*物品代码*/
 NAME            VARCHAR(64)      NOT NULL,       /*物品名称*/
 TYPE            VARCHAR(64)      NULL,           /*物品类型*/
 STAT            INT              DEFAULT 0 NULL, /*物品状态 0 正常; 1 使用中; 2 作废;  3 损坏;*/
+QUANTITY        INT              DEFAULT 0 NULL, /*物品数量*/
+STOCKQUANTITY   INT              DEFAULT 0 NULL, /*物品库存数量*/
 PICTURE         VARCHAR(64)      NULL,           /*物品图片ID*/
 DESCRIPTION     VARCHAR(512)     NULL,           /*详细描述*/
-PRICE           DECIMAL(10,2)    NULL,           /*借用单价*/
+PRICE           DECIMAL(10,2)    NULL,           /*单价*/
 DEPOSITAMT      DECIMAL(10,2)    NULL,           /*押金金额*/
+COSTPRICE       DECIMAL(10,2)    NULL,           /*成本金额*/
 REPAYAMT        DECIMAL(10,2)    NULL,           /*损坏需偿还金额*/
+RENTPRICE       DECIMAL(10,2)    NULL,           /*租用价格*/
 LASTER          VARCHAR(32)      NULL,           /*最后修改人*/
 LASTUPDTIME     DATETIME         NULL,           /*最后更新时间*/
 MEMO            VARCHAR(256)     NULL,           /*备注(预留)*/
@@ -49,11 +53,9 @@ STOREUUID       VARCHAR(32)      NULL            /*所属组织(SHSTORE.UUID)*/
 /*物品库存*/
 CREATE TABLE SHGoodsStock(
 UUID            VARCHAR(32)    PRIMARY KEY NOT NULL,  /*物品uuid*/
-INV             DECIMAL(10,2)  DEFAULT 0 NOT NULL,    /*总库存*/
-QTY             DECIMAL(10,2)  DEFAULT 0 NOT NULL,    /*可用数量*/
-USEQTY          DECIMAL(10,2)  DEFAULT 0 NOT NULL,    /*已借出数量*/
-LASTUPDTIME     DATETIME       NULL,                  /*最后更新时间*/
-MEMO            VARCHAR(256)   NULL                   /*备注(预留)*/
+NO              INT            DEFAULT 0 NOT NULL,    /*商品编号*/
+STATE           INT            DEFAULT 0 NOT NULL,    /*0表示可用，1表示已预定，2表示已租用，3表示已损坏，4表示已遗失*/
+MEMO            VARCHAR(256)   NULL                   /*备注*/
 );
 
 /*物品借用单主表*/
