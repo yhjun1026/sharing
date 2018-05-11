@@ -6,6 +6,7 @@ import cn.sharing.platform.common.ResponseResult;
 import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.GoodsService;
 import cn.sharing.platform.facade.goods.v1.SGoods;
+import cn.sharing.platform.facade.goods.v1.SGoodsStock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,12 +73,12 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   /**
    * 更新物品的状态
    *
-   * @param uuid
-   *         租用物品ID
+   * @param sGoodsStock
+   *         物品库存状态
    * @return 修改成功或者失败
    */
   @Override
-  public ResponseResult<Void> updateState(String uuid) {
+  public ResponseResult<Void> updateState(SGoodsStock sGoodsStock) {
     return null;
   }
 
