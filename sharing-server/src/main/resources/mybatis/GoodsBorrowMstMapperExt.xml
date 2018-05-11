@@ -28,7 +28,6 @@
     where mst.uuid = dtl.borrow_uuid
     <if test="storeId != null">
       and mst.store_uuid = #{storeId,jdbcType=VARCHAR}
-      and(st.`code` LIKE CONCAT('%', #{code}, '%') or st.`name` LIKE CONCAT('%', #{code}, '%'))
     </if>
     <if test="stat != null">
       and mst.stat = #{stat,jdbcType=VARCHAR}
@@ -44,7 +43,7 @@
                 ]]>
     </if>
     <if test="goodsName != null">
-      and mst.goodsName liek "%"#{goodsName}"%"
+      and dtl.goods_name like CONCAT('%', #{goodsName}, '%')
     </if>
 
   </select>

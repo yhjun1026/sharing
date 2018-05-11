@@ -8,6 +8,7 @@
  */
 package cn.sharing.platform;
 
+import com.github.pagehelper.PageHelper;
 import com.google.common.base.Predicates;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +29,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
+import java.util.Properties;
 
 /**
  * @author yanghongjun
@@ -65,6 +67,19 @@ public class SharingApplication {
             .apis(RequestHandlerSelectors.basePackage("cn.sharing.platform"))
             .paths(paths())
             .build();
+  }
+
+  //配置mybatis的分页插件pageHelper
+  @Bean
+  public PageHelper pageHelper(){
+    PageHelper pageHelper = new PageHelper();
+    Properties properties = new Properties();
+    properties.setProperty("offsetAsPageNum","true");
+    properties.setProperty("rowBoundsWithCount","true");
+    properties.setProperty("reasonable","true");
+    properties.setProperty("dialect","mysql");    //配置mysql数据库的方言
+    pageHelper.setProperties(properties);
+    return pageHelper;
   }
 
   private com.google.common.base.Predicate<String> paths(){

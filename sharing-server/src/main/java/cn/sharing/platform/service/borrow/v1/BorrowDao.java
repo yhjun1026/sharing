@@ -25,6 +25,7 @@ import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.utils.UUIDGenerator;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sun.xml.internal.rngom.digested.DAttributePattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -206,8 +207,8 @@ public class BorrowDao {
   }
 
   public QueryResult<BorrowSummaryDto> query(BorrowQuery param) {
-    Page<GoodsBorrowMst> page = pageBorrowGoodsMst(param);
-    List<GoodsBorrowMst> goodsBorrowMsts = page.getResult();
+    PageInfo<GoodsBorrowMst> page = pageBorrowGoodsMst(param);
+    List<GoodsBorrowMst> goodsBorrowMsts = page.getList();
     List<BorrowSummaryDto> lstDto = new ArrayList<>();
     for (GoodsBorrowMst item : goodsBorrowMsts) {
       BorrowSummaryDto summaryDto = convertDetailDtoFromMst(item);
@@ -340,7 +341,7 @@ public class BorrowDao {
     return payInfoParam;
   }
 
-  private Page<GoodsBorrowMst> pageBorrowGoodsMst(BorrowQuery param) {
+  private PageInfo<GoodsBorrowMst> pageBorrowGoodsMst(BorrowQuery param) {
     Date beginTime = null;
     Date endTime = null;
     if (!StringUtils.isEmpty(param.getBeginTime())) {
@@ -359,8 +360,14 @@ public class BorrowDao {
     } else if (param.getBorrowType() == 4) {
       stat = BorrowStatEnum.COMPENSATED.getCode();
     }
-    Page<GoodsBorrowMst> page = PageHelper.startPage((param.getPage() - 1) * param.getPageSize(), param.getPageSize(), true);
-    goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
-    return page;
+
+//    Page<GoodsBorrowMst> page = PageHelper.startPage((param.getPage() - 1) * param.getPageSize(), param.getPageSize(), true);
+//    goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
+//    return page;
+
+    PageHelper.startPage(param.getPage(), param.getPageSize());
+    List<GoodsBorrowMst> goodsBorrowMsts = goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
+    PageInfo<GoodsBorrowMst> pageInfo = new PageInfo<>(goodsBorrowMsts);
+    return pageInfo;
   }
 }
