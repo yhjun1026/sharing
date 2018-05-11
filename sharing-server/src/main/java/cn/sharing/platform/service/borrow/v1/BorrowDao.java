@@ -95,6 +95,7 @@ public class BorrowDao {
 
     GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
     borrowMst.setUuid(mstUuid);
+    borrowMst.setBorrowPayUuid(payUuid);
     borrowMst.setBillNumber(billNumbers.get(0));
     goodsBorrowMstMapper.insert(borrowMst);
 
