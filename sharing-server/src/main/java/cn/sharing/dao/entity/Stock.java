@@ -1,79 +1,64 @@
 package cn.sharing.dao.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 
 public class Stock implements Serializable {
-    private String uuid;
+  /** 序列化ID */
+  private static final long serialVersionUID = 8703864469054619768L;
+  /** uuid */
+  private String uuid;
 
-    private BigDecimal inv;
+  /** 物品代码 */
+  private String goodsCode;
+  /** 物品编号 */
+  private int no;
+  /** 物品状态 */
+  private int state;
+  /** 物品说明 */
+  private String memo;
 
-    private BigDecimal qty;
+  /** uuid */
+  public String getUuid() {
+    return uuid;
+  }
 
-    private BigDecimal useqty;
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
+  }
 
-    private Date lastupdtime;
+  /** 物品代码 */
+  public String getGoodsCode() {
+    return goodsCode;
+  }
 
-    private String memo;
+  public void setGoodsCode(String goodsCode) {
+    this.goodsCode = goodsCode;
+  }
 
-    private static final long serialVersionUID = 1L;
+  /** 物品编号 */
+  public int getNo() {
+    return no;
+  }
 
-    private String updateSql;
+  public void setNo(int no) {
+    this.no = no;
+  }
 
-    public String getUuid() {
-        return uuid;
-    }
+  /** 物品状态 */
+  public int getState() {
+    return state;
+  }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
-    }
+  public void setState(int state) {
+    this.state = state;
+  }
 
-    public BigDecimal getInv() {
-        return inv;
-    }
+  /** 物品说明 */
+  public String getMemo() {
+    return memo;
+  }
 
-    public void setInv(BigDecimal inv) {
-        this.inv = inv;
-    }
-
-    public BigDecimal getQty() {
-        return qty;
-    }
-
-    public void setQty(BigDecimal qty) {
-        this.qty = qty;
-    }
-
-    public BigDecimal getUseqty() {
-        return useqty;
-    }
-
-    public void setUseqty(BigDecimal useqty) {
-        this.useqty = useqty;
-    }
-
-    public Date getLastupdtime() {
-        return lastupdtime;
-    }
-
-    public void setLastupdtime(Date lastupdtime) {
-        this.lastupdtime = lastupdtime;
-    }
-
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
-    }
-
-    public String getUpdateSql() {
-        return this.updateSql;
-    }
-
-    public void setUpdateSql(String updateSql) {
-        this.updateSql = updateSql;
-    }
+  public void setMemo(String memo) {
+    this.memo = memo;
+  }
 }

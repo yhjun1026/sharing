@@ -5,155 +5,205 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Goods implements Serializable {
-    private String uuid;
 
-    private String code;
+  /** 序列化ID */
+  private static final long serialVersionUID = 5198509064679750131L;
+  /** uuid */
+  private String uuid;
+  /** 物品代码 */
+  private String code;
+  /** 物品名称 */
+  private String name;
+  /** 物品类型 */
+  private String type;
+  /** 物品状态 */
+  private Integer state;
+  /** 物品数量 */
+  private int quantity;
+  /** 物品库存数量 */
+  private int stockQuantity;
+  /** 物品图片 */
+  private String picture;
+  /** 物品描述 */
+  private String description;
+  /** 单价 */
+  private BigDecimal price;
+  /** 押金价格 */
+  private BigDecimal depositamt;
+  /** 赔偿价格 */
+  private BigDecimal repayamt;
+  /** 成本价格 */
+  private BigDecimal costPrice;
+  /** 租用价格 */
+  private BigDecimal rentPrice;
+  /** 修改人 */
+  private String laster;
+  /** 修改时间 */
+  private Date lastupdtime;
+  /** 说明 */
+  private String memo;
+  /** 门店ID */
+  private String storeUuid;
 
-    private String name;
+  /** uuid */
+  public String getUuid() {
+    return uuid;
+  }
 
-    private String type;
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
+  }
 
-    private Integer stat;
+  /** 物品代码 */
+  public String getCode() {
+    return code;
+  }
 
-    private String picture;
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    private String description;
+  /** 物品名称 */
+  public String getName() {
+    return name;
+  }
 
-    private BigDecimal price;
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    private BigDecimal depositamt;
+  /** 物品类型 */
+  public String getType() {
+    return type;
+  }
 
-    private BigDecimal repayamt;
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    private String laster;
+  /** 物品状态 */
+  public Integer getState() {
+    return state;
+  }
 
-    private Date lastupdtime;
+  public void setState(Integer state) {
+    this.state = state;
+  }
 
-    private String memo;
+  /** 物品数量 */
+  public int getQuantity() {
+    return quantity;
+  }
 
-    private String storeuuid;
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
 
-    private static final long serialVersionUID = 1L;
+  /** 物品库存数量 */
+  public int getStockQuantity() {
+    return stockQuantity;
+  }
 
-    private String updateSql;
+  public void setStockQuantity(int stockQuantity) {
+    this.stockQuantity = stockQuantity;
+  }
 
-    public String getUuid() {
-        return uuid;
-    }
+  /** 物品图片 */
+  public String getPicture() {
+    return picture;
+  }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
-    }
+  public void setPicture(String picture) {
+    this.picture = picture;
+  }
 
-    public String getCode() {
-        return code;
-    }
+  /** 物品描述 */
+  public String getDescription() {
+    return description;
+  }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public String getName() {
-        return name;
-    }
+  /** 单价 */
+  public BigDecimal getPrice() {
+    return price;
+  }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+  public void setPrice(BigDecimal price) {
+    this.price = price;
+  }
 
-    public String getType() {
-        return type;
-    }
+  /** 押金价格 */
+  public BigDecimal getDepositamt() {
+    return depositamt;
+  }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+  public void setDepositamt(BigDecimal depositamt) {
+    this.depositamt = depositamt;
+  }
 
-    public Integer getStat() {
-        return stat;
-    }
+  /** 赔偿价格 */
+  public BigDecimal getRepayamt() {
+    return repayamt;
+  }
 
-    public void setStat(Integer stat) {
-        this.stat = stat;
-    }
+  public void setRepayamt(BigDecimal repayamt) {
+    this.repayamt = repayamt;
+  }
 
-    public String getPicture() {
-        return picture;
-    }
+  /** 成本价格 */
+  public BigDecimal getCostPrice() {
+    return costPrice;
+  }
 
-    public void setPicture(String picture) {
-        this.picture = picture == null ? null : picture.trim();
-    }
+  public void setCostPrice(BigDecimal costPrice) {
+    this.costPrice = costPrice;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  /** 租用价格 */
+  public BigDecimal getRentPrice() {
+    return rentPrice;
+  }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
+  public void setRentPrice(BigDecimal rentPrice) {
+    this.rentPrice = rentPrice;
+  }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+  /** 修改人 */
+  public String getLaster() {
+    return laster;
+  }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+  public void setLaster(String laster) {
+    this.laster = laster;
+  }
 
-    public BigDecimal getDepositamt() {
-        return depositamt;
-    }
+  /** 修改时间 */
+  public Date getLastupdtime() {
+    return lastupdtime;
+  }
 
-    public void setDepositamt(BigDecimal depositamt) {
-        this.depositamt = depositamt;
-    }
+  public void setLastupdtime(Date lastupdtime) {
+    this.lastupdtime = lastupdtime;
+  }
 
-    public BigDecimal getRepayamt() {
-        return repayamt;
-    }
+  /** 说明 */
+  public String getMemo() {
+    return memo;
+  }
 
-    public void setRepayamt(BigDecimal repayamt) {
-        this.repayamt = repayamt;
-    }
+  public void setMemo(String memo) {
+    this.memo = memo;
+  }
 
-    public String getLaster() {
-        return laster;
-    }
+  /** 门店ID */
+  public String getStoreUuid() {
+    return storeUuid;
+  }
 
-    public void setLaster(String laster) {
-        this.laster = laster == null ? null : laster.trim();
-    }
-
-    public Date getLastupdtime() {
-        return lastupdtime;
-    }
-
-    public void setLastupdtime(Date lastupdtime) {
-        this.lastupdtime = lastupdtime;
-    }
-
-    public String getMemo() {
-        return memo;
-    }
-
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
-    }
-
-    public String getStoreuuid() {
-        return storeuuid;
-    }
-
-    public void setStoreuuid(String storeuuid) {
-        this.storeuuid = storeuuid == null ? null : storeuuid.trim();
-    }
-
-    public String getUpdateSql() {
-        return this.updateSql;
-    }
-
-    public void setUpdateSql(String updateSql) {
-        this.updateSql = updateSql;
-    }
+  public void setStoreUuid(String storeUuid) {
+    this.storeUuid = storeUuid;
+  }
 }

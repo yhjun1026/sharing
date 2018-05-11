@@ -74,14 +74,13 @@ public interface GoodsService {
   /**
    * 更新物品的状态
    *
-   * @param uuid
-   *         租用物品ID
+   * @param sGoodsStock
+   *        物品库存状态
    * @return 修改成功或者失败
    */
-  @RequestMapping(value = "/update/stock/{uuid}" + "", method = RequestMethod.POST)
+  @RequestMapping(value = "/update/stock/" + "", method = RequestMethod.POST)
   @ApiOperation(value = "更新物品的状态")
-  ResponseResult<Void> updateState(@PathVariable(value = "uuid") @ApiParam(name = "uuid", value = "租用物品ID") String
-                                           uuid);
+  ResponseResult<Void> updateState(@RequestBody SGoodsStock sGoodsStock);
 
   /**
    * 删除物品

@@ -1,38 +1,28 @@
 package cn.sharing.dao.mapper;
 
-import cn.sharing.dao.entity.StockExample;
 import cn.sharing.dao.entity.Stock;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
 
 public interface StockMapper {
-    long countByExample(StockExample example);
+    /**
+     * 插入物品库存
+     * @param stock 物品库存
+     * @return
+     */
+    int insert(Stock stock);
 
-    int deleteByExample(StockExample example);
+    /**
+     * 批量插入物品库存信息
+     * @param stocks 物品库存
+     */
+    void batchInsert(@Param("stocks") List<Stock> stocks);
 
-    int deleteByPrimaryKey(String uuid);
-
-    int insert(Stock record);
-
-    int insertSelective(Stock record);
-
-    List<Stock> selectByExampleWithRowbounds(StockExample example, RowBounds rowBounds);
-
-    List<Stock> selectByExample(StockExample example);
-
-    Stock selectByPrimaryKey(String uuid);
-
-    int updateByExampleSelective(@Param("record") Stock record, @Param("example") StockExample example);
-
-    int updateByExample(@Param("record") Stock record, @Param("example") StockExample example);
-
-    int updateByPrimaryKeySelective(Stock record);
-
-    int updateByPrimaryKey(Stock record);
-
-    Long sumByExample(StockExample example);
-
-    void batchInsert(@Param("items") List<Stock> items);
+    /**
+     * 根据查询条件查询物品库存信息
+     * @param condition 查询条件
+     * @return
+     */
+    Stock getByCondition(Stock condition);
 }

@@ -1,37 +1,44 @@
 package cn.sharing.dao.mapper;
 
 import cn.sharing.dao.entity.Goods;
-import cn.sharing.dao.entity.GoodsExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+
 public interface GoodsMapper {
-    long countByExample(GoodsExample example);
 
-    int deleteByExample(GoodsExample example);
+    /**
+     * 插入物品信息
+     * @param goods 物品信息
+     * @return
+     */
+    int insert(Goods goods);
 
-    int deleteByPrimaryKey(String uuid);
+    /**
+     * 修改物品信息
+     * @param goods 物品信息
+     * @return
+     */
+    int update(Goods goods);
 
-    int insert(Goods record);
+    /**
+     * 删除物品信息
+     * @param goods 物品信息
+     * @return
+     */
+    int delete(Goods goods);
 
-    int insertSelective(Goods record);
+    /**
+     * 分页查询所有可租用的物品
+     * @param rowBounds 分页信息
+     * @return
+     */
+    List<Goods> getAllRentGoods(RowBounds rowBounds);
 
-    List<Goods> selectByExampleWithRowbounds(GoodsExample example, RowBounds rowBounds);
+    /**
+     * 所有可租用物品的数量
+     * @return
+     */
+    int getAllRentGoodsCount();
 
-    List<Goods> selectByExample(GoodsExample example);
-
-    Goods selectByPrimaryKey(String uuid);
-
-    int updateByExampleSelective(@Param("record") Goods record, @Param("example") GoodsExample example);
-
-    int updateByExample(@Param("record") Goods record, @Param("example") GoodsExample example);
-
-    int updateByPrimaryKeySelective(Goods record);
-
-    int updateByPrimaryKey(Goods record);
-
-    Long sumByExample(GoodsExample example);
-
-    void batchInsert(@Param("items") List<Goods> items);
 }
