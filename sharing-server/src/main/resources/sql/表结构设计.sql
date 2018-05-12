@@ -53,7 +53,7 @@ STOREUUID       VARCHAR(32)      NULL            /*所属组织(SHSTORE.UUID)*/
 /*物品库存*/
 CREATE TABLE SHGoodsStock(
 UUID            VARCHAR(32)    PRIMARY KEY NOT NULL,  /*uuid*/
-GOODSCODE       VARCHAR(64)    NOT NULL,              /*物品代码*/
+GOODSUUID       VARCHAR(32)    NOT NULL,              /*物品UUID*/
 NO              INT            DEFAULT 0 NOT NULL,    /*商品编号*/
 STATE           INT            DEFAULT 0 NOT NULL,    /*0表示可用，1表示已预定，2表示已租用，3表示已损坏，4表示已遗失*/
 MEMO            VARCHAR(256)   NULL                   /*备注*/

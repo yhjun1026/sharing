@@ -14,6 +14,27 @@ public interface StockMapper {
     int insert(Stock stock);
 
     /**
+     * 更新物品库存信息
+     * @param stock 物品库存
+     * @return
+     */
+    int update(Stock stock);
+
+    /**
+     * 删除物品库存信息
+     * @param stock 物品库存
+     * @return
+     */
+    int delete(Stock stock);
+
+    /**
+     * 根据主键删除
+     * @param uuid uuid
+     * @return
+     */
+    int deleteByPrimaryKey(@Param("uuid") String uuid);
+
+    /**
      * 批量插入物品库存信息
      * @param stocks 物品库存
      */
@@ -25,4 +46,11 @@ public interface StockMapper {
      * @return
      */
     Stock getByCondition(Stock condition);
+
+    /**
+     * 根据UUID获取物品库存信息
+     * @param uuid uuid
+     * @return
+     */
+    Stock getByPrimaryKey(@Param("uuid") String uuid);
 }

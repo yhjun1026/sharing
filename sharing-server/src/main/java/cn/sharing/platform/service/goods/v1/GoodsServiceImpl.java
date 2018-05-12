@@ -7,8 +7,12 @@ import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.GoodsService;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 物品服务实现
@@ -54,6 +58,18 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<Void> add(SGoods sGoods) {
+    if (sGoods == null){
+      ResponseResult.failed("");
+    }
+    List<SGoodsStock> list = new ArrayList<>();
+    if (StringUtils.isEmpty(sGoods.getUuid())){ //新增
+      for(int i = 0; i < sGoods.getQuantity(); i++){
+        SGoodsStock sGoodsStock = new SGoodsStock();
+        sGoodsStock.setGoodsUuid(sGoods.getUuid());
+        sGoodsStock.setNo(i);
+        sGoodsStock.setState(0); //初始值为0
+      }
+    }
     return null;
   }
 

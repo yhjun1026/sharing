@@ -8,8 +8,8 @@ public class Stock implements Serializable {
   /** uuid */
   private String uuid;
 
-  /** 物品代码 */
-  private String goodsCode;
+  /** 物品UUID */
+  private String goodsUuid;
   /** 物品编号 */
   private int no;
   /** 物品状态 */
@@ -26,13 +26,13 @@ public class Stock implements Serializable {
     this.uuid = uuid;
   }
 
-  /** 物品代码 */
-  public String getGoodsCode() {
-    return goodsCode;
+  /** 物品UUID */
+  public String getGoodsUuid() {
+    return goodsUuid;
   }
 
-  public void setGoodsCode(String goodsCode) {
-    this.goodsCode = goodsCode;
+  public void setGoodsUuid(String goodsUuid) {
+    this.goodsUuid = goodsUuid;
   }
 
   /** 物品编号 */

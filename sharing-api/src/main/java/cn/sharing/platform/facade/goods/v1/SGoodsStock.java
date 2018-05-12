@@ -11,6 +11,8 @@ import lombok.Data;
 public class SGoodsStock {
   /** UUID */
   private String uuid;
+  /** 物品UUID */
+  private String goodsUuid;
   /** 商品编号 */
   private int no;
   /** 商品状态，精确到每一个的状态，取值 0表示可用，1表示已预定，2表示已租用，3表示已损坏，4表示已遗失 */
