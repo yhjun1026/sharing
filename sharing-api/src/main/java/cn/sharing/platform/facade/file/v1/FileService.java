@@ -1,12 +1,15 @@
 package cn.sharing.platform.facade.file.v1;
 
 import cn.sharing.platform.common.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 文件服务接口，用于上传下载物品的图片
  */
+@RequestMapping("/api/v1/file")
+@Api(tags = "文件服务接口")
 public interface FileService {
 
   /** 用于在Spring容器的默认ID。 */
@@ -45,14 +50,14 @@ public interface FileService {
 
   /**
    * 上传文件
-   * @param request
+   * @param file
    * @return
    */
-  @RequestMapping(value = "upload", method = RequestMethod.POST)
-  @ApiOperation(value = "上传文件", httpMethod = "POST")
+  @RequestMapping(value = "upload")
+  @ApiOperation(value = "上传文件")
   public
   @ResponseBody
-  ResponseResult<FileInfo> upload(HttpServletRequest request);
+  ResponseResult<FileInfo> upload(@RequestParam("file") MultipartFile file);
 
   /**
    * 下载文件
