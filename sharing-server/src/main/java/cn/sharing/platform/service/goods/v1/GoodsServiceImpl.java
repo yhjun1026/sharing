@@ -7,6 +7,7 @@ import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.GoodsService;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
+import cn.sharing.platform.utils.UUIDGenerator;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,19 +35,32 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<SGoods> get(String goodsId) {
-    return null;
+    return new ResponseResult<SGoods>(goodsDao.getGoodsByCondition(goodsId));
   }
 
   /**
    * 分页查询可租用的物品信息
    *
    * @param param
-   *         分页参数
+   *         查询参数，包括分页参数
    * @return
    */
   @Override
   public ResponseResult<QueryResult<SGoods>> getRentGoods(GoodsQuery param) {
-    return null;
+    SGoods sGoods = new SGoods();
+    sGoods.setStoreuuid(param.getStoreId());
+    sGoods.setCode(param.getCode());
+    sGoods.setName(param.getName());
+    List<SGoods> sGoodsList = goodsDao.getAllRentGoods(sGoods, param);
+    int count = goodsDao.getAllRentGoodsCount(sGoods);
+    QueryResult<SGoods> queryResult = new QueryResult<SGoods>();
+    queryResult.setItem(sGoodsList);
+    queryResult.setPage(param.getPage());
+    //计算pagesize
+    int pageCount = (count + param.getPageSize() - 1) / param.getPageSize();
+    queryResult.setPageSize(pageCount);
+    queryResult.setTotalCount(count);
+    return new ResponseResult<QueryResult<SGoods>>(queryResult);
   }
 
   /**
@@ -59,18 +73,39 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   @Override
   public ResponseResult<Void> add(SGoods sGoods) {
     if (sGoods == null){
-      ResponseResult.failed("");
+      return ResponseResult.failed("没有需要保存的数据");
+    }
+    if(StringUtils.isEmpty(sGoods.getCode())){
+      return ResponseResult.failed("物品信息代码不能为空");
+    }
+    if(StringUtils.isEmpty(sGoods.getName())){
+      return ResponseResult.failed("物品信息名称不能为空");
     }
     List<SGoodsStock> list = new ArrayList<>();
-    if (StringUtils.isEmpty(sGoods.getUuid())){ //新增
-      for(int i = 0; i < sGoods.getQuantity(); i++){
-        SGoodsStock sGoodsStock = new SGoodsStock();
-        sGoodsStock.setGoodsUuid(sGoods.getUuid());
-        sGoodsStock.setNo(i);
-        sGoodsStock.setState(0); //初始值为0
-      }
+    int beginNo = 0;
+    /*新增物品时，物品库存编码从0开始
+      增加库存数量时，库存编号从已有库存最大值编号加1开始*/
+    if (!StringUtils.isEmpty(sGoods.getUuid())){ //UUID存在表示增加库存
+      //获取库存数量的最大NO值
+      int maxNo = goodsDao.getMaxNoFromStock(sGoods.getUuid());
+      beginNo = maxNo + 1;
     }
-    return null;
+    for(int i = beginNo; i < sGoods.getQuantity(); i++){
+      SGoodsStock sGoodsStock = new SGoodsStock();
+      sGoodsStock.setGoodsUuid(sGoods.getUuid());
+      sGoodsStock.setNo(i);
+      sGoodsStock.setState(0); //初始值为0
+      sGoodsStock.setUuid(UUIDGenerator.getUUID());
+      list.add(sGoodsStock);
+    }
+    sGoods.setSGoodsStockList(list);
+    try {
+      goodsDao.saveGoods(sGoods);
+      return ResponseResult.success();
+    } catch (Exception e) {
+      logger.error("新增物品失败，原因：" + e.getMessage());
+      return ResponseResult.failed("物品新增失败");
+    }
   }
 
   /**
@@ -83,6 +118,9 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<SGoods> borrow(SGoods sGoods) {
+    //根据商品代码查询可以租用的
+    SGoodsStock sGoodsStock = goodsDao.getCanRentGoods(sGoods.getUuid());
+
     return null;
   }
 
@@ -95,7 +133,13 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<Void> updateState(SGoodsStock sGoodsStock) {
-    return null;
+    try{
+      goodsDao.updateStockState(sGoodsStock);
+      return ResponseResult.success();
+    }catch (Exception e){
+      logger.error("更新物品状态失败，原因" + e.getMessage());
+      return ResponseResult.failed("删除物品信息失败");
+    }
   }
 
 
@@ -108,11 +152,17 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<Void> delete(SGoods sGoods) {
-    return null;
+    try{
+      goodsDao.deleteGoods(sGoods);
+      return ResponseResult.success();
+    }catch (Exception e){
+      logger.error("删除物品失败，原因" + e.getMessage());
+      return ResponseResult.failed("删除物品信息失败");
+    }
   }
 
   /**
-   * 修改物品信息
+   * 修改物品信息，不修改物品库存信息
    *
    * @param sGoods
    *         物品信息
@@ -120,6 +170,16 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<Void> update(SGoods sGoods) {
-    return null;
+    if (StringUtils.isEmpty(sGoods.getUuid())){
+      return ResponseResult.failed("商品信息传入错误");
+    }
+    try {
+      goodsDao.updateGoods(sGoods);
+      return ResponseResult.success();
+    }catch(Exception e){
+      logger.error("更新数据失败:,原因：" + e.getMessage());
+      return ResponseResult.failed("更新物品信息失败");
+    }
+
   }
 }

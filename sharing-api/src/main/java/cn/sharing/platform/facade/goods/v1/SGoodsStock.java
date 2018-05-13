@@ -19,5 +19,7 @@ public class SGoodsStock {
   private int state;
   /** 备注 */
   private String memo;
+  /** 乐观锁 */
+  private int lockVersion;
 
 }

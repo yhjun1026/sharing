@@ -15,28 +15,32 @@ public class GoodsConvert {
 
   /**
    * 单个对象转换
-   * @param sGoods 物品传输对象
+   *
+   * @param sGoods
+   *         物品传输对象
    * @return
    */
-    public static Goods perzConvert(SGoods sGoods){
-      Goods goods = new Goods();
-      BeanUtils.copyProperties(sGoods, goods);
-      goods.setStockQuantity(sGoods.getCurrentQuantity());
-      goods.setStoreUuid(sGoods.getStoreuuid());
-      return goods;
-    }
+  public static Goods perzConvert(SGoods sGoods) {
+    Goods goods = new Goods();
+    BeanUtils.copyProperties(sGoods, goods);
+    goods.setStockQuantity(sGoods.getCurrentQuantity());
+    goods.setStoreUuid(sGoods.getStoreuuid());
+    return goods;
+  }
 
   /**
    * 列表对象转换
-   * @param sGoodsList 物品传输对象
+   *
+   * @param sGoodsList
+   *         物品传输对象
    * @return
    */
-  public static List<Goods> perzConvertList(List<SGoods> sGoodsList){
+  public static List<Goods> perzConvertList(List<SGoods> sGoodsList) {
     List<Goods> goodsList = new ArrayList<Goods>();
-    for(SGoods sGoods: sGoodsList){
+    for (SGoods sGoods : sGoodsList) {
       Goods goods = perzConvert(sGoods);
       goodsList.add(goods);
     }
-    return  goodsList;
+    return goodsList;
   }
 }

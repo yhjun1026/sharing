@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsMapper {
 
@@ -56,7 +57,13 @@ public interface GoodsMapper {
      * @param uuid UUID
      * @return 物品信息
      */
-    Goods getByPrimaryKey(@Param("uuid") String uuid);
+    List<Map<String, Object>> getByPrimaryKey(@Param("uuid") String uuid);
 
+    /**
+     * 根据查询条件获取物品信息,不返回库存信息
+     * @param condition 查询条件
+     * @return 物品信息
+     */
+    List<Goods> getByCondition(Goods condition);
 
 }

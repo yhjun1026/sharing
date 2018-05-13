@@ -16,6 +16,8 @@ public class Stock implements Serializable {
   private int state;
   /** 物品说明 */
   private String memo;
+  /** 乐观锁 */
+  private int lockVersion;
 
   /** uuid */
   public String getUuid() {
@@ -60,5 +62,14 @@ public class Stock implements Serializable {
 
   public void setMemo(String memo) {
     this.memo = memo;
+  }
+
+  /** 乐观锁 */
+  public int getLockVersion() {
+    return lockVersion;
+  }
+
+  public void setLockVersion(int lockVersion) {
+    this.lockVersion = lockVersion;
   }
 }

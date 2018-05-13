@@ -40,7 +40,7 @@ public interface GoodsService {
    * 分页查询可租用的物品信息
    *
    * @param param
-   *         分页参数
+   *         查询参数，包括分页参数
    * @return
    */
   @RequestMapping(value = "/get/rent/all", method = RequestMethod.POST)
@@ -94,7 +94,7 @@ public interface GoodsService {
   ResponseResult<Void> delete(@RequestBody SGoods sGoods);
 
   /**
-   * 修改物品信息
+   * 修改物品信息，不修改物品库存信息
    *
    * @param sGoods
    *         物品信息

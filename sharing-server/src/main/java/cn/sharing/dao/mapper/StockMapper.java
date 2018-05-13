@@ -45,7 +45,7 @@ public interface StockMapper {
      * @param condition 查询条件
      * @return
      */
-    Stock getByCondition(Stock condition);
+    List<Stock> getByCondition(Stock condition);
 
     /**
      * 根据UUID获取物品库存信息
@@ -53,4 +53,11 @@ public interface StockMapper {
      * @return
      */
     Stock getByPrimaryKey(@Param("uuid") String uuid);
+
+    /**
+     * 获取物品库存数量
+     * @param goodsUuid 商品UUID
+     * @return
+     */
+    int getMaxNo(@Param("goodsUuid") String goodsUuid);
 }

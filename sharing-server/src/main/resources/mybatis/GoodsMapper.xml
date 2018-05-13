@@ -122,13 +122,14 @@
     </if>
   </delete>
 
-  <select id="getByPrimaryKey" parameterType="java.lang.String" resultType="map">
+  <select id="getByPrimaryKey" parameterType="java.lang.String" resultType="java.util.HashMap">
     select A.UUID, A.CODE, A.NAME,
       A.TYPE, A.STAT, A.QUANTITY, A.STOCKQUANTITY, A.PICTURE,
       A.DESCRIPTION, A.PRICE, A.DEPOSITAMT, A.COSTPRICE, A.RENTPRICE,
       A.REPAYAMT, A.LASTER, A.LASTUPDTIME,
-      A.MEMO, A.TOREUUID
-      B.UUID, B.NO, B.STATE, B.MEMO
+      A.MEMO, A.STOREUUID,
+      B.UUID STOCKUUID, B.GOODSUUID, B.NO, B.STATE STOCKSTATE, B.MEMO STOCKMEMO,
+      B.LOCKVERSION
       from shgoods A, SHGoodsStock
       where A.UUID = B.GOODSUUID
       AND A.UUID = #{uuid,jdbcType=VARCHAR}
@@ -146,6 +147,9 @@
     <if test="name != null and name != ''">
       and NAME = #{name,jdbcType=VARCHAR},
     </if>
+    <if test="storeuuid != null">
+      and STOREUUID = #{storeuuid,jdbcType=VARCHAR},
+    </if>
     order by CODE
   </select>
 
@@ -162,5 +166,21 @@
       and NAME = #{name,jdbcType=VARCHAR},
     </if>
     order by CODE
+  </select>
+
+  <select id="getByCondition" parameterType="cn.sharing.dao.entity.Goods" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from shgoods
+    where 1 = 1
+    <if test="uuid != null and uuid != ''">
+      and A.UUID = #{uuid,jdbcType=VARCHAR}
+    </if>
+    <if test="code != null and code != ''">
+      and A.CODE = #{code,jdbcType=VARCHAR},
+    </if>
+    <if test="name != null and name != ''">
+      and A.NAME = #{name,jdbcType=VARCHAR},
+    </if>
   </select>
 </mapper>
