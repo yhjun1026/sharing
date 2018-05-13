@@ -32,6 +32,9 @@
     <if test="stat != null">
       and mst.stat = #{stat,jdbcType=VARCHAR}
     </if>
+    <if test="mobile != null">
+      and mst.mobile = #{mobile,jdbcType=VARCHAR}
+    </if>
     <if test="beginTime !=null">
       <![CDATA[
                 and mst.create_time >= #{beginTime}
@@ -41,6 +44,9 @@
       <![CDATA[
                 and mst.create_time <= #{endTime}
                 ]]>
+    </if>
+    <if test="goodsCode != null">
+      and dtl.goods_code = #{goodsName}
     </if>
     <if test="goodsName != null">
       and dtl.goods_name like CONCAT('%', #{goodsName}, '%')

@@ -26,8 +26,12 @@ public class BorrowQuery {
     private String beginTime;
     @ApiModelProperty(value = "查询结束时间(yyyy-MM-dd hh:mm:ss)")
     private String endTime;
+    @ApiModelProperty(value = "物品代码")
+    private String goodsCode;
     @ApiModelProperty(value = "物品名称")
     private String goodsName;
+    @ApiModelProperty(value = "借用人联系方式")
+    private String mobile;
     @ApiModelProperty(value = "当前页号，默认1", required = false)
     private int page = 1;
     @ApiModelProperty(value = "每页大小，默认20，不超过200", required = false)

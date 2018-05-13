@@ -4,6 +4,7 @@ import cn.sharing.dao.entity.GoodsBorrowDtlExample;
 import cn.sharing.dao.mapper.GoodsBorrowMstMapperExt;
 import cn.sharing.platform.common.BorrowStatEnum;
 import cn.sharing.platform.common.QueryResult;
+import cn.sharing.platform.common.ResponseResult;
 import cn.sharing.platform.facade.borrow.v1.BorrowDetailInfoDto;
 import cn.sharing.platform.facade.borrow.v1.BorrowParam;
 import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
@@ -12,6 +13,8 @@ import cn.sharing.platform.facade.borrow.v1.Custom;
 import cn.sharing.platform.facade.borrow.v1.PreCompensateGoodsParam;
 import cn.sharing.platform.facade.borrow.v1.PreCompensateParam;
 import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
+import cn.sharing.platform.facade.goods.v1.GoodsService;
+import cn.sharing.platform.facade.goods.v1.SGoodsStock;
 import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.utils.DateUtil;
 import cn.sharing.platform.utils.SerialNumberUtil;
@@ -23,10 +26,8 @@ import cn.sharing.dao.mapper.GoodsBorrowMstMapper;
 import cn.sharing.dao.mapper.PayInfoMapper;
 import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.utils.UUIDGenerator;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.xml.internal.rngom.digested.DAttributePattern;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,21 +60,31 @@ public class BorrowDao {
   @Autowired
   private GoodsBorrowMstMapperExt goodsBorrowMstMapperExt;
 
+  @Autowired
+  private GoodsService goodsService;
+
   @Transactional
   public String saveBorrow(BorrowParam param) {
     //1.更新物品状态
     //2.记录支付信息
     //3.记录借用单表
     String mstUuid = UUIDGenerator.getUUID();
+    List<GoodsBorrowDtl> dtls = new ArrayList<>();
     for (SBorrowDtl dtl : param.getGoodsDtl()) {
       //更新物品状态
-      // TODO: 2018/5/10
-
+      SGoodsStock goodsStock = new SGoodsStock();
+      goodsStock.setGoodsUuid(dtl.getGoodsUuid());
+      goodsStock.setState(1);
+      ResponseResult<Void> result = goodsService.updateState(goodsStock);
+      if (result.getStatus() != 0) {
+        log.error("更新物品状态失败, " + result.getMessage());
+        throw new RuntimeException("更新物品状态失败.");
+      }
       GoodsBorrowDtl borrowDtl = convertFromBorrowDtl(dtl);
       borrowDtl.setBorrowUuid(mstUuid);
-
-      goodsBorrowDtlMapper.insert(borrowDtl);
+      dtls.add(borrowDtl);
     }
+    goodsBorrowDtlMapper.batchInsert(dtls);
 
     //记录支付信息
     String payUuid = null;
@@ -98,6 +109,7 @@ public class BorrowDao {
     borrowMst.setUuid(mstUuid);
     borrowMst.setBorrowPayUuid(payUuid);
     borrowMst.setBillNumber(billNumbers.get(0));
+    borrowMst.setBorrowPayUuid(payUuid);
     goodsBorrowMstMapper.insert(borrowMst);
 
     return mstUuid;
@@ -106,7 +118,21 @@ public class BorrowDao {
   @Transactional
   public void collar(String borrowId, String dealer){
     //1.更新物品状态
-    // TODO: 2018/5/10  
+    GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
+    GoodsBorrowDtlExample.Criteria criteria = example.createCriteria();
+    criteria.andBorrowUuidEqualTo(borrowId);
+    List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
+    for (GoodsBorrowDtl item : dtls) {
+      SGoodsStock goodsStock = new SGoodsStock();
+      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setState(2);
+      ResponseResult<Void> result = goodsService.updateState(goodsStock);
+      if (result.getStatus() != 0) {
+        log.error("更新物品状态失败, " + result.getMessage());
+        throw new RuntimeException("更新物品状态失败.");
+      }
+    }
+
     //2.更新领用单领用受理人，领用受理时间，最后修改时间
     GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
     goodsBorrowMst.setStat(BorrowStatEnum.USING.getCode());
@@ -136,7 +162,20 @@ public class BorrowDao {
   @Transactional
   public void back(String borrowId, String backDealer, PayInfoParam payInfoParam) {
     //更新物品状态
-    // TODO: 2018/5/10  
+    GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
+    GoodsBorrowDtlExample.Criteria criteria = example.createCriteria();
+    criteria.andBorrowUuidEqualTo(borrowId);
+    List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
+    for (GoodsBorrowDtl item : dtls) {
+      SGoodsStock goodsStock = new SGoodsStock();
+      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setState(0);
+      ResponseResult<Void> result = goodsService.updateState(goodsStock);
+      if (result.getStatus() != 0) {
+        log.error("更新物品状态失败, " + result.getMessage());
+        throw new RuntimeException("更新物品状态失败.");
+      }
+    }
     String uuid = null;
     if (payInfoParam != null) {
       PayInfo payInfo = convertFromPayInfoParam(payInfoParam);
@@ -156,7 +195,20 @@ public class BorrowDao {
   @Transactional
   public void compensate(String borrowId, PayInfoParam payInfoParam) {
     //更新物品状态
-    // TODO: 2018/5/10
+    GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
+    GoodsBorrowDtlExample.Criteria criteria = example.createCriteria();
+    criteria.andBorrowUuidEqualTo(borrowId);
+    List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
+    for (GoodsBorrowDtl item : dtls) {
+      SGoodsStock goodsStock = new SGoodsStock();
+      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setState(3);
+      ResponseResult<Void> result = goodsService.updateState(goodsStock);
+      if (result.getStatus() != 0) {
+        log.error("更新物品状态失败, " + result.getMessage());
+        throw new RuntimeException("更新物品状态失败.");
+      }
+    }
     String uuid = UUIDGenerator.getUUID();
     PayInfo payInfo = convertFromPayInfoParam(payInfoParam);
     payInfo.setUuid(uuid);
@@ -361,12 +413,8 @@ public class BorrowDao {
       stat = BorrowStatEnum.COMPENSATED.getCode();
     }
 
-//    Page<GoodsBorrowMst> page = PageHelper.startPage((param.getPage() - 1) * param.getPageSize(), param.getPageSize(), true);
-//    goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
-//    return page;
-
     PageHelper.startPage(param.getPage(), param.getPageSize());
-    List<GoodsBorrowMst> goodsBorrowMsts = goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsName(), stat);
+    List<GoodsBorrowMst> goodsBorrowMsts = goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsCode(), param.getGoodsName(), param.getMobile(), stat);
     PageInfo<GoodsBorrowMst> pageInfo = new PageInfo<>(goodsBorrowMsts);
     return pageInfo;
   }

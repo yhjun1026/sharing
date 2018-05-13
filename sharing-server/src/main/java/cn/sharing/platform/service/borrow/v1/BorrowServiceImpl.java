@@ -60,7 +60,7 @@ public class BorrowServiceImpl implements BorrowService {
       return response;
     }
     for (SBorrowDtl dtl : borrowParam.getGoodsDtl()) {
-      if (!goodsDao.isExistGoodsByUuid(dtl.getGoodsUuid())) {
+      if (!goodsDao.isExistsStockByUuid(dtl.getGoodsUuid())) {
         response = ResponseResult.failed("租用的物品不存在.");
         return response;
       }
