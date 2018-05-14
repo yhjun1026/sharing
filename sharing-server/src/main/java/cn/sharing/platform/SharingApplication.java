@@ -63,7 +63,7 @@ public class SharingApplication {
   public Docket createRestApi() {
     return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
-            .host("http://39.105.94.218/sharing")
+            .host("39.105.94.218/sharing")
             .select()
             .apis(RequestHandlerSelectors.basePackage("cn.sharing.platform"))
             .paths(paths())
