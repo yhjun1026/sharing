@@ -56,7 +56,7 @@ public interface GoodsService {
    */
   @RequestMapping(value = "/add" + "", method = RequestMethod.POST)
   @ApiOperation(value = "物品新增，用于新增物品或者增加物品的库存数量")
-  ResponseResult<Void> add(@RequestBody SGoods sGoods);
+  ResponseResult<Void> add(@RequestBody  @Valid SGoods sGoods);
 
 
   /**

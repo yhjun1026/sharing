@@ -8,9 +8,13 @@ import cn.sharing.platform.facade.goods.v1.GoodsService;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
 import cn.sharing.platform.utils.UUIDGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,8 @@ import java.util.List;
  * <p>
  * Created by guotao on 2018.01.19.
  */
-@Service(GoodsService.DEFAULT_BEAN_ID)
+@RestController
+@Slf4j
 public class GoodsServiceImpl extends BaseImpl implements GoodsService {
 
   @Autowired
@@ -34,7 +39,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 物品信息
    */
   @Override
-  public ResponseResult<SGoods> get(String goodsId) {
+  public ResponseResult<SGoods> get(@PathVariable String goodsId) {
     return new ResponseResult<SGoods>(goodsDao.getGoodsByCondition(goodsId));
   }
 
@@ -46,7 +51,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return
    */
   @Override
-  public ResponseResult<QueryResult<SGoods>> getRentGoods(GoodsQuery param) {
+  public ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody GoodsQuery param) {
     SGoods sGoods = new SGoods();
     sGoods.setStoreuuid(param.getStoreId());
     sGoods.setCode(param.getCode());
@@ -71,7 +76,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 新增成功或者失败
    */
   @Override
-  public ResponseResult<Void> add(SGoods sGoods) {
+  public ResponseResult<Void> add(@RequestBody SGoods sGoods) {
     if (sGoods == null){
       return ResponseResult.failed("没有需要保存的数据");
     }
@@ -117,7 +122,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 租用的物品
    */
   @Override
-  public ResponseResult<SGoods> borrow(SGoods sGoods) {
+  public ResponseResult<SGoods> borrow(@RequestBody SGoods sGoods) {
     //根据商品代码查询可以租用的
     SGoodsStock sGoodsStock = goodsDao.getCanRentGoods(sGoods.getUuid());
 
@@ -132,7 +137,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 修改成功或者失败
    */
   @Override
-  public ResponseResult<Void> updateState(SGoodsStock sGoodsStock) {
+  public ResponseResult<Void> updateState(@RequestBody  SGoodsStock sGoodsStock) {
     try{
       goodsDao.updateStockState(sGoodsStock);
       return ResponseResult.success();
@@ -151,7 +156,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return 删除成功或者失败
    */
   @Override
-  public ResponseResult<Void> delete(SGoods sGoods) {
+  public ResponseResult<Void> delete(@RequestBody SGoods sGoods) {
     try{
       goodsDao.deleteGoods(sGoods);
       return ResponseResult.success();
@@ -169,7 +174,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * @return
    */
   @Override
-  public ResponseResult<Void> update(SGoods sGoods) {
+  public ResponseResult<Void> update(@RequestBody SGoods sGoods) {
     if (StringUtils.isEmpty(sGoods.getUuid())){
       return ResponseResult.failed("商品信息传入错误");
     }
