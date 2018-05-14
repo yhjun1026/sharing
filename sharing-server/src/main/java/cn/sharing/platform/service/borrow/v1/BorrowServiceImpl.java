@@ -175,7 +175,12 @@ public class BorrowServiceImpl implements BorrowService {
     try {
       ResponseResult<BorrowDetailInfoDto> response = new ResponseResult<>();
       BorrowDetailInfoDto detailInfoDto = borrowDao.get(uuid);
-      response.setData(detailInfoDto);
+      if (detailInfoDto == null) {
+        response.setStatus(ResponseResult.FAILED);
+        response.setMessage("租用单不存在.");
+      } else {
+        response.setData(detailInfoDto);
+      }
 
       return response;
     } catch (Exception e) {

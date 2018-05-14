@@ -47,7 +47,7 @@
     </if>
   </update>
 
-  <delete id="delete" parameterMap="cn.sharing.dao.entity.Stock">
+  <delete id="delete" parameterType="cn.sharing.dao.entity.Stock">
     delete from shgoodsstock
     where 1 = 1
     <if test="uuid != null and uuid != '' ">
@@ -61,7 +61,7 @@
     </if>
   </delete>
 
-  <delete id="deleteByPrimaryKey" parameterMap="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shgoodsstock
     where UUID = #{uuid,jdbcType=VARCHAR}
   </delete>
@@ -75,7 +75,7 @@
     </foreach>
   </insert>
 
-  <select id="getByCondition" parameterMap="cn.sharing.dao.entity.Stock" resultMap="resultMap">
+  <select id="getByCondition" parameterType="cn.sharing.dao.entity.Stock" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from shgoodsstock
@@ -94,7 +94,7 @@
     </if>
   </select>
 
-  <select id="getByPrimaryKey" parameterType="java.lang.String" resultMap="resultMap">
+  <select id="getByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from shgoodsstock
