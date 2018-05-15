@@ -20,7 +20,7 @@ public interface PaymentService {
     @RequestMapping(value = "/save" +
             "", method = RequestMethod.POST)
     @ApiOperation(value = "支付保存")
-    public ResponseResult<Void> save (@RequestBody PayInfoParam payInfo);
+    public ResponseResult<String> save (@RequestBody PayInfoParam payInfo);
 
 
     @RequestMapping(value = "/{payid}", method = RequestMethod.GET)
