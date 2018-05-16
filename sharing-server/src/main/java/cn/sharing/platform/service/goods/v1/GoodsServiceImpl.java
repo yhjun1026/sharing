@@ -3,13 +3,12 @@ package cn.sharing.platform.service.goods.v1;
 import cn.sharing.platform.BaseImpl;
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
-import cn.sharing.platform.facade.goods.v1.GoodsQuery;
-import cn.sharing.platform.facade.goods.v1.GoodsService;
-import cn.sharing.platform.facade.goods.v1.SGoods;
-import cn.sharing.platform.facade.goods.v1.SGoodsStock;
+import cn.sharing.platform.facade.goods.v1.*;
+import cn.sharing.platform.utils.DateUtil;
 import cn.sharing.platform.utils.UUIDGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static cn.sharing.platform.utils.DateUtil.DEFAULT_FORMAT;
 
 /**
  * 物品服务实现
@@ -53,7 +55,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   @Override
   public ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody GoodsQuery param) {
     SGoods sGoods = new SGoods();
-    sGoods.setStoreuuid(param.getStoreId());
+    sGoods.setStoreUuid(param.getStoreId());
     sGoods.setCode(param.getCode());
     sGoods.setName(param.getName());
     List<SGoods> sGoodsList = goodsDao.getAllRentGoods(sGoods, param);
@@ -71,38 +73,59 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
   /**
    * 物品新增，用于新增物品或者增加物品的库存数量
    *
-   * @param sGoods
+   * @param nGoods
    *         物品信息
    * @return 新增成功或者失败
    */
   @Override
-  public ResponseResult<Void> add(@RequestBody SGoods sGoods) {
-    if (sGoods == null){
+  public ResponseResult<Void> add(@RequestBody NewGoods nGoods) {
+    if (nGoods == null){
       return ResponseResult.failed("没有需要保存的数据");
     }
-    if(StringUtils.isEmpty(sGoods.getCode())){
+    if(StringUtils.isEmpty(nGoods.getCode())){
       return ResponseResult.failed("物品信息代码不能为空");
     }
-    if(StringUtils.isEmpty(sGoods.getName())){
+    if(StringUtils.isEmpty(nGoods.getName())){
       return ResponseResult.failed("物品信息名称不能为空");
     }
+    SGoods sGoods = new SGoods();
     List<SGoodsStock> list = new ArrayList<>();
     int beginNo = 0;
     /*新增物品时，物品库存编码从0开始
       增加库存数量时，库存编号从已有库存最大值编号加1开始*/
     if (!StringUtils.isEmpty(sGoods.getUuid())){ //UUID存在表示增加库存
       //获取库存数量的最大NO值
-      int maxNo = goodsDao.getMaxNoFromStock(sGoods.getUuid());
+      int maxNo = goodsDao.getMaxNoFromStock(nGoods.getUuid());
       beginNo = maxNo + 1;
     }
-    for(int i = beginNo; i < sGoods.getQuantity(); i++){
+
+    for(int i = beginNo; i < nGoods.getQuantity(); i++){
       SGoodsStock sGoodsStock = new SGoodsStock();
-      sGoodsStock.setGoodsUuid(sGoods.getUuid());
+      sGoodsStock.setGoodsUuid(nGoods.getUuid());
       sGoodsStock.setNo(i);
       sGoodsStock.setState(0); //初始值为0
       sGoodsStock.setUuid(UUIDGenerator.getUUID());
+      sGoodsStock.setLockVersion(0);
       list.add(sGoodsStock);
     }
+    sGoods.setUuid(nGoods.getUuid());
+    sGoods.setCode(nGoods.getCode());
+    sGoods.setName(nGoods.getName());
+    sGoods.setLastupdtime(DateUtil.format(DateUtil.dateToString(new Date(), DEFAULT_FORMAT), null));
+    sGoods.setCostPrice(nGoods.getCostPrice());
+    sGoods.setCurrentQuantity(nGoods.getCurrentQuantity());
+    sGoods.setDepositamt(nGoods.getDepositamt());
+    sGoods.setDescription(nGoods.getDescription());
+    sGoods.setMemo(nGoods.getMemo());
+    sGoods.setLaster(nGoods.getLaster());
+    sGoods.setPicture(nGoods.getPicture());
+    sGoods.setPrice(nGoods.getPrice());
+    sGoods.setQuantity(nGoods.getQuantity());
+    sGoods.setRentPrice(nGoods.getRentPrice());
+    sGoods.setRepayamt(nGoods.getRepayamt());
+    sGoods.setState(nGoods.getState());
+    sGoods.setStoreUuid(nGoods.getStoreUuid());
+    sGoods.setType(nGoods.getType());
     sGoods.setSGoodsStockList(list);
     try {
       goodsDao.saveGoods(sGoods);

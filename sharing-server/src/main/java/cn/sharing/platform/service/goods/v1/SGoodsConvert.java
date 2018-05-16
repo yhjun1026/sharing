@@ -24,7 +24,7 @@ public class SGoodsConvert {
     SGoods sGoods = new SGoods();
     BeanUtils.copyProperties(goods, sGoods);
     sGoods.setCurrentQuantity(goods.getStockQuantity());
-    sGoods.setStoreuuid(goods.getStoreUuid());
+    sGoods.setStoreUuid(goods.getStoreUuid());
     return sGoods;
   }
 
@@ -64,7 +64,7 @@ public class SGoodsConvert {
     sGoods.setDescription((String)map.get("DESCRIPTION"));
     sGoods.setLaster((String)map.get("LASTER"));
     sGoods.setLastupdtime((Date)map.get("LASTUPDTIME"));
-    sGoods.setStoreuuid((String)map.get("STOREUUID"));
+    sGoods.setStoreUuid((String)map.get("STOREUUID"));
     sGoods.setMemo((String)map.get("MEMO"));
     return sGoods;
   }

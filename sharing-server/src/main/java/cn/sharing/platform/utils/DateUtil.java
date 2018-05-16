@@ -39,6 +39,18 @@ public class DateUtil {
 		return date;
 	}
 
+	public static Date format(String time, String format) {
+		Date date = null;
+		if(StringUtils.isEmpty(format)){
+			format = DEFAULT_FORMAT;
+		}
+		try {
+			date = DateUtils.parseDate(time, format);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return date;
+	}
 	/**
 	 * 获取当前日期
 	 * 

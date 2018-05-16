@@ -147,7 +147,7 @@ public class GoodsExample {
         return this;
     }
 
-    public GoodsExample sumStoreuuid() {
+    public GoodsExample sumStoreUuid() {
         this.sumCol="STOREUUID";
         return this;
     }

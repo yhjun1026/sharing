@@ -43,7 +43,7 @@ public class Goods implements Serializable {
   /** 说明 */
   private String memo;
   /** 门店ID */
-  private String storeUuid;
+  private String storeuuid;
 
   /** uuid */
   public String getUuid() {
@@ -200,10 +200,10 @@ public class Goods implements Serializable {
 
   /** 门店ID */
   public String getStoreUuid() {
-    return storeUuid;
+    return storeuuid;
   }
 
   public void setStoreUuid(String storeUuid) {
-    this.storeUuid = storeUuid;
+    this.storeuuid = storeUuid;
   }
 }

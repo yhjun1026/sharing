@@ -64,7 +64,7 @@ public class SGoods {
   private String memo;
   /** 组织uuid */
   @ApiModelProperty(value = "组织uuid")
-  private String storeuuid;
+  private String storeUuid;
 
   /** 押金金额 */
   @ApiModelProperty(value = "押金金额")
