@@ -38,6 +38,7 @@ public class UserServiceImpl extends BaseImpl implements UserService {
   @Override
   public ResponseResult<UserResponse> login(@RequestHeader("storeCode") String storeCode, @RequestBody UserLogin userLogin){
     ResponseResult<UserResponse> response;
+    userDao.getUserRights("admin");
     if (userLogin == null) {
       response = ResponseResult.failed("参数解析错误.");
       return response;

@@ -41,7 +41,7 @@
       #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{depositamt,jdbcType=DECIMAL},
       #{costPrice,jdbcType=DECIMAL}, #{rentPrice,jdbcType=DECIMAL},
       #{repayamt,jdbcType=DECIMAL}, #{laster,jdbcType=VARCHAR}, #{lastupdtime,jdbcType=TIMESTAMP},
-      #{memo,jdbcType=VARCHAR}, #{storeuuid,jdbcType=VARCHAR})
+      #{memo,jdbcType=VARCHAR}, #{storeUuid,jdbcType=VARCHAR})
   </insert>
 
   <!-- 更新物品表 -->

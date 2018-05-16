@@ -129,4 +129,33 @@ CREATE TABLE IF NOT EXISTS `serial_number` (
   UNIQUE KEY `orgCodeDay` (`business_code`,`day`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `sharing_menu` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL COMMENT '编号',
+  `name` varchar(255) DEFAULT NULL COMMENT '名称',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父级菜单id',
+  `show_sep` varchar(255) DEFAULT NULL COMMENT '显示顺序',
+  `createTime` datetime DEFAULT NULL,
+  `router` varchar(255) DEFAULT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `sharing_operation` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `sharing_role_operation` (
+  `id` int(11) NOT NULL,
+  `role_type` varchar(255) DEFAULT NULL,
+  `operation_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /****************************END****************************/

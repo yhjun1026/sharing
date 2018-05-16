@@ -1,11 +1,18 @@
 package cn.sharing.platform.user;
 
+import cn.sharing.dao.entity.SharingMenu;
 import cn.sharing.dao.entity.User;
 import cn.sharing.dao.entity.UserExample;
+import cn.sharing.dao.mapper.SharingMenuMapperExt;
 import cn.sharing.dao.mapper.UserMapper;
+import cn.sharing.platform.utils.JsonHelper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,9 +20,14 @@ import java.util.List;
  * Created by guotao on 2018.01.17.
  */
 @Component
+@Slf4j
 public class UserDao {
+
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  SharingMenuMapperExt menuMapperExt;
 
   /**
    * 根据代码判断用户是否存在
@@ -76,6 +88,49 @@ public class UserDao {
     return (users == null || users.isEmpty()) ? null : users.get(0);
   }
 
+  public UserRights getUserRights(String userType) {
 
+    List<SharingMenu> menus = menuMapperExt.selectMenuByUserType(userType);
+    List<MenuRights> rightses = buildMenuTree(menus);
+    try {
+      log.info(JsonHelper.toJson(rightses));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
+  private List<MenuRights> buildMenuTree(List<SharingMenu> menus) {
+    List<MenuRights> menuRightses = new ArrayList<>();
+    for (SharingMenu item : menus) {
+      if (item.getParentId().intValue() == 0) {
+        MenuRights menuRights = new MenuRights();
+        menuRights.setId(item.getId());
+        menuRights.setCode(item.getCode());
+        menuRights.setName(item.getName());
+        menuRights.setRouter(item.getRouter());
+        menuRights.setIcon(item.getIcon());
+        buildOneNode(menuRights, menus);
+        menuRightses.add(menuRights);
+      }
+    }
+    return menuRightses;
+  }
+
+  private void buildOneNode(MenuRights menuRights, List<SharingMenu> menus){
+    List<MenuRights> children = new ArrayList<>();
+    menuRights.setChildren(children);
+    for (SharingMenu item : menus) {
+      if (menuRights.getId().intValue() == item.getParentId().intValue()) {
+        MenuRights rights = new MenuRights();
+        rights.setId(item.getId());
+        rights.setCode(item.getCode());
+        rights.setName(item.getName());
+        rights.setRouter(item.getRouter());
+        rights.setIcon(item.getIcon());
+        children.add(rights);
+        buildOneNode(rights, menus);
+      }
+    }
+  }
 }
