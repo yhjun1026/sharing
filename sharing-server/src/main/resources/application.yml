@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     name: sharing
-    url: jdbc:mysql://${DATABASE_IP:127.0.0.1}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:sharing}?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://${DATABASE_IP:39.105.94.218}:${DATABASE_IP_PORT:3306}/${DATABASE_NAME:sharing}?useUnicode=true&characterEncoding=utf-8
     username: ${DATABASE_USERNAME:root}
-    password: ${DATABASE_PASSWORD:}
+    password: ${DATABASE_PASSWORD:yhj123}
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     filters: ${DATABASE_FILTERS:stat,log4j}
@@ -39,6 +39,10 @@ logging:                                # 配置日志级别，让hibernate打�
   config: classpath:logback.xml
   level:
     root: INFO
+    cn:
+      sharing:
+        dao:
+          mapper: debug
 
 eureka:
   client:

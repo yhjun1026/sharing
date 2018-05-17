@@ -71,7 +71,7 @@
     values
     <foreach collection="stocks" item="item" index="index" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.no,jdbcType=INTEGER},
-      #{item.state,jdbcType=INTEGER},#{item.memo,jdbcType=VARCHAR}, #{lockVersion,jdbcType=INTEGER})
+      #{item.state,jdbcType=INTEGER},#{item.memo,jdbcType=VARCHAR}, #{item.lockVersion,jdbcType=INTEGER})
     </foreach>
   </insert>
 
