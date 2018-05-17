@@ -66,7 +66,7 @@
     where UUID = #{uuid,jdbcType=VARCHAR}
   </delete>
 
-  <insert id="batchInsert">
+  <insert id="batchInsert" parameterType="cn.sharing.dao.entity.Stock">
     insert into shgoodsstock(UUID, GOODSUUID, NO, STATE,  MEMO, LOCKVERSION)
     values
     <foreach collection="stocks" item="item" index="index" separator=",">
