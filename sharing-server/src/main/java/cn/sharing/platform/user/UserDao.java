@@ -56,23 +56,22 @@ public class UserDao {
     return count > 0;
   }
   /**
-   * 更新用户数据
+   * 新增用户数据
    * @param user  用户
-   * @return 插入是否成功
    */
 
-  public Boolean insertUser(User user){
-    /** 判断用户是否存在 */
-    if (ExistUserByUuid(user.getUuid())){
-      /** 存在 按主键更新*/
-      int count = userMapper.updateByPrimaryKey(user);
-      return count > 0;
-    } else{
-      /** 不存在 */
-      int count =userMapper.insertSelective(user);
-      return count > 0;
-    }
+  public void insertUser(User user){
+
+    userMapper.insert(user);
+
   }
+
+  public void updateUser(User user){
+
+    userMapper.updateByPrimaryKey(user);
+
+  }
+
   /**
    * 查询获取用户信息
    * @param code 用户代码
@@ -90,14 +89,12 @@ public class UserDao {
 
   public UserRights getUserRights(String userType) {
 
+    UserRights userRights = new UserRights();
     List<SharingMenu> menus = menuMapperExt.selectMenuByUserType(userType);
     List<MenuRights> rightses = buildMenuTree(menus);
-    try {
-      log.info(JsonHelper.toJson(rightses));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return null;
+    userRights.setMenuRightses(rightses);
+    userRights.setButtonCodes(menuMapperExt.selectOptionByUserType(userType));
+    return userRights;
   }
 
   private List<MenuRights> buildMenuTree(List<SharingMenu> menus) {

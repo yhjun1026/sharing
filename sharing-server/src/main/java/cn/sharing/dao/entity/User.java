@@ -12,23 +12,25 @@ public class User implements Serializable {
 
     private String type;
 
-    private String groupuuid;
+    private String groupUuid;
 
     private String password;
 
-    private Date logintime;
+    private Date loginTime;
 
     private String mobile;
 
-    private Date lastupdtime;
+    private Date lstUpdTime;
 
     private String memo;
 
-    private String storeuuid;
+    private String storeUuid;
 
-    private String storecode;
+    private String storeCode;
 
-    private String storename;
+    private String storeName;
+
+    private Byte stat;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,12 +68,12 @@ public class User implements Serializable {
         this.type = type == null ? null : type.trim();
     }
 
-    public String getGroupuuid() {
-        return groupuuid;
+    public String getGroupUuid() {
+        return groupUuid;
     }
 
-    public void setGroupuuid(String groupuuid) {
-        this.groupuuid = groupuuid == null ? null : groupuuid.trim();
+    public void setGroupUuid(String groupUuid) {
+        this.groupUuid = groupUuid == null ? null : groupUuid.trim();
     }
 
     public String getPassword() {
@@ -82,12 +84,12 @@ public class User implements Serializable {
         this.password = password == null ? null : password.trim();
     }
 
-    public Date getLogintime() {
-        return logintime;
+    public Date getLoginTime() {
+        return loginTime;
     }
 
-    public void setLogintime(Date logintime) {
-        this.logintime = logintime;
+    public void setLoginTime(Date loginTime) {
+        this.loginTime = loginTime;
     }
 
     public String getMobile() {
@@ -98,12 +100,12 @@ public class User implements Serializable {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public Date getLastupdtime() {
-        return lastupdtime;
+    public Date getLstUpdTime() {
+        return lstUpdTime;
     }
 
-    public void setLastupdtime(Date lastupdtime) {
-        this.lastupdtime = lastupdtime;
+    public void setLstUpdTime(Date lstUpdTime) {
+        this.lstUpdTime = lstUpdTime;
     }
 
     public String getMemo() {
@@ -114,28 +116,36 @@ public class User implements Serializable {
         this.memo = memo == null ? null : memo.trim();
     }
 
-    public String getStoreuuid() {
-        return storeuuid;
+    public String getStoreUuid() {
+        return storeUuid;
     }
 
-    public void setStoreuuid(String storeuuid) {
-        this.storeuuid = storeuuid == null ? null : storeuuid.trim();
+    public void setStoreUuid(String storeUuid) {
+        this.storeUuid = storeUuid == null ? null : storeUuid.trim();
     }
 
-    public String getStorecode() {
-        return storecode;
+    public String getStoreCode() {
+        return storeCode;
     }
 
-    public void setStorecode(String storecode) {
-        this.storecode = storecode == null ? null : storecode.trim();
+    public void setStoreCode(String storeCode) {
+        this.storeCode = storeCode == null ? null : storeCode.trim();
     }
 
-    public String getStorename() {
-        return storename;
+    public String getStoreName() {
+        return storeName;
     }
 
-    public void setStorename(String storename) {
-        this.storename = storename == null ? null : storename.trim();
+    public void setStoreName(String storeName) {
+        this.storeName = storeName == null ? null : storeName.trim();
+    }
+
+    public Byte getStat() {
+        return stat;
+    }
+
+    public void setStat(Byte stat) {
+        this.stat = stat;
     }
 
     public String getUpdateSql() {

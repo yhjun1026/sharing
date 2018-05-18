@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface SharingMenuMapperExt {
   List<SharingMenu> selectMenuByUserType(@Param("userType") String userType);
+
+  List<String> selectOptionByUserType(@Param("userType") String userType);
 }

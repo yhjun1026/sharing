@@ -22,4 +22,11 @@
       and op.action = 'menu'
     order by menu.parent_id, menu.show_sep
   </select>
+
+  <select id="selectOptionByUserType" resultType="java.lang.String">
+    select distinct op.code from sharing_operation op, sharing_role_operation role
+      where role.operation_id = op.id
+      and op.action = 'button'
+      and role.role_type = #{userType,jdbcType=VARCHAR}
+  </select>
 </mapper>

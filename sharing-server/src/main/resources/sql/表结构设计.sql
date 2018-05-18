@@ -10,24 +10,6 @@ MEMO            VARCHAR(256)     NULL,        /*备注(预留)*/
 UPPERUUID       VARCHAR(32)      NULL         /*上级组织UUID(SHSTORE.UUID)*/
 );
 
-
-/*用户表*/
-CREATE TABLE SHUSER(
-UUID            VARCHAR(32)      PRIMARY KEY NOT NULL,
-CODE            VARCHAR(32)      NOT NULL,    /*用户代码*/
-NAME            VARCHAR(64)      NOT NULL,    /*用户名称*/
-TYPE            VARCHAR(64)      NULL,        /*用户类型*/
-GROUPUUID       VARCHAR(64)      NULL,        /*用户组UUID*/
-PASSWORD        VARCHAR(64)      NULL,        /*用户密码*/
-LOGINTIME       DATETIME         NULL,        /*登陆时间*/
-MOBILE          VARCHAR(32)      NULL,        /*手机号*/
-LASTUPDTIME     DATETIME         NULL,        /*最后更新时间*/
-MEMO            VARCHAR(256)     NULL,        /*备注(预留)*/
-STOREUUID       VARCHAR(32)      NULL,        /*所属组织(SHSTORE.UUID)*/
-STORECODE       VARCHAR(64)      NULL,        /*所属组织(SHSTORE.CODE)*/
-STORENAME       VARCHAR(64)      NULL         /*所属组织(SHSTORE.NAME)*/
-);
-
 /*物品表*/
 CREATE TABLE SHGOODS(
 UUID            VARCHAR(32)      PRIMARY KEY NOT NULL,
@@ -156,6 +138,24 @@ CREATE TABLE IF NOT EXISTS `sharing_role_operation` (
   `role_type` varchar(255) DEFAULT NULL,
   `operation_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `shuser` (
+  `uuid` varchar(32) NOT NULL,
+  `code` varchar(32) NOT NULL COMMENT '员工代码',
+  `name` varchar(64) NOT NULL COMMENT '员工名称',
+  `type` varchar(64) DEFAULT NULL COMMENT '用户类型',
+  `group_uuid` varchar(64) DEFAULT NULL COMMENT '用户组',
+  `password` varchar(64) DEFAULT NULL COMMENT '密码',
+  `login_time` datetime DEFAULT NULL COMMENT '登录时间',
+  `mobile` varchar(32) DEFAULT NULL COMMENT '联系方式',
+  `lst_upd_time` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `memo` varchar(256) DEFAULT NULL COMMENT '备注',
+  `store_uuid` varchar(32) DEFAULT NULL COMMENT '组织id',
+  `store_code` varchar(64) DEFAULT NULL COMMENT '组织代码',
+  `store_name` varchar(64) DEFAULT NULL COMMENT '组织名称',
+  `stat` tinyint(4) NOT NULL DEFAULT '0' COMMENT '用户状态（0 启用，1 停用）',
+  PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /****************************END****************************/

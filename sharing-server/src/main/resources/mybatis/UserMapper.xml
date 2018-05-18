@@ -2,19 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sharing.dao.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.User">
-    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
-    <result column="CODE" jdbcType="VARCHAR" property="code" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="TYPE" jdbcType="VARCHAR" property="type" />
-    <result column="GROUPUUID" jdbcType="VARCHAR" property="groupuuid" />
-    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
-    <result column="LOGINTIME" jdbcType="TIMESTAMP" property="logintime" />
-    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
-    <result column="LASTUPDTIME" jdbcType="TIMESTAMP" property="lastupdtime" />
-    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
-    <result column="STOREUUID" jdbcType="VARCHAR" property="storeuuid" />
-    <result column="STORECODE" jdbcType="VARCHAR" property="storecode" />
-    <result column="STORENAME" jdbcType="VARCHAR" property="storename" />
+    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="group_uuid" jdbcType="VARCHAR" property="groupUuid" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="lst_upd_time" jdbcType="TIMESTAMP" property="lstUpdTime" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="store_uuid" jdbcType="VARCHAR" property="storeUuid" />
+    <result column="store_code" jdbcType="VARCHAR" property="storeCode" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="stat" jdbcType="TINYINT" property="stat" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    UUID, CODE, NAME, TYPE, GROUPUUID, PASSWORD, LOGINTIME, MOBILE, LASTUPDTIME, MEMO, 
-    STOREUUID, STORECODE, STORENAME
+    uuid, code, name, type, group_uuid, password, login_time, mobile, lst_upd_time, memo, 
+    store_uuid, store_code, store_name, stat
   </sql>
   <select id="selectByExample" parameterType="cn.sharing.dao.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -100,11 +101,11 @@
     select 
     <include refid="Base_Column_List" />
     from shuser
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shuser
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="cn.sharing.dao.entity.UserExample">
     delete from shuser
@@ -113,58 +114,61 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sharing.dao.entity.User">
-    insert into shuser (UUID, CODE, NAME, 
-      TYPE, GROUPUUID, PASSWORD, 
-      LOGINTIME, MOBILE, LASTUPDTIME, 
-      MEMO, STOREUUID, STORECODE, 
-      STORENAME)
+    insert into shuser (uuid, code, name, 
+      type, group_uuid, password, 
+      login_time, mobile, lst_upd_time, 
+      memo, store_uuid, store_code, 
+      store_name, stat)
     values (#{uuid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{groupuuid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{logintime,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR}, #{lastupdtime,jdbcType=TIMESTAMP}, 
-      #{memo,jdbcType=VARCHAR}, #{storeuuid,jdbcType=VARCHAR}, #{storecode,jdbcType=VARCHAR}, 
-      #{storename,jdbcType=VARCHAR})
+      #{type,jdbcType=VARCHAR}, #{groupUuid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR}, #{lstUpdTime,jdbcType=TIMESTAMP}, 
+      #{memo,jdbcType=VARCHAR}, #{storeUuid,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, 
+      #{storeName,jdbcType=VARCHAR}, #{stat,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="cn.sharing.dao.entity.User">
     insert into shuser
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
-        UUID,
+        uuid,
       </if>
       <if test="code != null">
-        CODE,
+        code,
       </if>
       <if test="name != null">
-        NAME,
+        name,
       </if>
       <if test="type != null">
-        TYPE,
+        type,
       </if>
-      <if test="groupuuid != null">
-        GROUPUUID,
+      <if test="groupUuid != null">
+        group_uuid,
       </if>
       <if test="password != null">
-        PASSWORD,
+        password,
       </if>
-      <if test="logintime != null">
-        LOGINTIME,
+      <if test="loginTime != null">
+        login_time,
       </if>
       <if test="mobile != null">
-        MOBILE,
+        mobile,
       </if>
-      <if test="lastupdtime != null">
-        LASTUPDTIME,
+      <if test="lstUpdTime != null">
+        lst_upd_time,
       </if>
       <if test="memo != null">
-        MEMO,
+        memo,
       </if>
-      <if test="storeuuid != null">
-        STOREUUID,
+      <if test="storeUuid != null">
+        store_uuid,
       </if>
-      <if test="storecode != null">
-        STORECODE,
+      <if test="storeCode != null">
+        store_code,
       </if>
-      <if test="storename != null">
-        STORENAME,
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="stat != null">
+        stat,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -180,32 +184,35 @@
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
       </if>
-      <if test="groupuuid != null">
-        #{groupuuid,jdbcType=VARCHAR},
+      <if test="groupUuid != null">
+        #{groupUuid,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="logintime != null">
-        #{logintime,jdbcType=TIMESTAMP},
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
       </if>
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="lastupdtime != null">
-        #{lastupdtime,jdbcType=TIMESTAMP},
+      <if test="lstUpdTime != null">
+        #{lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="storeuuid != null">
-        #{storeuuid,jdbcType=VARCHAR},
+      <if test="storeUuid != null">
+        #{storeUuid,jdbcType=VARCHAR},
       </if>
-      <if test="storecode != null">
-        #{storecode,jdbcType=VARCHAR},
+      <if test="storeCode != null">
+        #{storeCode,jdbcType=VARCHAR},
       </if>
-      <if test="storename != null">
-        #{storename,jdbcType=VARCHAR},
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null">
+        #{stat,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -219,43 +226,46 @@
     update shuser
     <set>
       <if test="record.uuid != null">
-        UUID = #{record.uuid,jdbcType=VARCHAR},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
       <if test="record.code != null">
-        CODE = #{record.code,jdbcType=VARCHAR},
+        code = #{record.code,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
-        NAME = #{record.name,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        TYPE = #{record.type,jdbcType=VARCHAR},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
-      <if test="record.groupuuid != null">
-        GROUPUUID = #{record.groupuuid,jdbcType=VARCHAR},
+      <if test="record.groupUuid != null">
+        group_uuid = #{record.groupUuid,jdbcType=VARCHAR},
       </if>
       <if test="record.password != null">
-        PASSWORD = #{record.password,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.logintime != null">
-        LOGINTIME = #{record.logintime,jdbcType=TIMESTAMP},
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.mobile != null">
-        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
       </if>
-      <if test="record.lastupdtime != null">
-        LASTUPDTIME = #{record.lastupdtime,jdbcType=TIMESTAMP},
+      <if test="record.lstUpdTime != null">
+        lst_upd_time = #{record.lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.memo != null">
-        MEMO = #{record.memo,jdbcType=VARCHAR},
+        memo = #{record.memo,jdbcType=VARCHAR},
       </if>
-      <if test="record.storeuuid != null">
-        STOREUUID = #{record.storeuuid,jdbcType=VARCHAR},
+      <if test="record.storeUuid != null">
+        store_uuid = #{record.storeUuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.storecode != null">
-        STORECODE = #{record.storecode,jdbcType=VARCHAR},
+      <if test="record.storeCode != null">
+        store_code = #{record.storeCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.storename != null">
-        STORENAME = #{record.storename,jdbcType=VARCHAR},
+      <if test="record.storeName != null">
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stat != null">
+        stat = #{record.stat,jdbcType=TINYINT},
       </if>
       <if test="record.updateSql != null" >
         ${record.updateSql},
@@ -267,19 +277,20 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update shuser
-    set UUID = #{record.uuid,jdbcType=VARCHAR},
-      CODE = #{record.code,jdbcType=VARCHAR},
-      NAME = #{record.name,jdbcType=VARCHAR},
-      TYPE = #{record.type,jdbcType=VARCHAR},
-      GROUPUUID = #{record.groupuuid,jdbcType=VARCHAR},
-      PASSWORD = #{record.password,jdbcType=VARCHAR},
-      LOGINTIME = #{record.logintime,jdbcType=TIMESTAMP},
-      MOBILE = #{record.mobile,jdbcType=VARCHAR},
-      LASTUPDTIME = #{record.lastupdtime,jdbcType=TIMESTAMP},
-      MEMO = #{record.memo,jdbcType=VARCHAR},
-      STOREUUID = #{record.storeuuid,jdbcType=VARCHAR},
-      STORECODE = #{record.storecode,jdbcType=VARCHAR},
-      STORENAME = #{record.storename,jdbcType=VARCHAR}
+    set uuid = #{record.uuid,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      group_uuid = #{record.groupUuid,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      lst_upd_time = #{record.lstUpdTime,jdbcType=TIMESTAMP},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      store_uuid = #{record.storeUuid,jdbcType=VARCHAR},
+      store_code = #{record.storeCode,jdbcType=VARCHAR},
+      store_name = #{record.storeName,jdbcType=VARCHAR},
+      stat = #{record.stat,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -288,59 +299,63 @@
     update shuser
     <set>
       <if test="code != null">
-        CODE = #{code,jdbcType=VARCHAR},
+        code = #{code,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
-        NAME = #{name,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        TYPE = #{type,jdbcType=VARCHAR},
+        type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="groupuuid != null">
-        GROUPUUID = #{groupuuid,jdbcType=VARCHAR},
+      <if test="groupUuid != null">
+        group_uuid = #{groupUuid,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="logintime != null">
-        LOGINTIME = #{logintime,jdbcType=TIMESTAMP},
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
       </if>
       <if test="mobile != null">
-        MOBILE = #{mobile,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="lastupdtime != null">
-        LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
+      <if test="lstUpdTime != null">
+        lst_upd_time = #{lstUpdTime,jdbcType=TIMESTAMP},
       </if>
       <if test="memo != null">
-        MEMO = #{memo,jdbcType=VARCHAR},
+        memo = #{memo,jdbcType=VARCHAR},
       </if>
-      <if test="storeuuid != null">
-        STOREUUID = #{storeuuid,jdbcType=VARCHAR},
+      <if test="storeUuid != null">
+        store_uuid = #{storeUuid,jdbcType=VARCHAR},
       </if>
-      <if test="storecode != null">
-        STORECODE = #{storecode,jdbcType=VARCHAR},
+      <if test="storeCode != null">
+        store_code = #{storeCode,jdbcType=VARCHAR},
       </if>
-      <if test="storename != null">
-        STORENAME = #{storename,jdbcType=VARCHAR},
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="stat != null">
+        stat = #{stat,jdbcType=TINYINT},
       </if>
     </set>
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sharing.dao.entity.User">
     update shuser
-    set CODE = #{code,jdbcType=VARCHAR},
-      NAME = #{name,jdbcType=VARCHAR},
-      TYPE = #{type,jdbcType=VARCHAR},
-      GROUPUUID = #{groupuuid,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      LOGINTIME = #{logintime,jdbcType=TIMESTAMP},
-      MOBILE = #{mobile,jdbcType=VARCHAR},
-      LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
-      MEMO = #{memo,jdbcType=VARCHAR},
-      STOREUUID = #{storeuuid,jdbcType=VARCHAR},
-      STORECODE = #{storecode,jdbcType=VARCHAR},
-      STORENAME = #{storename,jdbcType=VARCHAR}
-    where UUID = #{uuid,jdbcType=VARCHAR}
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      group_uuid = #{groupUuid,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      lst_upd_time = #{lstUpdTime,jdbcType=TIMESTAMP},
+      memo = #{memo,jdbcType=VARCHAR},
+      store_uuid = #{storeUuid,jdbcType=VARCHAR},
+      store_code = #{storeCode,jdbcType=VARCHAR},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      stat = #{stat,jdbcType=TINYINT}
+    where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.dao.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -365,18 +380,18 @@
   </select>
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-            insert into shuser  (UUID, CODE, NAME, 
-        TYPE, GROUPUUID, PASSWORD, 
-        LOGINTIME, MOBILE, LASTUPDTIME, 
-        MEMO, STOREUUID, STORECODE, 
-        STORENAME)
+            insert into shuser  (uuid, code, name, 
+        type, group_uuid, password, 
+        login_time, mobile, lst_upd_time, 
+        memo, store_uuid, store_code, 
+        store_name, stat)
       values
       <foreach collection="items" item="item" index="index" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, 
-        #{item.type,jdbcType=VARCHAR}, #{item.groupuuid,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 
-        #{item.logintime,jdbcType=TIMESTAMP}, #{item.mobile,jdbcType=VARCHAR}, #{item.lastupdtime,jdbcType=TIMESTAMP}, 
-        #{item.memo,jdbcType=VARCHAR}, #{item.storeuuid,jdbcType=VARCHAR}, #{item.storecode,jdbcType=VARCHAR}, 
-        #{item.storename,jdbcType=VARCHAR})
+        #{item.type,jdbcType=VARCHAR}, #{item.groupUuid,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 
+        #{item.loginTime,jdbcType=TIMESTAMP}, #{item.mobile,jdbcType=VARCHAR}, #{item.lstUpdTime,jdbcType=TIMESTAMP}, 
+        #{item.memo,jdbcType=VARCHAR}, #{item.storeUuid,jdbcType=VARCHAR}, #{item.storeCode,jdbcType=VARCHAR}, 
+        #{item.storeName,jdbcType=VARCHAR}, #{item.stat,jdbcType=TINYINT})
       </foreach>
     </if>
   </insert>
