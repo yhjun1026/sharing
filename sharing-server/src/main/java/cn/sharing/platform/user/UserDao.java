@@ -6,6 +6,9 @@ import cn.sharing.dao.entity.UserExample;
 import cn.sharing.dao.mapper.SharingMenuMapperExt;
 import cn.sharing.dao.mapper.UserMapper;
 import cn.sharing.platform.utils.JsonHelper;
+import cn.sharing.platform.utils.StringUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +73,39 @@ public class UserDao {
 
     userMapper.updateByPrimaryKey(user);
 
+  }
+
+  public User getUserById(String uuid) {
+    return userMapper.selectByPrimaryKey(uuid);
+  }
+
+  public PageInfo<User> query(UserQuery param) {
+    UserExample example = new UserExample();
+    UserExample.Criteria criteria = example.createCriteria();
+    if (!StringUtils.isEmpty(param.getStoreId())){
+      criteria.andStoreUuidEqualTo(param.getStoreId());
+    }
+    if (!StringUtils.isEmpty(param.getUserCode())) {
+      criteria.andCodeEqualTo(param.getUserCode());
+    }
+    if (!StringUtils.isEmpty(param.getUserName())) {
+      criteria.andNameLike("%" + param.getUserName() + "%");
+    }
+    if (!StringUtils.isEmpty(param.getUserType())) {
+      criteria.andTypeEqualTo(param.getUserType());
+    }
+    if (!StringUtils.isEmpty(param.getMobile())) {
+      criteria.andMobileEqualTo(param.getMobile());
+    }
+    if (!(param.getStat() == null)) {
+      criteria.andStatEqualTo((byte)param.getStat().intValue());
+    }
+
+    PageHelper.startPage(param.getPage(), param.getPageSize());
+    List<User> users = userMapper.selectByExample(example);
+    PageInfo<User> pageInfo = new PageInfo<>(users);
+
+    return pageInfo;
   }
 
   /**

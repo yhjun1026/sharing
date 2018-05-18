@@ -1,10 +1,12 @@
 package cn.sharing.platform.user;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * Created by zenglin on 2018/5/18.
  */
+@Data
 public class UserQuery {
   @ApiModelProperty(value = "项目Id")
   private String storeId;

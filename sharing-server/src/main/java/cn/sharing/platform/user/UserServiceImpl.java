@@ -8,6 +8,7 @@ import cn.sharing.dao.entity.User;
 import cn.sharing.platform.utils.MD5;
 import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.utils.UUIDGenerator;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户接口实现
@@ -95,6 +98,8 @@ public class UserServiceImpl implements UserService {
 
     try {
       User shuser = converUserFromSuser(user);
+      User user1 = userDao.getUserById(shuser.getUuid());
+      shuser.setPassword(user1.getPassword());
       userDao.updateUser(shuser);
 
       response = ResponseResult.success();
@@ -134,12 +139,49 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public ResponseResult<QueryResult<SUser>> query(@RequestBody UserQuery param) {
-    return null;
+
+    try {
+      PageInfo<User> pageInfo = userDao.query(param);
+      List<SUser> users = new ArrayList<>();
+      if (pageInfo.getList() != null) {
+        for (User item : pageInfo.getList()) {
+          users.add(converSUserFromUser(item));
+        }
+      }
+      QueryResult<SUser> queryResult = new QueryResult<>();
+      queryResult.setTotalCount(pageInfo.getTotal());
+      queryResult.setPage(pageInfo.getPageNum());
+      queryResult.setPageSize(pageInfo.getPageSize());
+      queryResult.setItem(users);
+
+      ResponseResult<QueryResult<SUser>> response = ResponseResult.success();
+      response.setData(queryResult);
+      return response;
+    } catch (Exception e) {
+      log.error("【查询用户】异常，" + e.getMessage());
+      ResponseResult<QueryResult<SUser>> response = ResponseResult.failed("查询用户异常，" + e.getMessage());
+      return response;
+    }
   }
 
   @Override
   public ResponseResult<SUser> get(@PathVariable String uuid) {
-    return null;
+    ResponseResult<SUser> response;
+
+    try {
+      User user = userDao.getUserById(uuid);
+      if (user == null) {
+        response = ResponseResult.failed("用户不存在.");
+        return response;
+      }
+      response = ResponseResult.success();
+      response.setData(converSUserFromUser(user));
+      return response;
+    } catch (Exception e) {
+      log.error("【获取用户详情】异常，" + e.getMessage());
+      response = ResponseResult.failed("获取用户详情异常，" + e.getMessage());
+      return response;
+    }
   }
 
   private User converUserFromSuser(SUser sUser) {
@@ -155,6 +197,18 @@ public class UserServiceImpl implements UserService {
     user.setLstUpdTime(new Date());
     user.setPassword(MD5.sign(sUser.getPassword()));
     return user;
+  }
+
+  private SUser converSUserFromUser(User user) {
+    if (user == null) {
+      return null;
+    }
+
+    SUser sUser = new SUser();
+    BeanUtils.copyProperties(user, sUser);
+    user.setPassword(null);
+
+    return sUser;
   }
 
   private String checkParam(SUser user, int type) {
