@@ -130,7 +130,7 @@
       A.MEMO, A.STOREUUID,
       B.UUID STOCKUUID, B.GOODSUUID, B.NO, B.STATE STOCKSTATE, B.MEMO STOCKMEMO,
       B.LOCKVERSION
-      from shgoods A, SHGoodsStock
+      from shgoods A, SHGoodsStock B
       where A.UUID = B.GOODSUUID
       AND A.UUID = #{uuid,jdbcType=VARCHAR}
   </select>

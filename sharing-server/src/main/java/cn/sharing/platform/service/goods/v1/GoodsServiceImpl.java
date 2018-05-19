@@ -91,12 +91,24 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
     SGoods sGoods = new SGoods();
     List<SGoodsStock> list = new ArrayList<>();
     int beginNo = 0;
+    boolean isUpdate = false;
     /*新增物品时，物品库存编码从0开始
       增加库存数量时，库存编号从已有库存最大值编号加1开始*/
-    if (!StringUtils.isEmpty(sGoods.getUuid())){ //UUID存在表示增加库存
+    if (StringUtils.isEmpty(nGoods.getUuid())){
+      nGoods.setUuid(UUIDGenerator.getUUID());
+    }else{
       //获取库存数量的最大NO值
-      int maxNo = goodsDao.getMaxNoFromStock(nGoods.getUuid());
-      beginNo = maxNo + 1;
+      int maxNo = 0;
+
+      //UUID存在表示增加库存
+      SGoods sGoods1 = goodsDao.getGoodsByUuid(nGoods.getUuid());
+      if(sGoods1 == null){
+        nGoods.setUuid(UUIDGenerator.getUUID());
+      }else{
+        isUpdate = true;
+        maxNo = goodsDao.getMaxNoFromStock(nGoods.getUuid());
+        beginNo = maxNo + 1;
+      }
     }
 
     for(int i = beginNo; i < nGoods.getQuantity(); i++){
@@ -128,7 +140,12 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
     sGoods.setType(nGoods.getType());
     sGoods.setSGoodsStockList(list);
     try {
-      goodsDao.saveGoods(sGoods);
+      if (isUpdate == false){
+        goodsDao.saveGoods(sGoods);
+      }else{
+        goodsDao.updateGoods(sGoods);
+      }
+
       return ResponseResult.success();
     } catch (Exception e) {
       logger.error("新增物品失败，原因：" + e.getMessage());

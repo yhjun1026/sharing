@@ -77,7 +77,7 @@ public class GoodsDao {
    */
   public SGoods getGoodsByUuid(String uuid){
     List<Map<String, Object>> resultMap = goodsMapper.getByPrimaryKey(uuid);
-    if (resultMap == null){
+    if (resultMap == null || resultMap.size() <= 0){
       return null;
     }
     SGoods sGoods = SGoodsConvert.perzConvertFromMap(resultMap.get(0));
@@ -106,12 +106,7 @@ public class GoodsDao {
   @Transactional
   public void saveGoods(SGoods sGoods) throws Exception{
     //先保存物品表数据
-    if(StringUtils.isEmpty(sGoods.getUuid())){
-      goodsMapper.insert(GoodsConvert.perzConvert(sGoods));
-    }
-    else{
-      goodsMapper.update(GoodsConvert.perzConvert(sGoods));
-    }
+    goodsMapper.insert(GoodsConvert.perzConvert(sGoods));
     //保存物品库存数据
     stockMapper.batchInsert(StockConvert.perzConvertList(sGoods.getSGoodsStockList()));
   }
