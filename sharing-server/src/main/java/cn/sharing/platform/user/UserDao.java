@@ -123,6 +123,14 @@ public class UserDao {
     return (users == null || users.isEmpty()) ? null : users.get(0);
   }
 
+  public User getUserByCode(String code){
+    UserExample example = new UserExample();
+    UserExample.Criteria criteria= example.createCriteria();
+    criteria.andCodeEqualTo(code);
+    List<User> users = userMapper.selectByExample(example);
+    return (users == null || users.isEmpty()) ? null : users.get(0);
+  }
+
   public UserRights getUserRights(String userType) {
 
     UserRights userRights = new UserRights();

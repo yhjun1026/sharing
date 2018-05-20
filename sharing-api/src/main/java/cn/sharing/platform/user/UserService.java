@@ -6,7 +6,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,5 +49,9 @@ public interface UserService {
   @RequestMapping(value = "/get/{uuid}", method = RequestMethod.POST)
   @ApiOperation(value = "用户详情")
   public ResponseResult<SUser> get(@PathVariable String uuid);
+
+  @RequestMapping(value = "/update/password", method = RequestMethod.POST)
+  @ApiOperation(value = "修改密码")
+  public ResponseResult<Void> changePassword (@RequestBody ChangePassword changePassword);
 
 }

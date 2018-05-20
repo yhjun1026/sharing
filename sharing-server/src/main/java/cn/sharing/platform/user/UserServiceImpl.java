@@ -2,8 +2,6 @@ package cn.sharing.platform.user;
 
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
-import cn.sharing.platform.store.StoreDao;
-import cn.sharing.dao.entity.Store;
 import cn.sharing.dao.entity.User;
 import cn.sharing.platform.utils.MD5;
 import cn.sharing.platform.utils.StringUtils;
@@ -180,6 +178,51 @@ public class UserServiceImpl implements UserService {
     } catch (Exception e) {
       log.error("【获取用户详情】异常，" + e.getMessage());
       response = ResponseResult.failed("获取用户详情异常，" + e.getMessage());
+      return response;
+    }
+  }
+
+  @Override
+  public ResponseResult<Void> changePassword(@RequestBody ChangePassword changePassword) {
+
+    ResponseResult<Void> response;
+    if (changePassword == null) {
+      response = ResponseResult.failed("解析参数错误.");
+      return response;
+    }
+    if (StringUtils.isEmpty(changePassword.getUserCode())) {
+      response = ResponseResult.failed("用户代码不能为空.");
+      return response;
+    }
+    if (StringUtils.isEmpty(changePassword.getOldPassword())) {
+      response = ResponseResult.failed("用户原密码不能为空.");
+      return response;
+    }
+    if (StringUtils.isEmpty(changePassword.getNewPassword())) {
+      response = ResponseResult.failed("用户新密码不能为空.");
+      return response;
+    }
+    User user = userDao.getUserByCode(changePassword.getUserCode());
+    if (user == null) {
+      response = ResponseResult.failed("用户不存在.");
+      return response;
+    }
+
+    //验证密码
+    if (user.getPassword().equals(MD5.sign(changePassword.getOldPassword()))) {
+      response = ResponseResult.failed("原密码不正确.");
+      return response;
+    }
+
+    user.setPassword(MD5.sign(changePassword.getNewPassword()));
+    user.setLstUpdTime(new Date());
+    try {
+      userDao.updateUser(user);
+      response = ResponseResult.success();
+      return response;
+    } catch (Exception e) {
+      log.error("【修改密码】异常，" + e.getMessage());
+      response = ResponseResult.failed("修改密码异常，" + e.getMessage());
       return response;
     }
   }
