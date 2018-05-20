@@ -23,5 +23,5 @@ public class UserQuery {
   @ApiModelProperty(value = "每页大小，默认20，不超过200")
   private int pageSize = 20;
   @ApiModelProperty(value = "用户状态", required = false)
-  private Integer stat;
+  private Byte stat;
 }

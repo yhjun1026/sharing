@@ -98,7 +98,7 @@ public class UserDao {
       criteria.andMobileEqualTo(param.getMobile());
     }
     if (!(param.getStat() == null)) {
-      criteria.andStatEqualTo((byte)param.getStat().intValue());
+      criteria.andStatEqualTo(param.getStat());
     }
 
     PageHelper.startPage(param.getPage(), param.getPageSize());
