@@ -46,7 +46,7 @@ public interface UserService {
   @ApiOperation(value = "用户查询")
   public ResponseResult<QueryResult<SUser>> query(@RequestBody UserQuery param);
 
-  @RequestMapping(value = "/get/{uuid}", method = RequestMethod.POST)
+  @RequestMapping(value = "/get/{uuid}", method = RequestMethod.GET)
   @ApiOperation(value = "用户详情")
   public ResponseResult<SUser> get(@PathVariable String uuid);
 
