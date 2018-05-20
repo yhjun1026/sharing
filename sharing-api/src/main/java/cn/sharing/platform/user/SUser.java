@@ -31,5 +31,5 @@ public class SUser {
   @ApiModelProperty(value = "备注", required = false)
   private String memo;
   @ApiModelProperty(value = "用户状态（0 启用，1 停用）", required = true)
-  private Integer stat;
+  private Byte stat;
 }

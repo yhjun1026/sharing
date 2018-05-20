@@ -51,24 +51,31 @@ public class UserServiceImpl implements UserService {
       response = ResponseResult.failed("用户密码不能为空.");
       return response;
     }
-    if (!userDao.isExistUserByCode(userLogin.getUserCode())) {
+    User user = userDao.getUserByCode(userLogin.getUserCode());
+    if (user == null) {
       response = ResponseResult.failed("用户不存在.");
       return response;
     }
+    if (user.getStat().intValue() == 1) {
+      response = ResponseResult.failed("用户已被停用.");
+      return response;
+    }
+    if (!user.getPassword().equals(MD5.sign(userLogin.getPassword()))) {
+      response = ResponseResult.failed("用户密码不正确.");
+      return response;
+    }
+
 
     try {
-      User shuser = userDao.getUserByCodeAndPassword(userLogin.getUserCode(), MD5.sign(userLogin.getPassword()));
-      if (shuser == null) {
-        response = ResponseResult.failed("用户密码不正确.");
-        return response;
-      }
-
-      UserRights userRights = userDao.getUserRights(shuser.getType());
+      UserRights userRights = userDao.getUserRights(user.getType());
       //更新登录时间
-      shuser.setLoginTime(new Date());
-      userDao.updateUser(shuser);
+      user.setLoginTime(new Date());
+      userDao.updateUser(user);
       UserResponse userResponse = new UserResponse();
       userResponse.setRights(userRights);
+      userResponse.setCode(user.getCode());
+      userResponse.setName(user.getName());
+      userResponse.setUuid(user.getUuid());
       response = ResponseResult.success();
       response.setData(userResponse);
       return response;
@@ -209,7 +216,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //验证密码
-    if (user.getPassword().equals(MD5.sign(changePassword.getOldPassword()))) {
+    if (!user.getPassword().equals(MD5.sign(changePassword.getOldPassword()))) {
       response = ResponseResult.failed("原密码不正确.");
       return response;
     }
@@ -282,8 +289,11 @@ public class UserServiceImpl implements UserService {
     if (user.getStat() == null || user.getStat() < 0 || user.getStat() > 1) {
       return "用户状态未正确指定.";
     }
-    if (userDao.isExistUserByCode(user.getCode())) {
-      return "用户代码已经存在.";
+    User user1 = userDao.getUserByCode(user.getCode());
+    if (user1 != null) {
+      if (!user1.getUuid().equals(user.getUuid())) {
+        return "用户代码已经存在.";
+      }
     }
     if (type == 1) {
       if (!userDao.ExistUserByUuid(user.getUuid())) {
