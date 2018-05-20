@@ -1,0 +1,44 @@
+/**
+ * 版权所有(C)，上海海鼎信息工程股份有限公司，1995-2016，所有权利保留。
+ * 项目名：sharing
+ * 文件名：Customer
+ * 模块说明：
+ * 修改历史：
+ * 2018/5/20 - yanghongjun - 创建
+ */
+package cn.sharing.platform.facade.customer.v1;
+
+import cn.sharing.platform.facade.borrow.v1.Custom;
+import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * @author yanghongjun
+ * @version 1.0
+ */
+@Data
+@ApiModel(description = "顾客信息")
+public class Customer {
+    @ApiModelProperty(value = "用户id")
+    private String id;
+    @ApiModelProperty(value = "注册时间(yyyy-MM-dd hh:mm:ss)")
+    private String createTime;
+    @ApiModelProperty(value = "备注")
+    private String memo;
+    @ApiModelProperty(value = "昵称")
+    private String nickName;
+    @ApiModelProperty(value = "小程序app Id")
+    private String appId;
+    @ApiModelProperty(value = "小程序openId")
+    private String openId;
+    @ApiModelProperty(value = "微信号")
+    private String wechatId;
+    @ApiModelProperty(value = "手机号")
+    private String phoneNumber;
+    @ApiModelProperty(value = "小程序token")
+    private String token;
+}

@@ -10,6 +10,9 @@ public class GoodsQuery {
   /** 项目代码 */
   @ApiModelProperty(value = "项目Id", required = false)
   private String storeId;
+  /** 物品id */
+  @ApiModelProperty(value = "物品id", required = false)
+  private String id;
   /** 物品代码 */
   @ApiModelProperty(value = "物品代码", required = false)
   private String code;
