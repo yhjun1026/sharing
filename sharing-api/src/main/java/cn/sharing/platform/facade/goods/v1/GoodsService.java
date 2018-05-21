@@ -31,9 +31,9 @@ public interface GoodsService {
    *         物品uuid
    * @return 物品信息
    */
-  @RequestMapping(value = "/get/{goodsid}", method = RequestMethod.GET)
+  @RequestMapping(value = "/get/{goodsId}", method = RequestMethod.GET)
   @ApiOperation(value = "获取物品信息,包括物品的库存")
-  ResponseResult<SGoods> get(@PathVariable(value = "goodsid") @ApiParam(name = "goodsid", value = "物品代码") String
+  ResponseResult<SGoods> get(@PathVariable(value = "goodsId") @ApiParam(name = "goodsId", value = "物品代码") String
                                      goodsId);
 
   /**

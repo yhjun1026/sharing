@@ -24,7 +24,7 @@ public class GoodsConvert {
     Goods goods = new Goods();
     BeanUtils.copyProperties(sGoods, goods);
     goods.setStockQuantity(sGoods.getCurrentQuantity());
-    goods.setStoreUuid(sGoods.getStoreUuid());
+    goods.setStoreuuid(sGoods.getStoreUuid());
     return goods;
   }
 

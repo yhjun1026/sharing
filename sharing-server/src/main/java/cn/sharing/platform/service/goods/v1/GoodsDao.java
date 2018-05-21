@@ -165,7 +165,12 @@ public class GoodsDao {
     sGoods.setCode(goodsId);
     List<SGoods> list = SGoodsConvert.perzConvertList(goodsMapper.getByCondition(GoodsConvert.perzConvert(sGoods)));
     if (list == null || list.size() == 0){
-      return null;
+      sGoods.setCode(null);
+      sGoods.setUuid(goodsId);
+      list = SGoodsConvert.perzConvertList(goodsMapper.getByCondition(GoodsConvert.perzConvert(sGoods)));
+      if (list == null || list.size() == 0){
+        return null;
+      }
     }
     return list.get(0);
   }

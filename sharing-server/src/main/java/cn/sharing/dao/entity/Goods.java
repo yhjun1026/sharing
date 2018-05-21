@@ -199,11 +199,11 @@ public class Goods implements Serializable {
   }
 
   /** 门店ID */
-  public String getStoreUuid() {
+  public String getStoreuuid() {
     return storeuuid;
   }
 
-  public void setStoreUuid(String storeUuid) {
+  public void setStoreuuid(String storeUuid) {
     this.storeuuid = storeUuid;
   }
 }

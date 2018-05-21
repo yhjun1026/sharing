@@ -49,55 +49,55 @@
     update shgoods
     <set>
       <if test="code != null and code != ''">
-        CODE = #{code,jdbcType=VARCHAR},
+        CODE = #{code,jdbcType=VARCHAR}
       </if>
       <if test="name != null and name != ''">
-        NAME = #{name,jdbcType=VARCHAR},
+        NAME = #{name,jdbcType=VARCHAR}
       </if>
       <if test="type != null and type != ''">
-        TYPE = #{type,jdbcType=VARCHAR},
+        TYPE = #{type,jdbcType=VARCHAR}
       </if>
       <if test="state != null">
-        STAT = #{state,jdbcType=INTEGER},
+        STAT = #{state,jdbcType=INTEGER}
       </if>
       <if test="quantity != null">
         QUANTITY = #{quantity,jdbcType=INTEGER},
       </if>
       <if test="stockQuantity != null">
-        STOCKQUANTITY = #{stockQuantity,jdbcType=INTEGER},
+        STOCKQUANTITY = #{stockQuantity,jdbcType=INTEGER}
       </if>
       <if test="picture != null and picture != ''">
-        PICTURE = #{picture,jdbcType=VARCHAR},
+        PICTURE = #{picture,jdbcType=VARCHAR}
       </if>
       <if test="description != null and description != '' ">
-        DESCRIPTION = #{description,jdbcType=VARCHAR},
+        DESCRIPTION = #{description,jdbcType=VARCHAR}
       </if>
       <if test="price != null">
-        PRICE = #{price,jdbcType=DECIMAL},
+        PRICE = #{price,jdbcType=DECIMAL}
       </if>
       <if test="depositamt != null">
-        DEPOSITAMT = #{depositamt,jdbcType=DECIMAL},
+        DEPOSITAMT = #{depositamt,jdbcType=DECIMAL}
       </if>
       <if test="costPrice != null">
-        COSTPRICE = #{costPrice,jdbcType=DECIMAL},
+        COSTPRICE = #{costPrice,jdbcType=DECIMAL}
       </if>
       <if test="rentPrice != null">
-        RENTPRICE = #{rentPrice,jdbcType=DECIMAL},
+        RENTPRICE = #{rentPrice,jdbcType=DECIMAL}
       </if>
       <if test="repayamt != null">
-        REPAYAMT = #{repayamt,jdbcType=DECIMAL},
+        REPAYAMT = #{repayamt,jdbcType=DECIMAL}
       </if>
       <if test="laster != null">
-        LASTER = #{laster,jdbcType=VARCHAR},
+        LASTER = #{laster,jdbcType=VARCHAR}
       </if>
       <if test="lastupdtime != null">
-        LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
+        LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP}
       </if>
       <if test="memo != null">
-        MEMO = #{memo,jdbcType=VARCHAR},
+        MEMO = #{memo,jdbcType=VARCHAR}
       </if>
       <if test="storeuuid != null">
-        STOREUUID = #{storeuuid,jdbcType=VARCHAR},
+        STOREUUID = #{storeuuid,jdbcType=VARCHAR}
       </if>
     </set>
     where UUID = #{uuid,jdbcType=VARCHAR}
@@ -112,13 +112,13 @@
     delete from shgoods
     where 1 = 1
     <if test="code != null and code != ''">
-      and CODE = #{code,jdbcType=VARCHAR},
+      and CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
-      and NAME = #{name,jdbcType=VARCHAR},
+      and NAME = #{name,jdbcType=VARCHAR}
     </if>
     <if test="type != null and type != ''">
-      and TYPE = #{type,jdbcType=VARCHAR},
+      and TYPE = #{type,jdbcType=VARCHAR}
     </if>
   </delete>
 
@@ -138,49 +138,49 @@
   <select id="getAllRentGoods" resultMap="BaseResultMap" parameterType="cn.sharing.dao.entity.Goods">
     select
       <include refid="Base_Column_List" />
-    from shgoods
+    from shgoods A
     where 1 = 1
-    and STOCKQUANTITY > 0
+    and A.STOCKQUANTITY > 0
     <if test="code != null and code != ''">
-      and CODE = #{code,jdbcType=VARCHAR},
+      and A.CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
-      and NAME = #{name,jdbcType=VARCHAR},
+      and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
     <if test="storeuuid != null">
-      and STOREUUID = #{storeuuid,jdbcType=VARCHAR},
+      and A.STOREUUID = #{storeuuid,jdbcType=VARCHAR}
     </if>
-    order by CODE
+    order by A.CODE
   </select>
 
-  <select id="getAllRentGoodsCount" resultType="Integer" parameterType="cn.sharing.dao.entity.Goods">
+  <select id="getAllRentGoodsCount" resultType="java.lang.Integer" parameterType="cn.sharing.dao.entity.Goods">
     select
     count(*)
-    from shgoods
+    from shgoods A
     where 1 = 1
-    and STOCKQUANTITY > 0
+    and A.STOCKQUANTITY > 0
     <if test="code != null and code != ''">
-      and CODE = #{code,jdbcType=VARCHAR},
+      and A.CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
-      and NAME = #{name,jdbcType=VARCHAR},
+      and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
-    order by CODE
+    order by A.CODE
   </select>
 
   <select id="getByCondition" parameterType="cn.sharing.dao.entity.Goods" resultMap="BaseResultMap">
     select
       <include refid="Base_Column_List" />
-    from shgoods
+    from shgoods A
     where 1 = 1
     <if test="uuid != null and uuid != ''">
       and A.UUID = #{uuid,jdbcType=VARCHAR}
     </if>
     <if test="code != null and code != ''">
-      and A.CODE = #{code,jdbcType=VARCHAR},
+      and A.CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
-      and A.NAME = #{name,jdbcType=VARCHAR},
+      and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
   </select>
 </mapper>
