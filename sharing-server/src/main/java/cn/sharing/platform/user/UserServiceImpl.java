@@ -256,7 +256,7 @@ public class UserServiceImpl implements UserService {
 
     SUser sUser = new SUser();
     BeanUtils.copyProperties(user, sUser);
-    user.setPassword(null);
+    sUser.setPassword(null);
 
     return sUser;
   }
