@@ -1,7 +1,5 @@
 package cn.sharing.platform.pay.wxpay.utils;
 
-import com.hd123.util.TenpayUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

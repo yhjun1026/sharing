@@ -1,7 +1,7 @@
 package cn.sharing.platform.pay.wxpay.utils;
 
-import com.hd123.util.SDKRuntimeException;
 
+import cn.sharing.platform.pay.wxpay.SDKRuntimeException;
 
 public class MD5SignUtil {
 	public static String Sign(String content, String key)

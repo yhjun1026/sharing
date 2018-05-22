@@ -1,6 +1,8 @@
 package cn.sharing.platform.pay.wxpay.utils;
 
-import com.hd123.util.SDKRuntimeException;
+
+
+import cn.sharing.platform.pay.wxpay.SDKRuntimeException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
