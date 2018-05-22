@@ -114,6 +114,11 @@
       <groupId>io.springfox</groupId>
       <artifactId>springfox-schema</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>org.jdom</groupId>
+      <artifactId>jdom</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.jolokia</groupId>
       <artifactId>jolokia-core</artifactId>
