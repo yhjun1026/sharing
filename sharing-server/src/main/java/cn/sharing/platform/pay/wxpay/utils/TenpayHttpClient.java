@@ -2,6 +2,16 @@ package cn.sharing.platform.pay.wxpay.utils;
 
 
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.EntityUtils;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -360,7 +370,7 @@ public class TenpayHttpClient {
              
              System.out.println("executing request" + httpPost.getRequestLine());
              
-             StringEntity  reqEntity  = new StringEntity(this.reqXmlPosData);
+             StringEntity reqEntity  = new StringEntity(this.reqXmlPosData);
              // 设置类型 
              reqEntity.setContentType("application/x-www-form-urlencoded"); 
              httpPost.setEntity(reqEntity);
