@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,4 +64,8 @@ public interface FileService {
   @ApiOperation(value = "下载文件", httpMethod = "GET")
   public ResponseEntity<byte[]> download(@RequestParam("fileId") String fileId);
 //  public void download(HttpServletRequest request, HttpServletResponse response);
+
+  @RequestMapping(value = "/{fileId}/", method = RequestMethod.GET)
+  @ApiOperation(value = "文件", httpMethod = "GET")
+  public ResponseEntity<byte[]> file(@PathVariable("fileId") String fileId);
 }

@@ -17,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
@@ -152,6 +149,45 @@ public class FileServiceImpl extends BaseImpl implements FileService {
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             // 当文件名中有中文时，会出现乱码，通过new String(fileName.getBytes("utf-8"),"ISO8859-1")转换
             headers.setContentDispositionFormData("attchement", new String(fileId.getBytes("UTF-8"), "ISO-8859-1"));
+            if (content == null || content.length == 0) {
+                return null;
+            } else {
+                return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);  //HttpStatus.CREATED
+            }
+        } catch (Exception e) {
+            logger.error("download error:" + e.getMessage(), e);
+            return null;
+        }
+    }
+
+
+    @Override
+    public ResponseEntity<byte[]> file(@PathVariable("fileId") String fileId) {
+        try {
+            if (StringUtils.isEmpty(fileId)) {
+                logger.error("未指定文件id");
+                return null;
+            }
+            byte[] content = getFile(fileId);
+            if (content == null) {
+                logger.error("文件不存在, fileId=" + fileId);
+            }
+
+            HttpHeaders headers = new HttpHeaders();
+            if(fileId.contains(".jpg") || fileId.contains(".JEPG")){
+                headers.setContentType(MediaType.IMAGE_JPEG);
+            }else if(fileId.contains(".png")){
+                headers.setContentType(MediaType.IMAGE_PNG);
+            }else if(fileId.contains(".gif")){
+                headers.setContentType(MediaType.IMAGE_GIF);
+            }else{
+                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+                // 当文件名中有中文时，会出现乱码，通过new String(fileName.getBytes("utf-8"),"ISO8859-1")转换
+                headers.setContentDispositionFormData("attchement", new String(fileId.getBytes("UTF-8"), "ISO-8859-1"));
+            }
+
+            // 当文件名中有中文时，会出现乱码，通过new String(fileName.getBytes("utf-8"),"ISO8859-1")转换
+//            headers.setContentDispositionFormData("attchement", new String(fileId.getBytes("UTF-8"), "ISO-8859-1"));
             if (content == null || content.length == 0) {
                 return null;
             } else {
