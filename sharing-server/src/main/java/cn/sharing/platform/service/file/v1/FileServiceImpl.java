@@ -8,11 +8,17 @@ import cn.sharing.platform.utils.FileIdUtils;
 import cn.sharing.platform.utils.FileUtils;
 import cn.sharing.platform.utils.MD5;
 import cn.sharing.platform.utils.RequestUtils;
+import cn.sharing.platform.utils.StringUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -129,35 +135,31 @@ public class FileServiceImpl extends BaseImpl implements FileService {
 
     /**
      * 下载文件
-     *
-     * @param request
-     * @param response
      */
     @Override
-    public void download(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<byte[]> download(@RequestParam("fileId") String fileId) {
         try {
-            String fileId = request.getParameter("fileId");
-            if (fileId == null) {
-                RequestUtils.writeMessage(response, "未指定文件id");
-                return;
+            if (StringUtils.isEmpty(fileId)) {
+                logger.error("未指定文件id");
+                return null;
             }
             byte[] content = getFile(fileId);
             if (content == null) {
-                RequestUtils.writeMessage(response, "文件不存在.");
-                return;
+                logger.error("文件不存在, fileId=" + fileId);
             }
-            String userAgent = request.getHeader("User-Agent");
-            response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", fileId));
-            ServletOutputStream out = response.getOutputStream();
-            try {
-                out.write(content);
-                response.setContentLength(content.length);
-            } finally {
-                out.flush();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            // 当文件名中有中文时，会出现乱码，通过new String(fileName.getBytes("utf-8"),"ISO8859-1")转换
+            headers.setContentDispositionFormData("attchement", new String(fileId.getBytes("UTF-8"), "ISO-8859-1"));
+            if (content == null || content.length == 0) {
+                return null;
+            } else {
+                return new ResponseEntity<byte[]>(content, headers, HttpStatus.OK);  //HttpStatus.CREATED
             }
         } catch (Exception e) {
             logger.error("download error:" + e.getMessage(), e);
-            RequestUtils.writeMessage(response, "下载文件失败：" + e.getMessage());
+            return null;
         }
     }
 

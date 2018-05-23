@@ -4,6 +4,7 @@ import cn.sharing.platform.common.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ public interface FileService {
    * @param fileId 文件ID
    * @return 文件信息
    */
-  @RequestMapping(value = "info", method = RequestMethod.GET)
+  @RequestMapping(value = "/info", method = RequestMethod.GET)
   @ApiOperation(value = "获取文件信息", httpMethod = "GET")
   public
   @ResponseBody
@@ -41,7 +42,7 @@ public interface FileService {
    * @param fileId 文件ID
    * @return
    */
-  @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
   @ApiOperation(value = "删除文件", httpMethod = "DELETE")
   public
   @ResponseBody
@@ -53,7 +54,7 @@ public interface FileService {
    * @param file
    * @return
    */
-  @RequestMapping(value = "upload")
+  @RequestMapping(value = "/upload", method = RequestMethod.POST)
   @ApiOperation(value = "上传文件")
   public
   @ResponseBody
@@ -61,10 +62,9 @@ public interface FileService {
 
   /**
    * 下载文件
-   * @param request
-   * @param response
    */
-  @RequestMapping(value = "download", method = RequestMethod.GET)
+  @RequestMapping(value = "/download", method = RequestMethod.GET)
   @ApiOperation(value = "下载文件", httpMethod = "GET")
-  public void download(HttpServletRequest request, HttpServletResponse response);
+  public ResponseEntity<byte[]> download(@RequestParam("fileId") String fileId);
+//  public void download(HttpServletRequest request, HttpServletResponse response);
 }
