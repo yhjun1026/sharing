@@ -174,11 +174,11 @@ public class FileServiceImpl extends BaseImpl implements FileService {
             }
 
             HttpHeaders headers = new HttpHeaders();
-            if(fileId.contains(".jpg") || fileId.contains(".JEPG")){
+            if(fileId.toLowerCase().contains(".jpg") || fileId.toLowerCase().contains(".jpeg")){
                 headers.setContentType(MediaType.IMAGE_JPEG);
-            }else if(fileId.contains(".png")){
+            }else if(fileId.toLowerCase().contains(".png")){
                 headers.setContentType(MediaType.IMAGE_PNG);
-            }else if(fileId.contains(".gif")){
+            }else if(fileId.toLowerCase().contains(".gif")){
                 headers.setContentType(MediaType.IMAGE_GIF);
             }else{
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
