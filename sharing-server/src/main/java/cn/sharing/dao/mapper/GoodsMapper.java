@@ -43,14 +43,21 @@ public interface GoodsMapper {
      * @param rowBounds 分页信息
      * @return
      */
-    List<Goods> getAllRentGoods(Goods goods, RowBounds rowBounds);
+    List<Goods> getAllRentGoods(@Param("storeId")String storeId,
+                                @Param("code")String code,
+                                @Param("name")String name,
+                                @Param("queryType")int queryType,
+                                RowBounds rowBounds);
 
     /**
      * 所有可租用物品的数量
      * @parm goods 物品信息
      * @return
      */
-    int getAllRentGoodsCount(Goods goods);
+    int getAllRentGoodsCount(@Param("storeId")String storeId,
+                             @Param("code")String code,
+                             @Param("name")String name,
+                             @Param("queryType")int queryType);
 
     /**
      * 根据主键获取物品信息

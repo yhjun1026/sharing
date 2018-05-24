@@ -140,17 +140,19 @@
       <include refid="Base_Column_List" />
     from shgoods A
     where 1 = 1
-    and A.STOCKQUANTITY > 0
+    <if test="queryType != null and queryType == 1">
+      and A.STOCKQUANTITY > 0
+    </if>
     <if test="code != null and code != ''">
       and A.CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
       and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
-    <if test="storeuuid != null">
-      and A.STOREUUID = #{storeuuid,jdbcType=VARCHAR}
+    <if test="storeId != null and storeId != ''">
+      and A.STOREUUID = #{storeId,jdbcType=VARCHAR}
     </if>
-    order by A.CODE
+    order by A.LASTUPDTIME
   </select>
 
   <select id="getAllRentGoodsCount" resultType="java.lang.Integer" parameterType="cn.sharing.dao.entity.Goods">
@@ -158,14 +160,18 @@
     count(*)
     from shgoods A
     where 1 = 1
-    and A.STOCKQUANTITY > 0
+    <if test="queryType != null and queryType == 1">
+      and A.STOCKQUANTITY > 0
+    </if>
     <if test="code != null and code != ''">
       and A.CODE = #{code,jdbcType=VARCHAR}
     </if>
     <if test="name != null and name != ''">
       and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
-    order by A.CODE
+    <if test="storeId != null and storeId != ''">
+      and A.STOREUUID = #{storeId,jdbcType=VARCHAR}
+    </if>
   </select>
 
   <select id="getByCondition" parameterType="cn.sharing.dao.entity.Goods" resultMap="BaseResultMap">

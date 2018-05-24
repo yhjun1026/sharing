@@ -51,23 +51,21 @@ public class GoodsDao {
 
   /**
    * 根据条件查询所有可租用的物品
-   * @param goods 查询条件
    * @param goodsQuery 分页参数
    * @return
    */
-  public List<SGoods> getAllRentGoods(SGoods goods, GoodsQuery goodsQuery) {
+  public List<SGoods> getAllRentGoods(GoodsQuery goodsQuery, int type) {
     int offset = (goodsQuery.getPage() - 1) * goodsQuery.getPageSize();
-    return SGoodsConvert.perzConvertList(goodsMapper.getAllRentGoods(GoodsConvert.perzConvert(goods), new RowBounds(offset,
-            goodsQuery.getPageSize())));
+    return SGoodsConvert.perzConvertList(goodsMapper.getAllRentGoods(goodsQuery.getStoreId(), goodsQuery.getCode(), goodsQuery.getName(), type,
+            new RowBounds(offset, goodsQuery.getPageSize())));
   }
 
   /**
    * 查询科可租用的数量
-   * @param goods
    * @return
    */
-  public int getAllRentGoodsCount(SGoods goods){
-    return goodsMapper.getAllRentGoodsCount(GoodsConvert.perzConvert(goods));
+  public int getAllRentGoodsCount(GoodsQuery goodsQuery, int type){
+    return goodsMapper.getAllRentGoodsCount(goodsQuery.getStoreId(), goodsQuery.getCode(), goodsQuery.getName(), type);
   }
 
   /**

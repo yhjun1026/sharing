@@ -44,7 +44,7 @@ public interface GoodsService {
    * @return
    */
   @RequestMapping(value = "/get/rent/all", method = RequestMethod.POST)
-  @ApiOperation(value = "获取可以租用的物品")
+  @ApiOperation(value = "获取物品列表")
   ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody @Valid GoodsQuery param);
 
   /**

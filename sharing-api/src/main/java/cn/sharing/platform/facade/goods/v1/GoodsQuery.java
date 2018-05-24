@@ -10,19 +10,19 @@ public class GoodsQuery {
   /** 项目代码 */
   @ApiModelProperty(value = "项目Id", required = false)
   private String storeId;
-  /** 物品id */
-  @ApiModelProperty(value = "物品id", required = false)
-  private String id;
   /** 物品代码 */
   @ApiModelProperty(value = "物品代码", required = false)
   private String code;
   /** 物品名称 */
   @ApiModelProperty(value = "物品名称", required = false)
   private String name;
+  /** 查询类型 */
+  @ApiModelProperty(value = "查询类型（all 查询所有，available 查询可租用的，默认查询所有）", required = false)
+  private String queryType;
   /** 当前页 */
   @ApiModelProperty(value = "当前页号，默认1", required = false)
   private int page = 1;
   /** 每页记录数 */
-  @ApiModelProperty(value = "每页大小，默认50，不超过200", required = false)
+  @ApiModelProperty(value = "每页大小，默认20，不超过200", required = false)
   private int pageSize = 50;
 }

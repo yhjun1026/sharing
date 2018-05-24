@@ -54,18 +54,18 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    */
   @Override
   public ResponseResult<QueryResult<SGoods>> getRentGoods(@RequestBody GoodsQuery param) {
-    SGoods sGoods = new SGoods();
-    sGoods.setStoreUuid(param.getStoreId());
-    sGoods.setCode(param.getCode());
-    sGoods.setName(param.getName());
-    List<SGoods> sGoodsList = goodsDao.getAllRentGoods(sGoods, param);
-    int count = goodsDao.getAllRentGoodsCount(sGoods);
+    int type = 0;
+    if ("available".equals(param.getQueryType())) {
+      type = 1;
+    }
+    List<SGoods> sGoodsList = goodsDao.getAllRentGoods(param, type);
+    int count = goodsDao.getAllRentGoodsCount(param, type);
     QueryResult<SGoods> queryResult = new QueryResult<SGoods>();
     queryResult.setItem(sGoodsList);
     queryResult.setPage(param.getPage());
     //计算pagesize
-    int pageCount = (count + param.getPageSize() - 1) / param.getPageSize();
-    queryResult.setPageSize(pageCount);
+//    int pageCount = (count + param.getPageSize() - 1) / param.getPageSize();
+    queryResult.setPageSize(param.getPageSize());
     queryResult.setTotalCount(count);
     return new ResponseResult<QueryResult<SGoods>>(queryResult);
   }
