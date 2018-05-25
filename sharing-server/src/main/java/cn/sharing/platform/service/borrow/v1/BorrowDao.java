@@ -14,6 +14,7 @@ import cn.sharing.platform.facade.borrow.v1.PreCompensateGoodsParam;
 import cn.sharing.platform.facade.borrow.v1.PreCompensateParam;
 import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
 import cn.sharing.platform.facade.goods.v1.GoodsService;
+import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
 import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.utils.DateUtil;
@@ -374,6 +375,15 @@ public class BorrowDao {
     }
     SBorrowDtl borrowDtl = new SBorrowDtl();
     BeanUtils.copyProperties(dtl, borrowDtl);
+    //获取图片
+    try {
+      ResponseResult<SGoods> result = goodsService.get(dtl.getGoodsCode());
+      if (result.getStatus() == 0) {
+        borrowDtl.setPicture(result.getData().getPicture());
+      }
+    } catch (Exception e) {
+      log.error("获取物品图片信息异常, " + e.getMessage());
+    }
 
     return borrowDtl;
   }

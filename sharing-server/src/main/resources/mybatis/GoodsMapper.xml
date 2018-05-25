@@ -142,6 +142,7 @@
     where 1 = 1
     <if test="queryType != null and queryType == 1">
       and A.STOCKQUANTITY > 0
+      and A.STAT = 0
     </if>
     <if test="code != null and code != ''">
       and A.CODE = #{code,jdbcType=VARCHAR}
@@ -162,6 +163,7 @@
     where 1 = 1
     <if test="queryType != null and queryType == 1">
       and A.STOCKQUANTITY > 0
+      and A.STAT = 0
     </if>
     <if test="code != null and code != ''">
       and A.CODE = #{code,jdbcType=VARCHAR}

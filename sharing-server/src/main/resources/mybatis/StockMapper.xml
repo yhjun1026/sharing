@@ -86,7 +86,7 @@
     <if test="goodsUuid != null and uuid != '' ">
       and GOODSUUID = #{goodsUuid,jdbcType=VARCHAR}
     </if>
-    <if test="no != null">
+    <if test="no != null and no != 0">
       and NO = #{no,jdbcType=INTEGER}
     </if>
     <if test="state != null">

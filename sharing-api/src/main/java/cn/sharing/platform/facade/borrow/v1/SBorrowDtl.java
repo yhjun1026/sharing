@@ -32,4 +32,6 @@ public class SBorrowDtl {
   private String backDescrip;
   @ApiModelProperty(value = "备注")
   private String memo;
+  @ApiModelProperty(value = "图片")
+  private String picture;
 }
