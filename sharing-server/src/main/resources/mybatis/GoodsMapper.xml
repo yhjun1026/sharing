@@ -191,4 +191,18 @@
       and A.NAME = #{name,jdbcType=VARCHAR}
     </if>
   </select>
+
+  <!-- 更新物品库存 -->
+  <update id="updateStockQty">
+    update shgoods
+    <set>
+      <if test="type == 0">
+        STOCKQUANTITY = STOCKQUANTITY + 1,
+      </if>
+      <if test="type == 1">
+        STOCKQUANTITY = STOCKQUANTITY - 1,
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
 </mapper>

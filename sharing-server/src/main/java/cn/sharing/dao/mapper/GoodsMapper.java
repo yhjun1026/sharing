@@ -73,4 +73,10 @@ public interface GoodsMapper {
      */
     List<Goods> getByCondition(Goods condition);
 
+    /**
+     * 更新物品库存，type=0 增加，type=1 减少
+     * @return
+     */
+    int updateStockQty(@Param("uuid") String uuid, @Param("type") int type);
+
 }

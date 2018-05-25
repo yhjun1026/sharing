@@ -1,5 +1,7 @@
 package cn.sharing.platform.service.goods.v1;
 
+import cn.sharing.dao.entity.Goods;
+import cn.sharing.dao.entity.Stock;
 import cn.sharing.dao.mapper.GoodsMapper;
 import cn.sharing.dao.mapper.StockMapper;
 import cn.sharing.platform.facade.goods.v1.GoodsQuery;
@@ -147,10 +149,21 @@ public class GoodsDao {
    */
   @Transactional
   public void updateStockState(SGoodsStock sGoodsStock) throws Exception{
-    if(StringUtils.isEmpty(sGoodsStock.getUuid())){
+    Stock stock = stockMapper.getByPrimaryKey(sGoodsStock.getUuid());
+    if(stock == null){
       throw new Exception("物品库存信息不正确");
     }
-    stockMapper.update(StockConvert.perzConvert(sGoodsStock));
+    //物品损坏时，先调用赔偿接口，然后再调用归还接口，这种情况下不能将物品状态改成可用
+    if ((stock.getState() == 3 || stock.getState() == 4) && sGoodsStock.getState() == 0) {
+      //不做操作
+    } else {
+      stockMapper.update(StockConvert.perzConvert(sGoodsStock));
+      //更新库存
+      if (sGoodsStock.getState() == 0 || sGoodsStock.getState() == 1) {
+        //预定时减库存，归还时加库存
+        goodsMapper.updateStockQty(stock.getGoodsUuid(), sGoodsStock.getState());
+      }
+    }
   }
 
   /**
