@@ -63,13 +63,13 @@ public interface GoodsService {
    * 预定或者租用可以被租用的物品，一次只能租用一个物品，
    * 不需要传库存信息，系统随机选取一个可以租用的库存物品
    *
-   * @param sGoods
+   * @param borrowParam
    *         租用的物品信息
    * @return 租用的物品
    */
   @RequestMapping(value = "/borrow" + "", method = RequestMethod.POST)
   @ApiOperation(value = "预定或者租用可以被租用的物品，一次只能租用一个物品")
-  ResponseResult<SGoods> borrow(@RequestBody SGoods sGoods);
+  ResponseResult<SGoodsStock> borrow(@RequestBody GoodsBorrowParam borrowParam);
 
   /**
    * 更新物品的状态

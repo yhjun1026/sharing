@@ -157,16 +157,29 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
    * 预定或者租用可以被租用的物品，一次只能租用一个物品，
    * 不需要传库存信息，系统随机选取一个可以租用的库存物品
    *
-   * @param sGoods
+   * @param borrowParam
    *         租用的物品信息
    * @return 租用的物品
    */
   @Override
-  public ResponseResult<SGoods> borrow(@RequestBody SGoods sGoods) {
+  public ResponseResult<SGoodsStock> borrow(@RequestBody GoodsBorrowParam borrowParam) {
     //根据商品代码查询可以租用的
-    SGoodsStock sGoodsStock = goodsDao.getCanRentGoods(sGoods.getUuid());
+    ResponseResult<SGoodsStock> response;
+    try {
+      SGoodsStock sGoodsStock = goodsDao.getCanRentGoods(borrowParam.getUuid());
+      if (sGoodsStock == null) {
+        response = ResponseResult.failed("锁定物品失败.");
+        return response;
+      }
 
-    return null;
+      response = ResponseResult.success();
+      response.setData(sGoodsStock);
+      return response;
+    } catch (Exception e) {
+      logger.error("锁定物品失败, " + e.getMessage());
+      response = ResponseResult.failed("锁定物品失败, " + e.getMessage());
+      return response;
+    }
   }
 
   /**

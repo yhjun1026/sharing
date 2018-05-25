@@ -13,7 +13,7 @@ import lombok.Data;
 @ApiModel(description = "租用单物品归还对象")
 public class SGoodsStock {
   /** UUID */
-  @ApiModelProperty(value = "UUID")
+  @ApiModelProperty(value = "物品库存UUID")
   private String uuid;
   /** 物品UUID */
   @ApiModelProperty(value = "物品UUID")
