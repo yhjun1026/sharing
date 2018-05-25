@@ -196,7 +196,7 @@ public class GoodsServiceImpl extends BaseImpl implements GoodsService {
       return ResponseResult.success();
     }catch (Exception e){
       logger.error("更新物品状态失败，原因" + e.getMessage());
-      return ResponseResult.failed("删除物品信息失败");
+      return ResponseResult.failed("更新物品信息失败");
     }
   }
 

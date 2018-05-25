@@ -73,7 +73,7 @@ public class BorrowDao {
     for (SBorrowDtl dtl : param.getGoodsDtl()) {
       //更新物品状态
       SGoodsStock goodsStock = new SGoodsStock();
-      goodsStock.setGoodsUuid(dtl.getGoodsUuid());
+      goodsStock.setUuid(dtl.getGoodsUuid());
       goodsStock.setState(1);
       ResponseResult<Void> result = goodsService.updateState(goodsStock);
       if (result.getStatus() != 0) {
@@ -124,7 +124,7 @@ public class BorrowDao {
     List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
     for (GoodsBorrowDtl item : dtls) {
       SGoodsStock goodsStock = new SGoodsStock();
-      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setUuid(item.getGoodsUuid());
       goodsStock.setState(2);
       ResponseResult<Void> result = goodsService.updateState(goodsStock);
       if (result.getStatus() != 0) {
@@ -168,7 +168,7 @@ public class BorrowDao {
     List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
     for (GoodsBorrowDtl item : dtls) {
       SGoodsStock goodsStock = new SGoodsStock();
-      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setUuid(item.getGoodsUuid());
       goodsStock.setState(0);
       ResponseResult<Void> result = goodsService.updateState(goodsStock);
       if (result.getStatus() != 0) {
@@ -201,7 +201,7 @@ public class BorrowDao {
     List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
     for (GoodsBorrowDtl item : dtls) {
       SGoodsStock goodsStock = new SGoodsStock();
-      goodsStock.setGoodsUuid(item.getGoodsUuid());
+      goodsStock.setUuid(item.getGoodsUuid());
       goodsStock.setState(3);
       ResponseResult<Void> result = goodsService.updateState(goodsStock);
       if (result.getStatus() != 0) {
