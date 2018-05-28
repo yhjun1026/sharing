@@ -36,7 +36,7 @@ public class BorrowQuery {
     private int page = 1;
     @ApiModelProperty(value = "每页大小，默认20，不超过200", required = false)
     private int pageSize = 20;
-    @ApiModelProperty(value = "租用单类型，1=租借，2=已领取，3=归还，4=赔偿，0=全部， 默认0", required = false)
-    private int borrowType = 0;
+    @ApiModelProperty(value = "租用单类型，1=租借，2=已领取，3=归还，4=赔偿 （支持多选，逗号分隔，比如 2,4）", required = false)
+    private String borrowTypes;
 
 }

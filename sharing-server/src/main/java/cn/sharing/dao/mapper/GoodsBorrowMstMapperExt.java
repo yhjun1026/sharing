@@ -17,5 +17,5 @@ public interface GoodsBorrowMstMapperExt {
                                            @Param("goodsCode") String goodsCode,
                                            @Param("goodsName") String goodsName,
                                            @Param("mobile") String mobile,
-                                           @Param("stat") String stat);
+                                           @Param("stats") List<String> stats);
 }

@@ -413,20 +413,36 @@ public class BorrowDao {
     if (!StringUtils.isEmpty(param.getEndTime())) {
       endTime = DateUtil.getDateByPattern(param.getEndTime(), DateUtil.DEFAULT_FORMAT);
     }
-    String stat = null;
-    if (param.getBorrowType() == 1) {
-      stat = BorrowStatEnum.NEW.getCode();
-    } else if (param.getBorrowType() == 2) {
-      stat = BorrowStatEnum.USING.getCode();
-    } else if (param.getBorrowType() == 3) {
-      stat = BorrowStatEnum.BACKED.getCode();
-    } else if (param.getBorrowType() == 4) {
-      stat = BorrowStatEnum.COMPENSATED.getCode();
+    List<String> stateList = new ArrayList<>();
+    if (StringUtils.isNotEmpty(param.getBorrowTypes())) {
+      String[] states = param.getBorrowTypes().split(",");
+      for (String item : states) {
+        try {
+          int type = Integer.parseInt(item);
+          stateList.add(getState(type));
+        } catch (Exception e) {
+          //不做操作
+        }
+
+      }
     }
 
     PageHelper.startPage(param.getPage(), param.getPageSize());
-    List<GoodsBorrowMst> goodsBorrowMsts = goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsCode(), param.getGoodsName(), param.getMobile(), stat);
+    List<GoodsBorrowMst> goodsBorrowMsts = goodsBorrowMstMapperExt.queryGoodsBorrowMst(param.getStoreId(), beginTime, endTime, param.getGoodsCode(), param.getGoodsName(), param.getMobile(), stateList);
     PageInfo<GoodsBorrowMst> pageInfo = new PageInfo<>(goodsBorrowMsts);
     return pageInfo;
+  }
+
+  private String getState(int type){
+    if (type == 1) {
+      return BorrowStatEnum.NEW.getCode();
+    } else if (type == 2) {
+      return BorrowStatEnum.USING.getCode();
+    } else if (type == 3) {
+      return BorrowStatEnum.BACKED.getCode();
+    } else if (type == 4) {
+      return BorrowStatEnum.COMPENSATED.getCode();
+    }
+    return null;
   }
 }

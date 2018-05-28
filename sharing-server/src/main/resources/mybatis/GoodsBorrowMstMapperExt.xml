@@ -29,8 +29,11 @@
     <if test="storeId != null">
       and mst.store_uuid = #{storeId,jdbcType=VARCHAR}
     </if>
-    <if test="stat != null">
-      and mst.stat = #{stat,jdbcType=VARCHAR}
+    <if test="stats!=null and stats.size() > 0">
+      and mst.stat in
+      <foreach item="item" collection="stats" separator="," open="(" close=")" index="">
+        #{item, jdbcType=VARCHAR}
+      </foreach>
     </if>
     <if test="mobile != null">
       and mst.mobile = #{mobile,jdbcType=VARCHAR}
