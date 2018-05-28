@@ -51,6 +51,7 @@
     <if test="goodsName != null">
       and dtl.goods_name like CONCAT('%', #{goodsName}, '%')
     </if>
+    order by create_time desc
 
   </select>
 </mapper>

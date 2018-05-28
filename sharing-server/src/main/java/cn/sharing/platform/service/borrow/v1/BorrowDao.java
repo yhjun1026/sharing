@@ -269,7 +269,6 @@ public class BorrowDao {
       GoodsBorrowDtlExample example = new GoodsBorrowDtlExample();
       GoodsBorrowDtlExample.Criteria criteria = example.createCriteria();
       criteria.andBorrowUuidEqualTo(item.getUuid());
-      example.setOrderByClause("create_time desc");
       List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
       List<SBorrowDtl> goodsDtl = new ArrayList<>();
       for (GoodsBorrowDtl dtl : dtls) {
