@@ -186,6 +186,7 @@ public class BorrowDao {
     }
     GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
     goodsBorrowMst.setStat(BorrowStatEnum.BACKED.getCode());
+    goodsBorrowMst.setRealBackTime(new Date());
     goodsBorrowMst.setBackDealer(backDealer);
     goodsBorrowMst.setBackDealTime(new Date());
     goodsBorrowMst.setLstUpdTime(new Date());
