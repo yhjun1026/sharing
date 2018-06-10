@@ -10,6 +10,7 @@ public class WxAccount {
 	private String MchId;
 	private String SubMchId;
 	private String CertFileName;
+	private String NotifyUrl;
 	
 
 	public int getGround() {
@@ -60,5 +61,13 @@ public class WxAccount {
 		return "WxAccount [Ground=" + Ground + ", AppId=" + AppId + ", Appkey="
 				+ Appkey + ", MchId=" + MchId + ", SubMchId=" + SubMchId
 				+ ", CertFileName=" + CertFileName + "]";
+	}
+
+	public String getNotifyUrl() {
+		return NotifyUrl;
+	}
+
+	public void setNotifyUrl(String notifyUrl) {
+		NotifyUrl = notifyUrl;
 	}
 }

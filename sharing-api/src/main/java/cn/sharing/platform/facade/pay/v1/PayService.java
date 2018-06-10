@@ -23,15 +23,18 @@ import org.springframework.web.bind.annotation.*;
 public interface PayService {
 
     @RequestMapping(value = "/prepay", method = RequestMethod.POST)
-    @ApiOperation(value = "支付二维码申请")
+    @ApiOperation(value = "(当面付)支付二维码申请")
     public PayOut PreparePay(@RequestBody  PayIn preorder);
 
 
     @RequestMapping(value = "/scanpay", method = RequestMethod.POST)
-    @ApiOperation(value = "付款码直接支付")
+    @ApiOperation(value = "(当面付)付款码直接支付")
     public ResponseResult<PayOut> ScanPay(@RequestBody PayIn preorder);
 
 
+    @RequestMapping(value = "/unifiedpay", method = RequestMethod.POST)
+    @ApiOperation(value = "线上统一下单支付")
+    public ResponseResult<JSPayOut> UnifiedPay(@RequestBody PayIn preorder);
 
     @RequestMapping(value = "/get/{payId}", method = RequestMethod.GET)
     @ApiOperation(value = "获取单个租用单信息")

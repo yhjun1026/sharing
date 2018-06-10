@@ -1,5 +1,6 @@
 package cn.sharing.platform.pay.wxpay;
 
+import cn.sharing.platform.facade.pay.v1.JSPayOut;
 import cn.sharing.platform.facade.pay.v1.PayOut;
 
 import org.apache.log4j.Logger;
@@ -9,8 +10,8 @@ import java.text.SimpleDateFormat;
 public class WxPayClient {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static final Logger LOGGER = Logger.getLogger(WxPayClient.class);
-	
-	
+
+
 	public void WxPrePay(WxUnifieldRequest QrPayReq, PayOut payout){
 		LOGGER.info("预支付：微信扫码付请求开始！");
 		try {
@@ -47,6 +48,7 @@ public class WxPayClient {
 			e.printStackTrace();
 		}
 	}
+
 	
 	public void WxScanPay(WxScanPayRequest scanPay,PayOut payout){
 		LOGGER.info("扫码付：微信支付请求开始");

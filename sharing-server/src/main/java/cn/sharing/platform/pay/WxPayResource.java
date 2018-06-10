@@ -1,21 +1,19 @@
 package cn.sharing.platform.pay;
 
 import cn.sharing.platform.common.ResponseResult;
+import cn.sharing.platform.config.SignFilterConfig;
+import cn.sharing.platform.config.WxPayConfig;
+import cn.sharing.platform.facade.pay.v1.JSPayOut;
 import cn.sharing.platform.facade.pay.v1.PayIn;
 import cn.sharing.platform.facade.pay.v1.PayOut;
 import cn.sharing.platform.facade.pay.v1.PayService;
 
-import cn.sharing.platform.pay.wxpay.WxAccount;
-import cn.sharing.platform.pay.wxpay.WxPayClient;
-import cn.sharing.platform.pay.wxpay.WxRefundRequest;
+import cn.sharing.platform.pay.wxpay.*;
 import io.swagger.annotations.ApiParam;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -29,6 +27,10 @@ public class WxPayResource implements PayService{
 //    private WxAccountService wxaccountService;
 //	@Autowired
 //	private MpayTranDtlService mpayService;
+
+
+	@Autowired
+	WxPayConfig wxPayConfig;
 	
     private static final HashMap<String, PayIn> memoryBase;
     static {
@@ -187,7 +189,48 @@ public class WxPayResource implements PayService{
 //		LOGGER.info("支付：微信支付完成，\n"+payout.toString());
 //		return payout;
 	}
-	
+
+	@Override
+	public ResponseResult<JSPayOut> UnifiedPay(@RequestBody PayIn preorder) {
+
+		WxAccount wxaccount = new WxAccount();
+
+		wxaccount.setAppId(wxPayConfig.getAppid());
+		wxaccount.setAppkey(wxPayConfig.getKey());
+		wxaccount.setCertFileName("");
+		wxaccount.setMchId(wxPayConfig.getMch_id());
+		wxaccount.setSubMchId("");
+		wxaccount.setNotifyUrl(wxPayConfig.getNotify_url());
+
+		//对请求数据进行存储
+		LOGGER.info("预支付：是否存在数据实体:" + preorder.getOut_trade_no());
+		LOGGER.info("预支付：构建微信请求参数");
+	/*	WxPreparePayRequest QrPayReq = new WxPreparePayRequest(wxaccount, preorder);*/
+		WxUnifieldRequest wxpay = new WxUnifieldRequest(wxaccount,preorder, WXPayTypeEnum.JSPAY);
+		try {
+			wxpay.UnifieldOrderClient();
+		} catch (Exception e) {
+			LOGGER.error("支付请求失败：\n" + e.getMessage());
+			return ResponseResult.failed("支付请求失败！");
+		}
+		if("SUCCESS".equals(wxpay.getRetcode())){
+			JSPayOut jsPayOut = new JSPayOut();
+			jsPayOut.setAppid(wxaccount.getAppId());
+			jsPayOut.setNonceStr(wxpay.getNonceStr());
+			//拼接签名需要的参数
+			String stringSignTemp = "appId=" + wxPayConfig.getAppid() + "&nonceStr=" + wxpay.getNonceStr() + "&package=prepay_id=" + wxpay.getPrepay_id()+ "&signType=MD5&timeStamp=" + wxpay.getTimeStamp();
+			//再次签名，这个签名用于小程序端调用wx.requesetPayment方法
+			String paySign = PayUtil.sign(stringSignTemp, wxPayConfig.getKey(), "utf-8").toUpperCase();
+
+			jsPayOut.setPaySign(paySign);
+			LOGGER.info("支付：微信预支付请求完成：\n" + jsPayOut.toString());
+			return new ResponseResult<>(jsPayOut);
+		}else {
+			return ResponseResult.failed(wxpay.getRetmsg());
+		}
+
+	}
+
 	@Override
 	public PayOut Query(@PathVariable(value = "payId") @ApiParam(name = "payId", value = "支付代码") String
 								payId) {
@@ -255,13 +298,12 @@ public class WxPayResource implements PayService{
 	public PayOut Refund(@RequestBody  PayIn preorder) {
 		PayOut payout = new PayOut();
 		WxAccount wxaccount = new WxAccount();
-		wxaccount.setAppId("");
-		wxaccount.setAppkey("");
+		wxaccount.setAppId(wxPayConfig.getAppid());
+		wxaccount.setAppkey(wxPayConfig.getKey());
 		wxaccount.setCertFileName("");
-		wxaccount.setGround(0);
-		wxaccount.setMchId("");
+		wxaccount.setMchId(wxPayConfig.getMch_id());
 		wxaccount.setSubMchId("");
-
+		wxaccount.setNotifyUrl(wxPayConfig.getNotify_url());
 		
 
 		//请求数据信息
