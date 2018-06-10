@@ -151,8 +151,17 @@
       <artifactId>httpcore</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.weixin4j</groupId>
+      <artifactId>weixin4j</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.baidu.disconf</groupId>
       <artifactId>disconf-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>RELEASE</version>
     </dependency>
 
   </dependencies>

@@ -16,10 +16,7 @@ import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author yanghongjun
@@ -28,8 +25,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/api/v1/customer")
 @Api(tags = "顾客接口")
 public interface CustomerService {
+
     /** beanID */
     String DEFAULT_BEAN_ID = "sharing-api.customerService";
+
+    /**
+     * 新顾客登陆
+     *
+     * @param code
+     *         顾客
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiOperation(value = "新增用户")
+    ResponseResult<String> login(@RequestParam String code);
+
     /**
      * 顾客新增
      *

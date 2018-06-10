@@ -1,8 +1,17 @@
 package cn.sharing.platform.config;
 
+import cn.sharing.platform.weixin.AccessToken;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.weixin4j.WeixinException;
+import org.weixin4j.http.HttpsClient;
+import org.weixin4j.http.Response;
+
+import java.io.IOException;
 
 /**
  * Created by MSI on 2018/6/10.
@@ -26,6 +35,23 @@ public class WxPayConfig {
     public static final String SIGNTYPE = "MD5";
     //交易类型，小程序支付的固定值为JSAPI
     public static final String TRADETYPE = "JSAPI";
+    public static final String grantType = "client_credential";
     //微信统一下单接口地址
     public static final String pay_url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+
+    public static AccessToken token = null;         //微信公众号的accessToken对象，由于请求次数有限制，这里使用全局静态变量保存起来
+    public static AccessToken getToken(String appId, String secret) throws WeixinException, JsonParseException, JsonMappingException, IOException {
+        if(token == null || token.getExpires_in() < System.currentTimeMillis()){
+            //拼接参数
+            String param = "?grant_type=" + grantType + "&appid=" + appId + "&secret=" + secret;
+            //创建请求对象
+            HttpsClient http = new HttpsClient();
+            //调用获取access_token接口
+            Response res = http.get("https://api.weixin.qq.com/cgi-bin/token" + param);
+            System.out.println(res.asString());
+            ObjectMapper mapper = new ObjectMapper();
+            token = mapper.readValue(res.asString(),AccessToken.class);
+        }
+        return token;
+    }
 }
