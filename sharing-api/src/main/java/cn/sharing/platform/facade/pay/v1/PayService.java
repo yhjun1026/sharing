@@ -14,6 +14,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author yanghongjun
  * @version 1.0
@@ -50,4 +53,9 @@ public interface PayService {
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     @ApiOperation(value = "撤销")
     public PayOut Cancel(@RequestParam("out_trade_no") String out_trade_no);
+
+    @RequestMapping(value = "/notify", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "支付回调（给支付平台调用）")
+    public void Notify(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
