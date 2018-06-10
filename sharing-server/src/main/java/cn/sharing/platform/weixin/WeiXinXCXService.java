@@ -1,5 +1,6 @@
 package cn.sharing.platform.weixin;
 
+import cn.sharing.platform.config.WxPayConfig;
 import cn.sharing.platform.exception.WeiXinException;
 import com.alibaba.fastjson.JSON;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -32,17 +33,16 @@ public class WeiXinXCXService {
      * @param code 调用微信登陆返回的Code
      * @return
      */
-    public static com.alibaba.fastjson.JSONObject getSessionKeyOropenid(String code) {
+    public static com.alibaba.fastjson.JSONObject getSessionKeyOropenid(String code, String appId, String appSecret) {
         //微信端登录code值
         String wxCode = code;
         Locale locale = new Locale("en", "US");
-        ResourceBundle resource = ResourceBundle.getBundle("config/wx-config",locale);   //读取属性文件
-        String requestUrl = resource.getString("url");  //请求地址 https://api.weixin.qq.com/sns/jscode2session
+        String requestUrl = "https://api.weixin.qq.com/sns/jscode2session";  //请求地址
         Map<String, String> requestUrlParam = new HashMap<String, String>();
-        requestUrlParam.put("appid", resource.getString("appId"));  //开发者设置中的appId
-        requestUrlParam.put("secret", resource.getString("appSecret")); //开发者设置中的appSecret
+        requestUrlParam.put("appid", appId);  //开发者设置中的appId
+        requestUrlParam.put("secret", appSecret); //开发者设置中的appSecret
         requestUrlParam.put("js_code", wxCode); //小程序调用wx.login返回的code
-        requestUrlParam.put("grant_type", resource.getString("grantType"));    //默认参数 authorization_code
+        requestUrlParam.put("grant_type", WxPayConfig.grantType);    //默认参数 authorization_code
 
         //发送post请求读取调用微信 https://api.weixin.qq.com/sns/jscode2session 接口获取openid用户唯一标识
         com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(sendPost(requestUrl, requestUrlParam));
