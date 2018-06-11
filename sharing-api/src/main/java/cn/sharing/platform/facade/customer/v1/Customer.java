@@ -23,8 +23,9 @@ import java.util.List;
 @Data
 @ApiModel(description = "顾客信息")
 public class Customer {
-    @ApiModelProperty(value = "用户id")
-    private String id;
+    @ApiModelProperty(value = "微信联合Id")
+    private String unionId;
+
     @ApiModelProperty(value = "用户账户")
     private String code;
 
@@ -37,6 +38,15 @@ public class Customer {
     @ApiModelProperty(value = "微信号")
     private String wechatId;
 
+    @ApiModelProperty(value = "国家")
+    private String country;
+
+    @ApiModelProperty(value = "省")
+    private String province;
+
+    @ApiModelProperty(value = "市")
+    private String city;
+
     @ApiModelProperty(value = "小程序app Id")
     private String appId;
 
@@ -45,6 +55,9 @@ public class Customer {
 
     @ApiModelProperty(value = "小程序token")
     private String token;
+
+    @ApiModelProperty(value = "微信头像")
+    private String icon;
 
     @ApiModelProperty(value = "注册时间(yyyy-MM-dd hh:mm:ss)")
     private String createTime;

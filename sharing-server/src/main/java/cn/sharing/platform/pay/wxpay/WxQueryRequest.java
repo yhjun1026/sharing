@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class WxQueryRequest {
-	private static final String querydorderURL = "https://api.mch.weixin.qq.com/pay/orderquery";
+	private static final String querydorderURL = "https://api.mch.wechat.qq.com/pay/orderquery";
 	private WxAccount wxaccount;
 	private String out_trade_no; //原交易商户订单号
 	private String transaction_id;

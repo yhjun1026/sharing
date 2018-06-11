@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class WxScanPayRequest {
-	public static final String unifiedorderURL = "https://api.mch.weixin.qq.com/pay/micropay";
+	public static final String unifiedorderURL = "https://api.mch.wechat.qq.com/pay/micropay";
 	private WxAccount wxaccount;
     private PayIn payin;
     private static final Logger LOGGER = Logger.getLogger(WxScanPayRequest.class);

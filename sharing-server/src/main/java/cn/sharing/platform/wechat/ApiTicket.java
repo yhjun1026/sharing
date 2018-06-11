@@ -1,4 +1,4 @@
-package cn.sharing.platform.weixin;
+package cn.sharing.platform.wechat;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package cn.sharing.platform.config;
 
-import cn.sharing.platform.weixin.AccessToken;
+import cn.sharing.platform.wechat.AccessToken;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,24 +20,24 @@ import java.io.IOException;
 @Data
 public class WxPayConfig {
     //小程序appid
-    @Value("${weixin.appid}")
+    @Value("${wechat.appid}")
     private  String appid = "";
     //微信支付的商户id
-    @Value("${weixin.pay.mch_id}")
+    @Value("${wechat.pay.mch_id}")
     private String mch_id = "";
     //微信支付的商户密钥
-    @Value("${weixin.pay.key}")
+    @Value("${wechat.pay.key}")
     private String key = "";
     //支付成功后的服务器回调url
-    @Value("${weixin.pay.notify_url}")
-    private String notify_url = "https://??/??/weixin/api/wxNotify";
+    @Value("${wechat.pay.notify_url}")
+    private String notify_url = "https://??/??/wechat/api/wxNotify";
     //签名方式，固定值
     public static final String SIGNTYPE = "MD5";
     //交易类型，小程序支付的固定值为JSAPI
     public static final String TRADETYPE = "JSAPI";
     public static final String grantType = "client_credential";
     //微信统一下单接口地址
-    public static final String pay_url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+    public static final String pay_url = "https://api.mch.wechat.qq.com/pay/unifiedorder";
 
     public static AccessToken token = null;         //微信公众号的accessToken对象，由于请求次数有限制，这里使用全局静态变量保存起来
     public static AccessToken getToken(String appId, String secret) throws WeixinException, JsonParseException, JsonMappingException, IOException {
@@ -47,7 +47,7 @@ public class WxPayConfig {
             //创建请求对象
             HttpsClient http = new HttpsClient();
             //调用获取access_token接口
-            Response res = http.get("https://api.weixin.qq.com/cgi-bin/token" + param);
+            Response res = http.get("https://api.wechat.qq.com/cgi-bin/token" + param);
             System.out.println(res.asString());
             ObjectMapper mapper = new ObjectMapper();
             token = mapper.readValue(res.asString(),AccessToken.class);

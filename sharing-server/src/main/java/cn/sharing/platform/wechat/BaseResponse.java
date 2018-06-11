@@ -1,4 +1,4 @@
-package cn.sharing.platform.weixin;
+package cn.sharing.platform.wechat;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

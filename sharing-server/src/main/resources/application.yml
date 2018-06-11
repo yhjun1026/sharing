@@ -81,9 +81,9 @@ log:
 weixin:
   appid: ${wexin.appid:wxd2b96ca76407eea5}
   pay:
-    mch_id: ${weixin.pay.mch_id:1505007201}
-    key: ${weixin.pay.key:adifjasifu7124zvc1241246856huaop}
-    notify_url: ${weixin.pay.notify_url:https://www.xuemeiwanan.com/api/v1/pay/wx/notify}
+    mch_id: ${wechat.pay.mch_id:1505007201}
+    key: ${wechat.pay.key:adifjasifu7124zvc1241246856huaop}
+    notify_url: ${wechat.pay.notify_url:https://www.xuemeiwanan.com/api/v1/pay/wx/notify}
 
     
 

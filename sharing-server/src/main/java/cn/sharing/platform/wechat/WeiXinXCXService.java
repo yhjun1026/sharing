@@ -1,4 +1,4 @@
-package cn.sharing.platform.weixin;
+package cn.sharing.platform.wechat;
 
 import cn.sharing.platform.config.WxPayConfig;
 import cn.sharing.platform.exception.WeiXinException;
@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSON;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jolokia.util.Base64Util;
 import org.springframework.stereotype.Component;
-import org.weixin4j.WeixinException;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -24,7 +23,6 @@ import java.util.*;
 /**
  * Created by MSI on 2018/6/10.
  */
-@Component
 public class WeiXinXCXService {
 
     /**
@@ -37,7 +35,7 @@ public class WeiXinXCXService {
         //微信端登录code值
         String wxCode = code;
         Locale locale = new Locale("en", "US");
-        String requestUrl = "https://api.weixin.qq.com/sns/jscode2session";  //请求地址
+        String requestUrl = "https://api.wechat.qq.com/sns/jscode2session";  //请求地址
         Map<String, String> requestUrlParam = new HashMap<String, String>();
         requestUrlParam.put("appid", appId);  //开发者设置中的appId
         requestUrlParam.put("secret", appSecret); //开发者设置中的appSecret
@@ -48,6 +46,21 @@ public class WeiXinXCXService {
         com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(sendPost(requestUrl, requestUrlParam));
         return jsonObject;
     }
+
+//    public static AccessToken getToken() throws WeixinException, JsonParseException, JsonMappingException, IOException{
+//        if(token == null || token.getExpires_in() < System.currentTimeMillis()){
+//            //拼接参数
+//            String param = "?grant_type=" + grantType + "&appid=" + appId + "&secret=" + secret;
+//            //创建请求对象
+//            HttpsClient http = new HttpsClient();
+//            //调用获取access_token接口
+//            Response res = http.get("https://api.weixin.qq.com/cgi-bin/token" + param);
+//            System.out.println(res.asString());
+//            ObjectMapper mapper = new ObjectMapper();
+//            token = mapper.readValue(res.asString(),AccessToken.class);
+//        }
+//        return token;
+//    }
 
     /**
      * 向指定 URL 发送POST方法的请求

@@ -32,13 +32,13 @@ public interface CustomerService {
     /**
      * 新顾客登陆
      *
-     * @param code
+     * @param weChatAppLoginReq
      *         顾客
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ApiOperation(value = "新增用户")
-    ResponseResult<String> login(@RequestParam String code);
+    @ApiOperation(value = "小程序用户登陆")
+    ResponseResult<Customer> login(@RequestBody WeChatAppLoginReq weChatAppLoginReq);
 
     /**
      * 顾客新增

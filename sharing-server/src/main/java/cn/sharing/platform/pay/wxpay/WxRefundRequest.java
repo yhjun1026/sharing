@@ -11,7 +11,7 @@ import java.util.*;
 
 public class WxRefundRequest {
 	private static final Logger LOGGER = Logger.getLogger(WxRefundRequest.class);
-	public static final String RefundURL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
+	public static final String RefundURL = "https://api.mch.wechat.qq.com/secapi/pay/refund";
 	private WxAccount wxaccount;
     private PayIn payin;
     /*业务参数*/

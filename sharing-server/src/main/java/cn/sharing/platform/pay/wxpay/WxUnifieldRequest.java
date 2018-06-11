@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.util.*;
 
 public class WxUnifieldRequest {
-    public static final String unifiedorderURL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+    public static final String unifiedorderURL = "https://api.mch.wechat.qq.com/pay/unifiedorder";
     private String out_trade_no; //原交易商户订单号
     private String transaction_id;
     private String out_refund_no; //商户退款单号  退货交易流水
