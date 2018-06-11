@@ -7,7 +7,7 @@ import cn.sharing.dao.mapper.StockMapper;
 import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
-import org.apache.commons.lang.StringUtils;
+import cn.sharing.platform.utils.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
