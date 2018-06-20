@@ -231,6 +231,11 @@
         <version>4.4.6</version>
       </dependency>
       <dependency>
+        <groupId>org.weixin4j</groupId>
+        <artifactId>weixin4j</artifactId>
+        <version>0.0.7</version>
+      </dependency>
+      <dependency>
         <groupId>com.baidu.disconf</groupId>
         <artifactId>disconf-client</artifactId>
         <version>2.6.34</version>
