@@ -17,10 +17,11 @@ import cn.sharing.platform.facade.customer.v1.CustomerService;
 import cn.sharing.platform.facade.customer.v1.WeChatAppLoginReq;
 import cn.sharing.platform.wechat.OAuthJsToken;
 import cn.sharing.platform.wechat.WeiXinXCXService;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

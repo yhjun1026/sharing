@@ -22,6 +22,9 @@ public class WxPayConfig {
     //小程序appid
     @Value("${wechat.appid}")
     private  String appid = "";
+
+    @Value("${wechat.appsecret}")
+    private  String appsecret = "";
     //微信支付的商户id
     @Value("${wechat.pay.mch_id}")
     private String mch_id = "";

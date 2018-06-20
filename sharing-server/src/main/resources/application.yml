@@ -80,6 +80,7 @@ log:
       errorPeriod: 30
 wechat:
   appid: ${WECHAT_APP_ID:wxd2b96ca76407eea5}
+  appsecret: ${WECHAT_APP_SECRET:e4efb52b96f188bf7b696380d1a6146c}
   pay:
     mch_id: ${WECHAT_PAY_MCH_ID:1505007201}
     key: ${WECHAT_PAY_KEY:adifjasifu7124zvc1241246856huaop}
