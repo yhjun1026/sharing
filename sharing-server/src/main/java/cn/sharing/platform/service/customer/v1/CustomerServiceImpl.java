@@ -17,17 +17,15 @@ import cn.sharing.platform.facade.customer.v1.CustomerService;
 import cn.sharing.platform.facade.customer.v1.WeChatAppLoginReq;
 import cn.sharing.platform.wechat.OAuthJsToken;
 import cn.sharing.platform.wechat.WeiXinXCXService;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.weixin4j.WeixinException;
 import org.weixin4j.http.HttpsClient;
@@ -57,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Map<String, Object> ret = new HashMap<String, Object>();
         //拼接参数
-        String param = "?grant_type=" + WxPayConfig.grantType + "&appid=" + wxPayConfig.getAppid() + "&secret=" + wxPayConfig.getKey() + "&js_code=" + weChatAppLoginReq.getCode();
+        String param = "?grant_type=" + WxPayConfig.grantType + "&appid=" + wxPayConfig.getAppid() + "&secret=" + wxPayConfig.getAppsecret() + "&js_code=" + weChatAppLoginReq.getCode();
 
         logger.info("https://api.wechat.qq.com/sns/jscode2session" + param);
 
