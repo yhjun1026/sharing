@@ -35,7 +35,7 @@ public class WeiXinXCXService {
         //微信端登录code值
         String wxCode = code;
         Locale locale = new Locale("en", "US");
-        String requestUrl = "https://api.wechat.qq.com/sns/jscode2session";  //请求地址
+        String requestUrl = "https://api.weixin.qq.com/sns/jscode2session";  //请求地址
         Map<String, String> requestUrlParam = new HashMap<String, String>();
         requestUrlParam.put("appid", appId);  //开发者设置中的appId
         requestUrlParam.put("secret", appSecret); //开发者设置中的appSecret

@@ -57,14 +57,14 @@ public class CustomerServiceImpl implements CustomerService {
         //拼接参数
         String param = "?grant_type=" + WxPayConfig.grantType + "&appid=" + wxPayConfig.getAppid() + "&secret=" + wxPayConfig.getAppsecret() + "&js_code=" + weChatAppLoginReq.getCode();
 
-        logger.info("https://api.wechat.qq.com/sns/jscode2session" + param);
+        logger.info("https://api.weixin.qq.com/sns/jscode2session" + param);
 
         //创建请求对象
         HttpsClient http = new HttpsClient();
         //调用获取access_token接口
         Response res = null;
         try {
-            res = http.get("https://api.wechat.qq.com/sns/jscode2session" + param);
+            res = http.get("https://api.weixin.qq.com/sns/jscode2session" + param);
             //根据请求结果判定，是否验证成功
             JSONObject jsonObj = res.asJSONObject();
             if (jsonObj != null) {

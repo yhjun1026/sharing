@@ -38,9 +38,9 @@ public class WxPayConfig {
     public static final String SIGNTYPE = "MD5";
     //交易类型，小程序支付的固定值为JSAPI
     public static final String TRADETYPE = "JSAPI";
-    public static final String grantType = "client_credential";
+    public static final String grantType = "authorization_code"; //authorization_code  //client_credential
     //微信统一下单接口地址
-    public static final String pay_url = "https://api.mch.wechat.qq.com/pay/unifiedorder";
+    public static final String pay_url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
     public static AccessToken token = null;         //微信公众号的accessToken对象，由于请求次数有限制，这里使用全局静态变量保存起来
     public static AccessToken getToken(String appId, String secret) throws WeixinException, JsonParseException, JsonMappingException, IOException {
@@ -50,7 +50,7 @@ public class WxPayConfig {
             //创建请求对象
             HttpsClient http = new HttpsClient();
             //调用获取access_token接口
-            Response res = http.get("https://api.wechat.qq.com/cgi-bin/token" + param);
+            Response res = http.get("https://api.weixin.qq.com/cgi-bin/token" + param);
             System.out.println(res.asString());
             ObjectMapper mapper = new ObjectMapper();
             token = mapper.readValue(res.asString(),AccessToken.class);

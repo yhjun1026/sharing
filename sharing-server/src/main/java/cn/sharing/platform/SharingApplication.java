@@ -12,12 +12,14 @@ import com.github.pagehelper.PageHelper;
 import com.google.common.base.Predicates;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -35,8 +37,10 @@ import java.util.Properties;
  * @author yanghongjun
  * @version 1.0
  */
-@SpringBootApplication
+//@SpringBootApplication
 //@EnableDiscoveryClient
+@Configuration
+@EnableAutoConfiguration
 @EnableSwagger2
 @EnableScheduling
 @ComponentScan(basePackages = {"cn.sharing.platform"})
@@ -63,10 +67,10 @@ public class SharingApplication {
   public Docket createRestApi() {
     return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
-            .host("www.xuemeiwanan.com/sharing")
+            .host("localhost:10086")
             .select()
             .apis(RequestHandlerSelectors.basePackage("cn.sharing.platform"))
-            .paths(paths())
+            .paths(PathSelectors.any())
             .build();
   }
 
