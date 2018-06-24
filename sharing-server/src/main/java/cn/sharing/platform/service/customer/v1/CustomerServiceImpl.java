@@ -11,10 +11,12 @@ package cn.sharing.platform.service.customer.v1;
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
 import cn.sharing.platform.config.WxPayConfig;
-import cn.sharing.platform.facade.customer.v1.Customer;
+import cn.sharing.platform.dao.entity.Customer;
+import cn.sharing.platform.facade.customer.v1.SCustomer;
 import cn.sharing.platform.facade.customer.v1.CustomerQuery;
 import cn.sharing.platform.facade.customer.v1.CustomerService;
 import cn.sharing.platform.facade.customer.v1.WeChatAppLoginReq;
+import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.wechat.OAuthJsToken;
 import cn.sharing.platform.wechat.WeiXinXCXService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,8 +49,35 @@ public class CustomerServiceImpl implements CustomerService {
     WxPayConfig wxPayConfig;
     private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
+    @Autowired
+    private CustomerDao customerDao;
+
     @Override
-    public ResponseResult<Customer> login(@RequestBody WeChatAppLoginReq weChatAppLoginReq){
+    public ResponseResult<SCustomer> login(@RequestBody WeChatAppLoginReq weChatAppLoginReq){
+        if(StringUtils.isNotEmpty(weChatAppLoginReq.getOpenId())){
+            Customer customer = customerDao.get(weChatAppLoginReq.getOpenId(), null);
+            if(customer != null){
+                SCustomer SCustomer = new SCustomer();
+                SCustomer.setAppId(wxPayConfig.getAppid());
+                SCustomer.setCode(weChatAppLoginReq.getCode());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String now = sdf.format(new Date());
+                SCustomer.setCreateTime(now);
+                SCustomer.setOpenId(customer.getOpenid());
+                SCustomer.setName(customer.getName());
+                SCustomer.setIcon(customer.getIcon());
+
+
+                SCustomer.setToken(customer.getToken());
+                SCustomer.setUnionId(customer.getUnionId());
+
+                SCustomer.setCity(customer.getCity());
+                SCustomer.setProvince(customer.getProvince());
+                SCustomer.setCountry(customer.getCountry());
+
+                return new ResponseResult<>(SCustomer);
+            }
+        }
         if (weChatAppLoginReq.getCode() == null || weChatAppLoginReq.getCode() .equals("")) {
             return ResponseResult.failed("invalid null, code is null.");
         }
@@ -78,26 +107,24 @@ public class CustomerServiceImpl implements CustomerService {
                 com.alibaba.fastjson.JSONObject userInfo = WeiXinXCXService.getUserInfo(weChatAppLoginReq.getEncryptedData(),oauthJsToken.getSession_key(), weChatAppLoginReq.getIv());
 
 
-                Customer customer = new Customer();
-                customer.setAppId(wxPayConfig.getAppid());
-                customer.setCode(weChatAppLoginReq.getCode());
+                SCustomer SCustomer = new SCustomer();
+                SCustomer.setAppId(wxPayConfig.getAppid());
+                SCustomer.setCode(weChatAppLoginReq.getCode());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String now = sdf.format(new Date());
-                customer.setCreateTime(now);
-                customer.setOpenId(oauthJsToken.getOpenid());
-                customer.setName(userInfo.getString("nickName"));
-                customer.setIcon(userInfo.getString("avatarUrl"));
-
-                customer.setIcon(userInfo.getString("avatarUrl"));
-                customer.setToken(oauthJsToken.getSession_key());
-                customer.setUnionId(userInfo.getString("unionId"));
+                SCustomer.setCreateTime(now);
+                SCustomer.setOpenId(oauthJsToken.getOpenid());
+                SCustomer.setName(userInfo.getString("nickName"));
+                SCustomer.setIcon(userInfo.getString("avatarUrl"));
+                SCustomer.setToken(oauthJsToken.getSession_key());
+                SCustomer.setUnionId(userInfo.getString("unionId"));
                 //userPo.setNation(userInfoObj.getString("city"));
 
-                customer.setCity(userInfo.getString("city"));
-                customer.setProvince(userInfo.getString("province"));
-                customer.setCountry(userInfo.getString("country"));
+                SCustomer.setCity(userInfo.getString("city"));
+                SCustomer.setProvince(userInfo.getString("province"));
+                SCustomer.setCountry(userInfo.getString("country"));
 
-                return new ResponseResult<>(customer);
+                return new ResponseResult<>(SCustomer);
             }
         } catch (WeixinException e) {
             return ResponseResult.failed(e.getMessage());
@@ -107,22 +134,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public ResponseResult<Void> get(@RequestBody Customer customer) {
+    public ResponseResult<Void> get(@RequestBody SCustomer SCustomer) {
         return null;
     }
 
     @Override
-    public ResponseResult<Void> update(@RequestBody Customer customer) {
+    public ResponseResult<Void> update(@RequestBody SCustomer SCustomer) {
         return null;
     }
 
     @Override
-    public ResponseResult<QueryResult<Customer>> query(@RequestBody CustomerQuery param) {
+    public ResponseResult<QueryResult<SCustomer>> query(@RequestBody CustomerQuery param) {
         return null;
     }
 
     @Override
-    public ResponseResult<Customer> get(@PathVariable String id) {
+    public ResponseResult<SCustomer> get(@PathVariable String id) {
         return null;
     }
 }

@@ -104,14 +104,14 @@ public class BorrowDao {
     }
     if (billNumbers == null || billNumbers.size() == 0) {
       throw new RuntimeException("生成单据号失败");
-    }
+  }
 
-    GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
-    borrowMst.setUuid(mstUuid);
-    borrowMst.setBorrowPayUuid(payUuid);
-    borrowMst.setBillNumber(billNumbers.get(0));
-    borrowMst.setBorrowPayUuid(payUuid);
-    goodsBorrowMstMapper.insert(borrowMst);
+  GoodsBorrowMst borrowMst = convertFromBorrowParam(param);
+  borrowMst.setUuid(mstUuid);
+  borrowMst.setBorrowPayUuid(payUuid);
+  borrowMst.setBillNumber(billNumbers.get(0));
+  borrowMst.setBorrowPayUuid(payUuid);
+  goodsBorrowMstMapper.insert(borrowMst);
 
     return mstUuid;
   }

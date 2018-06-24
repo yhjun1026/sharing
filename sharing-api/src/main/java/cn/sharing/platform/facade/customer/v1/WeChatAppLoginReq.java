@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 @ApiModel(value = "微信小程序登陆对象")
 public class WeChatAppLoginReq {
+    @ApiModelProperty(value = "已登录用户保存的openId")
+    private String openId;
     @ApiModelProperty(value = "小程序获取到的用户code")
     private String code;
     @ApiModelProperty(value = "包括敏感数据在内的完整用户信息的加密数据")

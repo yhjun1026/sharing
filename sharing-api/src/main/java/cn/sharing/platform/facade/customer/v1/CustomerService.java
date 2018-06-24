@@ -10,12 +10,8 @@ package cn.sharing.platform.facade.customer.v1;
 
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
-import cn.sharing.platform.facade.borrow.v1.BorrowCollarParam;
-import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
-import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -38,27 +34,27 @@ public interface CustomerService {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "小程序用户登陆")
-    ResponseResult<Customer> login(@RequestBody WeChatAppLoginReq weChatAppLoginReq);
+    ResponseResult<SCustomer> login(@RequestBody WeChatAppLoginReq weChatAppLoginReq);
 
     /**
      * 顾客新增
      *
-     * @param customer
+     * @param SCustomer
      *         顾客
      * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增用户")
-    ResponseResult<Void> get(@RequestBody Customer customer);
+    ResponseResult<Void> get(@RequestBody SCustomer SCustomer);
 
     /**
      * 用户信息更新
-     * @param customer
+     * @param SCustomer
      * @return
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ApiOperation(value = "用户信息更新(只允许修改昵称、手机号、openId无法修改)")
-    ResponseResult<Void> update(@RequestBody Customer customer);
+    ResponseResult<Void> update(@RequestBody SCustomer SCustomer);
 
     /**
      * 用户查询
@@ -67,15 +63,15 @@ public interface CustomerService {
      */
     @RequestMapping(value = "/query", method = RequestMethod.POST)
     @ApiOperation(value = "用户查询")
-    public ResponseResult<QueryResult<Customer>> query(@RequestBody CustomerQuery param);
+    public ResponseResult<QueryResult<SCustomer>> query(@RequestBody CustomerQuery param);
 
     /**
      * 用户获取（可以根据手机号，openid）
      * @param id
-     * @return Customer
+     * @return SCustomer
      */
     @RequestMapping(value = "/get/{id}", method = RequestMethod.POST)
     @ApiOperation(value = "")
-    public ResponseResult<Customer> get(@PathVariable String id);
+    public ResponseResult<SCustomer> get(@PathVariable String id);
 
 }

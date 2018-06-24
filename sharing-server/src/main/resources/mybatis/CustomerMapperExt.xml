@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sharing.platform.dao.mapper.CustomerMapperExt">
+  <resultMap id="BaseResultMap" type="cn.sharing.platform.dao.entity.Customer">
+    <result column="union_id" jdbcType="VARCHAR" property="unionId" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="wechatid" jdbcType="VARCHAR" property="wechatid" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="createtime" jdbcType="VARCHAR" property="createtime" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+
+  <select id="queryCustomerByOpenid" resultMap="BaseResultMap">
+    SELECT DISTINCT cstm.* from shcustomer cstm
+    <where>
+    <if test="openid != null">
+      cstm.openid = #{openid,jdbcType=VARCHAR}
+    </if>
+    <!--<if test="stats!=null and stats.size() > 0">-->
+      <!--and cstm.stat in-->
+      <!--<foreach item="item" collection="stats" separator="," open="(" close=")" index="">-->
+        <!--#{item, jdbcType=VARCHAR}-->
+      <!--</foreach>-->
+    <!--</if>-->
+    <!--<if test="mobile != null">-->
+      <!--and mst.mobile = #{mobile,jdbcType=VARCHAR}-->
+    <!--</if>-->
+    <!--<if test="beginTime !=null">-->
+      <!--<![CDATA[-->
+                <!--and mst.create_time >= #{beginTime}-->
+                <!--]]>-->
+    <!--</if>-->
+    <!--<if test="endTime !=null">-->
+      <!--<![CDATA[-->
+                <!--and mst.create_time <= #{endTime}-->
+                <!--]]>-->
+    <!--</if>-->
+    <if test="phoneNumber != null">
+      and cstm.phone_number = #{phoneNumber}
+    </if>
+    </where>
+  </select>
+</mapper>

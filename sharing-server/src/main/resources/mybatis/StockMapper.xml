@@ -1,6 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sharing.dao.mapper.StockMapper">
+<mapper namespace="cn.sharing.platform.dao.mapper.StockMapper">
+  <resultMap id="BaseResultMap" type="cn.sharing.platform.dao.entity.Stock">
+    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
+    <result column="GOODSUUID" jdbcType="VARCHAR" property="goodsuuid" />
+    <result column="NO" jdbcType="INTEGER" property="no" />
+    <result column="STATE" jdbcType="INTEGER" property="state" />
+    <result column="LOCKVERSION" jdbcType="INTEGER" property="lockversion" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    UUID, GOODSUUID, NO, STATE, LOCKVERSION, MEMO
+  </sql>
+  <select id="selectByExample" parameterType="cn.sharing.platform.dao.entity.StockExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shgoodsstock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="offset != null and limit != null">
+      limit ${offset}, ${limit}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shgoodsstock
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shgoodsstock
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.sharing.platform.dao.entity.StockExample">
+    delete from shgoodsstock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.sharing.platform.dao.entity.Stock">
+    insert into shgoodsstock (UUID, GOODSUUID, NO, 
+      STATE, LOCKVERSION, MEMO
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{goodsuuid,jdbcType=VARCHAR}, #{no,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{lockversion,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.sharing.platform.dao.entity.Stock">
+    insert into shgoodsstock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        UUID,
+      </if>
+      <if test="goodsuuid != null">
+        GOODSUUID,
+      </if>
+      <if test="no != null">
+        NO,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="lockversion != null">
+        LOCKVERSION,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsuuid != null">
+        #{goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null">
+        #{no,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lockversion != null">
+        #{lockversion,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.sharing.platform.dao.entity.StockExample" resultType="java.lang.Long">
+    select count(*) from shgoodsstock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shgoodsstock
+    <set>
+      <if test="record.uuid != null">
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsuuid != null">
+        GOODSUUID = #{record.goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no != null">
+        NO = #{record.no,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.lockversion != null">
+        LOCKVERSION = #{record.lockversion,jdbcType=INTEGER},
+      </if>
+      <if test="record.memo != null">
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateSql != null">
+        ${record.updateSql},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shgoodsstock
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      GOODSUUID = #{record.goodsuuid,jdbcType=VARCHAR},
+      NO = #{record.no,jdbcType=INTEGER},
+      STATE = #{record.state,jdbcType=INTEGER},
+      LOCKVERSION = #{record.lockversion,jdbcType=INTEGER},
+      MEMO = #{record.memo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.platform.dao.entity.Stock">
+    update shgoodsstock
+    <set>
+      <if test="goodsuuid != null">
+        GOODSUUID = #{goodsuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="no != null">
+        NO = #{no,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="lockversion != null">
+        LOCKVERSION = #{lockversion,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.sharing.platform.dao.entity.Stock">
+    update shgoodsstock
+    set GOODSUUID = #{goodsuuid,jdbcType=VARCHAR},
+      NO = #{no,jdbcType=INTEGER},
+      STATE = #{state,jdbcType=INTEGER},
+      LOCKVERSION = #{lockversion,jdbcType=INTEGER},
+      MEMO = #{memo,jdbcType=VARCHAR}
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.platform.dao.entity.StockExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from shgoodsstock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.StockExample" resultType="long">
+    select sum(${sumCol}) from shgoodsstock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <insert id="batchInsert">
+    <if test="items.get(0) != null">
+            insert into shgoodsstock  (UUID, GOODSUUID, NO, 
+        STATE, LOCKVERSION, MEMO
+        )
+      values
+      <foreach collection="items" index="index" item="item" separator=",">
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsuuid,jdbcType=VARCHAR}, #{item.no,jdbcType=INTEGER}, 
+        #{item.state,jdbcType=INTEGER}, #{item.lockversion,jdbcType=INTEGER}, #{item.memo,jdbcType=VARCHAR}
+        )
+      </foreach>
+    </if>
+  </insert>
   <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.Stock">
     <id column="UUID" jdbcType="VARCHAR" property="uuid" />
     <result column="GOODSUUID" jdbcType="VARCHAR" property="goodsUuid" />
@@ -69,7 +334,7 @@
   <insert id="batchInsert" parameterType="cn.sharing.dao.entity.Stock">
     insert into shgoodsstock(UUID, GOODSUUID, NO, STATE,  MEMO, LOCKVERSION)
     values
-    <foreach collection="stocks" item="item" index="index" separator=",">
+    <foreach collection="stocks" index="index" item="item" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.no,jdbcType=INTEGER},
       #{item.state,jdbcType=INTEGER},#{item.memo,jdbcType=VARCHAR}, #{item.lockVersion,jdbcType=INTEGER})
     </foreach>

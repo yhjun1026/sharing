@@ -1,4 +1,4 @@
-package com.sharing.dao.entity;
+package cn.sharing.platform.dao.entity;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 /**
  * 版权所有(C)，上海海鼎信息工程股份有限公司，1995-2016，所有权利保留。
  * 项目名：sharing
- * 文件名：Customer
+ * 文件名：SCustomer
  * 模块说明：
  * 修改历史：
  * 2018/5/20 - yanghongjun - 创建
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Data
 @ApiModel(description = "顾客信息")
-public class Customer {
+public class SCustomer {
     @ApiModelProperty(value = "微信联合Id")
     private String unionId;
 
