@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.SharingOperation;
-import cn.sharing.dao.entity.SharingOperationExample;
+import cn.sharing.platform.dao.entity.SharingOperation;
+import cn.sharing.platform.dao.entity.SharingOperationExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface SharingOperationMapper {
     long countByExample(SharingOperationExample example);

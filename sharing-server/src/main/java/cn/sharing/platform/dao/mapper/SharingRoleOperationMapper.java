@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.SharingRoleOperation;
-import cn.sharing.dao.entity.SharingRoleOperationExample;
+import cn.sharing.platform.dao.entity.SharingRoleOperation;
+import cn.sharing.platform.dao.entity.SharingRoleOperationExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface SharingRoleOperationMapper {
     long countByExample(SharingRoleOperationExample example);

@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.SerialNumber;
-import cn.sharing.dao.entity.SerialNumberExample;
+import cn.sharing.platform.dao.entity.SerialNumber;
+import cn.sharing.platform.dao.entity.SerialNumberExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface SerialNumberMapper {
     long countByExample(SerialNumberExample example);

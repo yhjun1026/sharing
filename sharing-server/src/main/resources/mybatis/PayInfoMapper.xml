@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sharing.dao.mapper.PayInfoMapper">
-  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.PayInfo">
+<mapper namespace="cn.sharing.platform.dao.mapper.PayInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.sharing.platform.dao.entity.PayInfo">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="pay_id" jdbcType="VARCHAR" property="payId" />
     <result column="trans_type" jdbcType="INTEGER" property="transType" />
@@ -76,7 +76,7 @@
     uuid, pay_id, trans_type, pay_type, trade_no, out_trade_no, pay_amt, pay_user, pay_time, 
     ori_trade_no, ori_out_trade_no
   </sql>
-  <select id="selectByExample" parameterType="cn.sharing.dao.entity.PayInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cn.sharing.platform.dao.entity.PayInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -104,13 +104,13 @@
     delete from shpayinfo
     where uuid = #{uuid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.sharing.dao.entity.PayInfoExample">
+  <delete id="deleteByExample" parameterType="cn.sharing.platform.dao.entity.PayInfoExample">
     delete from shpayinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.sharing.dao.entity.PayInfo">
+  <insert id="insert" parameterType="cn.sharing.platform.dao.entity.PayInfo">
     insert into shpayinfo (uuid, pay_id, trans_type, 
       pay_type, trade_no, out_trade_no, 
       pay_amt, pay_user, pay_time, 
@@ -120,7 +120,7 @@
       #{payAmt,jdbcType=DECIMAL}, #{payUser,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, 
       #{oriTradeNo,jdbcType=VARCHAR}, #{oriOutTradeNo,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.sharing.dao.entity.PayInfo">
+  <insert id="insertSelective" parameterType="cn.sharing.platform.dao.entity.PayInfo">
     insert into shpayinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
@@ -193,7 +193,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.sharing.dao.entity.PayInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cn.sharing.platform.dao.entity.PayInfoExample" resultType="java.lang.Long">
     select count(*) from shpayinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -260,7 +260,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.dao.entity.PayInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.platform.dao.entity.PayInfo">
     update shpayinfo
     <set>
       <if test="payId != null">
@@ -296,7 +296,7 @@
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.sharing.dao.entity.PayInfo">
+  <update id="updateByPrimaryKey" parameterType="cn.sharing.platform.dao.entity.PayInfo">
     update shpayinfo
     set pay_id = #{payId,jdbcType=VARCHAR},
       trans_type = #{transType,jdbcType=INTEGER},
@@ -310,7 +310,7 @@
       ori_out_trade_no = #{oriOutTradeNo,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.dao.entity.PayInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.platform.dao.entity.PayInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -325,7 +325,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="sumByExample" parameterType="cn.sharing.dao.entity.PayInfoExample" resultType="long" >
+  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.PayInfoExample" resultType="long" >
     select sum(${sumCol}) from shpayinfo
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

@@ -1,11 +1,13 @@
-package cn.sharing.platform.serialnumber;
+package cn.sharing.platform.service.serialnumber;
 
+import cn.sharing.platform.dao.entity.SerialNumber;
+import cn.sharing.platform.dao.mapper.SerialNumberMapper;
+import cn.sharing.platform.dao.mapper.SerialNumberMapperExt;
 import cn.sharing.platform.utils.DateUtil;
-import cn.sharing.dao.entity.SerialNumber;
-import cn.sharing.dao.mapper.SerialNumberMapper;
-import cn.sharing.dao.mapper.SerialNumberMapperExt;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,7 +18,7 @@ import java.util.Date;
  * @author Administrator
  *
  */
-@Service
+@Component
 public class SerialNumberImpl {
 
 	@Autowired

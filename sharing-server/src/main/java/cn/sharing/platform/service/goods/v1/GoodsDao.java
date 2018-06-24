@@ -1,9 +1,9 @@
 package cn.sharing.platform.service.goods.v1;
 
-import cn.sharing.dao.entity.Goods;
-import cn.sharing.dao.entity.Stock;
-import cn.sharing.dao.mapper.GoodsMapper;
-import cn.sharing.dao.mapper.StockMapper;
+import cn.sharing.platform.dao.entity.Goods;
+import cn.sharing.platform.dao.entity.Stock;
+import cn.sharing.platform.dao.mapper.GoodsMapper;
+import cn.sharing.platform.dao.mapper.StockMapper;
 import cn.sharing.platform.facade.goods.v1.GoodsQuery;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import cn.sharing.platform.facade.goods.v1.SGoodsStock;
@@ -48,6 +48,7 @@ public class GoodsDao {
     if (StringUtils.isEmpty(uuid)) {
       return false;
     }
+
     return stockMapper.getByPrimaryKey(uuid) == null ? false : true;
   }
 

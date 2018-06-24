@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.PayInfo;
-import cn.sharing.dao.entity.PayInfoExample;
+import cn.sharing.platform.dao.entity.PayInfo;
+import cn.sharing.platform.dao.entity.PayInfoExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface PayInfoMapper {
     long countByExample(PayInfoExample example);

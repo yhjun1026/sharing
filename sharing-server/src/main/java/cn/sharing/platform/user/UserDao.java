@@ -1,10 +1,10 @@
 package cn.sharing.platform.user;
 
-import cn.sharing.dao.entity.SharingMenu;
-import cn.sharing.dao.entity.User;
-import cn.sharing.dao.entity.UserExample;
-import cn.sharing.dao.mapper.SharingMenuMapperExt;
-import cn.sharing.dao.mapper.UserMapper;
+import cn.sharing.platform.dao.entity.SharingMenu;
+import cn.sharing.platform.dao.entity.User;
+import cn.sharing.platform.dao.entity.UserExample;
+import cn.sharing.platform.dao.mapper.SharingMenuMapperExt;
+import cn.sharing.platform.dao.mapper.UserMapper;
 import cn.sharing.platform.utils.JsonHelper;
 import cn.sharing.platform.utils.StringUtils;
 import com.github.pagehelper.PageHelper;

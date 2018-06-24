@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.SharingMenu;
-import cn.sharing.dao.entity.SharingMenuExample;
+import cn.sharing.platform.dao.entity.SharingMenu;
+import cn.sharing.platform.dao.entity.SharingMenuExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface SharingMenuMapper {
     long countByExample(SharingMenuExample example);

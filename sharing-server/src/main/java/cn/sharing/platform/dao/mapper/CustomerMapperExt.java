@@ -1,6 +1,6 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.GoodsBorrowMst;
+import cn.sharing.platform.dao.entity.GoodsBorrowMst;
 import cn.sharing.platform.dao.entity.Customer;
 import org.apache.ibatis.annotations.Param;
 

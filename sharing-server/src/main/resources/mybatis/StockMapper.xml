@@ -182,7 +182,7 @@
       <if test="record.memo != null">
         MEMO = #{record.memo,jdbcType=VARCHAR},
       </if>
-      <if test="record.updateSql != null">
+      <if test="record.updateSql != null" >
         ${record.updateSql},
       </if>
     </set>
@@ -247,9 +247,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.StockExample" resultType="long">
+  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.StockExample" resultType="long" >
     select sum(${sumCol}) from shgoodsstock
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
@@ -259,117 +259,11 @@
         STATE, LOCKVERSION, MEMO
         )
       values
-      <foreach collection="items" index="index" item="item" separator=",">
+      <foreach collection="items" item="item" index="index" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsuuid,jdbcType=VARCHAR}, #{item.no,jdbcType=INTEGER}, 
         #{item.state,jdbcType=INTEGER}, #{item.lockversion,jdbcType=INTEGER}, #{item.memo,jdbcType=VARCHAR}
         )
       </foreach>
     </if>
   </insert>
-  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.Stock">
-    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
-    <result column="GOODSUUID" jdbcType="VARCHAR" property="goodsUuid" />
-    <result column="NO" jdbcType="INTEGER" property="no" />
-    <result column="STATE" jdbcType="INTEGER" property="state" />
-    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
-    <result column="LOCKVERSION" jdbcType="INTEGER" property="lockVersion" />
-  </resultMap>
-
-  <sql id="Base_Column_List">
-    UUID, GOODSUUID, NO, STATE,  MEMO, LOCKVERSION
-  </sql>
-
-  <!-- 插入 -->
-  <insert id="insert" parameterType="cn.sharing.dao.entity.Stock">
-    insert into shgoodsstock(UUID, GOODSUUID, NO, STATE,  MEMO, LOCKVERSION)
-    values (#{uuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{no,jdbcType=INTEGER},
-      #{state,jdbcType=INTEGER},#{memo,jdbcType=VARCHAR}, #{lockVersion,jdbcType=INTEGER})
-  </insert>
-
-  <!-- 更新 -->
-  <update id="update" parameterType="cn.sharing.dao.entity.Stock">
-    update shgoodsstock
-    <set>
-      <if test="state != null">
-      STATE = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="memo != null and memo != ''">
-        MEMO = #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="lockVersion != null">
-        LOCKVERSION = #{lockVersion,jdbcType=INTEGER},
-      </if>
-    </set>
-    where 1 = 1
-    <if test="uuid != null and uuid != '' ">
-      and UUID = #{uuid,jdbcType=VARCHAR}
-    </if>
-    <if test="goodsUuid != null and uuid != '' ">
-      and GOODSUUID = #{goodsUuid,jdbcType=VARCHAR}
-    </if>
-    <if test="no != null">
-      and NO = #{no,jdbcType=INTEGER}
-    </if>
-  </update>
-
-  <delete id="delete" parameterType="cn.sharing.dao.entity.Stock">
-    delete from shgoodsstock
-    where 1 = 1
-    <if test="uuid != null and uuid != '' ">
-      and UUID = #{uuid,jdbcType=VARCHAR}
-    </if>
-    <if test="goodsUuid != null and uuid != '' ">
-      and GOODSUUID = #{goodsUuid,jdbcType=VARCHAR}
-    </if>
-    <if test="no != null">
-      and NO = #{no,jdbcType=INTEGER}
-    </if>
-  </delete>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from shgoodsstock
-    where UUID = #{uuid,jdbcType=VARCHAR}
-  </delete>
-
-  <insert id="batchInsert" parameterType="cn.sharing.dao.entity.Stock">
-    insert into shgoodsstock(UUID, GOODSUUID, NO, STATE,  MEMO, LOCKVERSION)
-    values
-    <foreach collection="stocks" index="index" item="item" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.no,jdbcType=INTEGER},
-      #{item.state,jdbcType=INTEGER},#{item.memo,jdbcType=VARCHAR}, #{item.lockVersion,jdbcType=INTEGER})
-    </foreach>
-  </insert>
-
-  <select id="getByCondition" parameterType="cn.sharing.dao.entity.Stock" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from shgoodsstock
-    where 1 = 1
-    <if test="uuid != null and uuid != '' ">
-      and UUID = #{uuid,jdbcType=VARCHAR}
-    </if>
-    <if test="goodsUuid != null and uuid != '' ">
-      and GOODSUUID = #{goodsUuid,jdbcType=VARCHAR}
-    </if>
-    <if test="no != null and no != 0">
-      and NO = #{no,jdbcType=INTEGER}
-    </if>
-    <if test="state != null">
-      and STATE = #{state,jdbcType=INTEGER}
-    </if>
-  </select>
-
-  <select id="getByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from shgoodsstock
-    where 1 = 1
-      and UUID = #{uuid,jdbcType=VARCHAR}
-  </select>
-
-  <select id="getMaxNo" parameterType="java.lang.String" resultType="java.lang.Integer">
-    select max(NO) from shgoodsstock
-    where GOODSUUID = #{goodsUuid,jdbcType=VARCHAR}
-  </select>
-
 </mapper>

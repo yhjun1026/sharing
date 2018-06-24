@@ -1,6 +1,6 @@
 package cn.sharing.platform.utils;
 
-import cn.sharing.platform.serialnumber.SerialNumberImpl;
+import cn.sharing.platform.service.serialnumber.SerialNumberImpl;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

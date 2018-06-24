@@ -1,6 +1,6 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.Goods;
+import cn.sharing.platform.dao.entity.Goods;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 

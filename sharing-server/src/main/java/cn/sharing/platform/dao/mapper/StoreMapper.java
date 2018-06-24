@@ -1,11 +1,11 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.Store;
-import cn.sharing.dao.entity.StoreExample;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
+import cn.sharing.platform.dao.entity.Store;
+import cn.sharing.platform.dao.entity.StoreExample;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface StoreMapper {
     long countByExample(StoreExample example);

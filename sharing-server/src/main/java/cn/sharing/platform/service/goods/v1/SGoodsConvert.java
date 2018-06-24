@@ -1,6 +1,6 @@
 package cn.sharing.platform.service.goods.v1;
 
-import cn.sharing.dao.entity.Goods;
+import cn.sharing.platform.dao.entity.Goods;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import org.springframework.beans.BeanUtils;
 

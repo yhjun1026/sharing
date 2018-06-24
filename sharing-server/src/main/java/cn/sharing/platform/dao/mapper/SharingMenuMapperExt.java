@@ -1,6 +1,6 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.SharingMenu;
+import cn.sharing.platform.dao.entity.SharingMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -33,7 +33,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mybatis/*.xml
-  type-aliases-package: cn.sharing.platform.server.entity
+  type-aliases-package: cn.sharing.platform.dao.entity
 
 logging:                                # 配置日志级别，让hibernate打印出执行的SQL
   config: classpath:logback.xml

@@ -1,8 +1,8 @@
 package cn.sharing.platform.service.Payment.v1;
 
-import cn.sharing.dao.entity.PayInfo;
-import cn.sharing.dao.entity.PayInfoExample;
-import cn.sharing.dao.mapper.PayInfoMapper;
+import cn.sharing.platform.dao.entity.PayInfo;
+import cn.sharing.platform.dao.entity.PayInfoExample;
+import cn.sharing.platform.dao.mapper.PayInfoMapper;
 import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.utils.DateUtil;
 import cn.sharing.platform.utils.UUIDGenerator;

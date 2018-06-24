@@ -1,7 +1,7 @@
 package cn.sharing.platform.service.goods.v1;
 
 
-import cn.sharing.dao.entity.Goods;
+import cn.sharing.platform.dao.entity.Goods;
 import cn.sharing.platform.facade.goods.v1.SGoods;
 import org.springframework.beans.BeanUtils;
 
@@ -24,6 +24,7 @@ public class GoodsConvert {
     Goods goods = new Goods();
     BeanUtils.copyProperties(sGoods, goods);
     goods.setStockQuantity(sGoods.getCurrentQuantity());
+
     goods.setStoreuuid(sGoods.getStoreUuid());
     return goods;
   }

@@ -311,7 +311,7 @@
       <if test="record.storeuuid != null">
         STOREUUID = #{record.storeuuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.updateSql != null">
+      <if test="record.updateSql != null" >
         ${record.updateSql},
       </if>
     </set>
@@ -436,9 +436,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.GoodsExample" resultType="long">
+  <select id="sumByExample" parameterType="cn.sharing.platform.dao.entity.GoodsExample" resultType="long" >
     select sum(${sumCol}) from shgoods
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
@@ -452,7 +452,7 @@
         LASTUPDTIME, MEMO, STOREUUID
         )
       values
-      <foreach collection="items" index="index" item="item" separator=",">
+      <foreach collection="items" item="item" index="index" separator=",">
       (#{item.uuid,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, 
         #{item.type,jdbcType=VARCHAR}, #{item.stat,jdbcType=INTEGER}, #{item.quantity,jdbcType=INTEGER}, 
         #{item.stockquantity,jdbcType=INTEGER}, #{item.picture,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, 
@@ -463,208 +463,4 @@
       </foreach>
     </if>
   </insert>
-
-  <resultMap id="BaseResultMap" type="cn.sharing.dao.entity.Goods">
-    <id column="UUID" jdbcType="VARCHAR" property="uuid" />
-    <result column="CODE" jdbcType="VARCHAR" property="code" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="TYPE" jdbcType="VARCHAR" property="type" />
-    <result column="STAT" jdbcType="INTEGER" property="state" />
-    <result column="QUANTITY" jdbcType="INTEGER" property="quantity" />
-    <result column="STOCKQUANTITY" jdbcType="INTEGER" property="stockQuantity" />
-    <result column="PICTURE" jdbcType="VARCHAR" property="picture" />
-    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
-    <result column="PRICE" jdbcType="DECIMAL" property="price" />
-    <result column="DEPOSITAMT" jdbcType="DECIMAL" property="depositamt" />
-    <result column="COSTPRICE" jdbcType="DECIMAL" property="costPrice" />
-    <result column="RENTPRICE" jdbcType="DECIMAL" property="rentPrice" />
-    <result column="REPAYAMT" jdbcType="DECIMAL" property="repayamt" />
-    <result column="LASTER" jdbcType="VARCHAR" property="laster" />
-    <result column="LASTUPDTIME" jdbcType="TIMESTAMP" property="lastupdtime" />
-    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
-    <result column="STOREUUID" jdbcType="VARCHAR" property="storeuuid" />
-  </resultMap>
-
-  <sql id="Base_Column_List">
-    UUID, CODE, NAME, TYPE, STAT, QUANTITY, STOCKQUANTITY, PICTURE, DESCRIPTION, PRICE, DEPOSITAMT, REPAYAMT,
-    COSTPRICE, RENTPRICE, LASTER, LASTUPDTIME, MEMO, STOREUUID
-  </sql>
-
-  <!-- 插入物品表 -->
-  <insert id="insert" parameterType="cn.sharing.dao.entity.Goods">
-    insert into shgoods (UUID, CODE, NAME,
-      TYPE, STAT, QUANTITY, STOCKQUANTITY, PICTURE,
-      DESCRIPTION, PRICE, DEPOSITAMT, COSTPRICE, RENTPRICE,
-      REPAYAMT, LASTER, LASTUPDTIME,
-      MEMO, STOREUUID)
-    values (#{uuid,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-      #{type,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER},
-      #{stockQuantity,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR},
-      #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{depositamt,jdbcType=DECIMAL},
-      #{costPrice,jdbcType=DECIMAL}, #{rentPrice,jdbcType=DECIMAL},
-      #{repayamt,jdbcType=DECIMAL}, #{laster,jdbcType=VARCHAR}, #{lastupdtime,jdbcType=TIMESTAMP},
-      #{memo,jdbcType=VARCHAR}, #{storeuuid,jdbcType=VARCHAR})
-  </insert>
-
-  <!-- 更新物品表 -->
-  <update id="update" parameterType="cn.sharing.dao.entity.Goods">
-    update shgoods
-    <set>
-      <if test="code != null and code != ''">
-        CODE = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null and name != ''">
-        NAME = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null and type != ''">
-        TYPE = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        STAT = #{state,jdbcType=INTEGER},
-      </if>
-      <if test="quantity != null">
-        QUANTITY = #{quantity,jdbcType=INTEGER},
-      </if>
-      <if test="stockQuantity != null">
-        STOCKQUANTITY = #{stockQuantity,jdbcType=INTEGER},
-      </if>
-      <if test="picture != null and picture != ''">
-        PICTURE = #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null and description != '' ">
-        DESCRIPTION = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null">
-        PRICE = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="depositamt != null">
-        DEPOSITAMT = #{depositamt,jdbcType=DECIMAL},
-      </if>
-      <if test="costPrice != null">
-        COSTPRICE = #{costPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="rentPrice != null">
-        RENTPRICE = #{rentPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="repayamt != null">
-        REPAYAMT = #{repayamt,jdbcType=DECIMAL},
-      </if>
-      <if test="laster != null">
-        LASTER = #{laster,jdbcType=VARCHAR},
-      </if>
-      <if test="lastupdtime != null">
-        LASTUPDTIME = #{lastupdtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="memo != null">
-        MEMO = #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="storeuuid != null">
-        STOREUUID = #{storeuuid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where UUID = #{uuid,jdbcType=VARCHAR}
-  </update>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from shgoods
-    where UUID = #{uuid,jdbcType=VARCHAR}
-  </delete>
-
-  <delete id="deleteByCondition" parameterType="cn.sharing.dao.entity.Goods">
-    delete from shgoods
-    where 1 = 1
-    <if test="code != null and code != ''">
-      and CODE = #{code,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and NAME = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="type != null and type != ''">
-      and TYPE = #{type,jdbcType=VARCHAR}
-    </if>
-  </delete>
-
-  <select id="getByPrimaryKey" parameterType="java.lang.String" resultType="java.util.HashMap">
-    select A.UUID, A.CODE, A.NAME,
-      A.TYPE, A.STAT, A.QUANTITY, A.STOCKQUANTITY, A.PICTURE,
-      A.DESCRIPTION, A.PRICE, A.DEPOSITAMT, A.COSTPRICE, A.RENTPRICE,
-      A.REPAYAMT, A.LASTER, A.LASTUPDTIME,
-      A.MEMO, A.STOREUUID,
-      B.UUID STOCKUUID, B.GOODSUUID, B.NO, B.STATE STOCKSTATE, B.MEMO STOCKMEMO,
-      B.LOCKVERSION
-      from shgoods A, SHGoodsStock B
-      where A.UUID = B.GOODSUUID
-      AND A.UUID = #{uuid,jdbcType=VARCHAR}
-  </select>
-
-  <select id="getAllRentGoods" parameterType="cn.sharing.dao.entity.Goods" resultMap="BaseResultMap">
-    select
-      <include refid="Base_Column_List" />
-    from shgoods A
-    where 1 = 1
-    <if test="queryType != null and queryType == 1">
-      and A.STOCKQUANTITY &gt; 0
-      and A.STAT = 0
-    </if>
-    <if test="code != null and code != ''">
-      and A.CODE = #{code,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and A.NAME = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="storeId != null and storeId != ''">
-      and A.STOREUUID = #{storeId,jdbcType=VARCHAR}
-    </if>
-    order by A.LASTUPDTIME
-  </select>
-
-  <select id="getAllRentGoodsCount" parameterType="cn.sharing.dao.entity.Goods" resultType="java.lang.Integer">
-    select
-    count(*)
-    from shgoods A
-    where 1 = 1
-    <if test="queryType != null and queryType == 1">
-      and A.STOCKQUANTITY &gt; 0
-      and A.STAT = 0
-    </if>
-    <if test="code != null and code != ''">
-      and A.CODE = #{code,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and A.NAME = #{name,jdbcType=VARCHAR}
-    </if>
-    <if test="storeId != null and storeId != ''">
-      and A.STOREUUID = #{storeId,jdbcType=VARCHAR}
-    </if>
-  </select>
-
-  <select id="getByCondition" parameterType="cn.sharing.dao.entity.Goods" resultMap="BaseResultMap">
-    select
-      <include refid="Base_Column_List" />
-    from shgoods A
-    where 1 = 1
-    <if test="uuid != null and uuid != ''">
-      and A.UUID = #{uuid,jdbcType=VARCHAR}
-    </if>
-    <if test="code != null and code != ''">
-      and A.CODE = #{code,jdbcType=VARCHAR}
-    </if>
-    <if test="name != null and name != ''">
-      and A.NAME = #{name,jdbcType=VARCHAR}
-    </if>
-  </select>
-
-  <!-- 更新物品库存 -->
-  <update id="updateStockQty">
-    update shgoods
-    <set>
-      <if test="type == 0">
-        STOCKQUANTITY = STOCKQUANTITY + 1,
-      </if>
-      <if test="type == 1">
-        STOCKQUANTITY = STOCKQUANTITY - 1,
-      </if>
-    </set>
-    where UUID = #{uuid,jdbcType=VARCHAR}
-  </update>
 </mapper>

@@ -1,9 +1,9 @@
 package cn.sharing.platform.service.customer.v1;
 
-import cn.sharing.dao.entity.GoodsBorrowDtl;
-import cn.sharing.dao.entity.GoodsBorrowDtlExample;
-import cn.sharing.dao.entity.GoodsBorrowMst;
-import cn.sharing.dao.entity.PayInfo;
+import cn.sharing.platform.dao.entity.GoodsBorrowDtl;
+import cn.sharing.platform.dao.entity.GoodsBorrowDtlExample;
+import cn.sharing.platform.dao.entity.GoodsBorrowMst;
+import cn.sharing.platform.dao.entity.PayInfo;
 import cn.sharing.platform.dao.entity.Customer;
 import cn.sharing.platform.dao.mapper.CustomerMapper;
 import cn.sharing.platform.dao.mapper.CustomerMapperExt;

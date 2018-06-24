@@ -1,11 +1,10 @@
 package cn.sharing.platform.dao.mapper;
 
-import cn.sharing.dao.entity.User;
-import cn.sharing.dao.entity.UserExample;
+import cn.sharing.platform.dao.entity.User;
+import cn.sharing.platform.dao.entity.UserExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface UserMapper {
     long countByExample(UserExample example);

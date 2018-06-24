@@ -2,7 +2,7 @@ package cn.sharing.platform.user;
 
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
-import cn.sharing.dao.entity.User;
+import cn.sharing.platform.dao.entity.User;
 import cn.sharing.platform.utils.MD5;
 import cn.sharing.platform.utils.StringUtils;
 import cn.sharing.platform.utils.UUIDGenerator;
