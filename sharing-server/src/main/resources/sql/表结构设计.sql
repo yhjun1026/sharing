@@ -158,4 +158,29 @@ CREATE TABLE IF NOT EXISTS `shuser` (
   PRIMARY KEY (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--  Drop table
+
+--  DROP TABLE sharing.shcustomer
+
+CREATE TABLE shcustomer (
+	union_id varchar(100) NULL,
+	code varchar(100) NULL COMMENT '用户代码',
+	name varchar(255) NULL COMMENT '用户名称',
+	phone_number varchar(20) NULL,
+	wechatid varchar(100) NULL,
+	country varchar(100) NULL,
+	province varchar(100) NULL,
+	city varchar(100) NULL,
+	appid varchar(100) NULL,
+	openid varchar(100) NULL,
+	token varchar(100) NULL,
+	icon varchar(100) NULL,
+	createtime varchar(30) NULL,
+	memo varchar(255) NULL
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8
+COLLATE=utf8_general_ci;
+DROP TABLE IF EXISTS shcustomer;
+
 /****************************END****************************/
