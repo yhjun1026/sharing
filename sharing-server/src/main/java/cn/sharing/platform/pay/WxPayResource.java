@@ -213,7 +213,7 @@ public class WxPayResource implements PayService{
 		LOGGER.info("预支付：是否存在数据实体:" + preorder.getOut_trade_no());
 		LOGGER.info("预支付：构建微信请求参数");
 	/*	WxPreparePayRequest QrPayReq = new WxPreparePayRequest(wxaccount, preorder);*/
-		WxUnifieldRequest wxpay = new WxUnifieldRequest(wxaccount,preorder, WXPayTypeEnum.JSPAY);
+		WxUnifieldRequest wxpay = new WxUnifieldRequest(wxaccount,preorder, WXPayTypeEnum.JSAPI);
 		try {
 			wxpay.UnifieldOrderClient();
 		} catch (Exception e) {
@@ -228,7 +228,7 @@ public class WxPayResource implements PayService{
 			String stringSignTemp = "appId=" + wxPayConfig.getAppid() + "&nonceStr=" + wxpay.getNonceStr() + "&package=prepay_id=" + wxpay.getPrepay_id()+ "&signType=MD5&timeStamp=" + wxpay.getTimeStamp();
 			//再次签名，这个签名用于小程序端调用wx.requesetPayment方法
 			String paySign = PayUtil.sign(stringSignTemp, wxPayConfig.getKey(), "utf-8").toUpperCase();
-
+			jsPayOut.setPrpay_id(wxpay.getPrepay_id());
 			jsPayOut.setPaySign(paySign);
 			LOGGER.info("支付：微信预支付请求完成：\n" + jsPayOut.toString());
 			return new ResponseResult<>(jsPayOut);

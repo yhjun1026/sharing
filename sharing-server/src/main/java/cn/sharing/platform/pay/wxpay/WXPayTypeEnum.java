@@ -4,7 +4,7 @@ package cn.sharing.platform.pay.wxpay;
  * Created by MSI on 2018/6/10.
  */
 public enum  WXPayTypeEnum {
-    NATIVE(1,"NATIVE"),JSPAY(2,"JSPAY");
+    NATIVE(1,"NATIVE"),JSAPI(2,"JSAPI"),APP(3,"APP");
     private int code;
     private String type;
 

@@ -97,16 +97,19 @@ public class WxUnifieldRequest {
 
         nativeObj.put("body", payin.getBody());//URLEncoder.encode(this.body, "utf-8").getBytes("UTF-8"),"UTF-8")
         nativeObj.put("out_trade_no", payin.getOut_trade_no());
-        BigDecimal b1 = new BigDecimal(Double.toString(payin.getOri_total_fee()));
-        nativeObj.put("total_fee", String.valueOf((b1.multiply(new BigDecimal("100")))));
+        BigDecimal b1 = new BigDecimal(Double.toString(payin.getTotal_fee()));
+        nativeObj.put("total_fee", b1.multiply(new BigDecimal("100")).setScale(0).toString());
         nativeObj.put("spbill_create_ip", ip);
         nativeObj.put("notify_url", wxaccount.getNotifyUrl());
         nativeObj.put("trade_type", trade_type);
-        nativeObj.put("product_id", product_id);
-        nativeObj.put("sign", GetBizSign(nativeObj));
+        if(StringUtils.isNotEmpty(product_id)){
+            nativeObj.put("product_id", product_id);
+        }
         if (StringUtils.isNotEmpty(payin.getOpenid())) {
             nativeObj.put("openid", payin.getOpenid());
         }
+        nativeObj.put("sign", GetBizSign(nativeObj));
+
         LOGGER.info("开始调用微信统一订单请求客户端");
 //			HttpClient client = HttpClientUtils.getHttpClient();
 //			HttpPost httpPost = new HttpPost(unifiedorderURL);
@@ -157,7 +160,7 @@ public class WxUnifieldRequest {
 
             code_url = resHandler.getParameter("code_url");
             prepay_id = resHandler.getParameter("prepay_id");
-            nonceStr =  resHandler.getParameter("nonceStr");
+            nonceStr =  resHandler.getParameter("nonce_str");
 
 
         } else {
@@ -198,7 +201,7 @@ public class WxUnifieldRequest {
             throw new SDKRuntimeException("APPKEY为空！");
         }
         bizString = bizString + "&key=" + wxaccount.getAppkey();
-        System.out.println(bizString);
+        LOGGER.info("待签名字符串：" + bizString);
 
         return MD5Util.MD5Encode(bizString, "utf-8").toUpperCase();
         //return SHA1Util.Sha1(bizString);
