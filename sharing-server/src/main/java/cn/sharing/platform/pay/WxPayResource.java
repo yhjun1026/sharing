@@ -213,7 +213,7 @@ public class WxPayResource implements PayService{
 		LOGGER.info("预支付：是否存在数据实体:" + preorder.getOut_trade_no());
 		LOGGER.info("预支付：构建微信请求参数");
 	/*	WxPreparePayRequest QrPayReq = new WxPreparePayRequest(wxaccount, preorder);*/
-		WxUnifieldRequest wxpay = new WxUnifieldRequest(wxaccount,preorder, WXPayTypeEnum.JSPAY);
+		WxUnifieldRequest wxpay = new WxUnifieldRequest(wxaccount,preorder, WXPayTypeEnum.JSAPI);
 		try {
 			wxpay.UnifieldOrderClient();
 		} catch (Exception e) {
