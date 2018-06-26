@@ -222,13 +222,18 @@ public class WxPayResource implements PayService{
 		}
 		if("SUCCESS".equals(wxpay.getRetcode())){
 			JSPayOut jsPayOut = new JSPayOut();
-			jsPayOut.setAppid(wxaccount.getAppId());
-			jsPayOut.setNonceStr(wxpay.getNonceStr());
 			//拼接签名需要的参数
-			String stringSignTemp = "appId=" + wxPayConfig.getAppid() + "&nonceStr=" + wxpay.getNonceStr() + "&package=prepay_id=" + wxpay.getPrepay_id()+ "&signType=MD5&timeStamp=" + wxpay.getTimeStamp();
+			String timeStamp =  String.valueOf(System.currentTimeMillis()/1000);
+			String noceStr = wxpay.getNonceStr();
+			jsPayOut.setAppid(wxaccount.getAppId());
+
+			jsPayOut.setNonceStr(noceStr);
+			String stringSignTemp = "appId=" + wxPayConfig.getAppid() + "&nonceStr=" + noceStr + "&package=prepay_id=" + wxpay.getPrepay_id()+ "&signType=MD5&timeStamp=" + timeStamp;
 			//再次签名，这个签名用于小程序端调用wx.requesetPayment方法
 			String paySign = PayUtil.sign(stringSignTemp, wxPayConfig.getKey(), "utf-8").toUpperCase();
-			jsPayOut.setPrpay_id(wxpay.getPrepay_id());
+			jsPayOut.setSignType("MD5");
+			jsPayOut.setTimeStamp(timeStamp);
+			jsPayOut.setPrepay_id(wxpay.getPrepay_id());
 			jsPayOut.setPaySign(paySign);
 			LOGGER.info("支付：微信预支付请求完成：\n" + jsPayOut.toString());
 			return new ResponseResult<>(jsPayOut);

@@ -162,7 +162,6 @@ public class WxUnifieldRequest {
             prepay_id = resHandler.getParameter("prepay_id");
             nonceStr =  resHandler.getParameter("nonce_str");
 
-
         } else {
 
             LOGGER.info("  后台调用通信失败");
