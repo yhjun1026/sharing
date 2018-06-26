@@ -12,7 +12,11 @@ import lombok.Data;
 public class JSPayOut {
     /** 预付单信息 */
     @ApiModelProperty(value = "预付单信息")
-    private String prpay_id;
+    private String prepay_id;
+
+    /** 签名类型，默认为MD5，支持HMAC-SHA256和MD5 */
+    @ApiModelProperty(value = "签名类型，默认为MD5，支持HMAC-SHA256和MD5")
+    private String signType;
 
     /** 随机字符串 */
     @ApiModelProperty(value = "随机字符串")
