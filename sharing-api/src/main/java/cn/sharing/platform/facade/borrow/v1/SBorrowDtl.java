@@ -14,14 +14,16 @@ import java.math.BigDecimal;
 @Data
 @ApiModel(description = "租用单明细信息")
 public class SBorrowDtl {
-  @ApiModelProperty(value = "具体物品uuid", required = true)
+  @ApiModelProperty(value = "物品uuid", required = true)
   private String goodsUuid;
-  @ApiModelProperty(value = "具体物品code", required = true)
+  @ApiModelProperty(value = "物品代码", required = true)
   private String goodsCode;
   @ApiModelProperty(value = "物品名称", required = true)
   private String goodsName;
   @ApiModelProperty(value = "物品单价", required = true)
   private BigDecimal goodsPrice;
+  @ApiModelProperty(value = "物品编号（不需要传参）")
+  private String goodsStockId;
   @ApiModelProperty(value = "需赔偿金额")
   private BigDecimal compensateAmt;
   @ApiModelProperty(value = "物品借出描述")

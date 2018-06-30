@@ -2,16 +2,7 @@ package cn.sharing.platform.service.borrow.v1;
 
 import cn.sharing.platform.common.QueryResult;
 import cn.sharing.platform.common.ResponseResult;
-import cn.sharing.platform.facade.borrow.v1.BorrowBackParam;
-import cn.sharing.platform.facade.borrow.v1.BorrowCollarParam;
-import cn.sharing.platform.facade.borrow.v1.BorrowCompensateParam;
-import cn.sharing.platform.facade.borrow.v1.BorrowDetailInfoDto;
-import cn.sharing.platform.facade.borrow.v1.BorrowParam;
-import cn.sharing.platform.facade.borrow.v1.BorrowQuery;
-import cn.sharing.platform.facade.borrow.v1.BorrowService;
-import cn.sharing.platform.facade.borrow.v1.BorrowSummaryDto;
-import cn.sharing.platform.facade.borrow.v1.PreCompensateParam;
-import cn.sharing.platform.facade.borrow.v1.SBorrowDtl;
+import cn.sharing.platform.facade.borrow.v1.*;
 import cn.sharing.platform.service.goods.v1.GoodsDao;
 import cn.sharing.platform.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +25,7 @@ public class BorrowServiceImpl implements BorrowService {
   private BorrowDao borrowDao;
 
   @Override
-  public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam) {
+  public ResponseResult<String> borrow(@RequestBody SBorrow borrowParam) {
     //1. 验证参数
     //2. 调用dao层进行操作（更新物品状态，插入数据）
     //3. 返回单据id
@@ -59,12 +50,13 @@ public class BorrowServiceImpl implements BorrowService {
       response = ResponseResult.failed("租用物品未指定.");
       return response;
     }
-    for (SBorrowDtl dtl : borrowParam.getGoodsDtl()) {
-      if (!goodsDao.isExistsStockByUuid(dtl.getGoodsUuid())) {
-        response = ResponseResult.failed("租用的物品不存在.");
-        return response;
-      }
-    }
+
+//    for (SBorrowDtl dtl : borrowParam.getGoodsDtl()) {
+//      if (!goodsDao.isExistsStockByUuid(dtl.getGoodsUuid())) {
+//        response = ResponseResult.failed("租用的物品不存在.");
+//        return response;
+//      }
+//    }
 
     try {
       String uuid = borrowDao.saveBorrow(borrowParam);
@@ -73,7 +65,7 @@ public class BorrowServiceImpl implements BorrowService {
       return response;
     } catch (Exception e) {
       log.error("【新增物品借用单】异常，" + e.getMessage());
-      response = ResponseResult.failed("租用发生异常，" + e.getMessage());
+      response = ResponseResult.failed("租用失败，" + e.getMessage());
       return response;
     }
 

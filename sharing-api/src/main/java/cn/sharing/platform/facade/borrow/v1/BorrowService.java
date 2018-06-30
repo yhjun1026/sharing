@@ -33,7 +33,7 @@ public interface BorrowService {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ApiOperation(value = "新增物品借用")
-    public ResponseResult<String> borrow(@RequestBody BorrowParam borrowParam);
+    public ResponseResult<String> borrow(@RequestBody SBorrow borrowParam);
 
    /**
    * 物品领用

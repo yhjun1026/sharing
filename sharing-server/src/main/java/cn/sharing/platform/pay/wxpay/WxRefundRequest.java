@@ -12,7 +12,7 @@ import java.util.*;
 
 public class WxRefundRequest {
     private static final Logger LOGGER = Logger.getLogger(WxRefundRequest.class);
-    public static final String RefundURL = "https://api.mch.wechat.qq.com/secapi/pay/refund";
+    public static final String RefundURL = "https://api.mch.weixin.qq.com/secapi/pay/refund";
     private WxAccount wxaccount;
     private PayIn payin;
     /*业务参数*/
@@ -88,9 +88,9 @@ public class WxRefundRequest {
         //设置请求返回的等待时间
         httpClient.setTimeOut(5);
         httpClient.setMchid(wxaccount.getMchId());
-        LOGGER.debug("证书位置：" + "C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12");
-        //设置证书
-        httpClient.setCertLessFile(new File("C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12"));
+//        LOGGER.debug("证书位置：" + "C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12");
+//        //设置证书
+//        httpClient.setCertLessFile(new File("C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12"));
 
         //设置发送类型POST
         httpClient.setMethod("POST");

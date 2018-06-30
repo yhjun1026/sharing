@@ -3,12 +3,17 @@ package cn.sharing.platform.pay;
 import cn.sharing.platform.common.ResponseResult;
 import cn.sharing.platform.config.SignFilterConfig;
 import cn.sharing.platform.config.WxPayConfig;
+import cn.sharing.platform.dao.mapper.PayInfoMapper;
 import cn.sharing.platform.facade.pay.v1.JSPayOut;
 import cn.sharing.platform.facade.pay.v1.PayIn;
 import cn.sharing.platform.facade.pay.v1.PayOut;
 import cn.sharing.platform.facade.pay.v1.PayService;
 
+import cn.sharing.platform.facade.payment.v1.PayInfoParam;
 import cn.sharing.platform.pay.wxpay.*;
+import cn.sharing.platform.service.Payment.v1.PaymentDao;
+import cn.sharing.platform.service.borrow.v1.BorrowDao;
+import cn.sharing.platform.utils.UUIDGenerator;
 import io.swagger.annotations.ApiParam;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +41,11 @@ public class WxPayResource implements PayService{
 //	@Autowired
 //	private MpayTranDtlService mpayService;
 
+	@Autowired
+	PaymentDao paymentDao;
+
+	@Autowired
+	BorrowDao borrowDao;
 
 	@Autowired
 	WxPayConfig wxPayConfig;
@@ -335,6 +346,78 @@ public class WxPayResource implements PayService{
 	}
 
 	@Override
+	public void RefundNotify(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream)request.getInputStream()));
+		String line = null;
+		StringBuilder sb = new StringBuilder();
+		while((line = br.readLine()) != null){
+			sb.append(line);
+		}
+		br.close();
+		//sb为微信返回的xml
+		String notityXml = sb.toString();
+		String resXml = "";
+		LOGGER.info("接收到的报文：" + notityXml);
+
+		Map map = PayUtil.doXMLParse(notityXml);
+
+		String returnCode = (String) map.get("return_code");
+		if("SUCCESS".equals(returnCode)){
+			//验证签名是否正确
+			Map<String, String> validParams = PayUtil.paraFilter(map);  //回调验签时需要去除sign和空值参数
+
+//			//根据微信官网的介绍，此处不仅对回调的参数进行验签，还需要对返回的金额与系统订单的金额进行比对等
+//			if(PayUtil.verify(validParams, (String)map.get("sign"), wxPayConfig.getKey(), "utf-8")){
+//				/**此处添加自己的业务逻辑代码start**/
+//
+//
+//				/**此处添加自己的业务逻辑代码end**/
+//				//通知微信服务器已经支付成功
+//				resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+//						+ "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
+//			}
+			if("SUCCESS".equals((String) map.get("refund_status"))){
+				//支付信息回写到支付记录， 支付信息关联支付订单
+				String payId = UUIDGenerator.getUUID();
+				PayInfoParam payInfoParam = new PayInfoParam();
+				payInfoParam.setPayId(payId);
+				payInfoParam.setOutTradeNo((String) map.get("out_trade_no"));
+				payInfoParam.setOriOutTradeNo((String) map.get("out_refund_no"));
+				payInfoParam.setOriTradeNo((String) map.get("refund_id"));
+				payInfoParam.setPayType(1);
+				payInfoParam.setPayAmt(new BigDecimal((String) map.get("settlement_refund_fee")).multiply(new BigDecimal(100)).setScale(2));
+				payInfoParam.setPayTime((String) map.get("success_time"));
+				payInfoParam.setTransType(-1);
+				payInfoParam.setTradeNo((String) map.get("transaction_id"));
+				payInfoParam.setPayUser((String) map.get("openid"));
+				paymentDao.save(payInfoParam);
+				try {
+					borrowDao.RefundSuccess((String) map.get("out_trade_no"), payId);
+				}catch (Exception e){
+					System.out.println("支付订单回写失败" + (String) map.get("out_trade_no") + "_" + payId );
+				}
+			}
+
+			//通知微信服务器已经支付成功
+			resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
+					+ "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
+		}else{
+			resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
+					+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
+		}
+		System.out.println(resXml);
+		System.out.println("微信支付回调数据结束");
+
+
+		BufferedOutputStream out = new BufferedOutputStream(
+				response.getOutputStream());
+		out.write(resXml.getBytes());
+		out.flush();
+		out.close();
+	}
+
+
+	@Override
 	public void Notify(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream)request.getInputStream()));
 		String line = null;
@@ -365,6 +448,24 @@ public class WxPayResource implements PayService{
 //				resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
 //						+ "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
 //			}
+			//支付信息回写到支付记录， 支付信息关联支付订单
+			String payId = UUIDGenerator.getUUID();
+			PayInfoParam payInfoParam = new PayInfoParam();
+			payInfoParam.setPayId(payId);
+			payInfoParam.setOutTradeNo((String) map.get("out_trade_no"));
+			payInfoParam.setPayType(1);
+			payInfoParam.setPayAmt(new BigDecimal((String) map.get("total_fee")).multiply(new BigDecimal(100)).setScale(2));
+			payInfoParam.setPayTime((String) map.get("time_end"));
+			payInfoParam.setTransType(1); //TOOD
+			payInfoParam.setTradeNo((String) map.get("transaction_id"));
+			payInfoParam.setPayUser((String) map.get("openid"));
+			paymentDao.save(payInfoParam);
+			try {
+				borrowDao.PaySuccess((String) map.get("out_trade_no"), payId);
+			}catch (Exception e){
+				System.out.println("支付订单回写失败" + (String) map.get("out_trade_no") + "_" + payId );
+			}
+
 			//通知微信服务器已经支付成功
 			resXml = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>"
 					+ "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";

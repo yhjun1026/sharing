@@ -58,4 +58,9 @@ public interface PayService {
     @ResponseBody
     @ApiOperation(value = "支付回调（给支付平台调用）")
     public void Notify(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+    @RequestMapping(value = "/refund/notify", method = RequestMethod.POST)
+    @ResponseBody
+    @ApiOperation(value = "退货通知（给支付平台调用）")
+    public void RefundNotify(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

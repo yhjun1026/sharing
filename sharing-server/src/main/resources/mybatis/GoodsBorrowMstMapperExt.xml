@@ -23,6 +23,26 @@
     <result column="store_uuid" jdbcType="VARCHAR" property="storeUuid" />
   </resultMap>
 
+  <update id="updatePayInfo" >
+    UPDATE shgoodsborrowmst
+    <set>
+      <if test="payId!=null">
+        borrow_pay_uuid = #{payId, jdbcType=VARCHAR},
+      </if>
+    </set>
+    WHERE bill_number=#{borrowId, jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateRefundInfo" >
+    UPDATE shgoodsborrowmst
+    <set>
+      <if test="payId!=null">
+        back_pay_uuid = #{refundId, jdbcType=VARCHAR},
+      </if>
+    </set>
+    WHERE bill_number=#{borrowId, jdbcType=VARCHAR}
+  </update>
+
   <select id="queryGoodsBorrowMst" resultMap="BaseResultMap">
     SELECT DISTINCT mst.* from shgoodsborrowmst mst, shgoodsborrowdtl dtl
     where mst.uuid = dtl.borrow_uuid
