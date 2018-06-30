@@ -6,6 +6,7 @@ package cn.sharing.platform.common;
 public enum BorrowStatEnum {
 
   NEW("new", "新增"),
+  Paid("paid", "已支付"),
   USING("using", "已领取"),
   BACKED("backed", "已归还"),
   COMPENSATED("compensated", "已赔偿");

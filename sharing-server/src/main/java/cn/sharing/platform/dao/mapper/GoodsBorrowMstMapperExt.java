@@ -15,6 +15,9 @@ public interface GoodsBorrowMstMapperExt {
   int updateRefundInfo(@Param("borrowId") String borrowId,
                     @Param("refundId") String payId);
 
+  int updateOrderState(@Param("borrowId") String borrowId,
+                       @Param("state") String state);
+
   List<GoodsBorrowMst> queryGoodsBorrowMst(@Param("storeId") String storeId,
                                            @Param("beginTime") Date beginTime,
                                            @Param("endTime") Date endTime,

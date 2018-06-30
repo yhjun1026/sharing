@@ -124,6 +124,7 @@ public class BorrowDao {
         if(goodsBorrowMstMapperExt.updatePayInfo(borrowId, payId) <= 0){
             throw new RuntimeException("支付记录更新失败");
         }
+        goodsBorrowMstMapperExt.updateOrderState(borrowId,BorrowStatEnum.Paid.getCode());
     }
 
     @Transactional
@@ -454,10 +455,12 @@ public class BorrowDao {
         if (type == 1) {
             return BorrowStatEnum.NEW.getCode();
         } else if (type == 2) {
+            return BorrowStatEnum.Paid.getCode();
+        }else if (type == 3) {
             return BorrowStatEnum.USING.getCode();
-        } else if (type == 3) {
-            return BorrowStatEnum.BACKED.getCode();
         } else if (type == 4) {
+            return BorrowStatEnum.BACKED.getCode();
+        } else if (type == 5) {
             return BorrowStatEnum.COMPENSATED.getCode();
         }
         return null;

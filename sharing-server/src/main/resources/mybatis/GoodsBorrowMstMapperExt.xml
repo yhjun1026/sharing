@@ -43,6 +43,16 @@
     WHERE bill_number=#{borrowId, jdbcType=VARCHAR}
   </update>
 
+  <update id="updateOrderState" >
+    UPDATE shgoodsborrowmst
+    <set>
+      <if test="state!=null">
+        stat = #{state, jdbcType=VARCHAR},
+      </if>
+    </set>
+    WHERE bill_number=#{borrowId, jdbcType=VARCHAR}
+  </update>
+
   <select id="queryGoodsBorrowMst" resultMap="BaseResultMap">
     SELECT DISTINCT mst.* from shgoodsborrowmst mst, shgoodsborrowdtl dtl
     where mst.uuid = dtl.borrow_uuid

@@ -46,7 +46,7 @@ MEMO            VARCHAR(256)   NULL                   /*备注*/
 CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
   `uuid` varchar(32) NOT NULL,
   `bill_number` varchar(32) NOT NULL COMMENT '借用单据号',
-  `stat` varchar(16) NOT NULL COMMENT '单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated',
+  `stat` varchar(16) NOT NULL COMMENT '单据状态 new 新增; paid 已付款; 已领取 using; 已归还 backed; 已赔偿 compensated',
   `borrower` varchar(64) DEFAULT NULL COMMENT '借用人',
   `mobile` varchar(32) NOT NULL COMMENT '借用人手机号',
   `address` varchar(256) DEFAULT NULL COMMENT '借用人联系地址',
