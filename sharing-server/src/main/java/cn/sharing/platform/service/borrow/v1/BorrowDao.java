@@ -70,8 +70,9 @@ public class BorrowDao {
         String mstUuid = UUIDGenerator.getUUID();
         List<GoodsBorrowDtl> dtls = new ArrayList<>();
         for (SBorrowDtl dtl : param.getGoodsDtl()) {
+            //申请物品库存
             //更新物品状态
-            SGoodsStock goodsStock = goodsDao.getCanRentGoods(dtl.getGoodsStockId());
+            SGoodsStock goodsStock = goodsDao.getCanRentGoods(dtl.getGoodsUuid());
 //      SGoodsStock goodsStock = new SGoodsStock();
             if(goodsStock ==null){
                 log.error("物品" + dtl.getGoodsCode() + "-" +dtl.getGoodsName() + "库存不足！");
