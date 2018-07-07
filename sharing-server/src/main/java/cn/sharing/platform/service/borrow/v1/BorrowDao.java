@@ -78,7 +78,7 @@ public class BorrowDao {
                 log.error("物品" + dtl.getGoodsCode() + "-" +dtl.getGoodsName() + "库存不足！");
                 throw new RuntimeException("物品" + dtl.getGoodsCode() + "-" +dtl.getGoodsName() + "库存不足！");
             }
-            goodsStock.setUuid(dtl.getGoodsUuid());
+//            goodsStock.setUuid(dtl.getGoodsUuid());
             goodsStock.setState(1);
             ResponseResult<Void> result = goodsService.updateState(goodsStock);
             if (result.getStatus() != 0) {
