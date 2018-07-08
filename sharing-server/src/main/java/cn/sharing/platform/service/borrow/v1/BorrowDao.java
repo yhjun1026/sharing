@@ -117,7 +117,7 @@ public class BorrowDao {
 //  borrowMst.setBorrowPayUuid(payUuid);
         goodsBorrowMstMapper.insert(borrowMst);
 
-        return mstUuid;
+        return billNumbers.get(0);
     }
 
     @Transactional
