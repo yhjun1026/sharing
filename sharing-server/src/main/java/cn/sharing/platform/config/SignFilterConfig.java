@@ -34,14 +34,14 @@ public class SignFilterConfig {
   public SignatureFilter getFilter(){
     return new SignatureFilter();
   }
-//  @Bean
-//  public FilterRegistrationBean registrationBean() {
-//    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-//    registrationBean.setFilter(getFilter());
-//    List<String> urlPatterns = new ArrayList<String>();
-//    urlPatterns.add("/api/*");
-//    registrationBean.setUrlPatterns(urlPatterns);
-//    registrationBean.setOrder(1);
-//    return registrationBean;
-//  }
+  @Bean
+  public FilterRegistrationBean registrationBean() {
+    FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+    registrationBean.setFilter(getFilter());
+    List<String> urlPatterns = new ArrayList<String>();
+    urlPatterns.add("/api/*");
+    registrationBean.setUrlPatterns(urlPatterns);
+    registrationBean.setOrder(1);
+    return registrationBean;
+  }
 }

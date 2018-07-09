@@ -70,9 +70,10 @@ CREATE TABLE IF NOT EXISTS `shgoodsborrowmst` (
 /*物品借用单明细*/
 CREATE TABLE IF NOT EXISTS `shgoodsborrowdtl` (
   `uuid` varchar(32) NOT NULL,
-  `goods_uuid` varchar(32) NOT NULL COMMENT '具体物品uuid',
-  `goods_code` varchar(64) DEFAULT NULL COMMENT '具体物品代码',
-  `goods_name` varchar(64) DEFAULT NULL COMMENT '物品名称',
+  `stock_uuid` varchar(32) NOT NULL COMMENT '具体物品uuid',
+  `goods_uuid` varchar(32) NOT NULL COMMENT '物品类型uuid',
+  `goods_code` varchar(64) DEFAULT NULL COMMENT '物品类型代码',
+  `goods_name` varchar(64) DEFAULT NULL COMMENT '物品类型名称',
   `goods_price` decimal(10,2) DEFAULT NULL COMMENT '物品单价',
   `compensate_amt` decimal(10,2) DEFAULT NULL COMMENT '需赔偿金额',
   `borrow_descrip` varchar(512) DEFAULT NULL COMMENT '借出物品情况描述',

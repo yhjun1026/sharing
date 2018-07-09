@@ -106,6 +106,15 @@ public class GoodsDao {
    */
   @Transactional
   public void saveGoods(SGoods sGoods) throws Exception{
+//    if(stockMapper.getByCondition(sGoods.getCode()) != null){
+//      throw RuntimeException("对应的物品代码已存在");
+//    }
+    SGoods sGoodsCheck = new SGoods();
+    sGoodsCheck.setCode(sGoods.getCode());
+    List<SGoods> list = SGoodsConvert.perzConvertList(goodsMapper.getByCondition(GoodsConvert.perzConvert(sGoodsCheck)));
+    if (list != null && list.size() > 0){
+      throw new RuntimeException("物品代码已存在:" + sGoods.getCode());
+    }
     //先保存物品表数据
     goodsMapper.insert(GoodsConvert.perzConvert(sGoods));
     //保存物品库存数据

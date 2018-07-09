@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 @Data
 @ApiModel(description = "租用单明细信息")
 public class SBorrowDtl {
+//  @ApiModelProperty(value = "具体物品uuid", required = false)
+//  private String stockUuid;
   @ApiModelProperty(value = "物品uuid", required = true)
   private String goodsUuid;
   @ApiModelProperty(value = "物品代码", required = true)

@@ -42,7 +42,6 @@ import java.util.Properties;
 @Configuration
 @EnableAutoConfiguration
 @EnableSwagger2
-@EnableScheduling
 @ComponentScan(basePackages = {"cn.sharing.platform"})
 @MapperScan(basePackages = {"cn.sharing.platform.dao.mapper"})
 @EnableCaching
@@ -67,8 +66,8 @@ public class SharingApplication {
   public Docket createRestApi() {
     return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
-//            .host("localhost:10086")
-            .host("www.xuemeiwanan.com/sharing")
+            .host("localhost:10086")
+//            .host("www.xuemeiwanan.com/sharing")
             .select()
             .apis(RequestHandlerSelectors.basePackage("cn.sharing.platform"))
             .paths(PathSelectors.any())

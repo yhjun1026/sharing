@@ -3,6 +3,7 @@
 <mapper namespace="cn.sharing.platform.dao.mapper.GoodsBorrowDtlMapper">
   <resultMap id="BaseResultMap" type="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="stock_uuid" jdbcType="VARCHAR" property="stockUuid" />
     <result column="goods_uuid" jdbcType="VARCHAR" property="goodsUuid" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -111,11 +112,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
-    insert into shgoodsborrowdtl (uuid, goods_uuid, goods_code, 
+    insert into shgoodsborrowdtl (uuid, goods_uuid, stock_uuid,goods_code,
       goods_name, goods_price, compensate_amt, 
       borrow_descrip, deposit_amt, return_descrip, 
       borrow_uuid, memo)
-    values (#{uuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR}, 
+    values (#{uuid,jdbcType=VARCHAR},#{stockUuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR},
       #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{compensateAmt,jdbcType=DECIMAL}, 
       #{borrowDescrip,jdbcType=VARCHAR}, #{depositAmt,jdbcType=DECIMAL}, #{returnDescrip,jdbcType=VARCHAR}, 
       #{borrowUuid,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
@@ -125,6 +126,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         uuid,
+      </if>
+      <if test="stockUuid != null">
+        stock_uuid,
       </if>
       <if test="goodsUuid != null">
         goods_uuid,
@@ -160,6 +164,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="stockUuid != null">
+        #{stockUuid,jdbcType=VARCHAR},
       </if>
       <if test="goodsUuid != null">
         #{goodsUuid,jdbcType=VARCHAR},
@@ -205,6 +212,9 @@
       <if test="record.uuid != null">
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
+      <if test="record.stockUuid != null">
+        goods_uuid = #{record.stockUuid,jdbcType=VARCHAR},
+      </if>
       <if test="record.goodsUuid != null">
         goods_uuid = #{record.goodsUuid,jdbcType=VARCHAR},
       </if>
@@ -246,6 +256,7 @@
   <update id="updateByExample" parameterType="map">
     update shgoodsborrowdtl
     set uuid = #{record.uuid,jdbcType=VARCHAR},
+      stock_uuid = #{record.stockUuid,jdbcType=VARCHAR},
       goods_uuid = #{record.goodsUuid,jdbcType=VARCHAR},
       goods_code = #{record.goodsCode,jdbcType=VARCHAR},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
@@ -263,6 +274,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
     <set>
+      <if test="stockUuid != null">
+        goods_uuid = #{stockUuid,jdbcType=VARCHAR},
+      </if>
       <if test="goodsUuid != null">
         goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
       </if>
@@ -298,7 +312,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
-    set goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
+    set stock_uuid = #{stockUuid,jdbcType=VARCHAR},
+      goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
       goods_code = #{goodsCode,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=DECIMAL},
@@ -333,13 +348,13 @@
   </select>
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-            insert into shgoodsborrowdtl  (uuid, goods_uuid, goods_code, 
+            insert into shgoodsborrowdtl  (uuid,stock_uuid, goods_uuid, goods_code,
         goods_name, goods_price, compensate_amt, 
         borrow_descrip, deposit_amt, return_descrip, 
         borrow_uuid, memo)
       values
       <foreach collection="items" item="item" index="index" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.goodsCode,jdbcType=VARCHAR}, 
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.stockUuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.goodsCode,jdbcType=VARCHAR},
         #{item.goodsName,jdbcType=VARCHAR}, #{item.goodsPrice,jdbcType=DECIMAL}, #{item.compensateAmt,jdbcType=DECIMAL}, 
         #{item.borrowDescrip,jdbcType=VARCHAR}, #{item.depositAmt,jdbcType=DECIMAL}, #{item.returnDescrip,jdbcType=VARCHAR}, 
         #{item.borrowUuid,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR})

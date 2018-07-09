@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 public class GoodsBorrowDtl implements Serializable {
     private String uuid;
 
+    private String stockUuid;
+
     private String goodsUuid;
 
     private String goodsCode;
@@ -124,5 +126,13 @@ public class GoodsBorrowDtl implements Serializable {
 
     public void setUpdateSql(String updateSql) {
         this.updateSql = updateSql;
+    }
+
+    public String getStockUuid() {
+        return stockUuid;
+    }
+
+    public void setStockUuid(String stockUuid) {
+        this.stockUuid = stockUuid;
     }
 }

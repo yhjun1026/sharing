@@ -73,6 +73,7 @@ public class BorrowDao {
             //申请物品库存
             //更新物品状态
             SGoodsStock goodsStock = goodsDao.getCanRentGoods(dtl.getGoodsUuid());
+
 //      SGoodsStock goodsStock = new SGoodsStock();
             if(goodsStock ==null){
                 log.error("物品" + dtl.getGoodsCode() + "-" +dtl.getGoodsName() + "库存不足！");
@@ -87,6 +88,7 @@ public class BorrowDao {
             }
             GoodsBorrowDtl borrowDtl = convertFromBorrowDtl(dtl);
             borrowDtl.setBorrowUuid(mstUuid);
+            borrowDtl.setStockUuid(goodsStock.getUuid());
             dtls.add(borrowDtl);
         }
         goodsBorrowDtlMapper.batchInsert(dtls);
@@ -144,17 +146,26 @@ public class BorrowDao {
         List<GoodsBorrowDtl> dtls = goodsBorrowDtlMapper.selectByExample(example);
         for (GoodsBorrowDtl item : dtls) {
             SGoodsStock goodsStock = new SGoodsStock();
-            goodsStock.setUuid(item.getGoodsUuid());
+            goodsStock.setUuid(item.getStockUuid());
             goodsStock.setState(2);
-            ResponseResult<Void> result = goodsService.updateState(goodsStock);
-            if (result.getStatus() != 0) {
-                log.error("更新物品状态失败, " + result.getMessage());
+            try {
+                goodsDao.updateStockState(goodsStock);
+            }catch (Exception e){
+                log.error("更新物品状态失败, " + e.getMessage());
                 throw new RuntimeException("更新物品状态失败.");
             }
         }
 
         //2.更新领用单领用受理人，领用受理时间，最后修改时间
         GoodsBorrowMst goodsBorrowMst = goodsBorrowMstMapper.selectByPrimaryKey(borrowId);
+        if(goodsBorrowMst == null){
+            log.error("订单不存在：" + borrowId);
+            throw new RuntimeException("订单不存在：" + borrowId);
+        }
+        if (!goodsBorrowMst.getStat().equals(BorrowStatEnum.Paid.getCode())){
+            log.error("未支付订单不能领取：" + goodsBorrowMst.getBillNumber());
+            throw new RuntimeException("未支付订单不能领取：" + goodsBorrowMst.getBillNumber());
+        }
         goodsBorrowMst.setStat(BorrowStatEnum.USING.getCode());
         goodsBorrowMst.setLstUpdTime(new Date());
         goodsBorrowMst.setBorrowDealer(dealer);
