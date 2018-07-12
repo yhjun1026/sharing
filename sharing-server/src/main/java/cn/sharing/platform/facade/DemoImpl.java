@@ -9,12 +9,15 @@
 package cn.sharing.platform.facade;
 
 import cn.sharing.platform.common.ResponseResult;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 /**
@@ -27,6 +30,14 @@ public class DemoImpl implements Demo {
 
   @Override
   public ResponseResult<Void> login(@RequestHeader("orgCode") String orgCode, @RequestBody @Valid Map<String, String> param){
+    File path = null;
+    try {
+      path = new File(ResourceUtils.getURL("classpath:").getPath());
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    if(!path.exists()) path = new File("");
+    System.out.println("path:"+path.getAbsolutePath());
     return new ResponseResult<>();
   }
 

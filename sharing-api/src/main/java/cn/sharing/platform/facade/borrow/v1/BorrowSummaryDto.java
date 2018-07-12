@@ -18,7 +18,7 @@ public class BorrowSummaryDto extends SBorrow{
   private String uuid;
   @ApiModelProperty(value = "租用单单号")
   private String billNumber;
-  @ApiModelProperty(value = "单据状态 new 新增; 已领取 using; 已归还 backed; 已赔偿 compensated")
+  @ApiModelProperty(value = "单据状态 new 新增; 已支付   paid;已领取 using; 已归还 backed; 已赔偿 compensated")
   private String stat;
   @ApiModelProperty(value = "实际归还时间")
   private String realBackTime;

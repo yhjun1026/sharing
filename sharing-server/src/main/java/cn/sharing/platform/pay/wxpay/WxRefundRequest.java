@@ -90,7 +90,13 @@ public class WxRefundRequest {
         httpClient.setMchid(wxaccount.getMchId());
 //        LOGGER.debug("证书位置：" + "C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12");
 //        //设置证书
-//        httpClient.setCertLessFile(new File("C:\\MPay\\" + wxaccount.getGround() + "\\apiclient_cert.p12"));
+        File file = new File("classpath: wxpay/apiclient_cert.p12");
+        if(file.exists()){
+            httpClient.setCertLessFile(file);
+        }else{
+            LOGGER.debug("证书文件：" + "apiclient_cert.p12不存在");
+        }
+
 
         //设置发送类型POST
         httpClient.setMethod("POST");
