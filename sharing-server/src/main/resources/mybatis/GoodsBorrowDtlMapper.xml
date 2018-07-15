@@ -3,7 +3,6 @@
 <mapper namespace="cn.sharing.platform.dao.mapper.GoodsBorrowDtlMapper">
   <resultMap id="BaseResultMap" type="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="stock_uuid" jdbcType="VARCHAR" property="stockUuid" />
     <result column="goods_uuid" jdbcType="VARCHAR" property="goodsUuid" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -14,6 +13,7 @@
     <result column="return_descrip" jdbcType="VARCHAR" property="returnDescrip" />
     <result column="borrow_uuid" jdbcType="VARCHAR" property="borrowUuid" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="stock_uuid" jdbcType="VARCHAR" property="stockUuid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     uuid, goods_uuid, goods_code, goods_name, goods_price, compensate_amt, borrow_descrip, 
-    deposit_amt, return_descrip, borrow_uuid, memo
+    deposit_amt, return_descrip, borrow_uuid, memo, stock_uuid
   </sql>
   <select id="selectByExample" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
     select
@@ -112,23 +112,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
-    insert into shgoodsborrowdtl (uuid, goods_uuid, stock_uuid,goods_code,
+    insert into shgoodsborrowdtl (uuid, goods_uuid, goods_code, 
       goods_name, goods_price, compensate_amt, 
       borrow_descrip, deposit_amt, return_descrip, 
-      borrow_uuid, memo)
-    values (#{uuid,jdbcType=VARCHAR},#{stockUuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR},
+      borrow_uuid, memo, stock_uuid
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{goodsUuid,jdbcType=VARCHAR}, #{goodsCode,jdbcType=VARCHAR}, 
       #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{compensateAmt,jdbcType=DECIMAL}, 
       #{borrowDescrip,jdbcType=VARCHAR}, #{depositAmt,jdbcType=DECIMAL}, #{returnDescrip,jdbcType=VARCHAR}, 
-      #{borrowUuid,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR})
+      #{borrowUuid,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{stockUuid,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     insert into shgoodsborrowdtl
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         uuid,
-      </if>
-      <if test="stockUuid != null">
-        stock_uuid,
       </if>
       <if test="goodsUuid != null">
         goods_uuid,
@@ -160,13 +159,13 @@
       <if test="memo != null">
         memo,
       </if>
+      <if test="stockUuid != null">
+        stock_uuid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="stockUuid != null">
-        #{stockUuid,jdbcType=VARCHAR},
       </if>
       <if test="goodsUuid != null">
         #{goodsUuid,jdbcType=VARCHAR},
@@ -198,6 +197,9 @@
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
+      <if test="stockUuid != null">
+        #{stockUuid,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtlExample" resultType="java.lang.Long">
@@ -211,9 +213,6 @@
     <set>
       <if test="record.uuid != null">
         uuid = #{record.uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stockUuid != null">
-        goods_uuid = #{record.stockUuid,jdbcType=VARCHAR},
       </if>
       <if test="record.goodsUuid != null">
         goods_uuid = #{record.goodsUuid,jdbcType=VARCHAR},
@@ -245,6 +244,9 @@
       <if test="record.memo != null">
         memo = #{record.memo,jdbcType=VARCHAR},
       </if>
+      <if test="record.stockUuid != null">
+        stock_uuid = #{record.stockUuid,jdbcType=VARCHAR},
+      </if>
       <if test="record.updateSql != null" >
         ${record.updateSql},
       </if>
@@ -256,7 +258,6 @@
   <update id="updateByExample" parameterType="map">
     update shgoodsborrowdtl
     set uuid = #{record.uuid,jdbcType=VARCHAR},
-      stock_uuid = #{record.stockUuid,jdbcType=VARCHAR},
       goods_uuid = #{record.goodsUuid,jdbcType=VARCHAR},
       goods_code = #{record.goodsCode,jdbcType=VARCHAR},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
@@ -266,7 +267,8 @@
       deposit_amt = #{record.depositAmt,jdbcType=DECIMAL},
       return_descrip = #{record.returnDescrip,jdbcType=VARCHAR},
       borrow_uuid = #{record.borrowUuid,jdbcType=VARCHAR},
-      memo = #{record.memo,jdbcType=VARCHAR}
+      memo = #{record.memo,jdbcType=VARCHAR},
+      stock_uuid = #{record.stockUuid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -274,9 +276,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
     <set>
-      <if test="stockUuid != null">
-        goods_uuid = #{stockUuid,jdbcType=VARCHAR},
-      </if>
       <if test="goodsUuid != null">
         goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
       </if>
@@ -307,13 +306,15 @@
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},
       </if>
+      <if test="stockUuid != null">
+        stock_uuid = #{stockUuid,jdbcType=VARCHAR},
+      </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtl">
     update shgoodsborrowdtl
-    set stock_uuid = #{stockUuid,jdbcType=VARCHAR},
-      goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
+    set goods_uuid = #{goodsUuid,jdbcType=VARCHAR},
       goods_code = #{goodsCode,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_price = #{goodsPrice,jdbcType=DECIMAL},
@@ -322,7 +323,8 @@
       deposit_amt = #{depositAmt,jdbcType=DECIMAL},
       return_descrip = #{returnDescrip,jdbcType=VARCHAR},
       borrow_uuid = #{borrowUuid,jdbcType=VARCHAR},
-      memo = #{memo,jdbcType=VARCHAR}
+      memo = #{memo,jdbcType=VARCHAR},
+      stock_uuid = #{stockUuid,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=VARCHAR}
   </update>
   <select id="selectByExampleWithRowbounds" parameterType="cn.sharing.platform.dao.entity.GoodsBorrowDtlExample" resultMap="BaseResultMap">
@@ -348,16 +350,18 @@
   </select>
   <insert id="batchInsert">
     <if test="items.get(0) != null">
-            insert into shgoodsborrowdtl  (uuid,stock_uuid, goods_uuid, goods_code,
+            insert into shgoodsborrowdtl  (uuid, goods_uuid, goods_code, 
         goods_name, goods_price, compensate_amt, 
         borrow_descrip, deposit_amt, return_descrip, 
-        borrow_uuid, memo)
+        borrow_uuid, memo, stock_uuid
+        )
       values
       <foreach collection="items" item="item" index="index" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.stockUuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.goodsCode,jdbcType=VARCHAR},
+      (#{item.uuid,jdbcType=VARCHAR}, #{item.goodsUuid,jdbcType=VARCHAR}, #{item.goodsCode,jdbcType=VARCHAR}, 
         #{item.goodsName,jdbcType=VARCHAR}, #{item.goodsPrice,jdbcType=DECIMAL}, #{item.compensateAmt,jdbcType=DECIMAL}, 
         #{item.borrowDescrip,jdbcType=VARCHAR}, #{item.depositAmt,jdbcType=DECIMAL}, #{item.returnDescrip,jdbcType=VARCHAR}, 
-        #{item.borrowUuid,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR})
+        #{item.borrowUuid,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.stockUuid,jdbcType=VARCHAR}
+        )
       </foreach>
     </if>
   </insert>

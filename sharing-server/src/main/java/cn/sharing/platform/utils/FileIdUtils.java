@@ -1,6 +1,6 @@
 package cn.sharing.platform.utils;
 
-import cn.sharing.platform.service.file.v1.FSConstants;
+import cn.sharing.platform.facade.file.v1.FSConstants;
 
 import java.io.File;
 

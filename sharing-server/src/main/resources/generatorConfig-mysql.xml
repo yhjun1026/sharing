@@ -6,7 +6,7 @@
 <generatorConfiguration>
 
     <classPathEntry
-            location="E:\Source\Guo\JAVA\sharing\sharing-server\src\main\test\lib\mysql-connector-java-5.1.43-bin.jar"/>
+            location="D:\Development\m2\repository\mysql\mysql-connector-java\5.1.44\mysql-connector-java-5.1.44.jar"/>
 
     <context id="MysqlTables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
@@ -24,12 +24,12 @@
         </commentGenerator>
         <!--数据库连接-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/sharing"
+                        connectionURL="jdbc:mysql://39.105.94.218:3306/sharing"
                         userId="root"
-                        password="root">
+                        password="yhj123">
         </jdbcConnection>
         <!--生成实体类 指定包名-->
-        <javaModelGenerator targetPackage="com.sharing.dao.entity"
+        <javaModelGenerator targetPackage="cn.sharing.platform.dao.entity"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
@@ -39,21 +39,21 @@
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
         <!--生成Dao文件 type属性和父节点的属性targetRuntime="MyBatis3"对应-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sharing.dao.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.sharing.platform.dao.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-         <table tableName="SHSTORE" domainObjectName="Store" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-         <table tableName="SHUSER" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-         <table tableName="SHGOODS" domainObjectName="Goods" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-         <table tableName="SHGOODSSTOCK" domainObjectName="Stock" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
-         <table tableName="SHGOODSBORROWMST" domainObjectName="GoodsBorrowMst" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
+         <!--<table tableName="SHSTORE" domainObjectName="Store" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />-->
+         <!--<table tableName="SHUSER" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />-->
+         <!--<table tableName="SHGOODS" domainObjectName="Goods" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />-->
+         <!--<table tableName="SHGOODSSTOCK" domainObjectName="Stock" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />-->
+         <!--<table tableName="SHGOODSBORROWMST" domainObjectName="GoodsBorrowMst" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />-->
          <table tableName="SHGOODSBORROWDTL" domainObjectName="GoodsBorrowDtl" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true" />
     </context>

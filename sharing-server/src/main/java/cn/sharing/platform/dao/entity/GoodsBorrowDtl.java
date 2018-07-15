@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 public class GoodsBorrowDtl implements Serializable {
     private String uuid;
 
-    private String stockUuid;
-
     private String goodsUuid;
 
     private String goodsCode;
@@ -27,6 +25,8 @@ public class GoodsBorrowDtl implements Serializable {
     private String borrowUuid;
 
     private String memo;
+
+    private String stockUuid;
 
     private static final long serialVersionUID = 1L;
 
@@ -120,19 +120,19 @@ public class GoodsBorrowDtl implements Serializable {
         this.memo = memo == null ? null : memo.trim();
     }
 
+    public String getStockUuid() {
+        return stockUuid;
+    }
+
+    public void setStockUuid(String stockUuid) {
+        this.stockUuid = stockUuid == null ? null : stockUuid.trim();
+    }
+
     public String getUpdateSql() {
         return this.updateSql;
     }
 
     public void setUpdateSql(String updateSql) {
         this.updateSql = updateSql;
-    }
-
-    public String getStockUuid() {
-        return stockUuid;
-    }
-
-    public void setStockUuid(String stockUuid) {
-        this.stockUuid = stockUuid;
     }
 }

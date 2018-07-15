@@ -42,4 +42,11 @@ public class ResponseResult<T> {
         r.setStatus(FAILED);
         return r;
     }
+
+    public static ResponseResult failed(int Code, String message){
+        ResponseResult r = new ResponseResult();
+        r.setMessage(message);
+        r.setStatus(Code);
+        return r;
+    }
 }

@@ -136,6 +136,11 @@ public class GoodsBorrowDtlExample {
         return this;
     }
 
+    public GoodsBorrowDtlExample sumStockUuid() {
+        this.sumCol="stock_uuid";
+        return this;
+    }
+
     public Integer getOffset() {
         return this.offset;
     }
@@ -936,6 +941,76 @@ public class GoodsBorrowDtlExample {
 
         public Criteria andMemoNotBetween(String value1, String value2) {
             addCriterion("memo not between", value1, value2, "memo");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidIsNull() {
+            addCriterion("stock_uuid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidIsNotNull() {
+            addCriterion("stock_uuid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidEqualTo(String value) {
+            addCriterion("stock_uuid =", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidNotEqualTo(String value) {
+            addCriterion("stock_uuid <>", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidGreaterThan(String value) {
+            addCriterion("stock_uuid >", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidGreaterThanOrEqualTo(String value) {
+            addCriterion("stock_uuid >=", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidLessThan(String value) {
+            addCriterion("stock_uuid <", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidLessThanOrEqualTo(String value) {
+            addCriterion("stock_uuid <=", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidLike(String value) {
+            addCriterion("stock_uuid like", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidNotLike(String value) {
+            addCriterion("stock_uuid not like", value, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidIn(List<String> values) {
+            addCriterion("stock_uuid in", values, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidNotIn(List<String> values) {
+            addCriterion("stock_uuid not in", values, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidBetween(String value1, String value2) {
+            addCriterion("stock_uuid between", value1, value2, "stockUuid");
+            return (Criteria) this;
+        }
+
+        public Criteria andStockUuidNotBetween(String value1, String value2) {
+            addCriterion("stock_uuid not between", value1, value2, "stockUuid");
             return (Criteria) this;
         }
 

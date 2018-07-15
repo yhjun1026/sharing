@@ -1,6 +1,6 @@
 package cn.sharing.platform.config;
 
-import cn.sharing.platform.wechat.AccessToken;
+import cn.sharing.platform.service.wechat.AccessToken;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

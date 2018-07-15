@@ -175,7 +175,7 @@ CREATE TABLE shcustomer (
 	appid varchar(100) NULL,
 	openid varchar(100) NULL,
 	token varchar(100) NULL,
-	icon varchar(100) NULL,
+	icon varchar(255) NULL,
 	createtime varchar(30) NULL,
 	memo varchar(255) NULL
 )
